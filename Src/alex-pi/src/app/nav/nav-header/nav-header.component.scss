@@ -1,0 +1,17 @@
+mat-toolbar {
+  min-height: 70px;
+}
+
+button {
+  font-family: 'Orbitron', sans-serif; // without this - switches to default font!!!
+}
+.logo {
+  font-size: 1.5cm;
+  font-family: 'Orbitron', sans-serif;
+}
+
+:host {
+  position: fixed; // https://stackblitz.com/github/zetsnotdead/ng-reactive-sticky-header
+  top: 0;
+  width: 100%;
+}

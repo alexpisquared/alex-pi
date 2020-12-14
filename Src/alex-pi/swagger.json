@@ -1,0 +1,228 @@
+{
+  "swagger": "2.0",
+  "info": { "version": "v1", "title": "My API", "description": "Demo API for swagger code generation" },
+  "paths": {
+    "/api/Ocr/{imgurl}": {
+      "get": {
+        "tags": ["Ocr"],
+        "operationId": "Get",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{ "name": "imgurl", "in": "path", "required": true, "type": "string" }],
+        "responses": { "200": { "description": "Success", "schema": { "type": "string" } } }
+      }
+    },
+    "/api/Values": {
+      "get": {
+        "tags": ["Values"],
+        "operationId": "Get",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": { "200": { "description": "Success", "schema": { "uniqueItems": false, "type": "array", "items": { "type": "string" } } } }
+      }
+    },
+    "/api/VwEventUserUtcs": {
+      "get": {
+        "tags": ["VwEventUserUtcs"],
+        "operationId": "GetVwEventUserUtc",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": { "200": { "description": "Success", "schema": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/VwEventUserUtc" } } } }
+      }
+    },
+    "/api/VwEventUserUtcs/{a}/{b}/{c}": {
+      "get": {
+        "tags": ["VwEventUserUtcs"],
+        "operationId": "Get__just_a_POC",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [
+          { "name": "a", "in": "path", "required": true, "type": "integer", "format": "int32" },
+          { "name": "b", "in": "path", "required": true, "type": "integer", "format": "int32" },
+          { "name": "c", "in": "path", "required": true, "type": "integer", "format": "int32" }
+        ],
+        "responses": { "200": { "description": "Success", "schema": { "type": "string" } } }
+      }
+    },
+    "/api/VwEventUserUtcs/{nickname}/{userId}": {
+      "get": {
+        "tags": ["VwEventUserUtcs"],
+        "operationId": "GetVwEventUserUtcWithParam",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{ "name": "nickname", "in": "path", "required": true, "type": "string" }, { "name": "userId", "in": "path", "required": true, "type": "integer", "format": "int32" }],
+        "responses": { "200": { "description": "Success", "schema": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/VwEventUserUtc" } } } }
+      }
+    },
+    "/api/VwEventUserUtcs/{DoneAt}": {
+      "get": {
+        "tags": ["VwEventUserUtcs"],
+        "operationId": "GetVwEventUserUtc",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{ "name": "DoneAt", "in": "path", "required": true, "type": "string", "format": "date-time" }],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/VwEventUserUtc" } } }
+      }
+    },
+    "/api/VwUserHopsUtcs": {
+      "get": {
+        "tags": ["VwUserHopsUtcs"],
+        "operationId": "GetVwUserHopsUtc",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": { "200": { "description": "Success", "schema": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/VwUserHopsUtc" } } } }
+      }
+    },
+    "/api/VwUserHopsUtcs/{id}": {
+      "get": {
+        "tags": ["VwUserHopsUtcs"],
+        "operationId": "GetVwUserHopsUtc",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "integer", "format": "int32" }],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/VwUserHopsUtc" } } }
+      },
+      "delete": {
+        "tags": ["VwUserHopsUtcs"],
+        "operationId": "DeleteVwUserHopsUtc",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "integer", "format": "int32" }],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/VwUserHopsUtc" } } }
+      }
+    },
+    "/api/WebEventLogs": {
+      "get": {
+        "tags": ["WebEventLogs"],
+        "operationId": "GetWebEventLog",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": { "200": { "description": "Success", "schema": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/WebEventLog" } } } }
+      },
+      "post": {
+        "tags": ["WebEventLogs"],
+        "operationId": "PostWebEventLog",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{ "name": "webEventLog", "in": "body", "required": false, "schema": { "$ref": "#/definitions/WebEventLog" } }],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/WebEventLog" } } }
+      }
+    },
+    "/api/WebEventLogs/{id}": {
+      "get": {
+        "tags": ["WebEventLogs"],
+        "operationId": "GetWebEventLog",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "integer", "format": "int32" }],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/WebEventLog" } } }
+      },
+      "put": {
+        "tags": ["WebEventLogs"],
+        "operationId": "PutWebEventLog",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": [],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "integer", "format": "int32" }, { "name": "webEventLog", "in": "body", "required": false, "schema": { "$ref": "#/definitions/WebEventLog" } }],
+        "responses": { "200": { "description": "Success" } }
+      },
+      "delete": {
+        "tags": ["WebEventLogs"],
+        "operationId": "DeleteWebEventLog",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "integer", "format": "int32" }],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/WebEventLog" } } }
+      }
+    },
+    "/api/WebsiteUsers": {
+      "get": {
+        "tags": ["WebsiteUsers"],
+        "operationId": "GetWebsiteUser",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [],
+        "responses": { "200": { "description": "Success", "schema": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/WebsiteUser" } } } }
+      },
+      "post": {
+        "tags": ["WebsiteUsers"],
+        "operationId": "PostWebsiteUser",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{ "name": "websiteUser", "in": "body", "required": false, "schema": { "$ref": "#/definitions/WebsiteUser" } }],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/WebsiteUser" } } }
+      }
+    },
+    "/api/WebsiteUsers/{id}": {
+      "get": {
+        "tags": ["WebsiteUsers"],
+        "operationId": "GetWebsiteUser",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "integer", "format": "int32" }],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/WebsiteUser" } } }
+      },
+      "put": {
+        "tags": ["WebsiteUsers"],
+        "operationId": "PutWebsiteUser",
+        "consumes": ["application/json-patch+json", "application/json", "text/json", "application/*+json"],
+        "produces": [],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "integer", "format": "int32" }, { "name": "websiteUser", "in": "body", "required": false, "schema": { "$ref": "#/definitions/WebsiteUser" } }],
+        "responses": { "200": { "description": "Success" } }
+      },
+      "delete": {
+        "tags": ["WebsiteUsers"],
+        "operationId": "DeleteWebsiteUser",
+        "consumes": [],
+        "produces": ["text/plain", "application/json", "text/json"],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "integer", "format": "int32" }],
+        "responses": { "200": { "description": "Success", "schema": { "$ref": "#/definitions/WebsiteUser" } } }
+      }
+    }
+  },
+  "definitions": {
+    "VwEventUserUtc": { "type": "object", "properties": { "doneAt": { "format": "date-time", "type": "string" }, "nickname": { "type": "string" }, "eventName": { "type": "string" } } },
+    "VwUserHopsUtc": {
+      "type": "object",
+      "properties": {
+        "id": { "format": "int32", "type": "integer" },
+        "nickname": { "type": "string" },
+        "hops": { "format": "int32", "type": "integer" },
+        "started": { "format": "date-time", "type": "string" },
+        "finished": { "format": "date-time", "type": "string" },
+        "totalMin": { "format": "int32", "type": "integer" },
+        "reviewedAt": { "format": "date-time", "type": "string" }
+      }
+    },
+    "WebEventLog": {
+      "type": "object",
+      "properties": {
+        "id": { "format": "int32", "type": "integer" },
+        "websiteUserId": { "format": "int32", "type": "integer" },
+        "eventName": { "type": "string" },
+        "doneAt": { "format": "date-time", "type": "string" },
+        "websiteUser": { "$ref": "#/definitions/WebsiteUser" },
+        "eventData__Copy": { "type": "string" }
+      }
+    },
+    "WebsiteUser": {
+      "type": "object",
+      "properties": {
+        "id": { "format": "int32", "type": "integer" },
+        "eventData": { "type": "string" },
+        "nickname": { "type": "string" },
+        "note": { "type": "string" },
+        "doNotLog": { "type": "boolean" },
+        "reviewedBy": { "format": "int32", "type": "integer" },
+        "reviewedAt": { "format": "date-time", "type": "string" },
+        "lastVisitAt": { "format": "date-time", "type": "string" },
+        "createdAt": { "format": "date-time", "type": "string" },
+        "webEventLog": { "uniqueItems": false, "type": "array", "items": { "$ref": "#/definitions/WebEventLog" } },
+        "visitCount__New": { "format": "int32", "type": "integer" }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+<div class="centered">
+  <h1>{{ cnt }}</h1>
+  <h1>{{ url === undefined ? '' : url.substr(75, 5) }}</h1>
+  <h4>{{ this.periodMs }}</h4>
+
+  <h1>
+    <button (click)="tglLength()">1/3 hr</button>
+  </h1>
+  <h4>
+    <button (click)="tglSpeed()">Slow/Fast</button>
+  </h4>
+  <h4>
+    <button (click)="goBack()">go back</button>
+  </h4>
+</div>
+<div class="centered" style="background-color: red;">
+  helllo+++
+</div>
+
+<!-- <img loading="lazy"  style="top: 10px; left: 25%;" src="{{ urls[0] }}" class="absoluteHCentered" /> -->
+
+<div *ngFor="let url of urls" [class.selected]="url === selectedimage" (click)="onSelect(url)">
+  <!-- <img loading="lazy"  style="top: 10px; left: 25%;" src="{{ url }}" class="absoluteHCentered" [hidden]="!(this.visurl === url)" /> -->
+</div>
+
+<!-- <img loading="lazy"  style="top: 10px; left: 75%;" class="absoluteHCentered" src="{{ url }}" alt="{{ url }}" /> -->
+
+<!-- <img loading="lazy"  class="absoluteHCentered" src="https://weather.gc.ca/cacheable/images/radar/layers/roads/WKR_roads.gif" alt="" /> -->
+
+<table class="centered" style="top:580px">
+  <tr>
+    <td *ngFor="let url of urls">
+      <!-- <img loading="lazy"  src="{{ url }}" alt="{{ url.substr(75, 5) }}" [hidden]="this.visurl === url" /> -->
+    </td>
+  </tr>
+  <tr>
+    <td *ngFor="let url of urls">
+      <!-- <img loading="lazy"  src="{{ url }}" alt="{{ url.substr(75, 5) }}" [hidden]="!(this.visurl === url)" /> -->
+    </td>
+  </tr>
+</table>

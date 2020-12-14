@@ -1,0 +1,13 @@
+.flexVertJust {
+  text-align: center;
+  min-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // border: 1px solid gray;} .flexVertJust div {  background-color: #03030341;
+}
+img {
+  margin: 1.5em;
+  height: 110px;
+  // loading: lazy; - wait for chrome 77
+}

@@ -1,0 +1,30 @@
+<mat-card-header>
+  <!-- <div mat-card-avatar class="cv-header-image"></div> -->
+  <mat-card-title style="width:300px">Visitors</mat-card-title>
+  <mat-card-subtitle>
+    <div *ngIf="!dataavailbale">
+      WAIT! No WebEventLog Data is present ...yet
+    </div>
+    report
+  </mat-card-subtitle>
+  <button mat-mini-fab (click)="LoadData()"><mat-icon aria-label="Refersh">refresh</mat-icon></button>
+</mat-card-header>
+<div align="left" *ngIf="dataavailbale">
+  <div *ngFor="let usr of welRecords" style="font-size: 1.1em;">
+    <button mat-icon-button (click)="HideUser(usr.id)"><mat-icon aria-label="Hide User">delete</mat-icon></button>
+    {{ usr.createdAt | date: 'MMM-dd':'-1000' }}<b> {{ usr.createdAt | date: 'HH:mm':'-1000' }}&emsp;</b>
+    {{ usr.lastVisitAt | date: 'MMM-dd':'-1000' }}
+    <b> {{ usr.lastVisitAt | date: 'HH:mm':'-1000' }}&emsp;</b>
+    &emsp;{{ usr.visitCount | number: '3.0-10' }} &emsp;{{ usr.nickname }}
+    <p *ngIf="usr.eventData" style="font-size: 1px;">{{ usr.eventData }}</p>
+    <!-- <button (click)="share()">Share</button> -->
+  </div>
+
+        <div class="errmsg" [innerHtml]="errmsg"></div>
+
+</div>
+<!-- <mat-card-actions>
+  <button mat-mini-fab (click)="LoadData()"><mat-icon aria-label="Refersh">refresh</mat-icon></button>
+  <button mat-mini-fab (click)="LoadData()"><mat-icon aria-label="Refersh">add</mat-icon></button>
+  <button mat-mini-fab (click)="LoadData()"><mat-icon aria-label="Refersh">delete</mat-icon></button>
+</mat-card-actions> -->

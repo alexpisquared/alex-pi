@@ -1,0 +1,41 @@
+<div style="text-align:center;">
+  <br />
+  <h1>Analytics - User Details</h1>
+  <br />
+</div>
+<div class="flex-row-even">
+  <mat-card>
+    <mat-card-header>
+      <!-- <div mat-card-avatar class="cv-header-image"></div> -->
+      <mat-card-title *ngIf="hero" style="width:180px;">{{ hero.nickname | uppercase }} </mat-card-title>
+      <mat-card-subtitle>Details - Edit or ... </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content *ngIf="hero">
+      <div>
+        <label>id: </label> <b> {{ hero.id }}</b>
+      </div>
+      <div>
+        <label>signature:</label>
+        <br />
+        <textarea matInput readonly placeholder="RO please" style="height: 160px;">{{ hero.eventData }}</textarea>
+      </div>
+      <br />
+      <mat-form-field>
+        <!-- tu: https://material.angular.io/components/input/examples -->
+        <input matInput type="text" placeholder="Nick" [(ngModel)]="hero.nickname" />
+        <button mat-button *ngIf="hero.nickname" matSuffix mat-icon-button aria-label="Clear" (click)="hero.nickname = hero.id">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button (click)="save()"><mat-icon aria-label="Hide User">save</mat-icon></button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card><app-vw-event-user-utc></app-vw-event-user-utc></mat-card>
+</div>
+
+<div style="position: absolute; left: 0px; top: 70px; z-index: 100;">
+  <button mat-icon-button (click)="goBack()"><mat-icon aria-label="Hide User">arrow_back</mat-icon></button>
+</div>

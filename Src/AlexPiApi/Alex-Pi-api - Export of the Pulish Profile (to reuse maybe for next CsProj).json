@@ -1,0 +1,36 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appService_Alex-Pi-api_name": {
+      "type": "string"
+    },
+    "appServicePlan_ASP-uvw-874c_location": {
+      "type": "string"
+    },
+    "appServicePlan_ASP-uvw-874c_name": {
+      "type": "string"
+    },
+    "appServicePlan_ASP-uvw-874c_resourceGroup": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "location": "[parameters('appServicePlan_ASP-uvw-874c_location')]",
+      "name": "[parameters('appService_Alex-Pi-api_name')]",
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2015-08-01",
+      "tags": {
+        "[concat('hidden-related:', resourceId(parameters('appServicePlan_ASP-uvw-874c_resourceGroup'),'Microsoft.Web/serverfarms', parameters('appServicePlan_ASP-uvw-874c_name')))]": "empty"
+      },
+      "kind": "app",
+      "properties": {
+        "name": "[parameters('appService_Alex-Pi-api_name')]",
+        "kind": "app",
+        "httpsOnly": true,
+        "serverFarmId": "[resourceId(parameters('appServicePlan_ASP-uvw-874c_resourceGroup'),'Microsoft.Web/serverfarms', parameters('appServicePlan_ASP-uvw-874c_name'))]"
+      }
+    }
+  ]
+}

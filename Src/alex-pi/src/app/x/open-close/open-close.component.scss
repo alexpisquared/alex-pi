@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+
+.open-close-container {
+  border: 1px solid #dddddd;
+  margin-top: 1em;
+  padding: 20px 20px 0px 20px;
+  color: #000000;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
+.styleLightOn {
+  // background: #e0ffe8;
+  border-width: 1px;
+  border-color: #00aa00;
+  border-style: solid;
+  margin: 22px;
+  font-size: 18pt;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -khtml-border-radius: 20px;
+  behavior: url(/css/border-radius.htc);
+  border-radius: 20px;
+  width: 600px;
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#11801110',EndColorStr='#11801140'); /*	background-image: -webkit-gradient(linear, left top, left bottom, from(#11801110), to(#11801140)); 	background-image: -webkit-gradient(linear, left top, left bottom, from(hsl(0, 80%, 70%)), to(#11801140)); */
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#11801110), to(#11801140));
+  background-image: -webkit-linear-gradient(top, #11801110, #11801140);
+  background-image: -moz-linear-gradient(top, #11801110, #11801140);
+  background-image: -ms-linear-gradient(top, #11801110, #11801140);
+  background-image: -o-linear-gradient(top, #11801110, #11801140);
+  background-image: linear-gradient(to bottom, #11801110, #11801140); /* current standard, but unimplemented and subject to change */
+}

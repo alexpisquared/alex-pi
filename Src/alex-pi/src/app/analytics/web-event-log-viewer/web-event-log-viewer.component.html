@@ -1,0 +1,45 @@
+<mat-card-header>
+  <!-- <div mat-card-avatar class="cv-header-image"></div> -->
+  <mat-card-title style="width:180px">Events - Last 18</mat-card-title>
+  <mat-card-subtitle>
+    <div *ngIf="!dataavailbale">
+      WAIT! No WebEventLog Data is present ...yet
+    </div>
+    report
+  </mat-card-subtitle>
+
+  <button mat-mini-fab (click)="LoadData()"><mat-icon aria-label="Refersh">refresh</mat-icon></button>
+</mat-card-header>
+<mat-card-content>
+  <!-- <input type="button" class="btn btn-primary" (click)="loadAddnew()" 
+    data-toggle="modal" data-target="#myModal" 
+    value="Create New" /> -->
+  <table *ngIf="dataavailbale">
+    <thead>
+      <tr>
+        <th scope="col">##</th>
+        <th scope="col">Date-Xh</th>
+        <th scope="col">Time-Xh</th>
+        <th scope="col">Event</th>
+        <th scope="col">Nick</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of welRecords; let i = index">
+        <td scope="col">{{ i + 1 }}</td>
+        <td scope="col">{{ e.doneAt | date: 'MMM-dd':'-1000' }}</td>
+        <td scope="col">
+          <b> {{ e.doneAt | date: 'HH:mm':'-1000' }}</b>
+        </td>
+        <td scope="col">{{ e.eventName }}</td>
+        <td scope="col">{{ e.nickname }}</td>
+        <td style="display:none">{{ e.Id }}</td>
+      </tr>
+    </tbody>
+  </table>
+</mat-card-content>
+<!-- <mat-card-actions>
+  <button mat-mini-fab (click)="LoadData()"><mat-icon aria-label="Refersh">refresh</mat-icon></button>
+  <button mat-mini-fab (click)="LoadData()"><mat-icon aria-label="Refersh">add</mat-icon></button>
+  <button mat-mini-fab (click)="LoadData()"><mat-icon aria-label="Refersh">delete</mat-icon></button>
+</mat-card-actions> -->

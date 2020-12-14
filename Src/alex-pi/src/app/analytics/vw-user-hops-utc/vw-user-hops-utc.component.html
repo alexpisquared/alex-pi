@@ -1,0 +1,50 @@
+<mat-card-header>
+  <!-- <div mat-card-avatar class="cv-header-image"></div> -->
+  <mat-card-title style="width:240px">Observer</mat-card-title>
+  <mat-card-subtitle>
+    <div *ngIf="!dataavailbale">
+      WAIT! No WebEventLog Data is present ...yet
+    </div>
+    report
+  </mat-card-subtitle>
+  <button mat-mini-fab (click)="LoadData()" disabled="{{ isBusy == true }}"><mat-icon aria-label="Refersh">refresh</mat-icon></button>
+</mat-card-header>
+
+<table *ngIf="dataavailbale">
+  <thead>
+    <tr>
+      <th scope="col">Start-Xh - Finish-Xh &nbsp;</th>
+      <th scope="col">On (min) &nbsp;</th>
+      <th scope="col">Hops &nbsp;</th>
+      <th scope="col">Nick &nbsp;</th>
+      <th>
+        <button mat-icon-button (click)="alert('hs-ha')"><mat-icon aria-label="haha">watch</mat-icon></button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let hero of welRecords; let i = index" (click)="goToUserDetail(hero.id)">
+      <!-- <td scope="col">{{ i + 1 }}</td> -->
+      <td>
+        <button mat-button (click)="goToUserDetail(hero.id)"><mat-icon aria-label="User Details">edit</mat-icon> {{ hero.started | date: 'MM-dd':'-1000' }} - {{ hero.finished | date: 'MM-dd HHmm':'-1000' }}</button>
+      </td>
+      <td align="center">{{ hero.totalMin }}</td>
+      <td align="center">{{ hero.hops }}</td>
+      <td>{{ hero.nickname }}</td>
+      <td scope="col">
+        <!-- <a routerLink="/usr/{{ hero.id }}"><button mat-icon-button><mat-icon aria-label="User Details">edit</mat-icon></button></a> 
+          <button mat-icon-button (click)="goToUserDetail(hero.id)"><mat-icon aria-label="User Details">edit</mat-icon></button>
+        -->
+        <button mat-icon-button (click)="HideUser(hero.id)"><mat-icon aria-label="Hide User">delete</mat-icon></button>
+      </td>
+      <td style="display:none">{{ hero.id }}</td>
+    </tr>
+  </tbody>
+</table>
+<div class="errmsg" [innerHtml]="errmsg"></div>
+<!-- 
+  <mat-card-actions>
+  <button mat-mini-fab (click)="LoadData()"><mat-icon aria-label="Refersh">refresh</mat-icon></button>
+  <button mat-mini-fab (click)="LoadData()"><mat-icon aria-label="Refersh">add</mat-icon></button>
+  <button mat-mini-fab (click)="LoadData()"><mat-icon aria-label="Refersh">delete</mat-icon></button>
+</mat-card-actions> -->

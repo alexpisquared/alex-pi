@@ -1,0 +1,8 @@
+mat-grid-list {
+  margin: 0 32px; // apparently, tob-bottoms are not working for MGL.
+  // background-color: aqua;
+}
+
+::ng-deep .mat-tab-label .mat-tab-label-content {
+    font-size: large;
+}

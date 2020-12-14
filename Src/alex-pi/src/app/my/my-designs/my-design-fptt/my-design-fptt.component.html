@@ -1,0 +1,59 @@
+<br />
+<div class="flex-row-even">
+  <div><img loading="lazy" height="600" alt="RespCalc-long.gif" src="\assets\designs\epp1.gif" /> <br /></div>
+  <div>
+    <h2>Fisher Price Time Tracking</h2>
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>Steps</h3>
+          </mat-panel-title>
+          <mat-panel-description>
+            &nbsp;
+            <mat-icon>watch</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <br />
+        <br />
+        <h3>Step 1 - Select the work day</h3>
+        <br />
+        <h3>Step 2 - Pick the projects worked on</h3>
+        <br />
+        <h3>Step 3 - Adjust the time intervals</h3>
+        <br />
+        <br />
+        <br />
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>Roadmap</h3>
+          </mat-panel-title>
+          <mat-panel-description>
+            &nbsp;
+            <mat-icon>map</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>History</h3>
+          </mat-panel-title>
+          <mat-panel-description>
+            &nbsp;
+            <mat-icon>date_range</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br />
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
+<br />

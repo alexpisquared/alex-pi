@@ -1,0 +1,27 @@
+<br />
+<button mat-button (click)="toggleOpenClose()">{{ isLightOn ? 'open' : 'closed' }}</button>
+
+<div class="center-wrapper">
+  <div class="center-inner">
+    <div style="width: 800px; height: 200px; background-color: #ddd;">
+      <div class="center-wrapper">
+        <div class="center-inner">
+          <div [@openClose]="isLightOn ? 'open' : 'closed'" class="open-close-container">
+            <p>The box is now {{ isLightOn ? 'Open' : 'Closed' }}!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="width: 800px; height: 200px; background-color: #bbb;">
+      <div class="center-wrapper">
+        <div class="center-inner">
+          <div [@openClose]="isLightOn ? 'open' : 'closed'" class="styleLightOn">
+            <p>The box is now {{ isLightOn ? 'Open' : 'Closed' }}!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<img loading="lazy"  src="\assets\images\traffic-lights-green.png" alt="traffic-lights-green" width="31">

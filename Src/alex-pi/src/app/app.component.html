@@ -1,0 +1,23 @@
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <div id="watermark">
+      <h1>Under <br />construction</h1>
+      <p>The back-end is already on <b>.Net 5.0</b>!!!</p>
+    </div>
+
+    <!-- // https://stackblitz.com/github/zetsnotdead/ng-reactive-sticky-header -->
+    <div style="height: 70px"></div>
+    <app-nav-header></app-nav-header>
+
+    <app-nav-side-l></app-nav-side-l>
+
+    <!-- <router-outlet></router-outlet> -->
+    <div [@routeAnimations]="prepareRoute(outlet)">
+      <router-outlet #outlet="outlet"></router-outlet>
+      <!-- <app-nav-footer></app-nav-footer> -->
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!--   //todo:  https://medium.com/@saleemmalikraja/theme-your-angular-application-with-angular-material-library-477993fb746f -->

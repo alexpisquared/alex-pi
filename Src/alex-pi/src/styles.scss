@@ -1,0 +1,362 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$alex-pro-primary: mat-palette($mat-indigo);
+$alex-pro-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$alex-pro-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$alex-pro-theme: mat-light-theme($alex-pro-primary, $alex-pro-accent, $alex-pro-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($alex-pro-theme);
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// define a real custom palette (using http://mcg.mbitson.com) - https://www.color-hex.com/color-palette/22644
+$aav-main-primary: (
+  50: #e0efff,
+  100: #b3d7ff,
+  200: #80bcff,
+  300: #4da1ff,
+  400: #268cff,
+  500: #0078ff,
+  600: #0070ff,
+  700: #0065ff,
+  800: #005bff,
+  900: #0048ff,
+  A100: #ffffff,
+  A200: #f2f5ff,
+  A400: #bfcdff,
+  A700: #a6b9ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
+$aav-dark-primary: (
+  50: #fef4ea,
+  100: #fde4cb,
+  200: #fbd3a9,
+  300: #f9c186,
+  400: #f8b36c,
+  500: #f7a652,
+  600: #f69e4b,
+  700: #f59541,
+  800: #f38b38,
+  900: #f17b28,
+  A100: #ffffff,
+  A200: #fffcfb,
+  A400: #ffddc8,
+  A700: #ffcdae,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
+$aav-main-accent: (
+  50: #fef4ea,
+  100: #fde4cb,
+  200: #fbd3a9,
+  300: #f9c186,
+  400: #f8b36c,
+  500: #f7a652,
+  600: #f69e4b,
+  700: #f59541,
+  800: #f38b38,
+  900: #f17b28,
+  A100: #ffffff,
+  A200: #fffcfb,
+  A400: #ffddc8,
+  A700: #ffcdae,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+$aav-dark-accent: (
+  50: #e6ebf4,
+  100: #c1cee4,
+  200: #97add2,
+  300: #6d8cc0,
+  400: #4e74b3,
+  500: #2f5ba5,
+  600: #2a539d,
+  700: #234993,
+  800: #1d408a,
+  900: #122f79,
+  A100: #adc1ff,
+  A200: #7a9bff,
+  A400: #4774ff,
+  A700: #2e61ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff,
+    A700: #ffffff
+  )
+);
+$main-theme: mat-light-theme(mat-palette($aav-main-primary), mat-palette($aav-main-accent), mat-palette($mat-red));
+$dark-theme: mat-dark-theme(mat-palette($aav-dark-accent), mat-palette($aav-dark-primary), mat-palette($mat-red));
+@mixin mixin-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  // set body color, otherwise it is not consistent on custom error page
+  background-color: #666; // mat-color($background, background); looks better below the footer: like a no mans land.
+  .content {
+    background-color: mat-color($background, background);
+    color: mat-color($foreground, text);
+  }
+  .footer {
+    background-color: mat-color($background, background);
+    color: mat-color($foreground, text);
+  }
+
+  // this is wrong since no element has class "a" :  .a {    color: mat-color($primary);  }
+  a:link {
+    color: mat-color($primary);
+  }
+  a:visited {
+    color: mat-color($accent);
+  }
+  a:hover {
+    color: hotpink;
+  }
+  a:active {
+    color: blue;
+  }
+
+  .accent-color {
+    color: mat-color($accent) !important;
+  }
+  .primary-color {
+    color: mat-color($primary) !important;
+  }
+}
+$background: map-get($main-theme, background);
+.footer {
+  background-color: mat-color($background, background);
+}
+.main-theme {
+  @include angular-material-theme($main-theme);
+  @include mixin-theme($main-theme);
+  // Include theme styles for your custom components.
+  // @include custom-error-component-theme($main-theme);
+}
+.dark-theme {
+  @include angular-material-theme($dark-theme);
+  @include mixin-theme($dark-theme);
+  // Include theme styles for your custom components.
+  // @include custom-error-component-theme($dark-theme);
+}
+#containerId {
+  display: grid;
+  grid-template-columns: 70px auto;
+  height: 100%;
+}
+
+// @import url('https://fonts.googleapis.com/css?family=Lobster:400,700');
+// @import url('https://fonts.googleapis.com/css?family=Wingdings:400,700'); ..ap: I think no such font at Google side.
+@import url('https://fonts.googleapis.com/css?family=Lobster:400,700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import url('https://fonts.googleapis.com/css?family=Orbitron&display=swap');
+
+body,
+html {
+  height: 100%;
+  margin: 0 auto;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  --gray-shade: #80808040;
+  --lite-shade: #ffffff10;
+  --dark-shade: #00000010;
+}
+.body-with-fixed-bgrd-img {
+  background: #0048ff url(../src/assets/images/HeaderBackground.png) fixed center; // for more srch: css fixed background image
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  text-shadow: 0.5px 1px 0px #aaa, 1px 2px 0px #aaa, 1.5px 3px 2px #5558, 2px 4px 4px #5558;
+
+  // position: absolute;
+  // top: 40%;
+  // right: 50%;
+  // transform: translate(50%, -50%);
+  // text-transform: uppercase;
+  // font-family: verdana;
+  // font-size: 8em;
+  // font-weight: 700;
+  // color: #f5f5f5;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1.3em;
+  display: grid;
+  grid-template-columns: 30% auto;
+
+  a {
+    color: white;
+  }
+}
+
+section {
+  width: 80%;
+  margin: 0 auto;
+  padding: 2em;
+}
+
+.horizontalSpacer {
+  flex: 1 1 auto;
+}
+
+.full-width-top {
+  padding-left: 6px;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  flex-direction: row;
+  place-content: flex-start;
+  align-items: flex-start;
+}
+
+.gray-shade {
+  background-color: var(--gray-shade);
+}
+.lite-shade {
+  background-color: var(--lite-shade);
+}
+.dark-shade {
+  background-color: var(--dark-shade);
+}
+
+// div centering
+.center-wrapper {
+  text-align: center;
+}
+.center-inner {
+  display: inline-block;
+}
+
+.flex-row-even {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  vertical-align: center;
+}
+.flex-row-spbtwn {
+  display: flex;
+  flex-direction: row;
+  // flex-wrap: wrap;
+  justify-content: space-between;
+  vertical-align: center;
+  width: 100%;
+}
+
+// Expansion panel as accordion {{
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+mat-form-field {
+  margin-right: 12px;
+}
+// Expansion panel as accordion }}
+
+mat-card {
+  margin: 3px; // to show shadows
+}
+.errmsg {
+  width: 80%;
+  color: #d74;
+  font-size: 1.2em;
+}
+th {
+  font-weight: lighter;
+  font-size: smaller;
+}
+
+// layout debugging: mat-toolbar-row {  background-color: #fffff0;}mat-grid-tile {  background-color: #ff000011;}

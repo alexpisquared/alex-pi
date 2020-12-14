@@ -1,0 +1,53 @@
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 500px;
+  width: 100%;
+  vertical-align: bottom;
+  background-color: #8881;
+}
+
+.r {
+  padding: 0 10px;
+  color: #4b4;
+  text-align: left;
+  background-color: #8881;
+}
+.clear-icon {
+  cursor: pointer;
+}
+
+button {
+  margin: 10px;
+}
+.imgbtn {
+  margin: 10px;
+  height: 70px;
+}
+.imgsrc {
+  margin: 10px;
+  height: 480px;
+  background-color: #8881;
+  // border: solid green 2px;
+}
+canvas {
+  // padding: .33em 0; // ?? why - i dont know.
+  margin: 10px;
+  height: 480px;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: crisp-edges;
+  // image-rendering: pixelated;
+  // width: 100vh;
+  // height: 100vh;
+  // margin: 10px;
+  // background-color: #8881;
+  // border: solid green 0.5px;
+  // zoom: 100%;
+}
+
+.cr {
+  // background-color: #8881;
+  min-width: 320px;
+}

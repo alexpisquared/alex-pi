@@ -1,0 +1,38 @@
+<div align="center">
+  <h1>OCR Demo</h1>
+
+  <h3>Select an image for OCR from the following three ...</h3>
+
+  <button mat-raised-button (click)="onImageButtonClick(imgurl0)"><img src="{{ imgurl0 }}" class="imgbtn" alt="picture to OCR 0" /></button>
+  <button mat-raised-button (click)="onImageButtonClick(imgurl1)"><img src="{{ imgurl1 }}" class="imgbtn" alt="picture to OCR 1" /></button>
+  <button mat-raised-button (click)="onImageButtonClick(imgurl2)"><img src="{{ imgurl2 }}" class="imgbtn" alt="picture to OCR 2" /></button>
+
+  <br />
+
+  <mat-form-field style="padding: 0 1em; width: 480px; ">
+    <input matInput autocomplete="off" style="margin-left: 8px; margin-right: 8px;" type="text" value="" class="form-control" placeholder="... or enter any other url here" #urlInput />
+    <!-- <mat-icon class="edit-icon"  matSuffix *ngIf="!urlInput.value">search</mat-icon> -->
+    <mat-icon class="clear-icon" matSuffix *ngIf="urlInput.value" (click)="clearSearchInput()">clear</mat-icon>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="startOcr()" [disabled]="urlInput.value ? null : true" matTooltip="Perform OCR on the specified URL.">OCR</button>
+  <br />
+
+  <div class="flex-row">
+    <div style="position: relative; z-index: 1;">
+      <img src="{{ imgurl }}" alt="... Please select a picture to OCR" class="imgsrc" #myImage />
+      <canvas style="position: absolute; left: 0%; top: 0%;" #myCanvas height="480"></canvas>
+    </div>
+
+    <!-- <button mat-raised-button color="primary" (click)="startOcr()" [disabled]="urlInput.value ? null : true" matTooltip="Perform OCR on the specified URL." style="height: 36px; z-index: 2;">OCR</button> -->
+
+    <div class="cr" *ngIf="dataavailbale">
+      <h4>Text recognized:</h4>
+      <div *ngIf="dataavailbale">
+        <div class="r" [innerHtml]="result"></div>
+      </div>
+      <div class="errmsg" [innerHtml]="errmsg"></div>
+    </div>
+  </div>
+</div>
+<!-- <mat-form-field>      <textarea matInput matTextareaAutosize [(ngModel)]="{{result}}" placeholder="comment"> </textarea>    </mat-form-field> -->

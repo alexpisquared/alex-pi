@@ -1,0 +1,60 @@
+<br />
+<div class="flex-row-even">
+  <div><img loading="lazy" height="600" alt="RespCalc-long.gif" src="\assets\designs\RespCalc-long-Hi.gif" /> <br /></div>
+
+  <div>
+    <h2>RESP Calculation</h2>
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>Steps</h3>
+          </mat-panel-title>
+          <mat-panel-description>
+            &nbsp;
+            <mat-icon>money</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <br />
+        <br />
+        <h3>1 - Choose your monthly contributions</h3>
+        <br />
+        <h3>2 - Immediately see the resuls</h3>
+        <br />
+        <h3>3 - Repeat until targets hit</h3>
+        <br />
+        <br />
+        <br />
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>Roadmap</h3>
+          </mat-panel-title>
+          <mat-panel-description>
+            &nbsp;
+            <mat-icon>map</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>History</h3>
+          </mat-panel-title>
+          <mat-panel-description>
+            &nbsp;
+            <mat-icon>date_range</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br />
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
+<br />

@@ -1,0 +1,72 @@
+<div class="flexVertJust">
+  <div align="center" class="gray-shade">
+    <!-- <div align="right">
+      <button mat-button (click)="toggleAlpha()">{{ isNumeric ? 'isNmb' : 'isDgt' }}</button>
+      <button mat-button (click)="toggleOnOff()">{{ isLightOn ? 'isOn' : 'isOf' }}</button>
+    </div> -->
+    <br />
+    <br />
+    <div align="center" class="welcome-row">
+      <h1>Welcome&nbsp;to&nbsp;&nbsp;<span class="biggerish"> alex </span></h1>
+      <div class="g765 biggerish" [@flipinplace]="isNumeric ? 'isNmb' : 'isDgt'" (@flipinplace.done)="onDone($event)"><h1>3.14</h1></div>
+      <div class="g765 biggerish" [@flipinplace]="isNumeric ? 'isDgt' : 'isNmb'"><h1>&nbsp;Pi&nbsp;&nbsp;&nbsp;</h1></div>
+    </div>
+    <br />
+    <br />
+  </div>
+  <div align="center">
+    <!-- (2019-11-24:park  2020-11-10:unpark)
+      <h2>Praesent commodo, lorem.</h2>
+    -->
+    <h2>My Status</h2> 
+  </div>
+  <div align="center">
+    <div [@slideBumpLeftToRight]="isLightOn ? 'isOn' : 'isOf'">
+      <div class="traffic-light-container">
+        <div class="traffic-light">
+          <div class="circle_r"></div>
+          <div class="circle_a"></div>
+          <div class="circle_g" [@trafficLight]="isLightOn ? 'isOn' : 'isOf'"></div>
+        </div>
+      </div>
+    </div>
+    <div [@slideBumpRightToLeft]="isLightOn ? 'isOn' : 'isOf'" class="styleLightOn">
+      <span>
+        <br />
+        <br />
+        <!-- (2019-11-24:park  2020-11-10:unpark)
+          Proin egestas dolor id finibus ultrices.
+          <br /><br />
+          Praesent suscipit mauris non risus.
+          <br /><br />
+          In pharetra erat vel vestibulum.
+        -->
+        Full-stack developer is available for  
+        <br /><br />
+         opportunities in <b>Toronto</b> and <b>GTA</b> 
+        <br /><br />
+         starting from <b>{{ startDate }}</b> 
+
+        <br />
+        <br />
+      </span>
+      <!-- <canvas #canvas height="10" width="620"></canvas>
+      <button (click)="play()">Play</button> -->
+      <br />
+    </div>
+  </div>
+  <div align="center">
+    <div style="text-align:left; min-width: 400px; max-width: 640px;">
+      <p class="m12-15-f12">
+        <!-- (2019-11-24:park  2020-11-10:unpark)
+          Cras at augue ac metus viverra volutpat et ullamcorper mi. Donec
+          hendrerit efficitur enim at eleifend. Praesent auctor erat sed dignissim
+          dapibus. Pellentesque at dictum magna, in viverra odio, sem justo
+          pharetra dolor.
+        -->
+        Should you require assistance in delivering IT projects ahead of schedule using the latest advances in Microsoft .NET [Core], Web, WPF, MS SQL and Angular technologies, please do not hesitate to rely on my expert service. 
+      </p>
+    </div>
+  </div>
+  &nbsp;
+</div>

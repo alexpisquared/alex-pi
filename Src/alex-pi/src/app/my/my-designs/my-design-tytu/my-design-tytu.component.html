@@ -1,0 +1,67 @@
+<div class="flex-row-even">
+  <div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <img loading="lazy" height="360" alt="Typing Trainer" src="\assets\designs\TypeCatch0.gif" />
+  </div>
+
+  <div>
+    <h2>Typing Tutor</h2>
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>Steps</h3>
+          </mat-panel-title>
+          <mat-panel-description>
+            &nbsp;
+            <mat-icon>money</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <br />
+        <br />
+        <h3>&nbsp; ♦ Try to beat your previous record</h3>
+        <br />
+        <h3>&nbsp; ♦ See the real-time results color-coded during the session</h3>
+        <br />
+        <h3>&nbsp; ♦ Review your progress over time</h3>
+        <br />
+        <h3>&nbsp; ♦ Set up your daily load and keep it from sliding out</h3>
+        <br />
+        <br />
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>Roadmap</h3>
+          </mat-panel-title>
+          <mat-panel-description>
+            &nbsp;
+            <mat-icon>map</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>History</h3>
+          </mat-panel-title>
+          <mat-panel-description>
+            &nbsp;
+            <mat-icon>date_range</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br />
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
+<br />

@@ -1,0 +1,40 @@
+.flexVertJust {
+  margin: 0% 15%;
+  min-height: calc(100vh - 118px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // border: 1px solid gray;} .flexVertJust div {  background-color: #03030341;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0 5%;
+  padding: 0;
+
+  li {
+    background: #80808020;
+    padding: 3px 20px;
+    border-radius: 6px;
+    margin: 6px;
+    display: grid;
+
+    p {
+      margin: -70px 20px 0px 100px;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .img-w70-m3 {
+      width: 70px;
+      margin: 9px 3px 0px 3px;
+    }
+    .img-w20-m3 {
+      width: 20px;
+      margin: 3px;
+      position: relative;
+      left: -15px;
+      top: -59px;
+    }
+  }
+}

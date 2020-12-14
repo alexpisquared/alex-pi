@@ -1,0 +1,60 @@
+.flexVertJust {
+  text-align: center;
+  margin: 0% 15%;
+  height: calc(100vh - 188px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+    // border: 1px solid gray;} .flexVertJust div {  background-color: #03030341;
+}
+
+label {
+  display: block;
+
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    min-height: 100px;
+    margin-bottom: 20px;
+    padding: 1em;
+  }
+
+  .error {
+    color: red;
+    margin-top: -20px;
+    // background: yellow;
+    padding: 0.5em;
+    display: inline-block;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+  }
+}
+
+a {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.cta {
+  // background: #7700FF;
+  border: none;
+  color: white;
+
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 1em;
+  cursor: pointer;
+}
+
+.results {
+  margin-top: 50px;
+
+  strong {
+    display: block;
+  }
+  span {
+    margin-bottom: 20px;
+    display: block;
+  }
+}
