@@ -40,3 +40,14 @@ SWAGGER part:
   - Upgrade to
     - .Net 5.0
     - NG 11 (echo 2020-12-14  Upgrading NG from 8 to 11 - globally and locally - succeeded!!)
+    - Safe storage of app secrets in development in ASP.NET Core  https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows#register-the-user-secrets-configuration-source
+      + done on SecretManagerIntro branch
+      + apparently it is almost the same with my solutiuon for AlexPi.scr and TypeCatch
+    - Azure Key Vault Configuration Provider in ASP.NET Core      https://docs.microsoft.com/en-us/aspnet/core/security/key-vault-configuration?view=aspnetcore-5.0
+      + pending Azure pricing clarification
+        * secret creation   https://www.youtube.com/watch?v=PgujSug1ZbI
+        * assign to an app  https://www.youtube.com/watch?v=6fjBGGrbayU
+        * code to use Azure https://www.youtube.com/watch?v=6l_kpygO0Ic&feature=emb_logo
+
+#2020-12-15 //todo: https://www.youtube.com/watch?v=k2VYcYS3EIA from 2019-12-31
+
