@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/DemoPocKV",
+      "type": "secrets.keyVault",
+      "connectionId": "VaultUri",
+      "secretStore": "AzureAppSettings"
+    },
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/sqs/databases/OneBase",
+      "type": "mssql.azure",
+      "connectionId": "GuidedConStr",
+      "secretStore": "AzureKeyVault"
+    }
+  }
+}

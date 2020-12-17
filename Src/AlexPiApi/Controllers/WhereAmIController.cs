@@ -16,7 +16,7 @@ namespace AlexPiApi.Controllers
     [HttpGet]
     public string Get()
     {
-      var report = $"▄▀▄▀▄▀ {this.GetType().FullName} - {_configuration["WhereAmI"]} - Compiled: 2020-12-17 ▀▄▀▄▀▄";
+      var report = $"▄▀▄▀▄▀ {this.GetType().FullName} - {_configuration["WhereAmI"]} - Compiled: 2020-12-17T11:30 ▀▄▀▄▀▄";
 
       _logger.LogInformation(report);
       return report;
