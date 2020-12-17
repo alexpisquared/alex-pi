@@ -3,18 +3,18 @@
   FOLLOWING THESE: Getting Started with EF Core on ASP.NET Core with an Existing Database  https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/existing-db
 
 "Server=.\sqlexpress;Database=OneBase;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
-"data source=sqs.database.windows.net;initial catalog=OneBase;persist security info=True;user id=APiSqlLogin;password=\"j4g4nFF83djrt77\";MultipleActiveResultSets=True;App=EntityFramework"
+"data source=sqs.database.windows.net;initial catalog=OneBase;persist security info=True;user id=APiSqlLogin;password=\"<▄▀▄▀▄▀use new for 2021 password▄▀▄▀▄▀>\";MultipleActiveResultSets=True;App=EntityFramework"
 
-  Skip this, use next 7 lines below: SCAFFOLDING OFF azure db : https://cmatskas.com/scaffolding-dbcontext-and-models-with-entityframework-core-2-0-and-the-cli/  dotnet ef dbcontext scaffold "Server=tcp:sqs.database.windows.net,1433;Initial Catalog=OneBase;Persist Security Info=False;User ID=APiSqlLogin;Password=j4g4nFF83djrt77;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=12;" Microsoft.EntityFrameworkCore.SqlServer -o Model -f -c OneBaseContext
+  Skip this, use next 7 lines below: SCAFFOLDING OFF azure db : https://cmatskas.com/scaffolding-dbcontext-and-models-with-entityframework-core-2-0-and-the-cli/  dotnet ef dbcontext scaffold "▄▀▄▀▄▀Server=tcp:sqs.database.windows.net,1433;Initial Catalog=OneBase;Persist Security Info=False;User ID=APiSqlLogin;Password=<▄▀▄▀▄▀use new for 2021 password▄▀▄▀▄▀>;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=12;" Microsoft.EntityFrameworkCore.SqlServer -o Model -f -c OneBaseContext
 
 Model gen-n:
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 Install-Package Microsoft.EntityFrameworkCore.Tools
-Scaffold-DbContext "Server=tcp:sqs.database.windows.net,1433;Initial Catalog=OneBase;Persist Security Info=True;user id=APiSqlLogin;Password='j4g4nFF83djrt77';" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
-Scaffold-DbContext "Server=tcp:sqs.database.windows.net,1433;Initial Catalog=OneBase;Persist Security Info=True;user id=APiSqlLogin;Password='j4g4nFF83djrt77';" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model -force
+Scaffold-DbContext "▄▀▄▀▄▀Server=tcp:sqs.database.windows.net,1433;Initial Catalog=OneBase;Persist Security Info=True;user id=APiSqlLogin;Password='<▄▀▄▀▄▀use new for 2021 password▄▀▄▀▄▀>';" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+Scaffold-DbContext "▄▀▄▀▄▀Server=tcp:sqs.database.windows.net,1433;Initial Catalog=OneBase;Persist Security Info=True;user id=APiSqlLogin;Password='<▄▀▄▀▄▀use new for 2021 password▄▀▄▀▄▀>';" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model -force
 // ^^up - worked !!!
 // down - not tried
-Scaffold-DbContext "Server=tcp:sqs.database.windows.net,1433;Initial Catalog=OneBase;Persist Security Info=False;user id=APiSqlLogin;Password='j4g4nFF83djrt77';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=12;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+Scaffold-DbContext "▄▀▄▀▄▀Server=tcp:sqs.database.windows.net,1433;Initial Catalog=OneBase;Persist Security Info=False;user id=APiSqlLogin;Password='<▄▀▄▀▄▀use new for 2021 password▄▀▄▀▄▀>';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=12;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
 
 // seems OK without this one Install-Package Microsoft.EntityFrameworkCore.SqlServer.Design 
 
@@ -37,7 +37,7 @@ SWAGGER part:
   - npm update
 
 #2020-12
-  - Upgrade to
+  - Upgraded to
     - .Net 5.0
     - NG 11 (echo 2020-12-14  Upgrading NG from 8 to 11 - globally and locally - succeeded!!)
     - Safe storage of app secrets in development in ASP.NET Core  https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows#register-the-user-secrets-configuration-source
@@ -49,5 +49,7 @@ SWAGGER part:
         * assign to an app  https://www.youtube.com/watch?v=6fjBGGrbayU
         * code to use Azure https://www.youtube.com/watch?v=6l_kpygO0Ic&feature=emb_logo
 
-#2020-12-15 //todo: https://www.youtube.com/watch?v=k2VYcYS3EIA from 2019-12-31
+#2020-12-16 Used https://www.youtube.com/watch?v=k2VYcYS3EIA !!! from 2019-12-31  <== worked!!! +   https://github.com/Azure-Samples/key-vault-dotnet-core-quickstart
 
+  https://alex-pi-api.azurewebsites.net
+  48ebcf3d-868a-4fbe-adeb-5f91be20249f  alex-pi-api identity

@@ -1,4 +1,3 @@
-using AlexPiApi.AzureKeyVault;
 using Db.OneBase.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Diagnostics;
 
 namespace AlexPiApi
 {
@@ -38,11 +36,10 @@ namespace AlexPiApi
           });
       });
 
-      AzureKeyVaultHelper.TestLocalSecrets(Configuration);
-
       services.AddDbContext<OneBaseContext>( //tu: inject DbContext in .NET Core.
-        options => options.UseSqlServer(Configuration["WebApiStuff:DbOneConStr"]) 
+        options => options.UseSqlServer(Configuration["OneBaseDbConStr"])
       );
+
 
       services.AddControllers();
 
@@ -78,6 +75,11 @@ namespace AlexPiApi
       {
         c.SwaggerEndpoint("../swagger/v1/swagger.json", "My API V1");
       });
+
+      System.Diagnostics.Debug.WriteLine($"** {Configuration["TestSecret1"]}"); //tu: !!! MVP for Azure Key Vault utilization !!!
+      System.Diagnostics.Debug.WriteLine($"** {Configuration["OneBaseDbConStr"]}");
+      System.Diagnostics.Debug.WriteLine($"** {Configuration["WhereAmI"]}");
     }
   }
 }
+//2020-11-10 - Test to ignore++
