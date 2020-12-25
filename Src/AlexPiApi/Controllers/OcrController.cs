@@ -31,10 +31,10 @@ namespace AlexPi.WebApi.AnalytReport.Controllers
         return $"\nInvalid remote image url:\n{url}\n";
       }
 
-      var rv = await new OCRSample(_configuration["CognSvcRsc0-Key-001"]).OCRFromUrlAsync(url);
-      _logger.LogInformation(rv);
-      Debug.WriteLine(rv);
-      return rv;
+      var spaceSeparatedValues = await new OCRSample(_configuration["CognSvcRsc0-Key-001"]).OCRFromUrlAsync(url);
+      _logger.LogInformation(spaceSeparatedValues);
+      Debug.WriteLine(spaceSeparatedValues);
+      return spaceSeparatedValues;
     }
 
     // GET: api/Ocr                 [HttpGet] public async Task<string> GetAll() => await OCRSample.OCRFromUrlAsync("https://github.com/Azure-Samples/cognitive-services-sample-data-files/raw/master/ComputerVision/Images/printed_text.jpg");

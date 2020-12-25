@@ -49,7 +49,7 @@ SWAGGER part:
         * assign to an app  https://www.youtube.com/watch?v=6fjBGGrbayU
         * code to use Azure https://www.youtube.com/watch?v=6l_kpygO0Ic&feature=emb_logo
 
-#2020-12-16 Used https://www.youtube.com/watch?v=k2VYcYS3EIA !!! from 2019-12-31  <== worked!!! +   https://github.com/Azure-Samples/key-vault-dotnet-core-quickstart
+#2020-12-16  Azure Key Vault - Used https://www.youtube.com/watch?v=k2VYcYS3EIA !!! from 2019-12-31  <== worked!!! + https://github.com/Azure-Samples/key-vault-dotnet-core-quickstart
 
   https://alex-pi-api.azurewebsites.net
   48ebcf3d-868a-4fbe-adeb-5f91be20249f  alex-pi-api identity

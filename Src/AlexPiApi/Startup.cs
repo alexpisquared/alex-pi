@@ -37,7 +37,7 @@ namespace AlexPiApi
       });
 
       services.AddDbContext<OneBaseContext>( //tu: inject DbContext in .NET Core.
-        options => options.UseSqlServer(Configuration["OneBaseDbConStr"])
+        options => options.UseSqlServer(Configuration["OneBaseDbConStr"]) //tu: !!! MVP for Azure Key Vault utilization !!!
       );
 
 
@@ -75,10 +75,6 @@ namespace AlexPiApi
       {
         c.SwaggerEndpoint("../swagger/v1/swagger.json", "My API V1");
       });
-
-      System.Diagnostics.Debug.WriteLine($"** {Configuration["TestSecret1"]}"); //tu: !!! MVP for Azure Key Vault utilization !!!
-      System.Diagnostics.Debug.WriteLine($"** {Configuration["OneBaseDbConStr"]}");
-      System.Diagnostics.Debug.WriteLine($"** {Configuration["WhereAmI"]}");
     }
   }
 }
