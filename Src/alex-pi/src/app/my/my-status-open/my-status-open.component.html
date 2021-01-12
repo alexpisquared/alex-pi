@@ -8,8 +8,19 @@
     <br />
     <div align="center" class="welcome-row">
       <h1>Welcome&nbsp;to&nbsp;&nbsp;<span class="biggerish"> alex </span></h1>
-      <div class="g765 biggerish" [@flipinplace]="isNumeric ? 'isNmb' : 'isDgt'" (@flipinplace.done)="onDone($event)"><h1>3.14</h1></div>
-      <div class="g765 biggerish" [@flipinplace]="isNumeric ? 'isDgt' : 'isNmb'"><h1>&nbsp;Pi&nbsp;&nbsp;&nbsp;</h1></div>
+      <div
+        class="g765 biggerish"
+        [@flipinplace]="isNumeric ? 'isNmb' : 'isDgt'"
+        (@flipinplace.done)="onDone($event)"
+      >
+        <h1>3.14</h1>
+      </div>
+      <div
+        class="g765 biggerish"
+        [@flipinplace]="isNumeric ? 'isDgt' : 'isNmb'"
+      >
+        <h1>&nbsp;Pi&nbsp;&nbsp;&nbsp;</h1>
+      </div>
     </div>
     <br />
     <br />
@@ -18,7 +29,7 @@
     <!-- (2019-11-24:park  2020-11-10:unpark)
       <h2>Praesent commodo, lorem.</h2>
     -->
-    <h2>My Status</h2> 
+    <h2>My Status</h2>
   </div>
   <div align="center">
     <div [@slideBumpLeftToRight]="isLightOn ? 'isOn' : 'isOf'">
@@ -26,11 +37,17 @@
         <div class="traffic-light">
           <div class="circle_r"></div>
           <div class="circle_a"></div>
-          <div class="circle_g" [@trafficLight]="isLightOn ? 'isOn' : 'isOf'"></div>
+          <div
+            class="circle_g"
+            [@trafficLight]="isLightOn ? 'isOn' : 'isOf'"
+          ></div>
         </div>
       </div>
     </div>
-    <div [@slideBumpRightToLeft]="isLightOn ? 'isOn' : 'isOf'" class="styleLightOn">
+    <div
+      [@slideBumpRightToLeft]="isLightOn ? 'isOn' : 'isOf'"
+      class="styleLightOn"
+    >
       <span>
         <br />
         <br />
@@ -49,10 +66,8 @@
 
         Pending ...
         <br /><br />
-         ... very-very <b>Pending</b> 
-        <br /><br />
-         starting from <b>{{ startDate }}</b> 
-
+        ... very-very <b>Pending</b> <br /><br />
+        starting from <b>{{ startDate }}</b>
 
         <br />
         <br />
@@ -63,7 +78,7 @@
     </div>
   </div>
   <div align="center">
-    <div style="text-align:left; min-width: 400px; max-width: 640px;">
+    <div style="text-align: left; min-width: 400px; max-width: 640px">
       <p class="m12-15-f12">
         <!-- (2019-11-24:park  2020-11-10:unpark)
           Cras at augue ac metus viverra volutpat et ullamcorper mi. Donec
@@ -71,8 +86,40 @@
           dapibus. Pellentesque at dictum magna, in viverra odio, sem justo
           pharetra dolor.
         -->
-        Should you require assistance in delivering IT projects ahead of schedule using the latest advances in Microsoft .NET [Core], Web, WPF, MS SQL and Angular technologies, please do not hesitate to rely on my expert service. 
+        Should you require assistance in delivering IT projects ahead of
+        schedule using the latest advances in Microsoft .NET, Web, WPF, MS SQL
+        and Angular technologies, please do not hesitate to rely on my expert
+        service.
       </p>
+    </div>
+  </div>
+  <div align="center">
+    <div style="text-align: left; min-width: 400px; max-width: 640px">
+      Please leave a message in my guestbook
+      <br />
+      <form [formGroup]="messageForm" (ngSubmit)="onSubmit()" *ngIf="!success">
+        <label>
+          <textarea formControlName="textareaMsg"></textarea>
+          <div
+            *ngIf="submitted && messageForm.controls.textareaMsg.errors"
+            class="error"
+          >
+            <div *ngIf="messageForm.controls.textareaMsg.errors.required">
+              A message is required
+            </div>
+          </div>
+        </label>
+
+        <button mat-raised-button color="primary" (click)="onSubmit()">
+          Submit
+        </button>
+      </form>
+
+      <div *ngIf="success" class="results">
+        <h3 *ngIf="success">
+          Thank you. Your message has been sent.
+        </h3>
+      </div>
     </div>
   </div>
   &nbsp;

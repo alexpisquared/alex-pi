@@ -1,21 +1,28 @@
-<div class="lite-shade" style="text-align:center;">
+<div class="lite-shade" style="text-align: center">
   <br />
   <h1>Contact me</h1>
   <br />
 </div>
 <div class="flexVertJust">
-  <div style="text-align:left; margin: 0% 5% 0% 5% ;">
-      <br />
-    Should you feel like my full stack developer expertise would be of any use, <br />
-    feel free:
+  <div style="text-align: left; margin: 0% 5% 0% 5%">
+    <br />
+    Should you feel like my full stack developer expertise would be of any use
+    for you, feel free:
   </div>
-  <div style="text-align:left; margin: 0% 5% 0% 5% ;">&nbsp; ♦ &nbsp; to drop me a line at <a href="mailto: alex.pigida@outlook.com?cc=pigida@gmail.com&subject=reaching you from alexPi.ca&body=Hi Alex,">alex.pigida@outlook.com</a></div>
-  <div style="text-align:left; margin: 0% 5% 0% 5% ;">&nbsp; ♦ &nbsp; leave me a message at <a href="https://www.linkedin.com/in/alexpigida/">LinkedIn</a></div>
-  <!-- 
-  <div style="text-align:left; margin: 0% 5% 0% 5% ;">&nbsp; ♦ &nbsp; catch me at <a href="tel:416-262-0960">416-262-0960</a></div> 
-  -->
-  <div style="text-align:left; margin: 0% 5% 0% 5% ;">
-    &nbsp; ♦ &nbsp; or, since you are already here, just type a line or two below
+  <div style="text-align: left; margin: 0% 5% 0% 5%">
+    &nbsp; ♦ &nbsp; to drop me a line at
+    <a href="mailto: alex.pigida@outlook.com?cc=pigida@gmail.com&subject=reaching you from alexPi.ca&body=Hi Alex,">alex.pigida@outlook.com</a>
+  </div>
+  <div style="text-align: left; margin: 0% 5% 0% 5%">
+    &nbsp; ♦ &nbsp; leave me a message at
+    <a href="https://www.linkedin.com/in/alexpigida/">LinkedIn</a>
+  </div>
+  <div style="text-align: left; margin: 0% 5% 0% 5%">
+    &nbsp; ♦ &nbsp; catch me at <a href="tel:416-???-????">416-???-????</a>
+  </div>
+  <div style="text-align: left; margin: 0% 5% 0% 5%">
+    &nbsp; ♦ &nbsp; or, since you are already here, just type a line or two
+    below
     <br />
     <br />
 
@@ -29,21 +36,27 @@
     </label>
  -->
       <label>
-        <textarea formControlName="message"></textarea>
-        <div *ngIf="submitted && messageForm.controls.message.errors" class="error">
-          <div *ngIf="messageForm.controls.message.errors.required">A message is required</div>
+        <textarea formControlName="textareaMsg"></textarea>
+        <div *ngIf="submitted && messageForm.controls.textareaMsg.errors" class="error">
+          <div *ngIf="messageForm.controls.textareaMsg.errors.required">
+            A message is required
+          </div>
         </div>
       </label>
 
-      <button mat-raised-button color="primary" (click)="onSubmit()">Send message</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        Send message
+      </button>
     </form>
 
     <div *ngIf="success" class="results">
       <h3 *ngIf="success">
         Thank you. Your message has ... <br />
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ...NOT been sent yet! But just click <a href="{{ biglink }}">this link</a>, please, to get things going.
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ...NOT been sent yet! But just
+        click <a href="{{ biglink }}">this link</a>, please, to get things
+        going.
       </h3>
-      <div style="text-align:right; ">
+      <div style="text-align: right">
         <h6>It's just temporary 'til the plumbing's done. ;)</h6>
       </div>
     </div>

@@ -148,3 +148,28 @@
   height: 105px;
    transform: rotateX(180deg);
 }
+
+
+// text area 
+label {
+  display: block;
+
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    min-height: 60px;
+    margin-bottom: 20px;
+    padding: 1em;
+  }
+
+  .error {
+    color: red;
+    margin-top: -20px;
+    // background: yellow;
+    padding: 0.5em;
+    display: inline-block;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+  }
+}

@@ -13,13 +13,13 @@ export class ContactComponent implements OnInit {
   success = false;
   biglink = 'mailto: alex.pigida@outlook.com?cc=pigida@gmail.com&subject=reaching you from alexPi.ca&body=Hi Alex,';
 
-  constructor(private formBuilder: FormBuilder, private welSvc: WebEventLoggerService) {}
+  constructor(private formBuilder: FormBuilder, private welSvc: WebEventLoggerService) { }
 
   ngOnInit() {
     this.welSvc.logIfProd('cntc');
     this.messageForm = this.formBuilder.group({
       // sender: ['', Validators.required],
-      message: ['', Validators.required]
+      textareaMsg: ['', Validators.required]
     });
   }
 
@@ -29,7 +29,7 @@ export class ContactComponent implements OnInit {
       return;
     }
 
-    this.biglink = `mailto: alex.pigida@outlook.com?cc=pigida@gmail.com&subject=reaching you from alexPi.ca&body=${this.messageForm.controls.message.value}`;
+    this.biglink = `mailto: alex.pigida@outlook.com?cc=pigida@gmail.com&subject=reaching you from alexPi.ca ... &body=${this.messageForm.controls.textareaMsg.value}`;
 
     this.success = true;
   }
