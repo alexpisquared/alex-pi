@@ -53,3 +53,6 @@ SWAGGER part:
 
   https://alex-pi-api.azurewebsites.net
   48ebcf3d-868a-4fbe-adeb-5f91be20249f  alex-pi-api identity
+
+#2021-01-12  Guestbook
+  

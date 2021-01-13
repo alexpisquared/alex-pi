@@ -115,7 +115,7 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
       return caa;
     }
 
-    private async Task saveToDb()
+    async Task saveToDb()
     {
       try
       {

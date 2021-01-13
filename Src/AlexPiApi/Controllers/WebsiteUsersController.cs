@@ -13,7 +13,7 @@ namespace AlexPi.WebApi.Controllers
   [ApiController]
   public class WebsiteUsersController : ControllerBase
   {
-    private readonly OneBaseContext _context;
+    readonly OneBaseContext _context;
 
     public WebsiteUsersController(OneBaseContext context) => _context = context;
 
@@ -21,7 +21,7 @@ namespace AlexPi.WebApi.Controllers
     [HttpGet]
     public async Task<ActionResult<IEnumerable<WebsiteUser>>> GetWebsiteUser()
     {
-      var users = await _context.WebsiteUser.Where(r => r.ReviewedAt == null || 
+      var users = await _context.WebsiteUser.Where(r => r.ReviewedAt == null ||
       (
         _context.WebEventLog.Any(e => e.WebsiteUserId == r.Id) && r.ReviewedAt < (_context.WebEventLog.Where(e => e.WebsiteUserId == r.Id).Max(e => e.DoneAt))
       )).ToListAsync();

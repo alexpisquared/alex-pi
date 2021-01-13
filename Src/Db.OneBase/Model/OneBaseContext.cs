@@ -31,6 +31,7 @@ namespace Db.OneBase.Model
         public virtual DbSet<VwUserHopsUtc> VwUserHopsUtc { get; set; }
         public virtual DbSet<WebEventLog> WebEventLog { get; set; }
         public virtual DbSet<WebsiteUser> WebsiteUser { get; set; }
+        public virtual DbSet<GuestbookMsg> GuestbookMsg { get; set; } // 2021-01 manually added 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
