@@ -26,7 +26,7 @@
     <tr *ngFor="let hero of welRecords; let i = index" (click)="goToUserDetail(hero.id)">
       <!-- <td scope="col">{{ i + 1 }}</td> -->
       <td>
-        <button mat-button (click)="goToUserDetail(hero.id)"><mat-icon aria-label="User Details">edit</mat-icon> {{ hero.started | date: 'MM-dd':'-1000' }} - {{ hero.finished | date: 'MM-dd HHmm':'-1000' }}</button>
+        <button mat-button (click)="goToUserDetail(hero.id)"><mat-icon aria-label="User Details">edit</mat-icon> {{ hero.started | date: 'MM-dd':'-1000' }} · {{ hero.finished | date: 'MM-dd HHmm':'-1000' }}</button>
       </td>
       <td align="center">{{ hero.totalMin }}</td>
       <td align="center">{{ hero.hops }}</td>
