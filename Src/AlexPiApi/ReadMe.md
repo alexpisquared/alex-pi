@@ -55,4 +55,8 @@ SWAGGER part:
   48ebcf3d-868a-4fbe-adeb-5f91be20249f  alex-pi-api identity
 
 #2021-01-12  Guestbook
+
+#2021-12-13  Guestbook merged/published/deleted;  late2021updates created
+  mode operandy: use GitHub for Desktop to perform local commits + VS to push/pull !!!
+
   

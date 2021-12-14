@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Injectable, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -39,6 +40,7 @@ export class WebEventLoggerService {
     return unMaskedInfo;
   }
   getClientInfo(): string {
+    // @ts-ignore: error after upgrading to Angular 13.0.0
     const canvas = new OffscreenCanvas(512, 512);
     const gl1 = canvas.getContext('webgl');
     const gpr = this.getUnmaskedInfo(gl1).renderer;
