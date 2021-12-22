@@ -89,10 +89,10 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
       {
         webEventLog.DoneAt = DateTime.UtcNow; // DateTime.Now is ambiguos ~ local time of the web server => UTC is better.
 
-        var wsu = _context.WebsiteUser.FirstOrDefault(r => r.EventData.Equals(webEventLog.EventData__Copy));// ..., StringComparison.OrdinalIgnoreCase)); //tu: , StringComparison.* i.e.: none works!!!!!!!!! ==> use without StringComparison param!!!  <= I think it is original Core 3.0 bug
+        var wsu = _context.WebsiteUser.FirstOrDefault(r => r.EventData.Equals(webEventLog.EventData__Copy));
         if (wsu == null)
         {
-          wsu = _context.WebsiteUser.Add(new WebsiteUser { Nickname = "¤¤¤", CreatedAt = webEventLog.DoneAt, LastVisitAt = webEventLog.DoneAt, EventData = webEventLog.EventData__Copy }).Entity; // *!?`
+          wsu = _context.WebsiteUser.Add(new WebsiteUser { Nickname = $"{webEventLog.DoneAt:yyMMdd}", CreatedAt = webEventLog.DoneAt, LastVisitAt = webEventLog.DoneAt, EventData = webEventLog.EventData__Copy }).Entity; // *!?`
           await saveToDb(); // Core 3 does not provide mechanizm for the new ID !!!
         }
 

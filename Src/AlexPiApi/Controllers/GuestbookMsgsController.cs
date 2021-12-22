@@ -19,7 +19,7 @@ namespace AlexPiApi.Controllers
     readonly ILogger<GuestbookMsgsController> _logger;
     readonly IConfiguration _configuration;
 
-    public GuestbookMsgsController(OneBaseContext context) => _context = context;
+    //public GuestbookMsgsController(OneBaseContext context) => _context = context;
     public GuestbookMsgsController(OneBaseContext context, ILogger<GuestbookMsgsController> logger, IConfiguration configuration) => (_context, _logger, _configuration) = (context, logger, configuration);
 
     // GET: api/GuestbookMsgs
@@ -86,11 +86,14 @@ namespace AlexPiApi.Controllers
       {
         GuestbookMsg.CreatedAt = DateTime.UtcNow; // DateTime.Now is ambiguos ~ local time of the web server => UTC is better.
 
+        if (string.IsNullOrEmpty(GuestbookMsg.EventData))
+          GuestbookMsg.EventData = $"MVC Controller adds  this: {GuestbookMsg.CreatedAt}.";
+
         _context.GuestbookMsg.Add(GuestbookMsg);
       }
       catch (Exception ex) { Debug.WriteLine(ex); throw; }
 
-      await saveToDb();
+      await SaveToDb();
 
       CreatedAtActionResult caa;
       try
@@ -104,7 +107,7 @@ namespace AlexPiApi.Controllers
       return caa;
     }
 
-    async Task saveToDb()
+    async Task SaveToDb()
     {
       try
       {

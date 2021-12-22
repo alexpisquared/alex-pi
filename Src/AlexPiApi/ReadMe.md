@@ -59,4 +59,9 @@ SWAGGER part:
 #2021-12-13  Guestbook merged/published/deleted;  late2021updates created
   mode operandy: use GitHub for Desktop to perform local commits + VS to push/pull !!!
 
-  
+#2021-12-14    
+  Broken publish was remedied by https://stackoverflow.com/questions/58107017/azure-app-service-deploy-failed-to-get-resource-id-for-resource-type-microsoft
+  //todo: figure out dev/prod on ng13
+
+#2021-12-15
+  Is AlexPiApi a part of the CD/CI?

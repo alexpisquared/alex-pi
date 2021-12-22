@@ -11,7 +11,7 @@ import { WebViewer } from '../model/WebViewer';
 export class WebEventLoggerService {
   private svcurl = isDevMode() ? 'https://localhost:5001' : 'https://alex-pi-api.azurewebsites.net';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getUnmaskedInfo(gl2) {
     // gl2: WebGLRenderingContext does not compile, but useful to debug.
@@ -31,9 +31,9 @@ export class WebEventLoggerService {
     // for (let i = 37400; i < 37488; i++) {
     //   const v = gl2.getParameter(i);
     //   if (v === null) {
-    //     // console.log(` ** ${i}  `);
+    //     // console.log(` ▄▀ ${i}  `);
     //   } else {
-    //     console.log(` ** ${i}   ${v}`);
+    //     console.log(` ▄▀ ${i}   ${v}`);
     //   }
     // }
 
@@ -50,27 +50,29 @@ export class WebEventLoggerService {
 
     const clientId = `${usa.substr(0, 27)}**${usa.substr(usl)}**${navigator.languages}**CPU:${navigator.hardwareConcurrency}**${gpr}**${gpv}.`;
 
-    console.log(` ** clientId:  "${clientId}"`);
+    console.log(` ▄▀ clientId:  "${clientId}"`);
 
     return clientId;
   }
   logIfProd(evname: string) {
-    // if (isDevMode() === false) {
-    this.log(evname);
-    // } else {
-    //   this.getClientInfo();
-    // }
+    if (isDevMode() === false) {
+      this.logEvent(evname);
+      console.log(` ▄▀ prd mode: logged evdata to db`);
+    } else {
+      const evdata = this.getClientInfo();
+      console.log(` ▄▀ dev mode: no logging of  "${evdata}"`);
+    }
   }
-  log(evname: string) {
+  logEvent(evname: string) {
     const evdata = this.getClientInfo();
-    // redundant ???
+
     this.addEvent(evname, evdata).subscribe(
       data => {
-        console.log(' ** SUCCESS:  ');
+        console.log(' ▄▀ SUCCESS adding event to db:  ');
         console.log(data);
       },
       err => {
-        console.log(` ** ERR in log():  ${err.message}`);
+        console.log(` ▄▀ ERR in logEvent(${evname}):  ${err.message}`);
       }
     );
   }

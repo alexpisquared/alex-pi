@@ -16,9 +16,7 @@ import { WebEventLoggerService } from 'src/app/serivce/web-event-logger.service'
 export class UserDetailComponent implements OnInit {
   @Input() hero: WebsiteUser;
 
-  constructor(private route: ActivatedRoute, private welSvc: WebEventLoggerService, private svc: WebsiteUsersService, private interactSvc: CompInteractService, private location: Location) {
-    // this.hero = new website-user();
-  }
+  constructor(private route: ActivatedRoute, private welSvc: WebEventLoggerService, private svc: WebsiteUsersService, private interactSvc: CompInteractService, private location: Location) { }
 
   ngOnInit(): void {
     this.welSvc.logIfProd('uDtl ☺ ☻');

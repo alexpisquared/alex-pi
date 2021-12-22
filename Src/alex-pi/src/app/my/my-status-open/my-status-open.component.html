@@ -8,17 +8,10 @@
     <br />
     <div align="center" class="welcome-row">
       <h1>Welcome&nbsp;to&nbsp;&nbsp;<span class="biggerish"> alex </span></h1>
-      <div
-        class="g765 biggerish"
-        [@flipinplace]="isNumeric ? 'isNmb' : 'isDgt'"
-        (@flipinplace.done)="onDone($event)"
-      >
+      <div class="g765 biggerish" [@flipinplace]="isNumeric ? 'isNmb' : 'isDgt'" (@flipinplace.done)="onDone($event)">
         <h1>3.14</h1>
       </div>
-      <div
-        class="g765 biggerish"
-        [@flipinplace]="isNumeric ? 'isDgt' : 'isNmb'"
-      >
+      <div class="g765 biggerish" [@flipinplace]="isNumeric ? 'isDgt' : 'isNmb'">
         <h1>&nbsp;Pi&nbsp;&nbsp;&nbsp;</h1>
       </div>
     </div>
@@ -37,17 +30,11 @@
         <div class="traffic-light">
           <div class="circle_r"></div>
           <div class="circle_a"></div>
-          <div
-            class="circle_g"
-            [@trafficLight]="isLightOn ? 'isOn' : 'isOf'"
-          ></div>
+          <div class="circle_g" [@trafficLight]="isLightOn ? 'isOn' : 'isOf'"></div>
         </div>
       </div>
     </div>
-    <div
-      [@slideBumpRightToLeft]="isLightOn ? 'isOn' : 'isOf'"
-      class="styleLightOn"
-    >
+    <div [@slideBumpRightToLeft]="isLightOn ? 'isOn' : 'isOf'" class="styleLightOn">
       <span>
         <br />
         <br />
@@ -58,12 +45,12 @@
           <br /><br />
           In pharetra erat vel vestibulum.
         -->
-        Full-stack developer is available for  
+        Full-stack developer is available for
         <br /><br />
-         opportunities in <b>Toronto</b> <!-- and <b>GTA</b>  -->
+        opportunities in <b>Toronto</b> <!-- and <b>GTA</b>  -->
         <br /><br />
         <!-- starting from <b>{{ startDate }}</b> -->
-         starting from <b>April 2022</b> 
+        starting from <b>April 2022</b>
 
         <!-- Pending ...
         <br /><br />
@@ -88,7 +75,7 @@
           pharetra dolor.
         -->
         Should you require assistance in delivering IT projects ahead of
-        schedule using the latest advances in Microsoft .NET, Web, WPF, MS SQL
+        schedule using the latest advances in Microsoft .NET, WPF, Web, MS SQL
         and Angular technologies, please do not hesitate to rely on my expert
         service.
       </p>
@@ -96,21 +83,22 @@
   </div>
   <div align="center">
     <div style="text-align: left; min-width: 400px; max-width: 640px">
-      Please leave a message in my guestbook
+      <div style="width: 250px; display:inline; margin: 2px;">
+        Please leave a message in my guestbook
+      </div>
+      <div style="text-align:right; color: #808080; margin-left: 260px; display:inline;">
+        <b>{{ msgCount }}</b> unreads
+      </div>
       <br />
       <form [formGroup]="messageForm" (ngSubmit)="onSubmit()" *ngIf="!success">
         <label>
           <textarea formControlName="textareaMsg"></textarea>
-          <div
-            *ngIf="submitted && messageForm.controls.textareaMsg.errors"
-            class="error"
-          >
+          <div *ngIf="submitted && messageForm.controls.textareaMsg.errors" class="error">
             <div *ngIf="messageForm.controls.textareaMsg.errors.required">
               A message is required
             </div>
           </div>
         </label>
-
         <button mat-raised-button color="primary" (click)="onSubmit()">
           Submit
         </button>
