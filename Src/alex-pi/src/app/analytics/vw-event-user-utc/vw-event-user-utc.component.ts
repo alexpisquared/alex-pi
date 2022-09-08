@@ -55,7 +55,7 @@ export class VwEventUserUtcComponent implements OnInit, OnDestroy {
     const getter = this.nickNm === '' ? this.svc.GetVwEventUserUtc() : this.svc.GetVwEventUserUtcWithParam({ nickname: this.nickNm, userId: this.userId });
     getter.subscribe(
       data => {
-        setTimeout(() => (this.isBusy = false), 250);
+        setTimeout(() => (this.isBusy = false), 250); // todo: The router does no longer schedule redirect navigation within a setTimeout. Make sure your tests do not rely on this behavior.
         this.welRecords = data;
         console.log(this.welRecords);
         if (this.welRecords.length > 0) {
@@ -67,7 +67,7 @@ export class VwEventUserUtcComponent implements OnInit, OnDestroy {
         }
       },
       err => {
-        setTimeout(() => (this.isBusy = false), 250);
+        setTimeout(() => (this.isBusy = false), 250); // todo: The router does no longer schedule redirect navigation within a setTimeout. Make sure your tests do not rely on this behavior.
         this.errmsg = err.message
           // .toString()
           // .replace('https', '<br /><br />https')

@@ -1,8 +1,15 @@
+/*
+https://stackoverflow.com/questions/65858151/changing-package-from-microsoft-extensions-configuration-azurekeyvault-to-azu
+https://docs.microsoft.com/en-us/aspnet/core/security/key-vault-configuration?view=aspnetcore-6.0
+https://medium.com/dotnet-hub/use-azure-key-vault-with-net-or-asp-net-core-applications-read-azure-key-vault-secret-in-dotnet-fca293e9fbb3
+
+*/
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
+using Azure.Extensions.AspNetCore.Configuration.Secrets; // see comments above ^^
 using Microsoft.Extensions.Hosting;
 using Azure.Identity;
 

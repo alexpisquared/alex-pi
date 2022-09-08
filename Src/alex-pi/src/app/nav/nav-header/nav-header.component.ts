@@ -91,7 +91,7 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
   signIn(): void {
     this.isSignedIn = true;
-    setTimeout(() => {
+    setTimeout(() => { // todo: The router does no longer schedule redirect navigation within a setTimeout. Make sure your tests do not rely on this behavior.
       this.router.navigate(['/']);
     }, 3333);
   }

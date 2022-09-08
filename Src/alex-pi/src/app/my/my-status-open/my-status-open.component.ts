@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { slideBumpRightToLeftAnimation, trafficLightAnimation, slideBumpLeftToRightAnimation, flipinplaceAnimation } from 'src/app/animations';
 import { GuestbookMsgsService } from 'src/app/_api/services/guestbook-msgs.service';
 
@@ -15,7 +15,7 @@ import { GuestbookMsgsService } from 'src/app/_api/services/guestbook-msgs.servi
   styleUrls: ['./my-status-open.component.scss'],
 })
 export class MyStatusOpenComponent implements OnInit, OnDestroy {
-  messageForm: FormGroup;
+  messageForm: UntypedFormGroup;
   submitted = false;
   success = false;
   biglink = 'mailto: alex.pigida@outlook.com?cc=pigida@gmail.com&subject=reaching you from alexPi.ca&body=Hi Alex,';
@@ -40,10 +40,10 @@ export class MyStatusOpenComponent implements OnInit, OnDestroy {
     this.isNumeric = !this.isNumeric;
   }
 
-  constructor(private formBuilder: FormBuilder, private ngZone: NgZone, private svc: GuestbookMsgsService) { }
+  constructor(private formBuilder: UntypedFormBuilder, private ngZone: NgZone, private svc: GuestbookMsgsService) { }
 
   ngOnInit() {
-    setTimeout(() => {
+    setTimeout(() => { // todo: The router does no longer schedule redirect navigation within a setTimeout. Make sure your tests do not rely on this behavior.
       this.isLightOn = true;
     }, 750);
 

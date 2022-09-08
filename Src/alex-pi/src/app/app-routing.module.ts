@@ -22,7 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' }, // todo: If you are defining routes with pathMatch, you may have to cast it to Route or Routes explicitly. Route.pathMatch is no longer compatible with string type.
   { path: 'home', component: HomeComponent, data: { animation: 'HomePage' } },
 
   { path: 'my-projects', component: MyProjectsComponent, data: { animation: 'MyProjectsPage' } },

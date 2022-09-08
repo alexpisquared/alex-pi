@@ -34,3 +34,8 @@ Guestbook - added visuals; need talk to SQL DB.
 Prettier - Removed to avoid:
   1. auto-double-quoting
   2. 80 max length
+
+## 2022-09-07
+Updating to ng14 following this:  https://update.angular.io/?l=3&v=13.0-14.0
+
+BTW, the build on Azure: https://dev.azure.com/AlexPi/alex-pi/_build

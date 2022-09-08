@@ -28,7 +28,7 @@ export class VwUserHopsUtcComponent implements OnInit {
     this.svc.GetVwUserHopsUtc().subscribe(
       data => {
         this.welRecords = data;
-        setTimeout(() => (this.isBusy = false), 250);
+        setTimeout(() => (this.isBusy = false), 250); // todo: The router does no longer schedule redirect navigation within a setTimeout. Make sure your tests do not rely on this behavior.
         console.log(this.welRecords);
         if (this.welRecords.length > 0) {
           this.dataavailbale = true;
@@ -39,7 +39,7 @@ export class VwUserHopsUtcComponent implements OnInit {
         }
       },
       err => {
-        setTimeout(() => (this.isBusy = false), 250);
+        setTimeout(() => (this.isBusy = false), 250); // todo: The router does no longer schedule redirect navigation within a setTimeout. Make sure your tests do not rely on this behavior.
         this.errmsg = err.message
           // .toString()
           // .replace('https', '<br /><br />https')

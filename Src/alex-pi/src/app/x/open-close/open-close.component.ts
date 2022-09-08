@@ -39,7 +39,7 @@ export class OpenCloseComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    setTimeout(() => {
+    setTimeout(() => { // todo: The router does no longer schedule redirect navigation within a setTimeout. Make sure your tests do not rely on this behavior.
       this.isLightOn = true;
     }, 400);
   }

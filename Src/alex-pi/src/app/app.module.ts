@@ -26,7 +26,7 @@ import { MyStatusBusyComponent } from './my/my-status-busy/my-status-busy.compon
 import { MyGeoTargetComponent } from './my/my-geo-target/my-geo-target.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common'; // todo: Implementing the LocationStrategy interface now requires definition of getState().
 import { WebEventLogViewerComponent } from './analytics/web-event-log-viewer/web-event-log-viewer.component';
 import { AnalytMainComponent } from './analytics/analyt-main/analyt-main.component';
 import { MyDesignRespComponent } from './my/my-designs/my-design-resp/my-design-resp.component';
@@ -86,6 +86,7 @@ import { CompInteractService } from './serivce/comp-interact.service';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }) // try to fix SW - no go; need to find latest and do from scratch.
   ],
   providers: [CompInteractService, { provide: LocationStrategy, useClass: HashLocationStrategy }], // deep link fix #3 (https://stackoverflow.com/questions/38054707/angular-2-azure-deploy-refresh-error-the-resource-you-are-looking-for-has-been)
+  // todo: Implementing the LocationStrategy interface now requires definition of getState().
   bootstrap: [AppComponent]
 })
 export class AppModule {}
