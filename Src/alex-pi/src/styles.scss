@@ -51,8 +51,7 @@ $aav-main-primary: (
   A200: #f2f5ff,
   A400: #bfcdff,
   A700: #a6b9ff,
-  contrast: (
-    50: #000000,
+  contrast: (50: #000000,
     100: #000000,
     200: #000000,
     300: #000000,
@@ -65,8 +64,7 @@ $aav-main-primary: (
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #000000
-  )
+    A700: #000000)
 );
 
 $aav-dark-primary: (
@@ -84,8 +82,7 @@ $aav-dark-primary: (
   A200: #fffcfb,
   A400: #ffddc8,
   A700: #ffcdae,
-  contrast: (
-    50: #000000,
+  contrast: (50: #000000,
     100: #000000,
     200: #000000,
     300: #000000,
@@ -98,8 +95,7 @@ $aav-dark-primary: (
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #000000
-  )
+    A700: #000000)
 );
 
 $aav-main-accent: (
@@ -117,8 +113,7 @@ $aav-main-accent: (
   A200: #fffcfb,
   A400: #ffddc8,
   A700: #ffcdae,
-  contrast: (
-    50: #000000,
+  contrast: (50: #000000,
     100: #000000,
     200: #000000,
     300: #000000,
@@ -131,8 +126,7 @@ $aav-main-accent: (
     A100: #000000,
     A200: #000000,
     A400: #000000,
-    A700: #000000
-  )
+    A700: #000000)
 );
 $aav-dark-accent: (
   50: #e6ebf4,
@@ -149,8 +143,7 @@ $aav-dark-accent: (
   A200: #7a9bff,
   A400: #4774ff,
   A700: #2e61ff,
-  contrast: (
-    50: #000000,
+  contrast: (50: #000000,
     100: #000000,
     200: #000000,
     300: #000000,
@@ -163,11 +156,11 @@ $aav-dark-accent: (
     A100: #000000,
     A200: #000000,
     A400: #ffffff,
-    A700: #ffffff
-  )
+    A700: #ffffff)
 );
 $main-theme: mat-light-theme(mat-palette($aav-main-primary), mat-palette($aav-main-accent), mat-palette($mat-red));
 $dark-theme: mat-dark-theme(mat-palette($aav-dark-accent), mat-palette($aav-dark-primary), mat-palette($mat-red));
+
 @mixin mixin-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
@@ -176,10 +169,12 @@ $dark-theme: mat-dark-theme(mat-palette($aav-dark-accent), mat-palette($aav-dark
   $foreground: map-get($theme, foreground);
   // set body color, otherwise it is not consistent on custom error page
   background-color: #666; // mat-color($background, background); looks better below the footer: like a no mans land.
+
   .content {
     background-color: mat-color($background, background);
     color: mat-color($foreground, text);
   }
+
   .footer {
     background-color: mat-color($background, background);
     color: mat-color($foreground, text);
@@ -189,12 +184,15 @@ $dark-theme: mat-dark-theme(mat-palette($aav-dark-accent), mat-palette($aav-dark
   a:link {
     color: mat-color($primary);
   }
+
   a:visited {
     color: mat-color($accent);
   }
+
   a:hover {
     color: hotpink;
   }
+
   a:active {
     color: blue;
   }
@@ -202,26 +200,32 @@ $dark-theme: mat-dark-theme(mat-palette($aav-dark-accent), mat-palette($aav-dark
   .accent-color {
     color: mat-color($accent) !important;
   }
+
   .primary-color {
     color: mat-color($primary) !important;
   }
 }
+
 $background: map-get($main-theme, background);
+
 .footer {
   background-color: mat-color($background, background);
 }
+
 .main-theme {
   @include angular-material-theme($main-theme);
   @include mixin-theme($main-theme);
   // Include theme styles for your custom components.
   // @include custom-error-component-theme($main-theme);
 }
+
 .dark-theme {
   @include angular-material-theme($dark-theme);
   @include mixin-theme($dark-theme);
   // Include theme styles for your custom components.
   // @include custom-error-component-theme($dark-theme);
 }
+
 #containerId {
   display: grid;
   grid-template-columns: 70px auto;
@@ -247,8 +251,13 @@ body {
   --lite-shade: #ffffff10;
   --dark-shade: #00000010;
 }
+
 .body-with-fixed-bgrd-img {
-  background: #0048ff url(../src/assets/images/HeaderBackground.png) fixed center; // for more srch: css fixed background image
+  // Errors during publishing frmo VSCode: cannot open azureAppService:/HeaderBackground.png?id%3D%2Fsubscriptions%2F55444df9-fdd4-43d1-a454-16a90de75646%2Fmicrosoft.web%2Fsites%2Fsubscriptions%2F55444df9-fdd4-43d1-a454-16a90de75646%2FresourceGroups%2Fuvw%2Fproviders%2FMicrosoft.eb%2Fsites%2FAlex-Pi%2FFiles%2FHeaderBackground.png. 
+  // Detail: File seems to be binary and cannot be opened as text
+  // replacing then:
+  // background: #0048ff url(../src/assets/images/HeaderBackground.png) fixed center; // for more srch: css fixed background image
+  background: #0048ff;
 }
 
 h1 {
@@ -301,9 +310,11 @@ section {
 .gray-shade {
   background-color: var(--gray-shade);
 }
+
 .lite-shade {
   background-color: var(--lite-shade);
 }
+
 .dark-shade {
   background-color: var(--dark-shade);
 }
@@ -312,6 +323,7 @@ section {
 .center-wrapper {
   text-align: center;
 }
+
 .center-inner {
   display: inline-block;
 }
@@ -323,6 +335,7 @@ section {
   justify-content: space-evenly;
   vertical-align: center;
 }
+
 .flex-row-spbtwn {
   display: flex;
   flex-direction: row;
@@ -337,23 +350,28 @@ section {
 .example-headers-align .mat-expansion-panel-header-description {
   flex-basis: 0;
 }
+
 .example-headers-align .mat-expansion-panel-header-description {
   justify-content: space-between;
   align-items: center;
 }
+
 mat-form-field {
   margin-right: 12px;
 }
+
 // Expansion panel as accordion }}
 
 mat-card {
   margin: 3px; // to show shadows
 }
+
 .errmsg {
   width: 80%;
   color: #d74;
   font-size: 1.2em;
 }
+
 th {
   font-weight: lighter;
   font-size: smaller;

@@ -48,7 +48,12 @@ export class MyStatusOpenComponent implements OnInit, OnDestroy {
     }, 750);
 
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    this.startDate = monthNames[this.addDays(new Date(), 7).getMonth()];
+
+    const contractEnd = new Date(2022, 11, 1);
+    if (new Date() > contractEnd)
+      this.startDate = monthNames[this.addDays(new Date(), 7).getMonth()];
+    else
+      this.startDate = 'November';
 
     this.messageForm = this.formBuilder.group({
       textareaMsg: ['', Validators.required],
@@ -88,7 +93,7 @@ export class MyStatusOpenComponent implements OnInit, OnDestroy {
     console.log('▄▀▄▀▄▀ onSubmit - Z - success Receiving');
   }
 
-  randomIntFromInterval(min, max) { 
+  randomIntFromInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 }

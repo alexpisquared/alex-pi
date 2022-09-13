@@ -49,9 +49,7 @@
         <br /><br />
         opportunities in <b>Toronto</b> <!-- and <b>GTA</b>  -->
         <br /><br />
-        <!-- starting from <b>{{ startDate }}</b> -->
-        starting from <b>November 2022</b>
-        <!-- // a change to trigger pipeline rebuild -->
+        starting from <b>{{ startDate }}</b>
 
         <!-- Pending ...
         <br /><br />
@@ -84,11 +82,11 @@
   </div>
   <div align="center">
     <div style="text-align: left; min-width: 400px; max-width: 640px">
-      <div style="width: 250px; display:inline; margin: 2px;">
+      <div style="width: 255px; display:inline; margin: 3px;">
         Please leave a message in my guestbook
       </div>
-      <div style="text-align:right; color: #808080; margin-left: 260px; display:inline;">
-        <b>{{ msgCount }}</b> unreads
+      <div style="text-align:right; color: #808080; margin-left: 265px; display:inline;">
+        <b>{{ msgCount }}</b>&nbsp;unreads
       </div>
       <br />
       <form [formGroup]="messageForm" (ngSubmit)="onSubmit()" *ngIf="!success">

@@ -30,7 +30,8 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   private themeKey = 'themeKey';
   private mainTheme = 'main-theme';
   private darkTheme = 'dark-theme';
-  AlexPiLogoThemed = './assets/images/AlexTiny_LinkedIn.png';
+  // AlexPiLogoThemed = './assets/images/AlexTiny_LinkedIn.png';
+  AlexPiLogoThemed = './assets/images/AlexPi pro 315x315 - Ukraine Flag - Ofc.png';
   UkraineFlagThemd = './assets/images/UkraineFlag.svg'; // a change to trigger pipeline rebuild 
   isSignedIn = false;
   private isMobileResolution: boolean;
@@ -105,11 +106,11 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit {
       this.welSvc.logIfProd('dark');
       this.document.body.classList.remove(this.mainTheme);
       this.document.body.classList.add((this.themeVal = this.darkTheme));
-      this.AlexPiLogoThemed = './assets/images/AlexPi_Logo_Dark.png';
+      // this.AlexPiLogoThemed = './assets/images/AlexPi_Logo_Dark.png';
     } else {
       this.document.body.classList.remove(this.darkTheme);
       this.document.body.classList.add((this.themeVal = this.mainTheme));
-      this.AlexPiLogoThemed = './assets/images/AlexPi_Logo_Lite.png';
+      // this.AlexPiLogoThemed = './assets/images/AlexPi_Logo_Lite.png';
       this.welSvc.logIfProd('lite');
     }
     console.log(` ** theme toggled  to   ${this.themeVal}`);
@@ -125,6 +126,6 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.document.body.classList.add(this.themeVal);
 
-    this.AlexPiLogoThemed = this.themeVal === this.mainTheme ? './assets/images/AlexPi_Logo_Lite.png' : './assets/images/AlexPi_Logo_Dark.png';
+    // this.AlexPiLogoThemed = this.themeVal === this.mainTheme ? './assets/images/AlexPi_Logo_Lite.png' : './assets/images/AlexPi_Logo_Dark.png';
   }
 }

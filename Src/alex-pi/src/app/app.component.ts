@@ -17,7 +17,6 @@ export class AppComponent {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 }
-
 /*
 PWA solution
 https://stackoverflow.com/questions/52536154/angular-6-pwa-the-pwa-functionality-is-interefering-with-azure-adal-authentic

@@ -20,14 +20,13 @@ mat-sidenav-container {
   margin-top: 100px;
   margin-left: -75px;
   opacity: 0.15;
-  // background-color: #ff0;
   position: absolute;
   top: 0%;
   left: 0%;
   pointer-events: none;
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
-  // transform: rotate(-45deg);
+  transform: rotate(-45deg);
   z-index: -3;
 }
 #watermark h1 {

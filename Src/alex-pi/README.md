@@ -1,4 +1,4 @@
-# Chrono
+# Chrono - 
 
 https://dev.azure.com/AlexPi/_git/alex-pi?_a=history
 
@@ -39,3 +39,126 @@ Prettier - Removed to avoid:
 Updating to ng14 following this:  https://update.angular.io/?l=3&v=13.0-14.0
 
 BTW, the build on Azure: https://dev.azure.com/AlexPi/alex-pi/_build
+BTW, the repo  on Azure: https://dev.azure.com/AlexPi/alex-pi/_git/alex-pi
+
+## 2022-09-08
+Less at C:\Users\alexp\source\repos\alex-pi\AlexPiApi\ReadMe.md
+
+## 2022-09-10   Created parallel alex0-pi:
+⚡ alexp@RAZER1  ~\source\repos\alex-pi-22                                                                                                                                    [14:25]
+❯ ng new alex-pi
+? Would you like to add Angular routing? Yes
+? Which stylesheet format would you like to use? SCSS   [ https://sass-lang.com/documentation/syntax#scss                ]
+
+
+^^ Angular part ==============================================
+
+
+#2019-09:
+  FOLLOWING THESE: Getting Started with EF Core on ASP.NET Core with an Existing Database  https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/existing-db
+
+"Server=.\sqlexpress;Database=OneBase;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+"data source=sqs.database.windows.net;initial catalog=OneBase;persist security info=True;user id=APiSqlLogin;password=\"<▄▀▄▀▄▀use new for 2021 password▄▀▄▀▄▀>\";MultipleActiveResultSets=True;App=EntityFramework"
+
+  Skip this, use next 7 lines below: SCAFFOLDING OFF azure db : https://cmatskas.com/scaffolding-dbcontext-and-models-with-entityframework-core-2-0-and-the-cli/  dotnet ef dbcontext scaffold "▄▀▄▀▄▀Server=tcp:sqs.database.windows.net,1433;Initial Catalog=OneBase;Persist Security Info=False;User ID=APiSqlLogin;Password=<▄▀▄▀▄▀use new for 2021 password▄▀▄▀▄▀>;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=12;" Microsoft.EntityFrameworkCore.SqlServer -o Model -f -c OneBaseContext
+
+Model gen-n:
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
+Install-Package Microsoft.EntityFrameworkCore.Tools
+Scaffold-DbContext "▄▀▄▀▄▀Server=tcp:sqs.database.windows.net,1433;Initial Catalog=OneBase;Persist Security Info=True;user id=APiSqlLogin;Password='<▄▀▄▀▄▀use new for 2021 password▄▀▄▀▄▀>';" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+Scaffold-DbContext "▄▀▄▀▄▀Server=tcp:sqs.database.windows.net,1433;Initial Catalog=OneBase;Persist Security Info=True;user id=APiSqlLogin;Password='<▄▀▄▀▄▀use new for 2021 password▄▀▄▀▄▀>';" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model -force
+// ^^up - worked !!!
+// down - not tried
+Scaffold-DbContext "▄▀▄▀▄▀Server=tcp:sqs.database.windows.net,1433;Initial Catalog=OneBase;Persist Security Info=False;user id=APiSqlLogin;Password='<▄▀▄▀▄▀use new for 2021 password▄▀▄▀▄▀>';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=12;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+
+// seems OK without this one Install-Package Microsoft.EntityFrameworkCore.SqlServer.Design 
+
+  
+SWAGGER part:   
+{
+- for Core 2:    Install-Package Swashbuckle.AspNetCore
+- for Core 3:    Install-Package Swashbuckle.AspNetCore ~~Version="5.0.0-rc2"   !!!rc3 does not publish!!!
+
+  paste code snippets from: https://docs.microsoft.com/en-us/visualstudio/get-started/csharp/tutorial-aspnet-core-ef-step-04?view=vs-2019#adding-swagger
+
+  does not work with .NET Core 3.0 => downgraded to 2.2 !!!
+}
+
+Deploy to Azure:      https://docs.microsoft.com/en-us/visualstudio/get-started/csharp/tutorial-aspnet-core-ef-step-05?view=vs-2019
+==> was it this one:  https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-aspnet-web-app?view=vs-2019&tabs=azure
+
+#2020-11-10
+  - Unparking and changing status to Available.
+  - Iress logo added to my-clients.
+  - npm update
+
+#2020-12
+  - Upgraded to
+    - .Net 5.0
+    - NG 11 (echo 2020-12-14  Upgrading NG from 8 to 11 - globally and locally - succeeded!!)
+    - Safe storage of app secrets in development in ASP.NET Core  https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows#register-the-user-secrets-configuration-source
+      + done on SecretManagerIntro branch
+      + apparently it is almost the same with my solutiuon for AlexPi.scr and TypeCatch
+    - Azure Key Vault Configuration Provider in ASP.NET Core      https://docs.microsoft.com/en-us/aspnet/core/security/key-vault-configuration?view=aspnetcore-5.0
+      + pending Azure pricing clarification
+        * secret creation   https://www.youtube.com/watch?v=PgujSug1ZbI
+        * assign to an app  https://www.youtube.com/watch?v=6fjBGGrbayU
+        * code to use Azure https://www.youtube.com/watch?v=6l_kpygO0Ic&feature=emb_logo
+
+#2020-12-16  Azure Key Vault - Used https://www.youtube.com/watch?v=k2VYcYS3EIA !!! from 2019-12-31  <== worked!!! + https://github.com/Azure-Samples/key-vault-dotnet-core-quickstart
+
+  https://alex-pi-api.azurewebsites.net
+  48ebcf3d-868a-4fbe-adeb-5f91be20249f  alex-pi-api identity
+
+#2021-01-12  Guestbook
+
+#2021-12-13  Guestbook merged/published/deleted;  late2021updates created
+  mode operandy: use GitHub for Desktop to perform local commits + VS to push/pull !!!
+
+#2021-12-14    
+  Broken publish was remedied by https://stackoverflow.com/questions/58107017/azure-app-service-deploy-failed-to-get-resource-id-for-resource-type-microsoft
+  //todo: figure out dev/prod on ng13
+
+#2021-12-15
+  Is AlexPiApi a part of the CD/CI?
+
+#2022-09-08
+  More at C:\Users\alexp\Source\Repos\alex-pi\alex-pi\README.md
+
+#2022-09-09
+  Mar 19, 2022  CI/CD of Angular 13 app using Azure DevOps Pipelines      https://www.youtube.com/watch?v=iX1vHFghCtQ      Using YAML - not like mine.
+  Jun 01, 2022  How to deploy Angular app to Azure app service using CI/CD pipeline from GIT repo | Angular | LSC     https://www.youtube.com/watch?v=24w65VnlrOU
+
+  https://www.google.com/search?q=deploy+Angular+app+to+Azure+app+service+using+CI/CD+pipeline&tbm=vid&sxsrf=ALiCzsZ2Q03zrwQ0RbDOkj_vpslRU8NOsA:1662752222950&source=lnt&tbs=qdr:y&sa=X&ved=2ahUKEwjBmuTcuoj6AhWOrIkEHXJ_BcsQpwV6BAgKECA&biw=3724&bih=978&dpr=1.38
+  
+  
+  ***********************************************************************************************************************************************
+  https://www.youtube.com/watch?v=FW2-_ce_eNc   2021-10   Deploying Angular to Azure   |  Followed! Uses VSCode's Azure App Service extension.  *
+  the key:                                                                                                                                      *
+  - Compile build with     ng build --configuration=production                                                                                  *
+  - Open VSCode at folder  C:\Users\alexp\source\repos\alex-pi\alex-pi\dist\alex-pi                                                             *                                               
+  - Do the video steps                                                                                                                          *
+  ***********************************************************************************************************************************************
+
+  https://www.youtube.com/watch?v=NFqrWsUPCAM   2019-03   Angular CI/CD with Azure Devops to Azure App Service  |  Very similar to my setup. Try it!
+
+  https://www.youtube.com/watch?v=9PTFz_hTEpU   2022-..   Angular App Azure Deployment |  Azure Static Web Hosting
+  https://www.youtube.com/watch?v=vrQ4tPaj4MY   2022-..   DevOps | Azure | App Service | .NET 6 | Release Pipeline for .NET Core 6 Web API
+
+  Publish and download pipeline Artifacts .. using YAML   https://docs.microsoft.com/en-us/azure/devops/pipelines/artifacts/pipeline-artifacts?view=azure-devops&tabs=yaml
+
+  Quickstart: Deploy an ASP.NET web app - LOOK: THERE IS A FREE TIER - https://docs.microsoft.com/en-us/azure/app-service/quickstart-dotnetcore?tabs=net60&pivots=development-environment-vs#publish-your-web-app
+
+#2022-09-10   From old days:
+  https://stackoverflow.com/questions/65858151/changing-package-from-microsoft-extensions-configuration-azurekeyvault-to-azu
+  https://docs.microsoft.com/en-us/aspnet/core/security/key-vault-configuration?view=aspnetcore-6.0
+  https://medium.com/dotnet-hub/use-azure-key-vault-with-net-or-asp-net-core-applications-read-azure-key-vault-secret-in-dotnet-fca293e9fbb3
+
+  Quickstarts original: https://docs.microsoft.com/en-us/azure/app-service/
+
+#2022-09-12
+  Looks like the org  https://docs.microsoft.com/en-us/azure/devops/pipelines/release/?view=azure-devops
+  ..followed up, created new Rls Pipeline "~Org rls pipeline" with approvals..
+  ..only to notice that the old one "Alex-Pi--CD" works but for the root folder only!!!!!!??????
+
+  !!!Apparently, all has been well: building, publishing, all!!! It must've been cached version got stuck. Used title in the index.html to figure it out: looks like it does not get cached.

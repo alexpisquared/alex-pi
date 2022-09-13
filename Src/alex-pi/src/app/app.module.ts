@@ -86,7 +86,7 @@ import { CompInteractService } from './serivce/comp-interact.service';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }) // try to fix SW - no go; need to find latest and do from scratch.
   ],
   providers: [CompInteractService, { provide: LocationStrategy, useClass: HashLocationStrategy }], // deep link fix #3 (https://stackoverflow.com/questions/38054707/angular-2-azure-deploy-refresh-error-the-resource-you-are-looking-for-has-been)
-  // todo: Implementing the LocationStrategy interface now requires definition of getState().
+
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
