@@ -162,3 +162,4 @@ Deploy to Azure:      https://docs.microsoft.com/en-us/visualstudio/get-started/
   ..only to notice that the old one "Alex-Pi--CD" works but for the root folder only!!!!!!??????
 
   !!!Apparently, all has been well: building, publishing, all!!! It must've been cached version got stuck. Used title in the index.html to figure it out: looks like it does not get cached.
+
