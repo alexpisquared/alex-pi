@@ -14,10 +14,10 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.4",
-    "@angular/cdk": "^15.2.9",
+    "@angular/cdk": "^16.2.3",
     "@angular/compiler": "^16.2.4",
     "@angular/forms": "^16.2.4",
-    "@angular/material": "^15.2.9",
+    "@angular/material": "^16.2.3",
     "@angular/platform-browser": "^16.2.4",
     "@angular/platform-browser-dynamic": "^16.2.4",
     "@angular/pwa": "^0.803.29",
