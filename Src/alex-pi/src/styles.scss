@@ -27,13 +27,9 @@ $MaterialCustomTheme-theme: mat.define-light-theme((color: (primary: $MaterialCu
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($MaterialCustomTheme-theme);
-
-// ^^ intact copy of CUSTOM theming for angular material setup.
-
-
-
-@import '@angular/material/prebuilt-themes/purple-green.css';
+// ^^^^^^^^^^^^^^^^^^ intact copy from CUSTOM theming during angular material setup:  'ng add @angular/material'.
+// @include mat.all-component-themes($MaterialCustomTheme-theme);
+// @import '@angular/material/prebuilt-themes/purple-green.css'; // fallback if custom theme logic is broken.
 
 
 // define a real custom palette (using http://mcg.mbitson.com) - https://www.color-hex.com/color-palette/22644
@@ -215,28 +211,12 @@ $dark-theme: mat.define-dark-theme((color: (primary: mat.define-palette($aav-dar
 
 $background: map-get($main-theme, background);
 
-.footer {
-  // background-color: mat-color($background, background);
-  // background-color: mat-color($background, foreground);
-}
-
 .main-theme {
-  // @include mat.core-theme($main-theme);
-  //   @include mat.button-theme($main-theme);
-  //   @include mat.all-component-themes($main-theme);  // @include angular-material-theme($main-theme);
-  ///@include mixin-theme($main-theme);
-  // Include theme styles for your custom components.
-  // @include custom-error-component-theme($main-theme);
+  @include mat.all-component-themes($main-theme);
 }
 
 .dark-theme {
-  // @include mat.core-theme($dark-theme);
-  // @include mat.button-theme($dark-theme);
-  // @include mat.all-component-themes($dark-theme);
-  // @include angular-material-theme($dark-theme);
-  ///@include mixin-theme($dark-theme);
-  // Include theme styles for your custom components.
-  // @include custom-error-component-theme($dark-theme);
+  @include mat.all-component-themes($dark-theme);
 }
 
 #containerId {
