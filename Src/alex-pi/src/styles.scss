@@ -9,9 +9,9 @@
 //  If you specify typography styles for the components you use elsewhere, you should delete this line.
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
-@include mat.all-legacy-component-typographies();
-@include mat.legacy-core();
+//    `@include mat.legacy-typography-hierarchy(mat.define-typography-config());`
+@include mat.all-component-typographies();
+@include mat.core();
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
@@ -186,18 +186,18 @@ $dark-theme: mat.define-dark-theme((color: (primary: mat.define-palette($aav-dar
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
-  $background: map-get($theme, "background");
+  $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
   // set body color, otherwise it is not consistent on custom error page
   background-color: #666; // mat-color($background, background); looks better below the footer: like a no mans land.
 
   .content {
-    background-color: mat-color($background, "background");
+    background-color: mat-color($background, background);
     color: mat-color($foreground, text);
   }
 
   .footer {
-    background-color: mat-color($background, "background");
+    background-color: mat-color($background, background);
     color: mat-color($foreground, text);
   }
 
@@ -227,21 +227,27 @@ $dark-theme: mat.define-dark-theme((color: (primary: mat.define-palette($aav-dar
   }
 }
 
-$background: map-get($main-theme, "background");
+$background: map-get($main-theme, background);
 
 .footer {
-  background-color: mat-color($background, "background");
+  // background-color: mat-color($background, background);
+  // background-color: mat-color($background, foreground);
 }
 
 .main-theme {
-  @include angular-material-theme($main-theme);
+  @include mat.core-theme($main-theme);
+    @include mat.button-theme($main-theme);
+    @include mat.all-component-themes($main-theme);  // @include angular-material-theme($main-theme);
   @include mixin-theme($main-theme);
   // Include theme styles for your custom components.
   // @include custom-error-component-theme($main-theme);
 }
 
 .dark-theme {
-  @include angular-material-theme($dark-theme);
+  @include mat.core-theme($dark-theme);
+  @include mat.button-theme($dark-theme);
+  @include mat.all-component-themes($dark-theme);
+  // @include angular-material-theme($dark-theme);
   @include mixin-theme($dark-theme);
   // Include theme styles for your custom components.
   // @include custom-error-component-theme($dark-theme);
@@ -383,6 +389,7 @@ mat-form-field {
 
 // Expansion panel as accordion }}
 
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
 mat-card {
   margin: 3px; // to show shadows
 }
