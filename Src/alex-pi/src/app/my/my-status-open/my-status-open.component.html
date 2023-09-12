@@ -1,5 +1,5 @@
 <div class="flexVertJust">
-  <div align="center" class="gray-shade">
+  <div align="center">
     <!-- <div align="right">
       <button mat-button (click)="toggleAlpha()">{{ isNumeric ? 'isNmb' : 'isDgt' }}</button>
       <button mat-button (click)="toggleOnOff()">{{ isLightOn ? 'isOn' : 'isOf' }}</button>
@@ -19,12 +19,6 @@
     <br />
   </div>
   <div align="center">
-    <!-- (2019-11-24:park  2020-11-10:unpark)
-      <h2>Praesent commodo, lorem.</h2>
-    -->
-    <h2>My Status</h2>
-  </div>
-  <div align="center">
     <div [@slideBumpLeftToRight]="isLightOn ? 'isOn' : 'isOf'">
       <div class="traffic-light-container">
         <div class="traffic-light">
@@ -36,8 +30,12 @@
     </div>
     <div [@slideBumpRightToLeft]="isLightOn ? 'isOn' : 'isOf'" class="styleLightOn">
       <span>
-        <br />
-        <br />
+        <div align="center">
+          <!-- (2019-11-24:park  2020-11-10:unpark)
+        <h2>Praesent commodo, lorem.</h2>
+      -->
+          <h4>My Status</h4>
+        </div>
         <!-- (2019-11-24:park  2020-11-10:unpark)
           Proin egestas dolor id finibus ultrices.
           <br /><br />
@@ -74,13 +72,15 @@
           pharetra dolor.
         -->
         Should you require assistance in delivering IT projects ahead of
-        schedule using the latest advances in Microsoft .NET, WPF, Web, MS SQL
-        and Angular technologies, please do not hesitate to rely on my expert
+        schedule using the latest advances in Microsoft .NET, WPF, MS SQL and Web
+        technologies, please do not hesitate to rely on my expert
         service.
       </p>
     </div>
   </div>
-  <div align="center">
+   <!-- hide this div: -->
+
+  <div align="center" style="display: none;">
     <div style="text-align: left; min-width: 400px; max-width: 640px">
       <div style="width: 255px; display:inline; margin: 3px;">
         Please leave a message in my guestbook
