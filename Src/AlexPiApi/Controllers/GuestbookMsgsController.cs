@@ -1,4 +1,5 @@
-﻿using Db.OneBase.Model;
+﻿using AlexPiApi.Services;
+using Db.OneBase.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,25 +19,28 @@ namespace AlexPiApi.Controllers
     readonly OneBaseContext _context;
     readonly ILogger<GuestbookMsgsController> _logger;
     readonly IConfiguration _configuration;
+    readonly ITextDbContext _textDbContext;
 
-    //public GuestbookMsgsController(OneBaseContext context) => _context = context;
-    public GuestbookMsgsController(OneBaseContext context, ILogger<GuestbookMsgsController> logger, IConfiguration configuration) => (_context, _logger, _configuration) = (context, logger, configuration);
+    public GuestbookMsgsController(OneBaseContext context, ILogger<GuestbookMsgsController> logger, IConfiguration configuration, ITextDbContext textDbContext) => (_context, _logger, _configuration, _textDbContext) = (context, logger, configuration, textDbContext);
 
     // GET: api/GuestbookMsgs
     [HttpGet]
     public async Task<ActionResult<IEnumerable<GuestbookMsg>>> GetGuestbookMsg()
     {
+      await _textDbContext.AddStringAsync($"{GetType().FullName}  {Environment.MachineName}  Get()");
+
       _logger.LogInformation($"▄▀▄▀▄▀ {nameof(GuestbookMsgsController)}.{nameof(GetGuestbookMsg)}() - {_configuration["WhereAmI"]} ▀▄▀▄▀▄");
 
-      var messages = await _context.GuestbookMsg.OrderByDescending(r => r.Id).Take(3).ToListAsync();
-
-      return messages;
+      return new GuestbookMsg[] { new() { CreatedAt = DateTime.Now, Message = "Aaa" }, new() { CreatedAt = DateTime.Now, Message = "Bbb" } }.ToList(); //2023-09: return await _context.GuestbookMsg.OrderByDescending(r => r.Id).Take(3).ToListAsync();
     }
 
     // GET: api/GuestbookMsgs/5
     [HttpGet("{id}")]
     public async Task<ActionResult<GuestbookMsg>> GetGuestbookMsg(int id)
     {
+      await _textDbContext.AddStringAsync($"{GetType().FullName}  {Environment.MachineName}  id:{id}");
+
+
       _logger.LogInformation($"▄▀▄▀▄▀ {nameof(GuestbookMsgsController)}.{nameof(GetGuestbookMsg)}({id}) - {_configuration["WhereAmI"]} ▀▄▀▄▀▄");
 
       var GuestbookMsg = await _context.GuestbookMsg.FindAsync(id);
@@ -52,6 +56,8 @@ namespace AlexPiApi.Controllers
     [HttpPut("{id}")]
     public async Task<IActionResult> PutGuestbookMsg(int id, GuestbookMsg GuestbookMsg)
     {
+      await _textDbContext.AddStringAsync($"{GetType().FullName}  {Environment.MachineName}  {GuestbookMsg.Message}  {GuestbookMsg.CreatedAt}");
+
       if (id != GuestbookMsg.Id)
       {
         return BadRequest();
@@ -61,7 +67,7 @@ namespace AlexPiApi.Controllers
 
       try
       {
-        await _context.SaveChangesAsync();
+        ; //2023-09:         await _context.SaveChangesAsync();
       }
       catch (DbUpdateConcurrencyException)
       {
@@ -82,6 +88,8 @@ namespace AlexPiApi.Controllers
     [HttpPost]
     public async Task<ActionResult<GuestbookMsg>> PostGuestbookMsg(GuestbookMsg GuestbookMsg)
     {
+      await _textDbContext.AddStringAsync($"{GetType().FullName}  {Environment.MachineName}  {GuestbookMsg.Message}  {GuestbookMsg.CreatedAt}");
+
       try
       {
         GuestbookMsg.CreatedAt = DateTime.UtcNow; // DateTime.Now is ambiguos ~ local time of the web server => UTC is better.
@@ -93,7 +101,7 @@ namespace AlexPiApi.Controllers
       }
       catch (Exception ex) { Debug.WriteLine(ex); throw; }
 
-      await SaveToDb();
+      //2023-09: await SaveToDb();
 
       CreatedAtActionResult caa;
       try
