@@ -36,7 +36,8 @@ public class Startup
         });
     });
 
-    _ = services.AddDbContext<OneBaseContext>(options => options.UseSqlServer(Configuration["OneBaseDbConStr"])); //tu: !!! MVP for Azure Key Vault utilization !!!     //tu: inject DbContext in .NET Core.
+    //_ = services.AddDbContext<OneBaseContext>(options => options.UseSqlServer(Configuration["OneBaseDbConStr"])); //tu: !!! MVP for Azure Key Vault utilization !!!     //tu: inject DbContext in .NET Core.
+    _ = services.AddSingleton<OneBaseContext>(); 
 
     _ = services.AddSingleton<ITextDbContext>(new TextDbContext(Configuration["ChtBlobStorageConnectionString"]));
 

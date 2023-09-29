@@ -18,7 +18,7 @@ namespace AlexPi.WebApi.Core2.Controllers
 
     // GET: api/VwUserHopsUtcs
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<VwUserHopsUtc>>> GetVwUserHopsUtc() => await _context.VwUserHopsUtc.OrderByDescending(r => r.Finished).ToListAsync();
+    public ActionResult<IEnumerable<VwUserHopsUtc>> GetVwUserHopsUtc() => _context.VwUserHopsUtc.OrderByDescending(r => r.Finished).ToList(); //public async Task<ActionResult<IEnumerable<VwUserHopsUtc>>> GetVwUserHopsUtc() => await _context.VwUserHopsUtc.OrderByDescending(r => r.Finished).ToList/*Async*/();
 
     // GET: api/VwUserHopsUtcs/5
     [HttpGet("{id}")]

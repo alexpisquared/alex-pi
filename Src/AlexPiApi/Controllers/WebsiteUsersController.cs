@@ -103,7 +103,7 @@ public class WebsiteUsersController : ControllerBase
   [HttpPost]
   public async Task<ActionResult<WebsiteUser>> PostWebsiteUser(WebsiteUser websiteUser)
   {
-    await _textDbContext.AddStringAsync($"{GetType().FullName}.PutWebsiteUser({websiteUser})");
+    await _textDbContext.AddStringAsync($"{GetType().FullName}.Post({websiteUser})");
 
     _ = _context.WebsiteUser.Add(websiteUser);
     _ = await _context.SaveChangesAsync();

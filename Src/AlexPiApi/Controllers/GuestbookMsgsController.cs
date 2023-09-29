@@ -56,7 +56,7 @@ namespace AlexPiApi.Controllers
     [HttpPut("{id}")]
     public async Task<IActionResult> PutGuestbookMsg(int id, GuestbookMsg GuestbookMsg)
     {
-      await _textDbContext.AddStringAsync($"{GetType().FullName}  {Environment.MachineName}  {GuestbookMsg.Message}  {GuestbookMsg.CreatedAt}");
+      await _textDbContext.AddStringAsync($"{GetType().FullName}  {Environment.MachineName}  {GuestbookMsg.Message}  {GuestbookMsg.EventData}  {GuestbookMsg.CreatedAt}");
 
       if (id != GuestbookMsg.Id)
       {
@@ -88,7 +88,7 @@ namespace AlexPiApi.Controllers
     [HttpPost]
     public async Task<ActionResult<GuestbookMsg>> PostGuestbookMsg(GuestbookMsg GuestbookMsg)
     {
-      await _textDbContext.AddStringAsync($"{GetType().FullName}  {Environment.MachineName}  {GuestbookMsg.Message}  {GuestbookMsg.CreatedAt}");
+      await _textDbContext.AddStringAsync($"{GetType().FullName}  {Environment.MachineName}  {GuestbookMsg.Message}  {GuestbookMsg.EventData}  {GuestbookMsg.CreatedAt}");
 
       try
       {
