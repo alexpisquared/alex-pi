@@ -4,7 +4,7 @@
   <br />
 </div>
 <div class="flex-row-even">
-  <mat-card>
+  <mat-card appearance="outlined">
     <mat-card-header>
       <!-- <div mat-card-avatar class="cv-header-image"></div> -->
       <mat-card-title *ngIf="hero" style="width:180px;">{{ hero.nickname | uppercase }} </mat-card-title>
@@ -33,7 +33,7 @@
     </mat-card-actions>
   </mat-card>
 
-  <mat-card><app-vw-event-user-utc></app-vw-event-user-utc></mat-card>
+  <mat-card appearance="outlined"><app-vw-event-user-utc></app-vw-event-user-utc></mat-card>
 </div>
 
 <div style="position: absolute; left: 0px; top: 70px; z-index: 100;">

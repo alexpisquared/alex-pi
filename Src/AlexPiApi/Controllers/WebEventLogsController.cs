@@ -1,4 +1,6 @@
-﻿using Db.OneBase.Model;
+﻿using AlexPiApi.Controllers;
+using AlexPiApi.Services;
+using Db.OneBase.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,13 +20,16 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
     readonly OneBaseContext _context;
     readonly ILogger<WebEventLogsController> _logger;
     readonly IConfiguration _configuration;
+    readonly ITextDbContext _textDbContext;
 
-    public WebEventLogsController(OneBaseContext context, ILogger<WebEventLogsController> logger, IConfiguration configuration) => (_context, _logger, _configuration) = (context, logger, configuration);
+    public WebEventLogsController(OneBaseContext context, ILogger<WebEventLogsController> logger, IConfiguration configuration, ITextDbContext textDbContext) => (_context, _logger, _configuration, _textDbContext) = (context, logger, configuration, textDbContext);
 
     // GET: api/WebEventLogs
     [HttpGet]
     public async Task<ActionResult<IEnumerable<WebEventLog>>> GetWebEventLog()
     {
+      await _textDbContext.AddStringAsync($"{GetType().FullName}.Get()");
+
       _logger.LogInformation($"▄▀▄▀▄▀ {nameof(WebEventLogsController)}.{nameof(GetWebEventLog)}() - {_configuration["WhereAmI"]} ▀▄▀▄▀▄");
 
       var events = await _context.WebEventLog.OrderByDescending(r => r.Id).Take(21).ToListAsync();
@@ -40,6 +45,8 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<WebEventLog>> GetWebEventLog(int id)
     {
+      await _textDbContext.AddStringAsync($"{GetType().FullName}.Get({id})");
+
       _logger.LogInformation($"▄▀▄▀▄▀ {nameof(WebEventLogsController)}.{nameof(GetWebEventLog)}({id}) - {_configuration["WhereAmI"]} ▀▄▀▄▀▄");
 
       var webEventLog = await _context.WebEventLog.FindAsync(id);
@@ -55,6 +62,8 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
     [HttpPut("{id}")]
     public async Task<IActionResult> PutWebEventLog(int id, WebEventLog webEventLog)
     {
+      await _textDbContext.AddStringAsync($"{GetType().FullName}.Put({webEventLog})");
+
       if (id != webEventLog.Id)
       {
         return BadRequest();
@@ -85,6 +94,8 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
     [HttpPost]
     public async Task<ActionResult<WebEventLog>> PostWebEventLog(WebEventLog webEventLog)
     {
+      await _textDbContext.AddStringAsync($"{GetType().FullName}.Post({webEventLog})");
+
       try
       {
         webEventLog.DoneAt = DateTime.UtcNow; // DateTime.Now is ambiguos ~ local time of the web server => UTC is better.

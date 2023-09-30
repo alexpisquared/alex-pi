@@ -11,14 +11,9 @@ set para=/FFT /R:1 /W:1 /XD .git .gitignore .vs .vscode node_modules dist bin ob
     
 robocopy C:\Users\alexp\source\repos\alex-pi C:\g\alex-pi\Src %para%       /MIR 
 @echo.
-
+@echo.
+@echo.
+@REM @echo      ******************* The End ***********************
 set para=
-
-@echo.
-@echo.
-@echo      ******************* The End ***********************
-@echo      ******************* The End ***********************
-@echo      ******************* The End ***********************
-@echo      ******************* The End ***********************
 
 timeout 26

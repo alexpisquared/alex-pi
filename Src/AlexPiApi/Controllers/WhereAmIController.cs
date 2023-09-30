@@ -1,25 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using AlexPiApi.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace AlexPiApi.Controllers
+namespace AlexPiApi.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class WhereAmIController : ControllerBase
 {
-  [ApiController]
-  [Route("[controller]")]
-  public class WhereAmIController : ControllerBase
+  readonly ILogger<WhereAmIController> _logger;
+  readonly IConfiguration _configuration;
+  readonly ITextDbContext _textDbContext;
+
+  public WhereAmIController(ILogger<WhereAmIController> logger, IConfiguration configuration, ITextDbContext textDbContext) => (_logger, _configuration, _textDbContext) = (logger, configuration, textDbContext);
+
+  [HttpGet]
+  public string Get()
   {
-    readonly ILogger<WhereAmIController> _logger;
-    readonly IConfiguration _configuration;
+    var report = $"{GetType().FullName} - WhereAmI:[{_configuration["WhereAmI"]}] - {Environment.MachineName} - Compiled: 2023-09-29+";
 
-    public WhereAmIController(ILogger<WhereAmIController> logger, IConfiguration configuration) => (_logger, _configuration) = (logger, configuration);
+    _ = _textDbContext.AddStringAsync(report);
 
-    [HttpGet]
-    public string Get()
-    {
-      var report = $"▄▀▄▀▄▀ {GetType().FullName} - {_configuration["WhereAmI"]} - Compiled: 2020-12-17T11:30 ▀▄▀▄▀▄";
-
-      _logger.LogInformation(report);
-      return report;
-    }
+    _logger.LogInformation(report);
+    return report;
   }
 }

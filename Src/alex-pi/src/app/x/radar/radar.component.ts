@@ -53,7 +53,7 @@ export class RadarComponent implements OnInit {
   }
 
   tglLength() {
-    this.urls = (this.urls === undefined || this.urls.length) > 7 ? new Array<string>(7) : new Array<string>(23);
+    this.urls = (this.urls === undefined || this.urls.length > 7) ? new Array<string>(7) : new Array<string>(23);
     this.urls.fill('');
     this.refillUrls();
   }

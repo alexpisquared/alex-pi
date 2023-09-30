@@ -43,7 +43,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [BrowserModule, BrowserAnimationsModule, RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [BrowserModule, BrowserAnimationsModule, RouterModule.forRoot(routes, {})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
