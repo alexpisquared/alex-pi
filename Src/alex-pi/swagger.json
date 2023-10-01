@@ -205,7 +205,7 @@
         "eventName": { "type": "string" },
         "doneAt": { "format": "date-time", "type": "string" },
         "websiteUser": { "$ref": "#/definitions/WebsiteUser" },
-        "eventData__Copy": { "type": "string" }
+        "browserSignature": { "type": "string" }
       }
     },
     "WebsiteUser": {

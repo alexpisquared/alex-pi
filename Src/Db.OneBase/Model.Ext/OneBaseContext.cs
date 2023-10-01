@@ -17,8 +17,11 @@ public partial class OneBaseContext //: DbContext
     new() {      Nickname = "AaaNick", EventName="Aaa Event Name", DoneAt= new DateTime(2020,1,1)},
     new() {      Nickname = "BbbNick", EventName="Bbb Event Name", DoneAt= new DateTime(2020,2,2)},
     new() {      Nickname = "BbbNick", EventName="Bbb Event Name", DoneAt= DateTime.Now } }.AsQueryable();
+  public virtual IQueryable<WebEventLog> WebEventLog => new WebEventLog[] {
+    new() {      Id = 1, WebsiteUserId = 111, EventName="Aaa Event Name", DoneAt= new DateTime(2020,1,1)},
+    new() {      Id = 2, WebsiteUserId = 222, EventName="Bbb Event Name", DoneAt= new DateTime(2020,2,2)},
+    new() {      Id = 3, WebsiteUserId = 333, EventName="Bbb Event Name", DoneAt= DateTime.Now } }.AsQueryable();
 
-  public virtual DbSet<WebEventLog> WebEventLog { get; set; }
   public virtual DbSet<WebsiteUser> WebsiteUser { get; set; }
 
   public Entry Entry(object guestbookMsg) => new();

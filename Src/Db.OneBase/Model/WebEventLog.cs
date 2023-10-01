@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Db.OneBase.Model
 {
-    public partial class WebEventLog
+    public partial record WebEventLog
     {
         public int Id { get; set; }
         public int WebsiteUserId { get; set; }

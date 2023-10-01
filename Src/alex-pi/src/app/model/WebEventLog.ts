@@ -1,6 +1,6 @@
 export class WebEventLog {
   id: number;
   eventName: string;
-  eventData__Copy: string;
+  browserSignature: string;
   doneAt: Date;
 }

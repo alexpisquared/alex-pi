@@ -6,5 +6,5 @@ export interface WebEventLog {
   eventName?: string;
   doneAt?: string;
   websiteUser?: WebsiteUser;
-  eventData__Copy?: string;
+  browserSignature?: string;
 }

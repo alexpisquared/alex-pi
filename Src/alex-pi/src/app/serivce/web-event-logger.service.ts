@@ -80,7 +80,7 @@ export class WebEventLoggerService {
   addEvent(evname: string, evdata: string): Observable<WebEventLog> {
     const wel = new WebEventLog();
     wel.eventName = evname;
-    wel.eventData__Copy = evdata;
+    wel.browserSignature = evdata;
 
     return this.insertWebEventLog(wel);
   }

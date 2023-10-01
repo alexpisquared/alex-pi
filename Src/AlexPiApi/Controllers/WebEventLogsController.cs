@@ -32,7 +32,7 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
 
       _logger.LogInformation($"▄▀▄▀▄▀ {nameof(WebEventLogsController)}.{nameof(GetWebEventLog)}() - {_configuration["WhereAmI"]} ▀▄▀▄▀▄");
 
-      var events = await _context.WebEventLog.OrderByDescending(r => r.Id).Take(21).ToListAsync();
+      var events = _context.WebEventLog.OrderByDescending(r => r.Id).Take(21).ToList();
 
       //todo: does not await all events.ForEach(async ev => ev.Nickname = (await _context.WebsiteUser.FirstOrDefaultAsync(r => r.Id == ev.WebsiteUserId)).Nickname);
 
@@ -49,7 +49,7 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
 
       _logger.LogInformation($"▄▀▄▀▄▀ {nameof(WebEventLogsController)}.{nameof(GetWebEventLog)}({id}) - {_configuration["WhereAmI"]} ▀▄▀▄▀▄");
 
-      var webEventLog = await _context.WebEventLog.FindAsync(id);
+      var webEventLog = _context.WebEventLog.FirstOrDefault(r => r.Id == id);
       if (webEventLog == null)
       {
         return NotFound();
@@ -94,21 +94,21 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
     [HttpPost]
     public async Task<ActionResult<WebEventLog>> PostWebEventLog(WebEventLog webEventLog)
     {
-      await _textDbContext.AddStringAsync($"{GetType().FullName}.Post({webEventLog})");
+      await _textDbContext.AddStringAsync($"{GetType().Name}.Post({webEventLog}) ■▄▀■ ");
 
       try
       {
         webEventLog.DoneAt = DateTime.UtcNow; // DateTime.Now is ambiguos ~ local time of the web server => UTC is better.
 
-        var wsu = _context.WebsiteUser.FirstOrDefault(r => r.EventData.Equals(webEventLog.EventData__Copy));
+        var wsu = _context.WebsiteUser.FirstOrDefault(r => r.EventData.Equals(webEventLog.BrowserSignature));
         if (wsu == null)
         {
-          wsu = _context.WebsiteUser.Add(new WebsiteUser { Nickname = $"{webEventLog.DoneAt:yyMMdd}", CreatedAt = webEventLog.DoneAt, LastVisitAt = webEventLog.DoneAt, EventData = webEventLog.EventData__Copy }).Entity; // *!?`
-          await saveToDb(); // Core 3 does not provide mechanizm for the new ID !!!
+          wsu = _context.WebsiteUser.Add(new WebsiteUser { Nickname = $"{webEventLog.DoneAt:yyMMdd}", CreatedAt = webEventLog.DoneAt, LastVisitAt = webEventLog.DoneAt, EventData = webEventLog.BrowserSignature }).Entity; // *!?`
+          await saveToDb(); // :Core3 does not provide mechanism for the new ID !!!
         }
 
         webEventLog.WebsiteUserId = wsu.Id;
-        _context.WebEventLog.Add(webEventLog);
+        //todo: _context.WebEventLog.Add(webEventLog);
       }
       catch (Exception ex) { Debug.WriteLine(ex); throw; }
 
@@ -141,13 +141,13 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
     [HttpDelete("{id}")]
     public async Task<ActionResult<WebEventLog>> DeleteWebEventLog(int id)
     {
-      var webEventLog = await _context.WebEventLog.FindAsync(id);
+      var webEventLog = _context.WebEventLog.FirstOrDefault(r => r.Id == id);
       if (webEventLog == null)
       {
         return NotFound();
       }
 
-      _context.WebEventLog.Remove(webEventLog);
+      //todo: _context.WebEventLog.Remove(webEventLog);
       await _context.SaveChangesAsync();
 
       return webEventLog;
