@@ -94,12 +94,12 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
     [HttpPost]
     public async Task<ActionResult<WebEventLog>> PostWebEventLog(WebEventLog webEventLog)
     {
+      webEventLog.DoneAt = DateTime.UtcNow; // DateTime.Now is ambiguous ~ local time of the web server => UTC is better.
+
       await _textDbContext.AddStringAsync($"{GetType().Name}.Post({webEventLog}) ■▄▀■ ");
 
       try
       {
-        webEventLog.DoneAt = DateTime.UtcNow; // DateTime.Now is ambiguos ~ local time of the web server => UTC is better.
-
         var wsu = _context.WebsiteUser.FirstOrDefault(r => r.EventData.Equals(webEventLog.BrowserSignature));
         if (wsu == null)
         {

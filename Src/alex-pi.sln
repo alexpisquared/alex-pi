@@ -29,6 +29,10 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "alex-pi", "alex-pi\", "{581
 		VWDPort = "53088"
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "POCs", "POCs", "{00B6D3E0-A2F0-4721-A702-466D84429197}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisTimer", "TennisTimer\TennisTimer.csproj", "{4B0C207F-B84C-4EF4-B0F7-BBE44BEDCC7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,9 +55,16 @@ Global
 		{581A53E7-D656-435D-9E15-356C1FE21328}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{581A53E7-D656-435D-9E15-356C1FE21328}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{581A53E7-D656-435D-9E15-356C1FE21328}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{4B0C207F-B84C-4EF4-B0F7-BBE44BEDCC7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B0C207F-B84C-4EF4-B0F7-BBE44BEDCC7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B0C207F-B84C-4EF4-B0F7-BBE44BEDCC7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B0C207F-B84C-4EF4-B0F7-BBE44BEDCC7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4B0C207F-B84C-4EF4-B0F7-BBE44BEDCC7E} = {00B6D3E0-A2F0-4721-A702-466D84429197}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92EDC75C-A4A4-4B0D-9025-510DFC9B31C9}

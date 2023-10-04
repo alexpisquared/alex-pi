@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Media\en-US-AriaNeural~1.00~33~friendly~Last minute!.wav" />
+    <None Remove="Media\en-US-AriaNeural~1.00~33~friendly~Time to change!.wav" />
+    <None Remove="Media\Good - Fanfare.wav" />
+    <None Remove="Media\Start - Arcade Power Up.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Media\en-US-AriaNeural~1.00~33~friendly~Last minute!.wav" />
+    <Resource Include="Media\en-US-AriaNeural~1.00~33~friendly~Time to change!.wav" />
+    <Resource Include="Media\Good - Fanfare.wav" />
+    <Resource Include="Media\Start - Arcade Power Up.wav" />
+  </ItemGroup>
+
+</Project>

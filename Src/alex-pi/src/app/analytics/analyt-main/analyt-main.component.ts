@@ -10,7 +10,7 @@ export class AnalytMainComponent implements OnInit {
   constructor(private welSvc: WebEventLoggerService) {}
 
   ngOnInit() {
-    this.welSvc.logIfProd('ANLT!!!');
+    this.welSvc.logIfProd('ANLT');
   }
   LoadData() {}
 }

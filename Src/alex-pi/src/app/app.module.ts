@@ -40,6 +40,7 @@ import { VwEventUserUtcComponent } from './analytics/vw-event-user-utc/vw-event-
 import { VwUserHopsUtcComponent } from './analytics/vw-user-hops-utc/vw-user-hops-utc.component';
 import { UserDetailComponent } from './analytics/user-detail/user-detail.component';
 import { CompInteractService } from './serivce/comp-interact.service';
+import { TennisTimerComponent } from './x/tennis-timer/tennis-timer.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { CompInteractService } from './serivce/comp-interact.service';
     WebsiteUserComponent,
     VwEventUserUtcComponent,
     VwUserHopsUtcComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    TennisTimerComponent
   ],
   imports: [
     FormsModule, // for ngModel .. which is obsolete....
