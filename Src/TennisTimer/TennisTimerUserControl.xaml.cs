@@ -14,7 +14,7 @@ public partial class TennisTimerUserControl : UserControl
 
   async void OnLoaded(object s, RoutedEventArgs e)
   {
-    const double everyXMin = 1;
+    const double everyXMin = 5;
 
     pb1.Maximum = everyXMin * 60;
 
@@ -24,25 +24,25 @@ public partial class TennisTimerUserControl : UserControl
 
       do
       {
-        await Task.Delay(100);
+        await Task.Delay(250);
         now = DateTime.Now;
         tb1.Text = $"{next - now:mm\\:ss}";
         pb1.Value = (next - now).TotalSeconds;
       } while (now < next);
 
-      await PlayWavFilesAsync(2);
-    }
-
-    static DateTime FindNextTime(double everyXMin)
-    {
-      var now = DateTime.Now;
-      return new DateTime(now.Year, now.Month, now.Day, now.Hour, 0, 0).AddMinutes(((now.Minute / everyXMin) + 1) * everyXMin);
+      tb1.Text = "▄▀▄▀▄";
+      PlayWavFilesAsync(2);
     }
   }
 
-  async Task PlayWavFilesAsync(int i)
+  static DateTime FindNextTime(double everyXMin)
   {
-    await Task.Delay(100);
+    var now = DateTime.Now;
+    return new DateTime(now.Year, now.Month, now.Day, now.Hour, 0, 0).AddMinutes(((now.Minute / everyXMin) + 1) * everyXMin);
+  }
+
+  void PlayWavFilesAsync(int i)
+  {
     switch (i)
     {
       case 1:
@@ -54,14 +54,9 @@ public partial class TennisTimerUserControl : UserControl
         PlayResourse(@"C:\Users\alexp\source\repos\alex-pi\TennisTimer\Media\en-US-AriaNeural~1.00~33~friendly~Time to change!.wav");
         break;
     }
-
-    await Task.Delay(5000);
   }
 
   void PlayResourse(string filePath) => new SoundPlayer(filePath).PlaySync();
 
-  private void OnClose(object sender, RoutedEventArgs e)
-  {
-    Window.GetWindow(this).Close();
-  }
+  void OnClose(object sender, RoutedEventArgs e) => Window.GetWindow(this).Close();
 }

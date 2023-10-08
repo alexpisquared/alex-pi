@@ -1,0 +1,60 @@
+.mat-mdc-chip-set {
+  max-width: 70px;
+}
+
+.h-centered-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 75%;
+  font-size: 36vw;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  white-space: normal;
+  overflow: visible;
+
+  font-family: Tw Cen MT Condensed; // digits are same width!!!
+  font-weight: 600;
+
+  // background-color: #ddd;
+}
+
+.container-tt {
+  height: 420px;
+  width: 100%;
+  // background-color: #ff0;
+}
+
+.sticky-top {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+// how to make an HTML div to be stuck to the bottom?
+.sticky-btm {
+  // background-color: #0dd;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+}
+
+.right-div {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 32px;
+  height: 110px;
+  margin-right: 26px;
+}

@@ -1,1 +1,34 @@
-<p>tennis-timer works!</p>
+<div class="container-tt">
+  <div class="centered-div">
+    {{ countdownString }}
+  </div>
+  <div class="sticky-top">
+    <mat-chip-listbox aria-labelledby="example-radio-group-label" [(ngModel)]="everyXMin">
+      <mat-chip-option *ngFor="let season of seasons" [value]="season">
+        {{season}}
+      </mat-chip-option>
+    </mat-chip-listbox>
+  </div>
+
+  <div class="sticky-btm">
+    <div class="h-centered-div">
+      Next rotation at &nbsp; <b>{{ nextHHMM }}</b> &nbsp; &nbsp; {{ error }}
+    </div>
+    <mat-progress-bar [value]="percentComplete" color="accent"></mat-progress-bar>
+    <mat-progress-bar [value]="percentComplete" color="accent"></mat-progress-bar>
+    <mat-progress-bar [value]="percentComplete" color="accent"></mat-progress-bar>
+    <mat-progress-bar [value]="percentComplete" color="accent"></mat-progress-bar>
+    <mat-progress-bar [value]="percentComplete" color="accent"></mat-progress-bar>
+    <mat-progress-bar [value]="percentComplete" color="accent"></mat-progress-bar>
+    <mat-progress-bar [value]="percentComplete" color="accent"></mat-progress-bar>
+    <mat-progress-bar [value]="percentComplete" color="accent"></mat-progress-bar>
+    <mat-progress-bar [value]="percentComplete" color="accent"></mat-progress-bar>
+    <mat-progress-bar [value]="percentComplete" color="accent"></mat-progress-bar>
+    <mat-progress-bar [value]="percentComplete" color="accent"></mat-progress-bar>
+    <mat-progress-bar [value]="percentComplete" color="accent"></mat-progress-bar>
+  </div>
+
+  <div class="right-div">
+    <button mat-mini-fab color="primary" (click)="Start_Arcade_Power_Up7mp3()"><mat-icon>speaker</mat-icon></button>
+  </div>
+</div>

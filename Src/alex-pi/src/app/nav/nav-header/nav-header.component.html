@@ -2,7 +2,7 @@
   <div class="flex-row-spbtwn">
     <div>
       <button mat-button routerLink="/" matTooltip="Go to Home page" class="logo">
-        <img loading="lazy" height="55" alt="AlexPi Logo"     src="{{ AlexPiLogoThemed }}" class="cirled"/>
+        <img loading="lazy" height="55" alt="AlexPi Logo" src="{{ AlexPiLogoThemed }}" class="cirled" />
         <!-- <span class="font-effect-3d-float">&nbsp; {{ appTitle }} </span> too ~cheesy? // a change to trigger pipeline rebuild -->
         <span>&nbsp;{{ appTitle }}&nbsp;</span>
         <img loading="lazy" height="45" alt="Flag of Ukraine" src="{{ UkraineFlagThemd }}" />
@@ -13,21 +13,23 @@
     <div>
       <button mat-icon-button disabled="{{ router.url == '/analtcs' }}" routerLink="/analtcs" matTooltip=""></button>
     </div>
-    <!--     
+    <!--
       <button mat-button *ngIf="router.url != '/my-designs'"  routerLink="/my-designs" matTooltip="Some of my original UI/UX solutions">UI · UX</button>
       <button mat-button *ngIf="router.url != '/my-apps'"     routerLink="/my-apps" matTooltip="Apps I have placed to Microsoft Store...and other places">Apps</button>
       <button mat-button *ngIf="router.url != '/about'"       routerLink="/about"   matTooltip="about">About</button>
-      <button mat-button *ngIf="router.url != '/contact'"     routerLink="/contact" matTooltip="contact">Contact</button> 
+      <button mat-button *ngIf="router.url != '/contact'"     routerLink="/contact" matTooltip="contact">Contact</button>
       <button mat-button routerLink="/my-geo-target" matTooltip="My ideal work locations">Geo Target</button>
       <button mat-button routerLink="/my-clients" matTooltip="My esteemed clients">Clientele</button>
       <button mat-button routerLink="/my-resumes" matTooltip="Resumes">CVs</button>
       <button mat-button routerLink="/my-family">My Family</button>
-      <button mat-button routerLink="/my-projects">My Projets</button> 
-      <button mat-button routerLink="/contact">Contact</button> 
+      <button mat-button routerLink="/my-projects">My Projets</button>
+      <button mat-button routerLink="/contact">Contact</button>
     -->
 
+    <button mat-mini-fab color="warn" disabled="{{ router.url == '/tttimer' }}" routerLink="/tttimer" matTooltip="Tennis Timer"><mat-icon>timer</mat-icon></button>
     <div *ngIf="!getIsMobileResolution()" style="margin: 8px">
       <!-- <button mat-button routerLink="/" matTooltip="Go to Home page">Home</button> -->
+      <button mat-button disabled="{{ router.url == '/tttimer' }}" routerLink="/tttimer" matTooltip="Tennis Timer">Timer</button>
       <button mat-button disabled="{{ router.url == '/ocrdemo' }}" routerLink="/ocrdemo" matTooltip="OCR (Optical Character Recognition) Demo">OCR</button>
       <button mat-button disabled="{{ router.url == '/designs' }}" routerLink="/designs" matTooltip="Some of my original UI/UX solutions">Designs</button>
       <button mat-button disabled="{{ router.url == '/my-apps' }}" routerLink="/my-apps" matTooltip="Apps I have placed to Microsoft Store...and other places">Apps</button>
@@ -44,6 +46,7 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item disabled="{{ router.url == '/' }}" routerLink="/" matTooltip="Home"><mat-icon>home</mat-icon><span>Home</span></button>
+        <button mat-menu-item disabled="{{ router.url == '/tttimer' }}" routerLink="/tttimer" matTooltip="Tennis Timer"><mat-icon>timer</mat-icon><span>Timer</span></button>
         <button mat-menu-item disabled="{{ router.url == '/ocrdemo' }}" routerLink="/ocrdemo" matTooltip="OCR (Optical Character Recognition) Demo"><mat-icon>text_fields</mat-icon><span>OCR Demo</span></button>
         <button mat-menu-item disabled="{{ router.url == '/designs' }}" routerLink="/designs" matTooltip="Some of my original UI/UX solutions"><mat-icon>play_for_work</mat-icon>My UI/UX Designs</button>
         <button mat-menu-item disabled="{{ router.url == '/my-apps' }}" routerLink="/my-apps" matTooltip="Apps I have placed to Microsoft Store...and other places"><mat-icon>apps</mat-icon>My Apps in Stores</button>

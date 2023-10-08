@@ -18,6 +18,7 @@ import { OcrDemoComponent } from './ocr-demo/ocr-demo.component';
 import { UserDetailComponent } from './analytics/user-detail/user-detail.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TennisTimerComponent } from './x/tennis-timer/tennis-timer.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'about__', component: AboutComponent, data: { animation: 'AboutPage' } },
   { path: 'my-apps', component: MyAppsComponent, data: { animation: 'MyAppsPage' } },
   { path: 'ocrdemo', component: OcrDemoComponent, data: { animation: 'OcrDemoPage' } },
+  { path: 'tttimer', component: TennisTimerComponent, data: { animation: 'TennisTimerPage' } },
   { path: 'contact', component: ContactComponent, data: { animation: 'ContactPage' } },
   { path: 'designs', component: MyDesignsComponent, data: { animation: 'MyDesignsPage' } },
   { path: 'analtcs', component: AnalytMainComponent }

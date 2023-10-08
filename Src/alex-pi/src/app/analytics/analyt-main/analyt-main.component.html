@@ -11,26 +11,38 @@
 
   <mat-card appearance="outlined">
     <mat-card-header>
-      <mat-card-title>Links</mat-card-title>
-      <button mat-mini-fab (click)="LoadData()"><mat-icon aria-label="Refersh">add</mat-icon></button>
+      <mat-card-title>Links to APIs</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <br />
-      <b>alexpiwebapicore2: </b> <br />
-      <i> Core <b>2.2</b> </i><br />
-      <a href="https://alexpiwebapicore2.azurewebsites.net/api/values">Values</a><br />
-      <a href="https://alexpiwebapicore2.azurewebsites.net/api/WebsiteUsers">WebsiteUsers</a><br />
-      <a href="https://alexpiwebapicore2.azurewebsites.net/api/WebEventLogs">WebEventLogs</a><br />
+      <b>alexpiwebapicore2: </b>
+      <i> Core <b>2.2</b> </i><br /><br />
+      <a href="https://alexpiwebapicore2.azurewebsites.net/api/values">Values</a>++ &nbsp;
+      <a href="https://alexpiwebapicore2.azurewebsites.net/api/WebsiteUsers">WebsiteUsers</a>-- &nbsp;
+      <a href="https://alexpiwebapicore2.azurewebsites.net/api/WebEventLogs">WebEventLogs</a>-- &nbsp;
       <br />
       <br />
-      <b>alex-pi-api: </b> <br />
-      <i> Core <b>3.0</b> </i><br />
-      <a href="https://alex-pi-api.azurewebsites.net/weatherForecast">~Values</a><br />
-      <a href="https://alex-pi-api.azurewebsites.net/api/WebsiteUsers">WebsiteUsers</a><br />
-      <a href="https://alex-pi-api.azurewebsites.net/api/WebEventLogs">WebEventLogs</a><br />
+      <br />
+      <b>alex-pi-api: </b>
+      <i> Core <b>6.0</b> </i><br /><br />
+      <a href="https://alex-pi-api.azurewebsites.net/weatherForecast">~Values</a>++ &nbsp;
+      <a href="https://alex-pi-api.azurewebsites.net/api/WebsiteUsers">WebsiteUsers</a>++ &nbsp;
+      <a href="https://alex-pi-api.azurewebsites.net/api/WebEventLogs">WebEventLogs</a>++ &nbsp;
+      <br />
       <br />
       <br />
     </mat-card-content>
-    <mat-card-actions> </mat-card-actions>
+    <mat-card-actions>
+      <button mat-raised-button (click)="wav()">wav</button>
+      <button mat-raised-button (click)="mp3_5()" color="primary">mp3 5</button>
+      <button mat-raised-button (click)="mp3_7()" color="primary">7</button>
+      <button mat-raised-button (click)="mp3_9()" color="primary">9</button>
+      <button mat-raised-button (click)="aac()" color="warn">aac</button>
+      <button mat-raised-button (click)="aac32()" color="warn">32</button>
+      <button mat-raised-button (click)="opus()" color="accent">opus</button>
+      <button mat-raised-button (click)="opus32()" color="accent">32</button>
+      <button mat-raised-button (click)="opus16()" color="accent">16</button>
+      <button mat-raised-button (click)="opus08()" color="accent">8</button>
+    </mat-card-actions>
   </mat-card>
 </div>
