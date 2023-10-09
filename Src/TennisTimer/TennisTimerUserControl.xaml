@@ -6,7 +6,7 @@
     <Viewbox>
       <TextBlock x:Name="tb1" Text="Playing from Resources is EVIL!!!!!!!!!" />
     </Viewbox>
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
       <Button Content="X"  Click="OnClose" IsCancel="True" />
       <!--<Button Content="Pause" Click="OnPause" />
       <Button Content="Stop"  Click="OnStop" />

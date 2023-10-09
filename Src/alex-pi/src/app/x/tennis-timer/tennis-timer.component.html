@@ -4,8 +4,8 @@
   </div>
   <div class="sticky-top">
     <mat-chip-listbox aria-labelledby="example-radio-group-label" [(ngModel)]="everyXMin">
-      <mat-chip-option *ngFor="let season of seasons" [value]="season">
-        {{season}}
+      <mat-chip-option *ngFor="let playPeriodInMinutes of playPeriods" [value]="playPeriodInMinutes">
+        {{playPeriodInMinutes}}
       </mat-chip-option>
     </mat-chip-listbox>
   </div>
@@ -29,6 +29,6 @@
   </div>
 
   <div class="right-div">
-    <button mat-mini-fab color="primary" (click)="Start_Arcade_Power_Up7mp3()"><mat-icon>speaker</mat-icon></button>
+    <button mat-mini-fab color="primary" (click)="Start_Arcade_Power_Up7mp3()" matTooltip="Test Audio"><mat-icon>speaker</mat-icon></button>
   </div>
 </div>

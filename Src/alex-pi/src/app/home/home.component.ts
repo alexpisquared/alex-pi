@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(queryParams => {
-      const rv = queryParams.qaz === 'sms' ? 'Std Mail Sender' : queryParams.qaz === 'sgn' ? 'mail signature' : queryParams.qaz ;
+      const rv = queryParams.qaz === 'sms' ? 'Std Mail Sender' : queryParams.qaz === 'sgn' ? 'mail signature' : queryParams.qaz ?? '';
       this.welSvc.logIfProd(`home ${rv}`);
       console.log(` ** queryParams: qaz=${queryParams.qaz}  qwe=${queryParams.qwe}  `);
     });
