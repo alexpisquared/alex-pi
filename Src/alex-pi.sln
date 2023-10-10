@@ -36,6 +36,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisTimer", "TennisTimer\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure2023", "..\..\..\..\..\temp\x\Azure2023\Azure2023\Azure2023.csproj", "{27C28402-D8D2-47FD-80A1-C2ABEF033B7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureLogParser", "AzureLogParser\AzureLogParser.csproj", "{DBE8D2D0-0DAC-4291-8640-A0ADEC67BD6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,12 +68,17 @@ Global
 		{27C28402-D8D2-47FD-80A1-C2ABEF033B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27C28402-D8D2-47FD-80A1-C2ABEF033B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27C28402-D8D2-47FD-80A1-C2ABEF033B7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBE8D2D0-0DAC-4291-8640-A0ADEC67BD6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBE8D2D0-0DAC-4291-8640-A0ADEC67BD6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBE8D2D0-0DAC-4291-8640-A0ADEC67BD6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBE8D2D0-0DAC-4291-8640-A0ADEC67BD6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4B0C207F-B84C-4EF4-B0F7-BBE44BEDCC7E} = {00B6D3E0-A2F0-4721-A702-466D84429197}
+		{DBE8D2D0-0DAC-4291-8640-A0ADEC67BD6C} = {00B6D3E0-A2F0-4721-A702-466D84429197}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92EDC75C-A4A4-4B0D-9025-510DFC9B31C9}
