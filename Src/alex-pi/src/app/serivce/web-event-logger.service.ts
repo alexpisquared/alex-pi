@@ -48,9 +48,12 @@ export class WebEventLoggerService {
     const usa = navigator.userAgent.replace('Mozilla/5.0 (', '').replace(') AppleWebKit/537.36 (KHTML, like Gecko) Chrome/', ' ');
     const usl = usa.length - 13; // ... Safari/537.36
 
-    const clientId = `${usa.substr(0, 27)}**${usa.substr(usl)}**${navigator.languages}**CPU:${navigator.hardwareConcurrency}**${gpr}**${gpv}.`;
+    // what else can be used to identify the user?
+    // https://www.w3schools.com/js/js_window_navigator.asp
 
-    console.log(` ▄▀ clientId:  "${clientId}"`);
+    const clientId = `${usa.substr(0, 27)}║║${usa.substr(usl)}║║CPU:${navigator.hardwareConcurrency.toString().padStart(2, '00') }║║${gpr}║║${gpv}■■${navigator.languages}.`;
+
+    console.log(` ▄▀ clientId: ▄▀${clientId}▄▀  `);
 
     return clientId;
   }

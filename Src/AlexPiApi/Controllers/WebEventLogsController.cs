@@ -96,7 +96,7 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
     {
       webEventLog.DoneAt = DateTime.UtcNow; // DateTime.Now is ambiguous ~ local time of the web server => UTC is better.
 
-      await _textDbContext.AddStringAsync($"{GetType().Name}.Post({webEventLog}) ■▄▀■ ");
+      await _textDbContext.AddStringAsync($"{webEventLog}");
 
       try
       {

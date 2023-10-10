@@ -7,6 +7,7 @@ import { WebEventLoggerService } from 'src/app/serivce/web-event-logger.service'
   styleUrls: ['./tennis-timer.component.scss'],
 })
 export class TennisTimerComponent implements OnInit {
+  isLooping = true;
   everyXMin = 10;
   percentComplete = 0;
   countdownString = '··:··';
@@ -24,18 +25,24 @@ export class TennisTimerComponent implements OnInit {
     try {
       this.welSvc.logIfProd('ttmr');
       this.soundEffect.autoplay = true;
-      // tslint:disable-next-line:max-line-length
-      // this.soundEffect.src = 'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV'; // This is a tiny MP3 file that is silent and extremely short
       this.soundEffect.src = 'assets\\Media\\Start - Arcade Alarm.mp3';
       this.error = '+...'; await this.delay(222);
       this.error = '++..'; await this.delay(222);
       this.error = '+++.'; await this.delay(222);
       this.error = '++++'; await this.delay(222);
     } catch (err) {
-      this.error = `${(err as Error).name}, ${(err as Error).message}`;
+      this.error = `■  ${(err as Error).name}, ${(err as Error).message}`;
+      this.welSvc.logIfProd(this.error);
+      try {
+      this.soundEffect.src = 'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV'; // This is a tiny MP3 file that is silent and extremely short
+      } catch (err) {
+        this.error = `■■ ${(err as Error).name}, ${(err as Error).message}`;
+        this.welSvc.logIfProd(this.error);
+      }
     }
 
     await this.MainLoop();
+    this.soundEffect.src = 'assets\\Media\\Start - Arcade Chirp Descend.mp3';
   }
 
   async MainLoop() {
@@ -48,11 +55,11 @@ export class TennisTimerComponent implements OnInit {
       this.error = `${(err as Error).name}, ${(err as Error).message}`;
     }
 
-    while (true) {
+    while (this.isLooping) {
       let now = new Date();
       this.setAndShowNextTime();
 
-      while (now < this.nextTime) {
+      while (this.isLooping && now < this.nextTime) {
         const prev = this.everyXMin;
         await this.delay(950);
         if (prev !== this.everyXMin) { // if the user changed the time, then reset the timer
@@ -70,10 +77,15 @@ export class TennisTimerComponent implements OnInit {
         }
       } // while (now < this.nextTime)
 
-      this.error = '·';
-      this.countdownString = '▄▀▄▀';
-      await this.playWavFilesAsync(2);
-    } // while (true)
+      if (this.isLooping) {
+        this.countdownString = '▄▀▄▀';
+        await this.playWavFilesAsync(2);
+      }
+      else {
+        this.countdownString = '■ ■';
+        this.error = '·';
+      }
+    } // while (this.isLooping)
   }
 
   private setAndShowNextTime() {
@@ -140,5 +152,8 @@ export class TennisTimerComponent implements OnInit {
     return stringArr[Math.floor(Math.random() * stringArr.length)];
   }
 
-  ngOnDestroy() { this.releaseWakeLock(); }
+  ngOnDestroy() {
+    this.isLooping = false;
+    this.releaseWakeLock();
+  }
 }

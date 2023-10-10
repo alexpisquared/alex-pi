@@ -21,7 +21,7 @@ export class AboutComponent implements OnInit {
     this.result = `${this.numberWithCommas(Math.floor(Math.random() * 100000000))}.`;
   }
   numberWithCommas(x) {
-    return '123';//x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return '123'; // x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
   goBack(): void {
     this.location.back();
