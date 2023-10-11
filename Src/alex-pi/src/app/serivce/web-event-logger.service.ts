@@ -51,7 +51,7 @@ export class WebEventLoggerService {
     // what else can be used to identify the user?
     // https://www.w3schools.com/js/js_window_navigator.asp
 
-    const clientId = `${usa.substr(0, 27)}║║${usa.substr(usl)}║║CPU:${navigator.hardwareConcurrency.toString().padStart(2, '00') }║║${gpr}║║${gpv}■■${navigator.languages}.`;
+    const clientId = `${usa.substring(0, 27)}║║${usa.substring(usl)}║║CPU:${navigator.hardwareConcurrency.toString().padStart(2, '00') }║║${gpr}║║${gpv}■■${navigator.languages}.`;
 
     console.log(` ▄▀ clientId: ▄▀${clientId}▄▀  `);
 
