@@ -84,8 +84,8 @@ import { TennisTimerComponent } from './x/tennis-timer/tennis-timer.component';
     HttpClientModule,
     ReactiveFormsModule,
     MaterialModule,
-    // viceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }) // review the origins!!! as it does not work.
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }) // try to fix SW - no go; need to find latest and do from scratch.
+    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }) // review the origins!!! as it does not work.
+    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }) // try to fix SW - no go; need to find latest and do from scratch.
   ],
   providers: [CompInteractService, { provide: LocationStrategy, useClass: HashLocationStrategy }], // deep link fix #3 (https://stackoverflow.com/questions/38054707/angular-2-azure-deploy-refresh-error-the-resource-you-are-looking-for-has-been)
 

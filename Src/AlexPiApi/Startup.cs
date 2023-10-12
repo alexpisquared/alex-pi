@@ -29,6 +29,8 @@ public class Startup
             WithOrigins
             (
               "http://localHost:4200",
+              "http://localHost:4201",
+              "http://localHost:4202",
               "https://alex-pi.azurewebsites.net"
             )
             .AllowAnyHeader()

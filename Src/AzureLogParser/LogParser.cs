@@ -1,4 +1,6 @@
 ﻿using AlexPiApi.Services;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using Db.OneBase.Model;
 using static System.Console;
 
@@ -6,84 +8,101 @@ namespace AzureLogParser;
 
 public class LogParser
 {
-  public static async Task Main2(string constr)
+  public async Task<(string logRaw, string usage2)> DoCRUD(char crud, string constr)
   {
-    //var client = new SecretClient(new Uri("https://demopockv.vault.azure.net/"), new DefaultAzureCredential());
-    //KeyVaultSecret secret = client.GetSecret("ChtBlobStorageConnectionString");
-    //string connectionString = secret.Value;
-
-    var connectionString = constr; // secret.Value !!!!!!!!!!!!!!!!!!!!!!!!!!;
-    var poorMansLogger = new PoorMansLogger(connectionString);
-
-    //// Create a file
-    //WriteLine("Creating file...");
-    //await poorMansLogger.CreateFileAsync(containerName, fileName, content);
-
-    //// Read the file
-    //WriteLine("Reading file...");
-    //var readContent = await poorMansLogger.ReadFileAsync(containerName, fileName);
-    //WriteLine($"Content: {readContent}");
-
-    //// Update the file
-    //WriteLine("Updating file...");
-    //var newContent = "Hello, Azure!";
-    //await poorMansLogger.UpdateFileAsync(containerName, fileName, newContent);
-
-    await poorMansLogger.AppendToFileAsync($"{DateTime.Now:MM-dd HH:mm}  -----  a call from the inspector's start  -----\r\n");
-
-    do
+    try
     {
-      var log = // _log; //
-                      await poorMansLogger.ReadFileAsync();
-
-      ForegroundColor = ConsoleColor.DarkYellow;
-      WriteLine($"{log}");
-      ForegroundColor = ConsoleColor.Gray;
-
-      var lines = log.Split("\r\n");
-      var WebEventLogs = new List<WebEventLog>();
-      var WebEventLogLines = lines.ToList().Where(r => r.Contains("WebEventLog { BrowserSignature =")).ToList();
-      foreach (var line in WebEventLogLines)
+      if (DateTime.Now == DateTime.Today) //nogo: @wo
       {
-        try
-        {
-          var WebEventLog = new WebEventLog();
-          var parts = line.Split(new string[] { "WebEventLog { BrowserSignature = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries);
-          var whens = line.Split(new string[] { "DoneAt = ", ", WebsiteUser =" }, StringSplitOptions.RemoveEmptyEntries);
-
-          //WebEventLog.EventName = eventName;
-          WebEventLog.DoneAt = DateTime.Parse(whens[1]);
-          WebEventLog.BrowserSignature = parts[1];
-
-          WebEventLogs.Add(WebEventLog);
-        }
-        catch (Exception ex)
-        {
-          ForegroundColor = ConsoleColor.Red;
-          WriteLine($"{ex.Message}  {line}");
-          ResetColor();
-        }
+        var client = new SecretClient(new Uri("https://demopockv.vault.azure.net/"), new DefaultAzureCredential());
+        KeyVaultSecret secret = client.GetSecret("ChtBlobStorageConnectionString");
+        string connectionString = secret.Value;
       }
 
-      ForegroundColor = ConsoleColor.DarkGreen;
-      //tmi: foreach (var wel in WebEventLogs) WriteLine(wel.ToString2);
+      var poorMansLogger = new PoorMansLogger(constr);
 
-      //foreach (var browserSignature in WebEventLogs.Select(r => r.BrowserSignature).Distinct().ToList()) WriteLine(browserSignature);
+      //// Create a file    await poorMansLogger.CreateFileAsync(containerName, fileName, content);
+      //// Read the file    var readContent = await poorMansLogger.ReadFileAsync(containerName, fileName);
+      //// Update the file  await poorMansLogger.UpdateFileAsync(containerName, fileName, newContent);
 
-      ForegroundColor = ConsoleColor.DarkYellow;
-      // select unique BrowserSignature With Max Of DoneAt from WebEventLogs
-      //WebEventLogs.GroupBy(r => r.BrowserSignature).Select(g => g.OrderByDescending(r => r.DoneAt).First()).ToList().ForEach(r => WriteLine($" {r.DoneAt}  {r.BrowserSignature}"));
+      if (DateTime.Now == DateTime.Today)
+        await poorMansLogger.AppendToFileAsync($"{DateTime.Now:MM-dd HH:mm}  -----  a call from the NEW(!) inspector's start  -----\r\n");
 
-      ForegroundColor = ConsoleColor.DarkCyan;
-      // select unique BrowserSignature With Max and Min Of DoneAt and the count records per BrowserSignature of from WebEventLogs
-      WebEventLogs.GroupBy(r => r.BrowserSignature).Select(g => new { g.Key, Max = g.Max(r => r.DoneAt), Min = g.Min(r => r.DoneAt), Count = g.Count() }).OrderBy(r => r.Max).ToList().ForEach(r => WriteLine($" {r.Min.ToLocalTime()}  {r.Max.ToLocalTime()} {r.Max - r.Min,15}{r.Count,4}  {r.Key}"));
+      if (crud == 'c')
+      {
+        await poorMansLogger.CreateFileAsync("Creating...");
+        return ("", "");
+      }
 
-      ForegroundColor = ConsoleColor.Green;  /**/ WriteLine($"Any key to repeat ... Escape to quit");
-      ResetColor();
+      if (crud == 'r')
+      {
+        var logRaw = await poorMansLogger.ReadFileAsync(); // _log; //
+        WriteLine($"{logRaw}");
 
-    } while (ReadKey().Key != ConsoleKey.Escape);
+        var WebEventLogs = new List<WebEventLog>();
+        foreach (var line in logRaw.Split("\r\n").ToList().Where(r => r.Contains(", FirstVisitId = ")).ToList())
+        {
+          try
+          {
+            var WebEventLog = new WebEventLog
+            {
+              DoneAt = DateTime.Parse(line.Split(new string[] { "DoneAt = ", ", WebsiteUser =" }, StringSplitOptions.RemoveEmptyEntries)[1]),
+              EventName = line.Split(new string[] { "EventName = ", "DoneAt =" }, StringSplitOptions.RemoveEmptyEntries)[1],
+              BrowserSignature = line.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1]
+            };
+
+            if (WebEventLog.DoneAt.ToLocalTime() > new DateTime(2023, 10, 9, 22, 50, 0))
+              WebEventLogs.Add(WebEventLog);
+          }
+          catch (Exception ex)
+          {
+            WriteLine($"{ex.Message}  {line}");
+          }
+        }
+
+        var usage2 = "";
+        // select unique BrowserSignature With Max and Min Of DoneAt and the count records per BrowserSignature of from WebEventLogs
+        WebEventLogs.GroupBy(r => r.BrowserSignature).Select(g => new { g.Key, Max = g.Max(r => r.DoneAt), Min = g.Min(r => r.DoneAt), Count = g.Count() }).OrderBy(r => r.Max).ToList().ForEach(r => usage2 += $" {r.Min.ToLocalTime():yy-MM-dd} .. {r.Max.ToLocalTime():MM-dd HH:mm} {r.Max - r.Min,15}{r.Count,4} \t {Whoser(r.Key)}\n");
+
+        return (logRaw, usage2);
+      }
+
+      if (crud == 'u')
+      {
+        await poorMansLogger.UpdateFileAsync($"-- Updated with this at {DateTime.Now} --");
+        return ("", "");
+      }
+
+      if (crud == 'd')
+      {
+        await poorMansLogger.DeleteFileAsync();
+        return ("", "");
+      }
+
+      if (crud == 'a')
+      {
+        await poorMansLogger.AppendToFileAsync($"++ Appending with this at {DateTime.Now}\n");
+        return ("", "");
+      }
+
+      return ("Really???????", "");
+    }
+    catch (Exception ex)
+    {
+      return (ex.Message, "");
+    }
   }
 
+  string Whoser(string sign) => sign switch
+  {
+    "Nothing" => "Nothing",
+    "Wed Oct 11 2023 17:53:27 GMT-0400 (Eastern Daylight Time)" => "ME",
+    "Wed Oct 11 2023 21:41:23 GMT-0400 (Eastern Daylight Time)" => "Pixel Chrome",
+    "Wed Oct 11 2023 21:43:22 GMT-0400 (Eastern Daylight Saving Time)" => "Zoe IPhone",
+    "Wed Oct 11 2023 21:44:23 GMT-0400 (Eastern Daylight Saving Time)" => "TTTimer ???",
+    "Wed Oct 11 2023 17:52:19 GMT-0400 (Eastern Daylight Time)" => "Old Browser Window",
+    _ => $"\"{sign}\" => \"{DateTime.Now:yyMMdd.HHmm}a\",",
+  };
   const string _log = @"
 10-07 17:36    0  WebEventLogsController.Post(WebEventLog { BrowserSignature = Linux; Android 10; K 117.0.**Safari/537.36**en-CA,zh-CN,zh,uk-UA,uk,en-GB,en-US,en**CPU:8**ANGLE (Qualcomm, Adreno (TM) 630, OpenGL ES 3.2)**Google Inc. (Qualcomm)., Id = 0, WebsiteUserId = 0, EventName = home undefined, DoneAt = 10/7/2023 5:36:43 PM, WebsiteUser =  }) ■▄▀■
 10-07 17:40    1  WebEventLogsController.Post(WebEventLog { BrowserSignature = Linux; Android 10; K 117.0.**Safari/537.36**en-CA,zh-CN,zh,uk-UA,uk,en-GB,en-US,en**CPU:8**ANGLE (Qualcomm, Adreno (TM) 630, OpenGL ES 3.2)**Google Inc. (Qualcomm)., Id = 0, WebsiteUserId = 0, EventName = home undefined, DoneAt = 10/7/2023 5:40:47 PM, WebsiteUser =  }) ■▄▀■

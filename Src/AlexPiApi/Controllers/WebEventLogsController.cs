@@ -97,7 +97,7 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
       webEventLog.DoneAt = DateTime.UtcNow; // DateTime.Now is ambiguous ~ local time of the web server => UTC is better.
 
       await _textDbContext.AddStringAsync($"{webEventLog}");
-
+/* //todo: file sys db (Oct 11, 2023)
       try
       {
         var wsu = _context.WebsiteUser.FirstOrDefault(r => r.EventData.Equals(webEventLog.BrowserSignature));
@@ -113,7 +113,7 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
       catch (Exception ex) { Debug.WriteLine(ex); throw; }
 
       await saveToDb();
-
+*/
       CreatedAtActionResult caa;
       try
       {

@@ -19,30 +19,35 @@ export class TennisTimerComponent implements OnInit {
   wakeLock: any;
   soundEffect = new Audio(); // https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari
 
-  constructor(private welSvc: WebEventLoggerService) { }
+  constructor(private welSvc: WebEventLoggerService) {
+    this.soundEffect.autoplay = true;
+    this.soundEffect.src = 'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV'; // This is a tiny MP3 file that is silent and extremely short
+  }
 
-  async ngOnInit() {
+  // async
+  ngOnInit() {
     try {
       this.welSvc.logIfProd('ttmr');
       this.soundEffect.autoplay = true;
       this.soundEffect.src = 'assets\\Media\\Start - Arcade Alarm.mp3';
-      this.error = '+...'; await this.delay(222);
-      this.error = '++..'; await this.delay(222);
-      this.error = '+++.'; await this.delay(222);
-      this.error = '++++'; await this.delay(222);
+      // this.error = '+...'; await this.delay(222);
+      // this.error = '++..'; await this.delay(222);
+      // this.error = '+++.'; await this.delay(222);
+      // this.error = '++++'; await this.delay(222);
+      this.error = '++++'; this.delay(222);
     } catch (err) {
       this.error = `■  ${(err as Error).name}, ${(err as Error).message}`;
       this.welSvc.logIfProd(this.error);
       try {
-      this.soundEffect.src = 'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV'; // This is a tiny MP3 file that is silent and extremely short
+        this.soundEffect.src = 'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV'; // This is a tiny MP3 file that is silent and extremely short
       } catch (err) {
         this.error = `■■ ${(err as Error).name}, ${(err as Error).message}`;
         this.welSvc.logIfProd(this.error);
       }
     }
 
-    await this.MainLoop();
-    this.soundEffect.src = 'assets\\Media\\Start - Arcade Chirp Descend.mp3';
+    // await this.MainLoop();
+    this.MainLoop();
   }
 
   async MainLoop() {
@@ -86,6 +91,9 @@ export class TennisTimerComponent implements OnInit {
         this.error = '·';
       }
     } // while (this.isLooping)
+
+    await this.delay(250); // collides with the "Wake Lock released" sound.
+    this.soundEffect.src = 'assets\\Media\\Start - Arcade Chirp Descend.mp3';
   }
 
   private setAndShowNextTime() {

@@ -25,14 +25,6 @@ public class PoorMansLogger
   public async Task CreateFileAsync(string content)
   {
     _ = await _containerClient.CreateIfNotExistsAsync();
-
-    using var stream = new MemoryStream(Encoding.UTF8.GetBytes(content));
-    _ = await _blobClient.UploadAsync(stream, true);
-  }
-  public async Task UpdateFileAsync(string newContent)
-  {
-    using var stream = new MemoryStream(Encoding.UTF8.GetBytes(newContent));
-    _ = await _blobClient.UploadAsync(stream, true);
   }
   public async Task<string> ReadFileAsync()
   {
@@ -41,10 +33,17 @@ public class PoorMansLogger
     using var reader = new StreamReader(downloadInfo.Value.Content);
     return await reader.ReadToEndAsync();
   }
-
+  public async Task UpdateFileAsync(string newContent)
+  {
+    using var stream = new MemoryStream(Encoding.UTF8.GetBytes(newContent));
+    _ = await _blobClient.UploadAsync(stream, true);
+  }
+  public async Task DeleteFileAsync()
+  {
+    _ = await _containerClient.DeleteAsync();
+  }
   public async Task AppendToFileAsync(string appendContent)
   {
-
     if (!await _appendBlobClient.ExistsAsync())
     {
       _ = await _appendBlobClient.CreateAsync();

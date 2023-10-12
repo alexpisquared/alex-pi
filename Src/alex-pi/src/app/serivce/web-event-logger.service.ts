@@ -9,7 +9,9 @@ import { WebViewer } from '../model/WebViewer';
   providedIn: 'root'
 })
 export class WebEventLoggerService {
-  private svcurl = isDevMode() ? 'https://localhost:5001' : 'https://alex-pi-api.azurewebsites.net';
+  // private svcurl = 'https://localhost:5001'; //
+  private svcurl = isDevMode() ? 'https://localhost:5001' : 'https://alex-pi-api.azurewebsites.net'; // always returns prod url>!>!>!?!?!?!
+  const pieceOfCake = 'LocalStoreTest';
 
   constructor(private http: HttpClient) { }
 
@@ -39,49 +41,57 @@ export class WebEventLoggerService {
 
     return unMaskedInfo;
   }
-  getClientInfo(): string {
-    // @ts-ignore: error after upgrading to Angular 13.0.0
-    const canvas = new OffscreenCanvas(512, 512);
-    const gl1 = canvas.getContext('webgl');
-    const gpr = this.getUnmaskedInfo(gl1).renderer;
-    const gpv = this.getUnmaskedInfo(gl1).vendor__;
-    const usa = navigator.userAgent.replace('Mozilla/5.0 (', '').replace(') AppleWebKit/537.36 (KHTML, like Gecko) Chrome/', ' ');
-    const usl = usa.length - 13; // ... Safari/537.36
+  getNothing(): string {
+    console.log(` ▄▀ SUCCESS getNothing at ${this.svcurl}`);
+    return (` ▄▀ SUCCESS getNothing at ${this.svcurl}`);
+; }
 
-    // what else can be used to identify the user?
-    // https://www.w3schools.com/js/js_window_navigator.asp
-
-    const clientId = `${usa.substring(0, 27)}║║${usa.substring(usl)}║║CPU:${navigator.hardwareConcurrency.toString().padStart(2, '00') }║║${gpr}║║${gpv}■■${navigator.languages}.`;
-
-    console.log(` ▄▀ clientId: ▄▀${clientId}▄▀  `);
-
-    return clientId;
-  }
-  logIfProd(evname: string) {
-    if (isDevMode() === false) {
-      this.logEvent(evname);
-      console.log(` ▄▀ prd mode: logged evdata to db`);
-    } else {
-      const evdata = this.getClientInfo();
-      console.log(` ▄▀ dev mode: no logging of  "${evdata}"`);
+  logNothing(): string {
+    try {
+      this.logEvent('Nothing', 'Nothing');
+      return `SUCCESS adding Nothing event to ${this.svcurl}`;
+    } catch (err) {
+      return (`${(err as Error).name}, ${(err as Error).message}`);
     }
   }
-  logEvent(evname: string) {
-    const evdata = this.getClientInfo();
+  logEvName(evname: string) {
+    try {
+      let anyString = localStorage.getItem(this.pieceOfCake);
+      if (anyString === null) {
+        anyString = new Date().toString();
+        localStorage.setItem(this.pieceOfCake, anyString);
+      }
 
-    this.addEvent(evname, evdata).subscribe(
+      this.logEvent(anyString, evname);
+      console.log(` ▄▀ prd mode: logged evdata to db`);
+    } catch (err) {
+      console.log(`${(err as Error).name}, ${(err as Error).message}`);
+    }
+  }
+  logIfProd(evname: string): boolean {
+    if (isDevMode() === false) {
+      this.logEvName(evname);
+      return true;
+    }
+
+    return false;
+  }
+  logEvent(noValue: string, evname: string) {
+    const evdata = this.getNothing();
+
+    this.addEvent(noValue, evname, evdata).subscribe(
       data => {
-        console.log(' ▄▀ SUCCESS adding event to db:  ');
-        console.log(data);
+        console.log(` ▄▀ SUCCESS adding event to db:  ${data} at ${this.svcurl}`);
       },
       err => {
-        console.log(` ▄▀ ERR in logEvent(${evname}):  ${err.message}`);
+        console.log(` ▄▀▄▀▄▀ ERR in logEvent(${evname}) at ${this.svcurl}:  ${err.message}`);
       }
     );
   }
 
-  addEvent(evname: string, evdata: string): Observable<WebEventLog> {
+  addEvent(noValue: string, evname: string, evdata: string): Observable<WebEventLog> {
     const wel = new WebEventLog();
+    wel.firstVisitId = noValue;
     wel.eventName = evname;
     wel.browserSignature = evdata;
 

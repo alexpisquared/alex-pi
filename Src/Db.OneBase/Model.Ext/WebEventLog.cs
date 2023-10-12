@@ -2,6 +2,10 @@
 
 namespace Db.OneBase.Model
 {
-  public partial record WebEventLog {[NotMapped] public string BrowserSignature { get; set; } }
-  public partial class WebsiteUser {[NotMapped] public int? VisitCount__New { get; set; } } // new / unreviewed visits  
+  public partial record WebEventLog
+  {
+    [NotMapped] public string BrowserSignature { get; set; }
+    [NotMapped] public string FirstVisitId { get; set; }
+  }
+  public partial class WebsiteUser { [NotMapped] public int? VisitCount__New { get; set; } } // new / unreviewed visits  
 }
