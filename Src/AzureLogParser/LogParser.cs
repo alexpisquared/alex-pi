@@ -96,11 +96,11 @@ public class LogParser
   string Whoser(string sign) => sign switch
   {
     "Nothing" => "Nothing",
-    "Wed Oct 11 2023 17:53:27 GMT-0400 (Eastern Daylight Time)" => "ME",
+    "Wed Oct 11 2023 17:53:27 GMT-0400 (Eastern Daylight Time)" => "Razer1",
     "Wed Oct 11 2023 21:41:23 GMT-0400 (Eastern Daylight Time)" => "Pixel Chrome",
     "Wed Oct 11 2023 21:43:22 GMT-0400 (Eastern Daylight Saving Time)" => "Zoe IPhone",
     "Wed Oct 11 2023 21:44:23 GMT-0400 (Eastern Daylight Saving Time)" => "TTTimer ???",
-    "Wed Oct 11 2023 17:52:19 GMT-0400 (Eastern Daylight Time)" => "Old Browser Window",
+    "Wed Oct 11 2023 17:52:19 GMT-0400 (Eastern Daylight Time)" => "localhost:4202",
     _ => $"\"{sign}\" => \"{DateTime.Now:yyMMdd.HHmm}a\",",
   };
   const string _log = @"

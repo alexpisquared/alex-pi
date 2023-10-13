@@ -9,7 +9,7 @@
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
     <Button IsCancel="True" Click="OnExit" VerticalAlignment="Top" HorizontalAlignment="Right" />
-    <TextBox x:Name="tbx1" Background="#222" Foreground="#ff8" Grid.Row="1" d:Text="lkjlkjlkjlkj;lkj?" FontFamily="Arial Narrow" VerticalScrollBarVisibility="Auto" />
+    <TextBox x:Name="tbx1" Background="#222" Foreground="#ff8" Grid.Row="1" d:Text="lkjlkjlkjlkj;lkj?" FontFamily="Arial Narrow" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
     <TextBox x:Name="tbx2" Background="#222" Foreground="#8ff" Grid.Row="3" d:Text="lkjlkjlkjlkj;lkj?" FontSize="18" />
     <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
 

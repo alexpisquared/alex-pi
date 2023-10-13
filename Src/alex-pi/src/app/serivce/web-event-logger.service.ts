@@ -41,11 +41,44 @@ export class WebEventLoggerService {
 
     return unMaskedInfo;
   }
-  getNothing(): string {
+  getNothing0(): string {
     console.log(` ▄▀ SUCCESS getNothing at ${this.svcurl}`);
     return (` ▄▀ SUCCESS getNothing at ${this.svcurl}`);
-; }
+  }
 
+  getNothing(): string {
+    // @ts-ignore: error after upgrading to Angular 13.0.0
+    const canvas = new OffscreenCanvas(512, 512);
+    const gl1 = canvas.getContext('webgl');
+    const gpr = this.getUnmaskedInfo(gl1).renderer;
+    const gpv = this.getUnmaskedInfo(gl1).vendor__;
+    const usa = navigator.userAgent.replace('Mozilla/5.0 (', '').replace(') AppleWebKit/537.36 (KHTML, like Gecko) Chrome/', ' ');
+    const usl = usa.length - 13; // ... Safari/537.36
+
+    //  There are several other properties you could consider to differentiate users further. Here are a few possibilities:
+    // 1. **Screen Resolution**: The screen width and height (`window.screen.width` and `window.screen.height`) could be used as additional data points.
+    const screenResolution = `${window.screen.width}x${window.screen.height}`;
+    // 2. **Timezone**: The client's timezone (`Intl.DateTimeFormat().resolvedOptions().timeZone`) can also provide a distinguishing factor.
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // 3. **Platform**: The platform property (`navigator.platform`) gives information about the underlying platform the browser is running on.
+    const platform = navigator.platform;
+    // 4. **Browser Plugin Details**: Information about plugins installed in the browser can be accessed using `navigator.plugins`.
+    const browserPlugins = navigator.plugins;
+    // 5. **Accept-Language Header**: The `Accept-Language` HTTP header advertises which languages the client is able to understand (`navigator.language`).
+    // const acceptLanguageHeader = navigator.language;
+    // 6. **Session Storage and Local Storage**: Check if these features are available in the user's browser (`window.sessionStorage` and `window.localStorage`).
+    const sessionStorage = window.sessionStorage;
+    // 7. **Cookies Enabled**: Check if cookies are enabled (`navigator.cookieEnabled`).
+    const cookiesEnabled = navigator.cookieEnabled;
+    // 8. **Color Depth**: The number of bits used to display one color (`window.screen.colorDepth`).
+    const colorDepth = window.screen.colorDepth;
+
+    const clientId = `${usa.substr(0, 27)}║${usa.substr(usl)}║CPU:${navigator.hardwareConcurrency.toString().padStart(2, '00')}║${gpr}║${window.screen.width}x${window.screen.height}║${Intl.DateTimeFormat().resolvedOptions().timeZone}║${navigator.platform}║${navigator.plugins}║${window.sessionStorage}║${navigator.cookieEnabled}║${window.screen.colorDepth}║${gpv}■■${navigator.languages}.`;
+
+    console.log(` ▄▀ clientId: ▄▀${clientId}▄▀  `);
+
+    return clientId;
+  }
   logNothing(): string {
     try {
       this.logEvent('Nothing', 'Nothing');
