@@ -7,11 +7,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <UserSecretsId>babfba77-9761-42ed-9b19-bdb272c2052a</UserSecretsId>
+    <ApplicationIcon>EdgeWebView2.ico</ApplicationIcon>
+    <PackageIcon>EdgeWebView2.ico</PackageIcon>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="EdgeWebView2.ico" />
-  </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\AlexPiApi\Services\PoorMansLogger.cs" Link="PoorMansLogger.cs" />
@@ -30,6 +28,13 @@
 
   <ItemGroup>
     <Resource Include="EdgeWebView2.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="EdgeWebView2.ico">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

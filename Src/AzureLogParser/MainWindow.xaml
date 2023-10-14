@@ -1,6 +1,8 @@
 ﻿<Window x:Class="AzureLogParser.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         xmlns:local="clr-namespace:AzureLogParser"
-        Title="Azure Log Parser" Height="450" Width="800" Background="#333" Loaded="OnLoaded" Icon="/EdgeWebView2.ico" >
+        Title="Azure Log Parser" Height="540" Width="1920" Background="#333" Loaded="OnLoaded" Icon="/EdgeWebView2.ico"
+        WindowStartupLocation="Manual" Left="0" Top="0"
+        AllowsTransparency="True" WindowStyle="None">
   <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
@@ -9,7 +11,7 @@
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
     <Button IsCancel="True" Click="OnExit" VerticalAlignment="Top" HorizontalAlignment="Right" />
-    <Image VerticalAlignment="Top" HorizontalAlignment="Right" Source="/EdgeWebView2.ico" Width="30" Height="30" />
+    <Image VerticalAlignment="Top" HorizontalAlignment="Left" Source="/EdgeWebView2.ico" Width="30" Height="30" />
     <TextBox x:Name="tbx1" Background="#222" Foreground="#ff8" Grid.Row="1" d:Text="lkjlkjlkjlkj;lkj?" FontFamily="Arial Narrow" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
     <TextBox x:Name="tbx2" Background="#222" Foreground="#8ff" Grid.Row="3" d:Text="lkjlkjlkjlkj;lkj?" FontSize="18" />
     <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
