@@ -13,7 +13,7 @@ export class AboutComponent implements OnInit {
   constructor(private location: Location, private welSvc: WebEventLoggerService) {}
 
   ngOnInit() {
-    this.welSvc.logIfProd('abou');
+    this.welSvc.logEvName('abou');
     this.getRandom();
   }
 

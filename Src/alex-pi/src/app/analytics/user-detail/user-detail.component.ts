@@ -19,7 +19,7 @@ export class UserDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private welSvc: WebEventLoggerService, private svc: WebsiteUsersService, private interactSvc: CompInteractService, private location: Location) { }
 
   ngOnInit(): void {
-    this.welSvc.logIfProd('uDtl ☺ ☻');
+    this.welSvc.logEvName('uDtl ☺ ☻');
     this.getHero();
   }
 

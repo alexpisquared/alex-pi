@@ -16,7 +16,7 @@ public partial class MainWindow : Window
   {
     tbx1.Text = tbx2.Text = "Loading...";
 
-    var (logRaw, usage2) = await new LogParser().DoCRUD('r', key);
+    var (logRaw, usage2) = await new AzureLogParser.LogParser().DoCRUD('r', key);
 
     tbx1.Text = logRaw;
     tbx2.Text = usage2;

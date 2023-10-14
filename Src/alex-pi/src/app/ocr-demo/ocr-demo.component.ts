@@ -29,7 +29,7 @@ export class OcrDemoComponent implements OnInit, AfterViewInit {
   constructor(private welSvc: WebEventLoggerService, private ocrsvc: OcrService) {}
 
   ngOnInit() {
-    this.welSvc.logIfProd('ocr-');
+    this.welSvc.logEvName('ocr-');
     this.cctx = this.myCanvas.nativeElement.getContext('2d');
 
     if (isDevMode()) {
@@ -113,7 +113,7 @@ export class OcrDemoComponent implements OnInit, AfterViewInit {
     this.cctx.closePath();
   }
   startOcr() {
-    this.welSvc.logIfProd('ocr!');
+    this.welSvc.logEvName('ocr!');
 
     const urlEscaped = btoa(this.imgurl); // slash issue fixed by double encoding
     // console.log('@@ url:' + urlEscaped);

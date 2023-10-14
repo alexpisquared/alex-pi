@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="EdgeWebView2.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\AlexPiApi\Services\PoorMansLogger.cs" Link="PoorMansLogger.cs" />
   </ItemGroup>
 
@@ -22,6 +26,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Db.OneBase\Db.OneBase.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="EdgeWebView2.ico" />
   </ItemGroup>
 
 </Project>

@@ -10,6 +10,6 @@ export class MyAppsComponent implements OnInit {
   constructor(private welSvc: WebEventLoggerService) {}
 
   ngOnInit() {
-    this.welSvc.logIfProd('apps');
+    this.welSvc.logEvName('apps');
   }
 }

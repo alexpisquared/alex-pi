@@ -11,6 +11,6 @@ export class MyDesignsComponent implements OnInit {
   constructor(private welSvc: WebEventLoggerService) {}
 
   ngOnInit() {
-    this.welSvc.logIfProd('dsgn');
+    this.welSvc.logEvName('dsgn');
   }
 }

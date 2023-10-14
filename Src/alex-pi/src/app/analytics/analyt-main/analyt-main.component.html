@@ -1,10 +1,10 @@
 <div style="text-align:center;">
-  <p style="text-align:right; color: #808080; margin: 5px 15px;">Build - 2023-10-11</p>
+  <p style="text-align:right; color: #808080; margin: 5px 15px;">Build - 2023-10-14</p>
   <h1>Analytics</h1>
   <br />
-  <h2>
+  <h3>
     {{ error }}
-  </h2>
+  </h3>
 </div>
 <div class="flex-row-even">
   <mat-card appearance="outlined">
@@ -31,8 +31,10 @@
       <br />
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button (click)="logEvName()" color="warn">log</button>
-      <button mat-raised-button (click)="logIfProd()" color="accent">nothing</button>
+      <button mat-raised-button (click)="getNothing1()" color="accent">get1</button>
+      <button mat-raised-button (click)="logEvName0()" color="warn">log0</button>
+      <button mat-raised-button (click)="logEvName1()" color="warn">log2</button>
+      <button mat-raised-button (click)="logEvName2()" color="warn">log2</button>
       <button mat-raised-button (click)="wav()">wav</button>
       <button mat-raised-button (click)="mp3_5()" color="primary">mp3</button>
     </mat-card-actions>

@@ -16,7 +16,7 @@ export class ContactComponent implements OnInit {
   constructor(private formBuilder: UntypedFormBuilder, private welSvc: WebEventLoggerService) { }
 
   ngOnInit() {
-    this.welSvc.logIfProd('cntc');
+    this.welSvc.logEvName('cntc');
     this.messageForm = this.formBuilder.group({
       // sender: ['', Validators.required],
       textareaMsg: ['', Validators.required]

@@ -27,7 +27,7 @@ export class TennisTimerComponent implements OnInit {
   // async
   ngOnInit() {
     try {
-      this.welSvc.logIfProd('ttmr');
+      this.welSvc.logEvName('ttmr');
       this.soundEffect.autoplay = true;
       this.soundEffect.src = 'assets\\Media\\Start - Arcade Alarm.mp3';
       // this.error = '+...'; await this.delay(222);
@@ -37,12 +37,12 @@ export class TennisTimerComponent implements OnInit {
       this.error = '++++'; this.delay(222);
     } catch (err) {
       this.error = `■  ${(err as Error).name}, ${(err as Error).message}`;
-      this.welSvc.logIfProd(this.error);
+      this.welSvc.logEvName(this.error);
       try {
         this.soundEffect.src = 'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV'; // This is a tiny MP3 file that is silent and extremely short
       } catch (err) {
         this.error = `■■ ${(err as Error).name}, ${(err as Error).message}`;
-        this.welSvc.logIfProd(this.error);
+        this.welSvc.logEvName(this.error);
       }
     }
 

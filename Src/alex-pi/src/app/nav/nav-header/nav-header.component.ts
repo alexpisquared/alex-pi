@@ -103,7 +103,7 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit {
 
   toggleTheme() {
     if (this.document.body.classList.contains(this.mainTheme)) {
-      this.welSvc.logIfProd('dark');
+      this.welSvc.logEvName('dark');
       this.document.body.classList.remove(this.mainTheme);
       this.document.body.classList.add((this.themeVal = this.darkTheme));
       // this.AlexPiLogoThemed = './assets/images/AlexPi_Logo_Dark.png';
@@ -111,7 +111,7 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit {
       this.document.body.classList.remove(this.darkTheme);
       this.document.body.classList.add((this.themeVal = this.mainTheme));
       // this.AlexPiLogoThemed = './assets/images/AlexPi_Logo_Lite.png';
-      this.welSvc.logIfProd('lite');
+      this.welSvc.logEvName('lite');
     }
     console.log(` ** theme toggled  to   ${this.themeVal}`);
   }

@@ -1,8 +1,9 @@
-﻿using AlexPiApi.Services;
+﻿using System.Windows;
+using AlexPiApi.Services;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using Db.OneBase.Model;
-using static System.Console;
+using static System.Diagnostics.Trace;
 
 namespace AzureLogParser;
 
@@ -16,7 +17,7 @@ public class LogParser
       {
         var client = new SecretClient(new Uri("https://demopockv.vault.azure.net/"), new DefaultAzureCredential());
         KeyVaultSecret secret = client.GetSecret("ChtBlobStorageConnectionString");
-        string connectionString = secret.Value;
+        var connectionString = secret.Value;
       }
 
       var poorMansLogger = new PoorMansLogger(constr);
@@ -93,16 +94,33 @@ public class LogParser
     }
   }
 
-  string Whoser(string sign) => sign switch
+  string Whoser(string sign)
   {
-    "Nothing" => "Nothing",
-    "Wed Oct 11 2023 17:53:27 GMT-0400 (Eastern Daylight Time)" => "Razer1",
-    "Wed Oct 11 2023 21:41:23 GMT-0400 (Eastern Daylight Time)" => "Pixel Chrome",
-    "Wed Oct 11 2023 21:43:22 GMT-0400 (Eastern Daylight Saving Time)" => "Zoe IPhone",
-    "Wed Oct 11 2023 21:44:23 GMT-0400 (Eastern Daylight Saving Time)" => "TTTimer ???",
-    "Wed Oct 11 2023 17:52:19 GMT-0400 (Eastern Daylight Time)" => "localhost:4202",
-    _ => $"\"{sign}\" => \"{DateTime.Now:yyMMdd.HHmm}a\",",
-  };
+    var rv = sign switch
+    {
+      "Nothing" => "Nothing",
+      "Wed Oct 11 2023 17:53:27 GMT-0400 (Eastern Daylight Time)" => "Razer1",
+      "Wed Oct 11 2023 21:41:23 GMT-0400 (Eastern Daylight Time)" => "Pixel Chrome",
+      "Wed Oct 11 2023 21:43:22 GMT-0400 (Eastern Daylight Saving Time)" => "Zoe IPhone",
+      "Fri Oct 13 2023 16:31:36 GMT-0400 (Eastern Daylight Saving Time)" => "Alx IPhone",
+      "Fri Oct 13 2023 18:54:17 GMT-0400 (Eastern Daylight Saving Time)" => "Mei IPhone",
+      "Wed Oct 11 2023 21:44:23 GMT-0400 (Eastern Daylight Saving Time)" => "TTTimer ???",
+      "Wed Oct 11 2023 17:52:19 GMT-0400 (Eastern Daylight Time)" => "localhost:4202",
+      "Thu Oct 12 2023 15:31:50 GMT-0400 (Eastern Daylight Time)" => "Nuc2",
+      "Thu Oct 12 2023 19:43:40 GMT-0400 (Eastern Daylight Time)" => "black tablet",
+      "No LocalStorage engagement yet." => "No LocalStorage engagement yet",
+      _ => null,
+    };
+
+    if (rv is null)
+    {
+      rv = $"\"{sign}\" => \"{DateTime.Now:yyMMdd.HHmmss}\",";
+      Clipboard.SetText(rv);
+    }
+
+    return rv;
+  }
+
   const string _log = @"
 10-07 17:36    0  WebEventLogsController.Post(WebEventLog { BrowserSignature = Linux; Android 10; K 117.0.**Safari/537.36**en-CA,zh-CN,zh,uk-UA,uk,en-GB,en-US,en**CPU:8**ANGLE (Qualcomm, Adreno (TM) 630, OpenGL ES 3.2)**Google Inc. (Qualcomm)., Id = 0, WebsiteUserId = 0, EventName = home undefined, DoneAt = 10/7/2023 5:36:43 PM, WebsiteUser =  }) ■▄▀■
 10-07 17:40    1  WebEventLogsController.Post(WebEventLog { BrowserSignature = Linux; Android 10; K 117.0.**Safari/537.36**en-CA,zh-CN,zh,uk-UA,uk,en-GB,en-US,en**CPU:8**ANGLE (Qualcomm, Adreno (TM) 630, OpenGL ES 3.2)**Google Inc. (Qualcomm)., Id = 0, WebsiteUserId = 0, EventName = home undefined, DoneAt = 10/7/2023 5:40:47 PM, WebsiteUser =  }) ■▄▀■
