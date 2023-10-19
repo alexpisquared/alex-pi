@@ -29,13 +29,15 @@
   behavior: url(/css/border-radius.htc);
   border-radius: 20px;
   width: 600px;
-  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr='#11801110',EndColorStr='#11801140'); /*	background-image: -webkit-gradient(linear, left top, left bottom, from(#11801110), to(#11801140)); 	background-image: -webkit-gradient(linear, left top, left bottom, from(hsl(0, 80%, 70%)), to(#11801140)); */
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#11801110', EndColorStr='#11801140');
+  /*	background-image: -webkit-gradient(linear, left top, left bottom, from(#11801110), to(#11801140)); 	background-image: -webkit-gradient(linear, left top, left bottom, from(hsl(0, 80%, 70%)), to(#11801140)); */
   background-image: -webkit-gradient(linear, left top, left bottom, from(#11801110), to(#11801140));
   background-image: -webkit-linear-gradient(top, #11801110, #11801140);
   background-image: -moz-linear-gradient(top, #11801110, #11801140);
   background-image: -ms-linear-gradient(top, #11801110, #11801140);
   background-image: -o-linear-gradient(top, #11801110, #11801140);
-  background-image: linear-gradient(to bottom, #11801110, #11801140); /* current standard, but unimplemented and subject to change */
+  background-image: linear-gradient(to bottom, #11801110, #11801140);
+  /* current standard, but unimplemented and subject to change */
 }
 
 // canvas {  border-style: solid;}
@@ -57,6 +59,7 @@
   background-color: #030303;
   border-radius: 5px;
 }
+
 .circle_r {
   display: block;
   position: absolute;
@@ -70,6 +73,7 @@
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
 }
+
 .circle_a {
   display: block;
   position: absolute;
@@ -83,6 +87,7 @@
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
 }
+
 .circle_g {
   opacity: 0.1; // ignores this 0.1 in animation. but will take 1.0 from animn.
   display: block;
@@ -106,22 +111,27 @@
   0% {
     -webkit-box-shadow: 0 0 0 0 rgba(16, 212, 16, 0.4);
   }
+
   64% {
     -webkit-box-shadow: 0 0 0 16px rgba(16, 212, 16, 0);
   }
+
   100% {
     -webkit-box-shadow: 0 0 0 0 rgba(16, 212, 16, 0);
   }
 }
+
 @keyframes pulse {
   0% {
     -moz-box-shadow: 0 0 0 0 rgba(16, 212, 16, 0.4);
     box-shadow: 0 0 0 0 rgba(16, 212, 16, 0.4);
   }
+
   64% {
     -moz-box-shadow: 0 0 0 16px rgba(16, 212, 16, 0);
     box-shadow: 0 0 0 16px #11ff1100;
   }
+
   100% {
     -moz-box-shadow: 0 0 0 0 rgba(16, 212, 16, 0);
     box-shadow: 0 0 0 0 rgba(16, 212, 16, 0);
@@ -131,6 +141,7 @@
 .biggerish {
   font-size: 1.4em;
 }
+
 .welcome-row {
   width: 404px;
   // background-color: #008040;
@@ -138,19 +149,19 @@
   flex-direction: row;
   position: relative;
 }
+
 .g765 {
   position: absolute;
-  top: -8px;
-  right: 8px;
+  top: -7px;
+  right: -42px;
   // background-color: #00000020;
   // color: #1e1;
-
   height: 105px;
-   transform: rotateX(180deg);
+  transform: rotateX(180deg);
 }
 
 
-// text area 
+// text area
 label {
   display: block;
 

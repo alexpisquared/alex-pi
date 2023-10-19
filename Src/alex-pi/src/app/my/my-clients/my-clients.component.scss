@@ -6,8 +6,18 @@
   justify-content: space-between;
   // border: 1px solid gray;} .flexVertJust div {  background-color: #03030341;
 }
+
 img {
-  margin: 1.5em;
-  height: 110px;
-  // loading: lazy; - wait for chrome 77
+  width: 90px;
+  height: 90px;
+  margin: 5px;
+}
+
+a {
+  background-color: #fff;
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+  margin: 15px;
+  overflow: hidden;
 }

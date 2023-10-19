@@ -48,7 +48,7 @@ public class LogParser
               Nickname = NickMapper(line.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1]),
             };
 
-            if (webEventLog.DoneAt > new DateTime(2023, 10, 13, 22, 50, 0))
+            if (webEventLog.DoneAt > new DateTime(2023, 10, 15))
               webEventLogs.Add(webEventLog);
           }
           catch (Exception ex)
@@ -97,7 +97,8 @@ public class LogParser
   }
   string NickMapper(string firstVisitStr)
   {
-    var nickname = firstVisitStr.Replace(", Nickname = ", "") switch
+    var key = firstVisitStr.Replace(", Nickname = ", "");
+    var nickname = key switch
     {
       "Nothing" => "Nothing",
       "Wed Oct 11 2023 21:43:22 GMT-0400 (Eastern Daylight Saving Time)" => "iPhone-Z",
@@ -109,6 +110,7 @@ public class LogParser
       "Mon Oct 16 2023 20:39:17 GMT-0400 (Eastern Daylight Time)" => "Rzr Chrome",
       "Wed Oct 11 2023 21:41:23 GMT-0400 (Eastern Daylight Time)" => "Pxl Chrome",
       "Wed Oct 11 2023 17:52:19 GMT-0400 (Eastern Daylight Time)" => "localhost:4202",
+      "Thu Oct 19 2023 11:12:17 GMT-0400 (Eastern Daylight Time)" => "localhost:4200",
       "Thu Oct 12 2023 19:43:40 GMT-0400 (Eastern Daylight Time)" => "black tablet",
       "Thu Oct 19 2023 03:49:20 GMT+0000 (Coordinated Universal Time)" => "Core-2",
       "No LocalStorage engagement yet." => "Temp dev version",
@@ -117,14 +119,14 @@ public class LogParser
 
     if (nickname is null)
     {
-      nickname = $"\"{firstVisitStr}\" => \"▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀ {DateTime.Now:yyMMdd.HHmmss}\",";
+      nickname = $"\"{key}\" => \"▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀ {DateTime.Now:yyMMdd.HHmmss}\",";
       try
       {
         //System.Windows.Clipboard.SetText(nickname);
       }
       catch (Exception ex)
       {
-        nickname = $"\"{firstVisitStr}\" => \"▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀ {ex.Message}\",";
+        nickname = $"\"{key}\" => \"▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀ {ex.Message}\",";
       }
 
       WriteLine($"{nickname}");

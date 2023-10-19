@@ -72,7 +72,7 @@
       <Button Content=" _Update " Click="OnUpdate" />
       <Button Content=" _Delete " Click="OnDelete" Foreground="#f00" />
       <Button Content=" _Append " Click="OnAppend" />
-      <Button     IsCancel="True" Click="OnExit" />
+      <Button     IsCancel="True" Click="OnExit" Background="#FF8DC73F" />
     </StackPanel>
   </Grid>
 </Window>
