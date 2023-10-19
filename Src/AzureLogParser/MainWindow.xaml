@@ -3,25 +3,76 @@
         Title="Azure Log Parser" Height="540" Width="1920" Background="#333" Loaded="OnLoaded" Icon="/EdgeWebView2.ico"
         WindowStartupLocation="Manual" Left="0" Top="0"
         AllowsTransparency="True" WindowStyle="None">
-  <Grid>
+  <Grid Margin="8">
+    <Grid.Resources>
+      <Style x:Key="RightAlignedCellStyle" TargetType="{x:Type DataGridCell}">
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+      </Style>
+      <Style x:Key="RightAlignStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextAlignment" Value="Right"  />
+        <Setter Property="Margin" Value="6 0"  />
+      </Style>
+      <Style TargetType="DataGridColumnHeader" x:Key="dgch">
+        <Setter Property="Background" Value="#333" />
+        <Setter Property="FontSize"   Value="12" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+      </Style>
+      <Style TargetType="Button">
+        <Setter Property="Background" Value="#e333" />
+        <Setter Property="Foreground" Value="#ccc" />
+        <Setter Property="BorderThickness" Value="0" />
+      </Style>
+      <Style TargetType="DataGrid" >
+        <Setter Property="FontSize"                 Value="16"     />
+        <Setter Property="GridLinesVisibility"      Value="None"   />
+        <Setter Property="AutoGenerateColumns"      Value="False"  />
+        <Setter Property="HeadersVisibility"        Value="Column" />
+        <Setter Property="Foreground" Value="#eee" />
+        <Setter Property="Background"               Value="#000" />
+        <Setter Property="RowBackground"            Value="#111" />
+        <Setter Property="AlternatingRowBackground" Value="#222" />
+        <Setter Property="ColumnHeaderStyle"        Value="{StaticResource dgch}" />
+      </Style>
+    </Grid.Resources>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
       <RowDefinition Height="8"/>
-      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto" MinHeight="52"/>
     </Grid.RowDefinitions>
-    <Button IsCancel="True" Click="OnExit" VerticalAlignment="Top" HorizontalAlignment="Right" />
-    <Image VerticalAlignment="Top" HorizontalAlignment="Left" Source="/EdgeWebView2.ico" Width="30" Height="30" />
-    <TextBox x:Name="tbx1" Background="#222" Foreground="#ff8" Grid.Row="1" d:Text="lkjlkjlkjlkj;lkj?" FontFamily="Arial Narrow" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
-    <TextBox x:Name="tbx2" Background="#222" Foreground="#8ff" Grid.Row="3" d:Text="lkjlkjlkjlkj;lkj?" FontSize="18" />
-    <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
+    <Image VerticalAlignment="Center" HorizontalAlignment="Left" Source="/EdgeWebView2.ico" Width="30" Height="30" />
+    <DataGrid x:Name="dbg1" Grid.Row="1"  >
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Time"         Binding="{Binding DoneAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0f8" />
+        <DataGridTextColumn Header="Event"        Binding="{Binding EventName}"               Foreground="#0af" />
+        <DataGridTextColumn Header="Nick"         Binding="{Binding Nickname}" MaxWidth="80"  Foreground="#ff0" />
+        <!--
+    <DataGridTextColumn Header="FirstVisitId" Binding="{Binding FirstVisitId}" />-->
+        <DataGridTextColumn Header="Signature"    Binding="{Binding BrowserSignature}" FontFamily="Arial Narrow" FontSize="18" Width="*" Foreground="#ccc"/>
+      </DataGrid.Columns>
+    </DataGrid>
 
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Row="3" >
+    <DataGrid x:Name="dbg2" Grid.Row="3" SelectionChanged="OnUserChanged"  >
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="CreatedAt  "  Binding="{Binding CreatedAt, StringFormat='{}{0:y-MM-dd}'}" Foreground="#faa" />
+        <DataGridTextColumn Header="LastVisit  "  Binding="{Binding LastVisitAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0f8" />
+        <DataGridTextColumn Header="Nickname  "   Binding="{Binding Nickname}" Foreground="#ff0" />
+        <DataGridTextColumn Header="Spread  "     Binding="{Binding Spread.TotalDays, StringFormat='{}{0:N1}'}" ElementStyle="{StaticResource RightAlignStyle}" />
+        <DataGridTextColumn Header="Visits  "     Binding="{Binding TotalVisits}"  ElementStyle="{StaticResource RightAlignStyle}" />
+        <DataGridTextColumn Header="Note  "       Binding="{Binding Note}" Width="*" Foreground="#888" />
+        <DataGridTextColumn Header="*"            Binding="{Binding EventData}" Width="26" />
+      </DataGrid.Columns>
+    </DataGrid>
+
+    <TextBlock x:Name="tbx1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.RowSpan="3" FontSize="22" Background="#8000" Foreground="#ff0" />
+
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" Margin="1">
       <Button Content=" _Create " Click="OnCreate" />
       <Button Content=" _Readit " Click="OnLoaded" IsDefault="True" Foreground="#080" />
       <Button Content=" _Update " Click="OnUpdate" />
       <Button Content=" _Delete " Click="OnDelete" Foreground="#f00" />
       <Button Content=" _Append " Click="OnAppend" />
+      <Button     IsCancel="True" Click="OnExit" />
     </StackPanel>
   </Grid>
 </Window>

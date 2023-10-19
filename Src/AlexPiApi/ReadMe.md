@@ -30,3 +30,5 @@ This code creates a `ShareFileClient` object that points to the specified file i
 
 # 2023-09-27
 
+# 2023-10-18:
+Cost analysis: https://portal.azure.com/?feature.quickstart=true#view/Microsoft_Azure_CostManagement/CostAnalysis/scope/%2Fproviders%2FMicrosoft.Billing%2FbillingAccounts%2F179a44a9-a5fa-5ab8-699f-a3851e2c2f86%3Ace93213f-2825-43a7-8e54-2d38f7314a5e_2019-05-31/isAcmContext~/true/viewId/%2Fproviders%2FMicrosoft.Billing%2FbillingAccounts%2F179a44a9-a5fa-5ab8-699f-a3851e2c2f86%3Ace93213f-2825-43a7-8e54-2d38f7314a5e_2019-05-31%2Fproviders%2FMicrosoft.CostManagement%2Fviews%2Fms%3AAccumulatedCosts/openByNewTab~/true
