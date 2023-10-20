@@ -2,7 +2,7 @@
   <div class="flex-row-spbtwn">
     <div>
       <button mat-button routerLink="/" matTooltip="Go to Home page" class="logo">
-        <img loading="lazy" height="55" alt="AlexPi Logo" src="{{ AlexPiLogoThemed }}" class="cirled" />
+        <img loading="lazy" height="55" alt="AlexPi Logo" src="{{ AlexPiLogoThemed }}" class="cirled" style="margin-top: 15px;"/>
         <!-- <span class="font-effect-3d-float">&nbsp; {{ appTitle }} </span> too ~cheesy? // a change to trigger pipeline rebuild -->
         <span>&nbsp;{{ appTitle }}&nbsp;</span>
         <img loading="lazy" height="45" alt="Flag of Ukraine" src="{{ UkraineFlagThemd }}" />
@@ -26,7 +26,8 @@
       <button mat-button routerLink="/contact">Contact</button>
     -->
 
-    <button mat-mini-fab color="warn" disabled="{{ router.url == '/tttimer' }}" routerLink="/tttimer" matTooltip="Tennis Timer"><mat-icon>timer</mat-icon></button>
+    <button mat-mini-fab disabled="{{ router.url == '/tttimer' }}" routerLink="/tttimer" matTooltip="Tennis Timer" color="warn" style="margin-top: 6px;"><mat-icon>timer</mat-icon></button>
+
     <div *ngIf="!getIsMobileResolution()" style="margin: 8px">
       <!-- <button mat-button routerLink="/" matTooltip="Go to Home page">Home</button> -->
       <button mat-button disabled="{{ router.url == '/tttimer' }}" routerLink="/tttimer" matTooltip="Tennis Timer">Timer</button>

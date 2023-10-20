@@ -77,7 +77,7 @@ public class LogParser
       }
       else if (crud == 'u')
       {
-        await poorMansLogger.UpdateFileAsync($"-- Updated with this at {DateTime.Now} --");
+        await poorMansLogger.UpdateFileAsync($"-- Updated with this at {DateTime.Now} --\n");
       }
       else if (crud == 'd')
       {
@@ -113,6 +113,7 @@ public class LogParser
       "Thu Oct 19 2023 11:12:17 GMT-0400 (Eastern Daylight Time)" => "localhost:4200",
       "Thu Oct 12 2023 19:43:40 GMT-0400 (Eastern Daylight Time)" => "black tablet",
       "Thu Oct 19 2023 03:49:20 GMT+0000 (Coordinated Universal Time)" => "Core-2",
+      "Thu Oct 19 2023 20:24:10 GMT-0400 (Eastern Daylight Saving Time)" => "Staff-0",
       "No LocalStorage engagement yet." => "Temp dev version",
       _ => null,
     };
@@ -122,7 +123,7 @@ public class LogParser
       nickname = $"\"{key}\" => \"▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀ {DateTime.Now:yyMMdd.HHmmss}\",";
       try
       {
-        //System.Windows.Clipboard.SetText(nickname);
+        System.Windows.Clipboard.SetText(nickname);
       }
       catch (Exception ex)
       {

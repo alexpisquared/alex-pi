@@ -20,6 +20,6 @@
       "dom"
     ],
     "useDefineForClassFields": false,
-    // "strictTemplates": true,
+    // "strictTemplates": true,  :fails to compile 2023-10-20
   }
 }

@@ -15,14 +15,15 @@ public partial class MainWindow : Window
   async Task ReadInLog(string? firstVisitId = null)
   {
     System.Media.SystemSounds.Hand.Play();
-    //tbx1.Text = "Loading...";
+    tbx1.Text = "Loading...";
     dbg1.ItemsSource =
     //dbg2.ItemsSource = 
     null;
 
     var (logRaw, usage2, elogs, users) = await new LogParser().DoCRUD('r', key);
 
-    //tbx1.Text = logRaw;
+    tbx1.Text = logRaw;
+    tbx1.ScrollToEnd(); // scroll to the end of text
 
     dbg1.ItemsSource = elogs.Where(r => firstVisitId == null || r.FirstVisitId == firstVisitId).OrderByDescending(r => r.DoneAt);
     if (firstVisitId == null)
@@ -36,7 +37,7 @@ public partial class MainWindow : Window
   void OnExit(object sender, RoutedEventArgs e) => Close();
 
   async void OnCreate(object sender, RoutedEventArgs e) { tbx1.Text = "Creating  the log file..."; var (_, _, _, _) = await new LogParser().DoCRUD('c', key); await ReadInLog(); }
-  async void OnReadIn(object sender, RoutedEventArgs e) { tbx1.Text = "Reading   the log file..."; await ReadInLog(); }
+  async void OnReadIn(object sender, RoutedEventArgs e) { tbx1.Text = "Reading   the log file..."; /*                                                      */ await ReadInLog(); }
   async void OnUpdate(object sender, RoutedEventArgs e) { tbx1.Text = "Updating  the log file..."; var (_, _, _, _) = await new LogParser().DoCRUD('u', key); await ReadInLog(); }
   async void OnDelete(object sender, RoutedEventArgs e) { tbx1.Text = "Deleting  the log file..."; var (_, _, _, _) = await new LogParser().DoCRUD('d', key); await ReadInLog(); }
   async void OnAppend(object sender, RoutedEventArgs e) { tbx1.Text = "Appending the log file..."; var (_, _, _, _) = await new LogParser().DoCRUD('a', key); await ReadInLog(); }

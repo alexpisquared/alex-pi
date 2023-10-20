@@ -23,6 +23,7 @@
         <Setter Property="BorderThickness" Value="0" />
       </Style>
       <Style TargetType="DataGrid" >
+        <Setter Property="VerticalAlignment"        Value="Top"    />
         <Setter Property="FontSize"                 Value="16"     />
         <Setter Property="GridLinesVisibility"      Value="None"   />
         <Setter Property="AutoGenerateColumns"      Value="False"  />
@@ -39,24 +40,26 @@
       <RowDefinition Height="*"/>
       <RowDefinition Height="8"/>
       <RowDefinition Height="Auto" MinHeight="52"/>
+      <RowDefinition Height="8"/>
+      <RowDefinition Height="Auto" MinHeight="26"/>
     </Grid.RowDefinitions>
     <Image VerticalAlignment="Center" HorizontalAlignment="Left" Source="/EdgeWebView2.ico" Width="30" Height="30" />
     <DataGrid x:Name="dbg1" Grid.Row="1"  >
       <DataGrid.Columns>
-        <DataGridTextColumn Header="Time"         Binding="{Binding DoneAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0f8" />
+        <DataGridTextColumn Header="Time"         Binding="{Binding DoneAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0c0" />
         <DataGridTextColumn Header="Event"        Binding="{Binding EventName}"               Foreground="#0af" />
-        <DataGridTextColumn Header="Nick"         Binding="{Binding Nickname}" MaxWidth="80"  Foreground="#ff0" />
+        <DataGridTextColumn Header="Nick"         Binding="{Binding Nickname}" MaxWidth="80"  Foreground="#cc0" />
         <!--
-    <DataGridTextColumn Header="FirstVisitId" Binding="{Binding FirstVisitId}" />-->
-        <DataGridTextColumn Header="Signature"    Binding="{Binding BrowserSignature}" FontFamily="Arial Narrow" FontSize="18" Width="*" Foreground="#ccc"/>
+        <DataGridTextColumn Header="FirstVisitId" Binding="{Binding FirstVisitId}" />-->
+        <DataGridTextColumn Header="Signature"    Binding="{Binding BrowserSignature}" FontFamily="Arial Narrow" FontSize="18" Width="*" Foreground="#aaf" />
       </DataGrid.Columns>
     </DataGrid>
 
     <DataGrid x:Name="dbg2" Grid.Row="3" SelectionChanged="OnUserChanged"  >
       <DataGrid.Columns>
         <DataGridTextColumn Header="CreatedAt  "  Binding="{Binding CreatedAt, StringFormat='{}{0:y-MM-dd}'}" Foreground="#faa" />
-        <DataGridTextColumn Header="LastVisit  "  Binding="{Binding LastVisitAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0f8" />
-        <DataGridTextColumn Header="Nickname  "   Binding="{Binding Nickname}" Foreground="#ff0" />
+        <DataGridTextColumn Header="LastVisit  "  Binding="{Binding LastVisitAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0c0" />
+        <DataGridTextColumn Header="Nickname  "   Binding="{Binding Nickname}" Foreground="#cc0" />
         <DataGridTextColumn Header="Spread  "     Binding="{Binding Spread.TotalDays, StringFormat='{}{0:N1}'}" ElementStyle="{StaticResource RightAlignStyle}" />
         <DataGridTextColumn Header="Visits  "     Binding="{Binding TotalVisits}"  ElementStyle="{StaticResource RightAlignStyle}" />
         <DataGridTextColumn Header="Note  "       Binding="{Binding Note}" Width="*" Foreground="#888" />
@@ -64,15 +67,18 @@
       </DataGrid.Columns>
     </DataGrid>
 
-    <TextBlock x:Name="tbx1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.RowSpan="3" FontSize="22" Background="#8000" Foreground="#ff0" />
+    <TextBox x:Name="tbx1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="5" FontSize="12" Background="#222" VerticalScrollBarVisibility="Auto" MaxHeight="160" Foreground="#aaf" />
+
+    <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
+    <GridSplitter Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
 
     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" Margin="1">
       <Button Content=" _Create " Click="OnCreate" />
-      <Button Content=" _Readit " Click="OnLoaded" IsDefault="True" Foreground="#080" />
+      <Button Content=" _Readit " Click="OnLoaded" IsDefault="True" Foreground="#0c0" />
       <Button Content=" _Update " Click="OnUpdate" />
       <Button Content=" _Delete " Click="OnDelete" Foreground="#f00" />
       <Button Content=" _Append " Click="OnAppend" />
-      <Button     IsCancel="True" Click="OnExit" Background="#FF8DC73F" />
+      <Button     IsCancel="True" Click="OnExit"   />
     </StackPanel>
   </Grid>
 </Window>

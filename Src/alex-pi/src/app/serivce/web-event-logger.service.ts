@@ -49,22 +49,30 @@ export class WebEventLoggerService {
   getNothing0(): string { return (`▄▀▄▀▄▀`); }
   getNothing1(): string {
     try {
-      const canvas = new OffscreenCanvas(512, 512);
-      const gl1 = canvas.getContext('webgl');
-      const gpr = this.getUnmaskedInfo(gl1).renderer;
-      const gpv = this.getUnmaskedInfo(gl1).vendor__;
+      const { gpr, gpv } = this.getWebGLDetails();
       const usa = navigator.userAgent.replace('Mozilla/5.0 (', '').replace(') AppleWebKit/537.36 (KHTML, like Gecko) Chrome/', ' ');
       const usl = usa.length - 13; // ... Safari/537.36
 
       const clientId =
-        `${usa.substring(0, 27)}│${usa.substring(usl)}│cpu:${navigator.hardwareConcurrency.toString().padStart(2, '00')}│`+
-        `${window.screen.width}x${window.screen.height}xd:${window.screen.colorDepth}│${Intl.DateTimeFormat().resolvedOptions().timeZone}│s:${window.sessionStorage.length}│${gpr}│${gpv}│`+
-        `b:${navigator.platform}│p:${navigator.plugins.length}│c:${navigator.cookieEnabled}│${navigator.language}│${navigator.languages}█`;
+        `${usa.substring(0, 27)}│${usa.substring(usl)}│cpu:${navigator.hardwareConcurrency.toString().padStart(2, '00')}│` +
+        `${window.screen.width}x${window.screen.height}xd:${window.screen.colorDepth}│${Intl.DateTimeFormat().resolvedOptions().timeZone}│s:${window.sessionStorage.length}│${gpr}│${gpv}│` +
+        `b:${navigator.platform}│p:${navigator.plugins.length}│c:${navigator.cookieEnabled}│${navigator.language}│${navigator.languages}`;
 
       return clientId;
     } catch (err) {
       console.log(`ERROR in getNothing1(): ${(err as Error).name}, ${(err as Error).message}`);
       return (`ERROR in getNothing1(): ${(err as Error).name}, ${(err as Error).message}`);
+    }
+  }
+
+  private getWebGLDetails() {
+    try {
+      const gl1 = new OffscreenCanvas(512, 512).getContext('webgl');
+      const gpr = this.getUnmaskedInfo(gl1).renderer;
+      const gpv = this.getUnmaskedInfo(gl1).vendor__;
+      return { gpr, gpv };
+    } catch (err) {
+      return { gpr: (err as Error).name, gpv: (err as Error).message };
     }
   }
 
