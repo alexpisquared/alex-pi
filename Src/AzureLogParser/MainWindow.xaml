@@ -49,9 +49,22 @@
         <DataGridTextColumn Header="Time"         Binding="{Binding DoneAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0c0" />
         <DataGridTextColumn Header="Event"        Binding="{Binding EventName}"               Foreground="#0af" />
         <DataGridTextColumn Header="Nick"         Binding="{Binding Nickname}" MaxWidth="80"  Foreground="#cc0" />
+        <DataGridTextColumn Header="00"           Binding="{Binding Sub[00]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+        <DataGridTextColumn Header="01"           Binding="{Binding Sub[01]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+        <DataGridTextColumn Header="02"           Binding="{Binding Sub[02]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+        <DataGridTextColumn Header="03"           Binding="{Binding Sub[03]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+        <DataGridTextColumn Header="04"           Binding="{Binding Sub[04]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+        <DataGridTextColumn Header="05"           Binding="{Binding Sub[05]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+        <DataGridTextColumn Header="06"           Binding="{Binding Sub[06]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" Width="*" />
+        <DataGridTextColumn Header="07"           Binding="{Binding Sub[07]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+        <DataGridTextColumn Header="08"           Binding="{Binding Sub[08]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+        <DataGridTextColumn Header="09"           Binding="{Binding Sub[09]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+        <DataGridTextColumn Header="10"           Binding="{Binding Sub[10]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+        <DataGridTextColumn Header="11"           Binding="{Binding Sub[11]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+        <DataGridTextColumn Header="12"           Binding="{Binding Sub[12]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
         <!--
+        <DataGridTextColumn Header="Signature"    Binding="{Binding BrowserSignature}" FontFamily="Arial Narrow" FontSize="18" Width="*" Foreground="#aaa" />
         <DataGridTextColumn Header="FirstVisitId" Binding="{Binding FirstVisitId}" />-->
-        <DataGridTextColumn Header="Signature"    Binding="{Binding BrowserSignature}" FontFamily="Arial Narrow" FontSize="18" Width="*" Foreground="#aaf" />
       </DataGrid.Columns>
     </DataGrid>
 

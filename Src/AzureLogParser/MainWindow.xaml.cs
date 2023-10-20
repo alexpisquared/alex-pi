@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using Microsoft.Extensions.Configuration;
-
 namespace AzureLogParser;
 public partial class MainWindow : Window
 {
@@ -20,7 +19,7 @@ public partial class MainWindow : Window
     //dbg2.ItemsSource = 
     null;
 
-    var (logRaw, usage2, elogs, users) = await new LogParser().DoCRUD('r', key);
+    var (logRaw, elogs, users) = await new LogParser().DoCRUD('r', key);
 
     tbx1.Text = logRaw;
     tbx1.ScrollToEnd(); // scroll to the end of text
@@ -33,15 +32,12 @@ public partial class MainWindow : Window
   }
 
   async void OnLoaded(object sender, RoutedEventArgs e) => await ReadInLog();
-
   void OnExit(object sender, RoutedEventArgs e) => Close();
-
-  async void OnCreate(object sender, RoutedEventArgs e) { tbx1.Text = "Creating  the log file..."; var (_, _, _, _) = await new LogParser().DoCRUD('c', key); await ReadInLog(); }
-  async void OnReadIn(object sender, RoutedEventArgs e) { tbx1.Text = "Reading   the log file..."; /*                                                      */ await ReadInLog(); }
-  async void OnUpdate(object sender, RoutedEventArgs e) { tbx1.Text = "Updating  the log file..."; var (_, _, _, _) = await new LogParser().DoCRUD('u', key); await ReadInLog(); }
-  async void OnDelete(object sender, RoutedEventArgs e) { tbx1.Text = "Deleting  the log file..."; var (_, _, _, _) = await new LogParser().DoCRUD('d', key); await ReadInLog(); }
-  async void OnAppend(object sender, RoutedEventArgs e) { tbx1.Text = "Appending the log file..."; var (_, _, _, _) = await new LogParser().DoCRUD('a', key); await ReadInLog(); }
-
+  async void OnCreate(object sender, RoutedEventArgs e) { tbx1.Text = "Creating  the log file..."; var (_, _, _) = await new LogParser().DoCRUD('c', key); await ReadInLog(); }
+  async void OnReadIn(object sender, RoutedEventArgs e) { tbx1.Text = "Reading   the log file..."; /*                                                   */ await ReadInLog(); }
+  async void OnUpdate(object sender, RoutedEventArgs e) { tbx1.Text = "Updating  the log file..."; var (_, _, _) = await new LogParser().DoCRUD('u', key); await ReadInLog(); }
+  async void OnDelete(object sender, RoutedEventArgs e) { tbx1.Text = "Deleting  the log file..."; var (_, _, _) = await new LogParser().DoCRUD('d', key); await ReadInLog(); }
+  async void OnAppend(object sender, RoutedEventArgs e) { tbx1.Text = "Appending the log file..."; var (_, _, _) = await new LogParser().DoCRUD('a', key); await ReadInLog(); }
   async void OnUserChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
   {
     if (e.AddedItems.Count > 0)

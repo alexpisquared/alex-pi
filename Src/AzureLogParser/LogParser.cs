@@ -3,15 +3,14 @@ using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using Db.OneBase.Model;
 using static System.Diagnostics.Trace;
-
 namespace AzureLogParser;
-
 public class LogParser
 {
-  public async Task<(string logRaw, string usage2, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> DoCRUD(char crud, string connectionString)
+  public async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> DoCRUD(char crud, string connectionString)
   {
     var webEventLogs = new List<WebEventLog>();
     var websiteUsers = new List<WebsiteUser>();
+
     try
     {
       if (DateTime.Now == DateTime.Today) //nogo: @wo //tu: @ho!!!
@@ -48,8 +47,10 @@ public class LogParser
               Nickname = NickMapper(line.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1]),
             };
 
-            if (webEventLog.DoneAt > new DateTime(2023, 10, 15))
-              webEventLogs.Add(webEventLog);
+            webEventLog.Sub = webEventLog.BrowserSignature.Split(new string[] { "│", ", Nickname = " }, StringSplitOptions.RemoveEmptyEntries);
+
+            //if (webEventLog.DoneAt > new DateTime(2023, 10, 15))
+            webEventLogs.Add(webEventLog);
           }
           catch (Exception ex)
           {
@@ -57,9 +58,7 @@ public class LogParser
           }
         }
 
-        var usage2 = "";
         // select unique FirstVisitId With Max and Min Of DoneAt and the count records per FirstVisitId of from webEventLogs
-        webEventLogs.GroupBy(r => r.FirstVisitId).Select(g => new { g.Key, Max = g.Max(r => r.DoneAt), Min = g.Min(r => r.DoneAt), Count = g.Count() }).OrderBy(r => r.Max).ToList().ForEach(r => usage2 += $" {r.Min.ToLocalTime():yy-MM-dd} .. {r.Max.ToLocalTime():MM-dd HH:mm} {r.Max - r.Min,15}{r.Count,4} \t {NickMapper(r.Key)}\n");
         webEventLogs.GroupBy(r => r.FirstVisitId).Select(g => new WebsiteUser
         {
           Id = 0,
@@ -73,7 +72,7 @@ public class LogParser
         }).OrderBy(r => r.LastVisitAt).ToList().
           ForEach(websiteUsers.Add);
 
-        return (logRaw, usage2, webEventLogs, websiteUsers);
+        return (logRaw, webEventLogs, websiteUsers);
       }
       else if (crud == 'u')
       {
@@ -88,11 +87,11 @@ public class LogParser
         await poorMansLogger.AppendToFileAsync($"++ Appending with this at {DateTime.Now}\n");
       }
 
-      return ("Really???????", "", webEventLogs, websiteUsers);
+      return ("Really???????",  webEventLogs, websiteUsers);
     }
     catch (Exception ex)
     {
-      return (ex.Message, ex.Message, webEventLogs, websiteUsers);
+      return (ex.Message, webEventLogs, websiteUsers);
     }
   }
   string NickMapper(string firstVisitStr)
