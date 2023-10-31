@@ -13,8 +13,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 75%;
-  font-size: 36vw;
+  // min-height: 55%;
+  font-size: 35vw;
 
   position: absolute;
   top: 50%;
@@ -30,8 +30,8 @@
   // background-color: #ddd;
 }
 
-.container-tt {
-  height: 420px;
+.mainRoot {
+  height: 420px; // 480 no scroll bar, but pushes progressbar too low; 420 was good on the phone
   width: 100%;
   // background-color: #ff0;
 }

@@ -15,7 +15,7 @@ export class TennisTimerComponent implements OnInit {
   error = 'no error';
   nextTime = new Date();
   nextHHMM = '88:88';
-  playPeriods: number[] = [2, 10, 15, 20, 30, 999];
+  playPeriods: number[] = [10, 15, 20, 30, 999];
   wakeLock: any;
   soundEffect = new Audio(); // https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari
 
@@ -30,11 +30,7 @@ export class TennisTimerComponent implements OnInit {
       this.welSvc.logEvName('ttmr');
       this.soundEffect.autoplay = true;
       this.soundEffect.src = 'assets\\Media\\Start - Arcade Alarm.mp3';
-      // this.error = '+...'; await this.delay(222);
-      // this.error = '++..'; await this.delay(222);
-      // this.error = '+++.'; await this.delay(222);
-      // this.error = '++++'; await this.delay(222);
-      this.error = '++++'; this.delay(222);
+      this.delay(222);
     } catch (err) {
       this.error = `■  ${(err as Error).name}, ${(err as Error).message}`;
       this.welSvc.logEvName(this.error);
@@ -77,13 +73,13 @@ export class TennisTimerComponent implements OnInit {
         this.percentComplete = Math.round((100 * (this.everyXMin * 60 - secondsLeft) / (this.everyXMin * 60)) * 10) / 10;
 
         if (secondsLeft <= 60 && secondsLeft > 56) { // play a sound when there is 1 minute left
-          this.countdownString = '▓▓▓▓';
+          this.countdownString = 'Last minute!';
           await this.playWavFilesAsync(1);
         }
       } // while (now < this.nextTime)
 
       if (this.isLooping) {
-        this.countdownString = '▄▀▄▀';
+        this.countdownString = 'Rotate';
         await this.playWavFilesAsync(2);
       }
       else {

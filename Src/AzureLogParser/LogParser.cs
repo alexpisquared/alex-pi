@@ -6,6 +6,7 @@ using static System.Diagnostics.Trace;
 namespace AzureLogParser;
 public class LogParser
 {
+  UserMap _userMap = new();
   public async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> DoCRUD(char crud, string connectionString)
   {
     var webEventLogs = new List<WebEventLog>();
@@ -87,7 +88,7 @@ public class LogParser
         await poorMansLogger.AppendToFileAsync($"++ Appending with this at {DateTime.Now}\n");
       }
 
-      return ("Really???????",  webEventLogs, websiteUsers);
+      return ("Really???????", webEventLogs, websiteUsers);
     }
     catch (Exception ex)
     {
@@ -97,6 +98,7 @@ public class LogParser
   string NickMapper(string firstVisitStr)
   {
     var key = firstVisitStr.Replace(", Nickname = ", "");
+
     var nickname = key switch
     {
       "Nothing" => "Nothing",
@@ -113,24 +115,21 @@ public class LogParser
       "Thu Oct 12 2023 19:43:40 GMT-0400 (Eastern Daylight Time)" => "black tablet",
       "Thu Oct 19 2023 03:49:20 GMT+0000 (Coordinated Universal Time)" => "Core-2",
       "Thu Oct 19 2023 20:24:10 GMT-0400 (Eastern Daylight Saving Time)" => "Staff-0",
+
+      "Sat Oct 21 2023 04:58:50 GMT+0000 (Coordinated Universal Time)" => "cpu40 o21.04",
+      "Sat Oct 21 2023 17:40:57 GMT+0000 (Coordinated Universal Time)" => "cpu72 o21.17",
+      "Mon Oct 23 2023 10:42:30 GMT-0400 (Eastern Daylight Saving Time)" => "231023.10",
+      "Mon Oct 23 2023 19:11:18 GMT+0000 (Coordinated Universal Time)" => "cpu64 o23.19",
+      "Mon Oct 23 2023 20:36:18 GMT+0000 (Coordinated Universal Time)" => "cpu72 o23.20",
+
       "No LocalStorage engagement yet." => "Temp dev version",
       _ => null,
     };
 
     if (nickname is null)
-    {
-      nickname = $"\"{key}\" => \"▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀ {DateTime.Now:yyMMdd.HHmmss}\",";
-      try
-      {
-        System.Windows.Clipboard.SetText(nickname);
-      }
-      catch (Exception ex)
-      {
-        nickname = $"\"{key}\" => \"▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀ {ex.Message}\",";
-      }
+      return _userMap.GetOrCreateUsernameFromId(key);
 
-      WriteLine($"{nickname}");
-    }
+    _userMap.AddIfNew(key, nickname);
 
     return nickname;
   }
