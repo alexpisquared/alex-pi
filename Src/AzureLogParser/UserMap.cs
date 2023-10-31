@@ -13,7 +13,7 @@ namespace AzureLogParser
     readonly string _filename;
     readonly Dictionary<string, string> _dictionary;
 
-    public UserMap(string filename = @"C:\g\alex-pi\Src\AzureLogParser\UserMap.json")
+    public UserMap(string filename = @"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\UserMap.json")
     {
       _filename = filename;
       _dictionary = File.Exists(_filename) ? JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(_filename)) ?? [] : [];
