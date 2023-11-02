@@ -15,7 +15,7 @@ public class TextDbContext : ITextDbContext
 
   public async Task AddStringAsync(string text)
   {
-    var r = $"{DateTime.Now.AddHours(-4):MM-dd HH:mm}{_counter++,5}  {text}\r\n"; //todo: remove -4 after initial testing.
+    var r = $"{DateTimeOffset.Now:MM-dd HH:mm}{_counter++,5}  {text}\r\n";
     Trace.WriteLine(r);
     await _poorMansLogger.AppendToFileAsync(r);
   }

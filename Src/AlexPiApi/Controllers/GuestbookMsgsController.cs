@@ -56,7 +56,7 @@ namespace AlexPiApi.Controllers
     [HttpPut("{id}")]
     public async Task<IActionResult> PutGuestbookMsg(int id, GuestbookMsg GuestbookMsg)
     {
-      await _textDbContext.AddStringAsync($"{GetType().FullName}  {Environment.MachineName}  {GuestbookMsg.Message}  {GuestbookMsg.EventData}  {GuestbookMsg.CreatedAt}");
+      await _textDbContext.AddStringAsync($"{GetType().FullName}  {Environment.MachineName}  {GuestbookMsg.Message}  {GuestbookMsg.MemberSinceKey}  {GuestbookMsg.CreatedAt}");
 
       if (id != GuestbookMsg.Id)
       {
@@ -88,14 +88,14 @@ namespace AlexPiApi.Controllers
     [HttpPost]
     public async Task<ActionResult<GuestbookMsg>> PostGuestbookMsg(GuestbookMsg GuestbookMsg)
     {
-      await _textDbContext.AddStringAsync($"{GetType().FullName}  {Environment.MachineName}  {GuestbookMsg.Message}  {GuestbookMsg.EventData}  {GuestbookMsg.CreatedAt}");
+      await _textDbContext.AddStringAsync($"{GetType().FullName}  {Environment.MachineName}  {GuestbookMsg.Message}  {GuestbookMsg.MemberSinceKey}  {GuestbookMsg.CreatedAt}");
 
       try
       {
         GuestbookMsg.CreatedAt = DateTime.UtcNow; // DateTime.Now is ambiguos ~ local time of the web server => UTC is better.
 
-        if (string.IsNullOrEmpty(GuestbookMsg.EventData))
-          GuestbookMsg.EventData = $"MVC Controller adds  this: {GuestbookMsg.CreatedAt}.";
+        if (string.IsNullOrEmpty(GuestbookMsg.MemberSinceKey))
+          GuestbookMsg.MemberSinceKey = $"MVC Controller adds  this: {GuestbookMsg.CreatedAt}.";
 
         _context.GuestbookMsg.Add(GuestbookMsg);
       }

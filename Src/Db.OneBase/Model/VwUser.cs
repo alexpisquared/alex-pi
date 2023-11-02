@@ -9,6 +9,6 @@ namespace Db.OneBase.Model
         public DateTime? LastEvEst { get; set; }
         public int? Cnt { get; set; }
         public string Nickname { get; set; }
-        public string EventData { get; set; }
+        public string MemberSinceKey { get; set; }
     }
 }

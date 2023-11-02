@@ -9,6 +9,6 @@ namespace Db.OneBase.Model
         public string EventName { get; set; }
         public string Nickname { get; set; }
         public DateTime? DoneAtLocalTime { get; set; }
-        public string EventData { get; set; }
+        public string MemberSinceKey { get; set; }
     }
 }

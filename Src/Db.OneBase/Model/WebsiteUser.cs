@@ -11,7 +11,7 @@ namespace Db.OneBase.Model
         }
 
         public int Id { get; set; }
-        public string EventData { get; set; }
+        public string MemberSinceKey { get; set; }
         public string Nickname { get; set; }
         public string Note { get; set; }
         public bool? DoNotLog { get; set; }

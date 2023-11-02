@@ -100,10 +100,10 @@ namespace AlexPi.WebApi.NetCore2._2.Controllers
 /* //todo: file sys db (Oct 11, 2023)
       try
       {
-        var wsu = _context.WebsiteUser.FirstOrDefault(r => r.EventData.Equals(webEventLog.BrowserSignature));
+        var wsu = _context.WebsiteUser.FirstOrDefault(r => r.MemberSinceKey.Equals(webEventLog.BrowserSignature));
         if (wsu == null)
         {
-          wsu = _context.WebsiteUser.Add(new WebsiteUser { Nickname = $"{webEventLog.DoneAt:yyMMdd}", CreatedAt = webEventLog.DoneAt, LastVisitAt = webEventLog.DoneAt, EventData = webEventLog.BrowserSignature }).Entity; // *!?`
+          wsu = _context.WebsiteUser.Add(new WebsiteUser { Nickname = $"{webEventLog.DoneAt:yyMMdd}", CreatedAt = webEventLog.DoneAt, LastVisitAt = webEventLog.DoneAt, MemberSinceKey = webEventLog.BrowserSignature }).Entity; // *!?`
           await saveToDb(); // :Core3 does not provide mechanism for the new ID !!!
         }
 

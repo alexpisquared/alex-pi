@@ -19,7 +19,7 @@ public class WhereAmIController : ControllerBase
   [HttpGet]
   public string Get()
   {
-    var report = $" {DateTime.Now} \r\n {GetType().FullName} \r\n WhereAmI:[{_configuration["WhereAmI"]}] \r\n {Environment.MachineName} \r\n Compiled: 2023-10-19 1457";
+    var report = $" {DateTime.Now} \r\n {GetType().FullName} \r\n WhereAmI:[{_configuration["WhereAmI"]}] \r\n {Environment.MachineName} \r\n Compiled: 2023-11-01 2200 - net7.0 + net6.0";
 
     _ = _textDbContext.AddStringAsync(report);
 

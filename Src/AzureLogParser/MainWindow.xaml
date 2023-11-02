@@ -39,7 +39,7 @@
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
       <RowDefinition Height="8"/>
-      <RowDefinition Height="Auto" MinHeight="52"/>
+      <RowDefinition Height="52"/>
       <RowDefinition Height="8"/>
       <RowDefinition Height="Auto" MinHeight="26"/>
     </Grid.RowDefinitions>
@@ -70,15 +70,15 @@
 
     <TextBox  Grid.Row="3" x:Name="tbx1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Background="#222" VerticalScrollBarVisibility="Auto" MaxHeight="160" Foreground="#aaf" />
 
-    <DataGrid Grid.Row="5" x:Name="dbg2" SelectionChanged="OnUserChanged"  >
+    <DataGrid Grid.Row="5" x:Name="dbg2" SelectionChanged="OnUserChanged" CellEditEnding="OnEdit" >
       <DataGrid.Columns>
-        <DataGridTextColumn Header="CreatedAt  "  Binding="{Binding CreatedAt, StringFormat='{}{0:y-MM-dd}'}" Foreground="#faa" />
-        <DataGridTextColumn Header="LastVisit  "  Binding="{Binding LastVisitAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0c0" />
-        <DataGridTextColumn Header="Nickname  "   Binding="{Binding Nickname}" Foreground="#cc0" />
-        <DataGridTextColumn Header="Spread  "     Binding="{Binding Spread.TotalDays, StringFormat='{}{0:N1}'}" ElementStyle="{StaticResource RightAlignStyle}" />
-        <DataGridTextColumn Header="Visits  "     Binding="{Binding TotalVisits}"  ElementStyle="{StaticResource RightAlignStyle}" />
-        <DataGridTextColumn Header="Note  "       Binding="{Binding Note}" Width="*" Foreground="#888" />
-        <DataGridTextColumn Header="*"            Binding="{Binding EventData}" Width="26" />
+        <DataGridTextColumn Header="CreatedAt  " IsReadOnly="True" Binding="{Binding CreatedAt, StringFormat='{}{0:y-MM-dd}'}" Foreground="#faa" />
+        <DataGridTextColumn Header="LastVisit  " IsReadOnly="True" Binding="{Binding LastVisitAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0c0" />
+        <DataGridTextColumn Header="Nickname  "                    Binding="{Binding Nickname}" Foreground="#cc0" />
+        <DataGridTextColumn Header="Spread  "    IsReadOnly="True" Binding="{Binding Spread.TotalDays, StringFormat='{}{0:N1}'}" ElementStyle="{StaticResource RightAlignStyle}" />
+        <DataGridTextColumn Header="Visits  "    IsReadOnly="True" Binding="{Binding TotalVisits}"  ElementStyle="{StaticResource RightAlignStyle}" />
+        <DataGridTextColumn Header="Note  "      IsReadOnly="True" Binding="{Binding Note}" Width="*" Foreground="#888" />
+        <DataGridTextColumn Header="*"           IsReadOnly="True" Binding="{Binding MemberSinceKey}" Width="26" />
       </DataGrid.Columns>
     </DataGrid>
 

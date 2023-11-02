@@ -1,9 +1,13 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using Microsoft.Extensions.Configuration;
 namespace AzureLogParser;
 public partial class MainWindow : Window
 {
   readonly string key;
+  readonly LogParser lp = new();
 
   public MainWindow()
   {
@@ -15,18 +19,20 @@ public partial class MainWindow : Window
   {
     System.Media.SystemSounds.Hand.Play();
     tbx1.Text = "Loading...";
-    dbg1.ItemsSource =
-    //dbg2.ItemsSource = 
-    null;
+    dbg1.ItemsSource = null;
 
-    var (logRaw, elogs, users) = await new LogParser().DoCRUD('r', key);
+    var (logRaw, elogs, users) = await lp.DoCRUD('r', key);
 
     tbx1.Text = logRaw;
     tbx1.ScrollToEnd(); // scroll to the end of text
 
     dbg1.ItemsSource = elogs.Where(r => firstVisitId == null || r.FirstVisitId == firstVisitId).OrderByDescending(r => r.DoneAt);
     if (firstVisitId == null)
-      dbg2.ItemsSource = users.OrderByDescending(r => r.LastVisitAt);
+    {
+      var vs = CollectionViewSource.GetDefaultView(users);
+      vs.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
+      dbg2.ItemsSource = vs;
+    }
 
     System.Media.SystemSounds.Beep.Play();
   }
@@ -41,6 +47,12 @@ public partial class MainWindow : Window
   async void OnUserChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
   {
     if (e.AddedItems.Count > 0)
-      await ReadInLog(((Db.OneBase.Model.WebsiteUser?)e?.AddedItems[0])?.EventData);
+      await ReadInLog(((Db.OneBase.Model.WebsiteUser?)e?.AddedItems[0])?.MemberSinceKey);
+  }
+
+  private void OnEdit(object sender, System.Windows.Controls.DataGridCellEditEndingEventArgs e)
+  {
+    var user = (Db.OneBase.Model.WebsiteUser?)e.Row.Item;
+    lp.UpdateIfDifferent(user.MemberSinceKey, ((TextBox)e.EditingElement).Text);
   }
 }

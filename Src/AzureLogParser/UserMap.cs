@@ -27,6 +27,14 @@ namespace AzureLogParser
         File.WriteAllText(_filename, JsonSerializer.Serialize(_dictionary));
       }
     }
+    internal void UpdateIfDifferent(string key, string val)
+    {
+      if (_dictionary.ContainsKey(key) && _dictionary[key]!=val)
+      {
+        _dictionary[key] = val;
+        File.WriteAllText(_filename, JsonSerializer.Serialize(_dictionary));
+      }
+    }
     internal string GetOrCreateUsernameFromId(string key)
     {
       AddIfNew(key, key);

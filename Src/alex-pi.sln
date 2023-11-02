@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azure2023", "..\..\..\..\..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureLogParser", "AzureLogParser\AzureLogParser.csproj", "{DBE8D2D0-0DAC-4291-8640-A0ADEC67BD6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzurePseudoLogger", "AzurePseudoLogger\AzurePseudoLogger.csproj", "{64767117-528C-45B8-8AE7-9648BB377F66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{DBE8D2D0-0DAC-4291-8640-A0ADEC67BD6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBE8D2D0-0DAC-4291-8640-A0ADEC67BD6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBE8D2D0-0DAC-4291-8640-A0ADEC67BD6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64767117-528C-45B8-8AE7-9648BB377F66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64767117-528C-45B8-8AE7-9648BB377F66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64767117-528C-45B8-8AE7-9648BB377F66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64767117-528C-45B8-8AE7-9648BB377F66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

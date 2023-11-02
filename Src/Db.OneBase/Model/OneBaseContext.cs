@@ -237,7 +237,7 @@ public partial class OneBaseContext__ : DbContext
                 .HasColumnName("DoneAt LocalTime")
                 .HasColumnType("datetime");
 
-      _ = entity.Property(e => e.EventData)
+      _ = entity.Property(e => e.MemberSinceKey)
                 .IsRequired()
                 .HasMaxLength(450);
 
@@ -258,7 +258,7 @@ public partial class OneBaseContext__ : DbContext
 
       _ = entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
-      _ = entity.Property(e => e.EventData)
+      _ = entity.Property(e => e.MemberSinceKey)
                 .IsRequired()
                 .HasMaxLength(450);
 
@@ -305,7 +305,7 @@ public partial class OneBaseContext__ : DbContext
 
     _ = modelBuilder.Entity<WebsiteUser>(entity =>
     {
-      _ = entity.HasIndex(e => e.EventData)
+      _ = entity.HasIndex(e => e.MemberSinceKey)
                 .HasName("IX_WebsiteUser")
                 .IsUnique();
 
@@ -313,7 +313,7 @@ public partial class OneBaseContext__ : DbContext
 
       _ = entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
-      _ = entity.Property(e => e.EventData).IsRequired();
+      _ = entity.Property(e => e.MemberSinceKey).IsRequired();
 
       _ = entity.Property(e => e.LastVisitAt).HasColumnType("datetime");
 
