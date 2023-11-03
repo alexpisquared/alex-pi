@@ -21,7 +21,7 @@ export class MyStatusOpenComponent implements OnInit, OnDestroy {
   biglink = 'mailto: alex.pigida@outlook.com?cc=pigida@gmail.com&subject=reaching you from alexPi.ca&body=Hi Alex,';
   h1Style = false;
   users: object;
-  startDate = 'October';
+  startMonth = 'October';
   msgCount = 26;
   alexTinyLinkedIn = './assets/images/AlexTiny_LinkedIn.png';
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
@@ -49,11 +49,11 @@ export class MyStatusOpenComponent implements OnInit, OnDestroy {
 
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    const contractEnd = new Date(2022, 11, 1);
+    const contractEnd = new Date('2023-12-01T23:59:59');
     if (new Date() > contractEnd)
-      this.startDate = monthNames[this.addDays(new Date(), 7).getMonth()];
+      this.startMonth = monthNames[this.addDays(new Date(), 7).getMonth()];
     else
-      this.startDate = 'November';
+      this.startMonth = monthNames[contractEnd.getMonth()];
 
     this.messageForm = this.formBuilder.group({
       textareaMsg: ['', Validators.required],

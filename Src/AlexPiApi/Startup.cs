@@ -31,6 +31,8 @@ public class Startup
               "http://localHost:4200",
               "http://localHost:4201",
               "http://localHost:4202",
+              "https://localhost:7052",
+              "https://tabletennistimer.azurewebsites.net",
               "https://alex-pi.azurewebsites.net"
             )
             .AllowAnyHeader()

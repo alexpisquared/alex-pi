@@ -1,7 +1,7 @@
 ﻿<Window x:Class="AzureLogParser.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         xmlns:local="clr-namespace:AzureLogParser"
         Title="Azure Log Parser" Height="540" Width="1920" Background="#333" Loaded="OnLoaded" Icon="/EdgeWebView2.ico"
-        WindowStartupLocation="Manual" Left="0" Top="0"
+        WindowStartupLocation="Manual" Left="0" Top="0" WindowState="Maximized" ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True" WindowStyle="None">
   <Grid Margin="8">
     <Grid.Resources>
@@ -68,7 +68,7 @@
       </DataGrid.Columns>
     </DataGrid>
 
-    <TextBox  Grid.Row="3" x:Name="tbx1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Background="#222" VerticalScrollBarVisibility="Auto" MaxHeight="160" Foreground="#aaf" />
+    <TextBox  Grid.Row="3" x:Name="tbx1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Background="#222" VerticalScrollBarVisibility="Auto" Foreground="#aaf" />
 
     <DataGrid Grid.Row="5" x:Name="dbg2" SelectionChanged="OnUserChanged" CellEditEnding="OnEdit" >
       <DataGrid.Columns>
