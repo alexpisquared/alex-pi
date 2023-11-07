@@ -24,7 +24,7 @@ namespace AzureLogParser
       if (!_dictionary.ContainsKey(key))
       {
         _dictionary.Add(key, val);
-        File.WriteAllText(_filename, JsonSerializer.Serialize(_dictionary));
+        File.WriteAllText(_filename, JsonSerializer.Serialize(_dictionary, new JsonSerializerOptions { WriteIndented = true }));
       }
     }
     internal void UpdateIfDifferent(string key, string val)
@@ -32,7 +32,7 @@ namespace AzureLogParser
       if (_dictionary.ContainsKey(key) && _dictionary[key]!=val)
       {
         _dictionary[key] = val;
-        File.WriteAllText(_filename, JsonSerializer.Serialize(_dictionary));
+        File.WriteAllText(_filename, JsonSerializer.Serialize(_dictionary, new JsonSerializerOptions { WriteIndented = true }));
       }
     }
     internal string GetOrCreateUsernameFromId(string key)
