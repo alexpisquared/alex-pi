@@ -48,7 +48,7 @@
       <DataGrid.Columns>
         <DataGridTextColumn Header="Time"         Binding="{Binding DoneAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0c0" />
         <DataGridTextColumn Header="Event"        Binding="{Binding EventName}"               Foreground="#0af" />
-        <DataGridTextColumn Header="Nick"         Binding="{Binding Nickname}" MaxWidth="80"  Foreground="#cc0" />
+        <DataGridTextColumn Header="Nick"         Binding="{Binding Nickname}" Width="80"  Foreground="#cc0" />
         <DataGridTextColumn Header="00"           Binding="{Binding Sub[00]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
         <DataGridTextColumn Header="01"           Binding="{Binding Sub[01]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
         <DataGridTextColumn Header="CPU"          Binding="{Binding Sub[02]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#0af" />

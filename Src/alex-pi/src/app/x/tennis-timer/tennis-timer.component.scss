@@ -50,11 +50,24 @@
   height: 70px;
 }
 
-.right-div {
+.right-bottom-div {
   position: absolute;
   right: 0;
   bottom: 0;
   width: 32px;
   height: 110px;
   margin-right: 26px;
+}
+
+.right-top-div {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 58px;
+  height: 72px;
+  margin-right: 8px;
+  padding-left: 8px;
+  padding-top: 0px;
+  margin-top: 80px;
+  background-color: #afa;
 }
