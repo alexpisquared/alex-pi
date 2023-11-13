@@ -75,8 +75,8 @@
         <DataGridTextColumn Header="Last Visit  &#10; (Local)" IsReadOnly="True"  Binding="{Binding LastVisitAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0c0" />
         <DataGridTextColumn Header="Created at  &#10; (Local)" IsReadOnly="True"  Binding="{Binding CreatedAt, StringFormat='{}{0:y-MM-dd HH:mm}'}" Foreground="#ea0" />
         <DataGridTextColumn Header="Nickname  "                                   Binding="{Binding Nickname}"                                      Foreground="#cc0" />
+        <DataGridTextColumn Header="Visits  "                  IsReadOnly="True"  Binding="{Binding TotalVisits}"  ElementStyle="{StaticResource RightAlignStyle}" />
         <DataGridTextColumn Header="Spread&#10; (days)"        IsReadOnly="True"  Binding="{Binding Spread.TotalDays, StringFormat='{}{0:N1}'}" ElementStyle="{StaticResource RightAlignStyle}" />
-        <DataGridTextColumn Header="Visits"                    IsReadOnly="True"  Binding="{Binding TotalVisits}"  ElementStyle="{StaticResource RightAlignStyle}" />
         <DataGridTextColumn Header="Note  "                    IsReadOnly="False" Binding="{Binding Note}" Width="*" Foreground="#888" />
         <DataGridTextColumn Header="MemberSinceKey&#10; (UTC)" IsReadOnly="True"  Binding="{Binding MemberSinceKey}" />
       </DataGrid.Columns>
