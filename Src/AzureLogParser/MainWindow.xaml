@@ -37,48 +37,48 @@
     </Grid.Resources>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
+      <RowDefinition Height="52" />
+      <RowDefinition Height="8"/>
       <RowDefinition Height="*"/>
       <RowDefinition Height="8"/>
-      <RowDefinition Height="52"/>
-      <RowDefinition Height="8"/>
-      <RowDefinition Height="Auto" MinHeight="26"/>
+      <RowDefinition Height="Auto" MinHeight="52" MaxHeight="600" />
     </Grid.RowDefinitions>
     <Image VerticalAlignment="Center" HorizontalAlignment="Left" Source="/EdgeWebView2.ico" Width="30" Height="30" />
-    <DataGrid x:Name="dbg1" Grid.Row="1"  >
+    <DataGrid x:Name="dbg1" Grid.Row="3"  >
       <DataGrid.Columns>
         <DataGridTextColumn Header="Time"         Binding="{Binding DoneAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0c0" />
         <DataGridTextColumn Header="Event"        Binding="{Binding EventName}"               Foreground="#0af" />
         <DataGridTextColumn Header="Nick"         Binding="{Binding Nickname}" Width="80"  Foreground="#cc0" />
-        <DataGridTextColumn Header="00"           Binding="{Binding Sub[00]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
-        <DataGridTextColumn Header="01"           Binding="{Binding Sub[01]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+        <DataGridTextColumn Header="Hardware&#10;     TTT" Binding="{Binding Sub[00]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+        <DataGridTextColumn Header="Browser"      Binding="{Binding Sub[01]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
         <DataGridTextColumn Header="CPU"          Binding="{Binding Sub[02]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#0af" />
-        <DataGridTextColumn Header="03"           Binding="{Binding Sub[03]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
-        <DataGridTextColumn Header="04"           Binding="{Binding Sub[04]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
-        <DataGridTextColumn Header="05"           Binding="{Binding Sub[05]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
-        <DataGridTextColumn Header="06"           Binding="{Binding Sub[06]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" Width="*" />
-        <DataGridTextColumn Header="07"           Binding="{Binding Sub[07]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
-        <DataGridTextColumn Header="08"           Binding="{Binding Sub[08]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
-        <DataGridTextColumn Header="09"           Binding="{Binding Sub[09]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
-        <DataGridTextColumn Header="10"           Binding="{Binding Sub[10]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
-        <DataGridTextColumn Header="11"           Binding="{Binding Sub[11]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
-        <DataGridTextColumn Header="12"           Binding="{Binding Sub[12]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+        <DataGridTextColumn Header="Resolution"   Binding="{Binding Sub[03]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+        <DataGridTextColumn Header="Time Zone"    Binding="{Binding Sub[04]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+        <DataGridTextColumn Header="s:0"          Binding="{Binding Sub[05]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+        <DataGridTextColumn Header="GPU"          Binding="{Binding Sub[06]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" Width="*" />
+        <DataGridTextColumn Header="Company"      Binding="{Binding Sub[07]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+        <DataGridTextColumn Header="OS"           Binding="{Binding Sub[08]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+        <DataGridTextColumn Header="p:5"          Binding="{Binding Sub[09]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+        <DataGridTextColumn Header="c:true"       Binding="{Binding Sub[10]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+        <DataGridTextColumn Header="Lang"         Binding="{Binding Sub[11]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+        <DataGridTextColumn Header="Langs"        Binding="{Binding Sub[12]}" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
         <!--
         <DataGridTextColumn Header="Signature"    Binding="{Binding BrowserSignature}" FontFamily="Arial Narrow" FontSize="18" Width="*" Foreground="#aaa" />
         <DataGridTextColumn Header="FirstVisitId" Binding="{Binding FirstVisitId}" />-->
       </DataGrid.Columns>
     </DataGrid>
 
-    <TextBox  Grid.Row="3" x:Name="tbx1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" Background="#222" VerticalScrollBarVisibility="Auto" Foreground="#aaf" />
+    <TextBox  Grid.Row="1" x:Name="tbx1" FontSize="12" Background="#222" VerticalScrollBarVisibility="Auto" Foreground="#aaf" />
 
     <DataGrid Grid.Row="5" x:Name="dbg2" SelectionChanged="OnUserChanged" CellEditEnding="OnEdit" >
       <DataGrid.Columns>
-        <DataGridTextColumn Header="CreatedAt  " IsReadOnly="True" Binding="{Binding CreatedAt, StringFormat='{}{0:y-MM-dd}'}" Foreground="#faa" />
-        <DataGridTextColumn Header="LastVisit  " IsReadOnly="True" Binding="{Binding LastVisitAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0c0" />
-        <DataGridTextColumn Header="Nickname  "                    Binding="{Binding Nickname}" Foreground="#cc0" />
-        <DataGridTextColumn Header="Spread  "    IsReadOnly="True" Binding="{Binding Spread.TotalDays, StringFormat='{}{0:N1}'}" ElementStyle="{StaticResource RightAlignStyle}" />
-        <DataGridTextColumn Header="Visits  "    IsReadOnly="True" Binding="{Binding TotalVisits}"  ElementStyle="{StaticResource RightAlignStyle}" />
-        <DataGridTextColumn Header="Note  "      IsReadOnly="True" Binding="{Binding Note}" Width="*" Foreground="#888" />
-        <DataGridTextColumn Header="*"           IsReadOnly="True" Binding="{Binding MemberSinceKey}" Width="26" />
+        <DataGridTextColumn Header="Created at  &#10; (Local)" IsReadOnly="True"  Binding="{Binding CreatedAt, StringFormat='{}{0:y-MM-dd HH:mm}'}" Foreground="#faa" />
+        <DataGridTextColumn Header="Last Visit  &#10; (Local)" IsReadOnly="True"  Binding="{Binding LastVisitAt, StringFormat='{}{0:ddd MM-dd HH:mm}'}" ElementStyle="{StaticResource RightAlignStyle}" Foreground="#0c0" />
+        <DataGridTextColumn Header="Nickname  "                                   Binding="{Binding Nickname}" Foreground="#cc0" />
+        <DataGridTextColumn Header="Spread&#10; (days)"        IsReadOnly="True"  Binding="{Binding Spread.TotalDays, StringFormat='{}{0:N1}'}" ElementStyle="{StaticResource RightAlignStyle}" />
+        <DataGridTextColumn Header="Visits"                    IsReadOnly="True"  Binding="{Binding TotalVisits}"  ElementStyle="{StaticResource RightAlignStyle}" />
+        <DataGridTextColumn Header="Note  "                    IsReadOnly="False" Binding="{Binding Note}" Width="*" Foreground="#888" />
+        <DataGridTextColumn Header="MemberSinceKey&#10; (UTC)" IsReadOnly="True"  Binding="{Binding MemberSinceKey}" />
       </DataGrid.Columns>
     </DataGrid>
 
