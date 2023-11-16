@@ -5,11 +5,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Microsoft.Extensions.Configuration;
+using System.Speech.Synthesis;
 namespace AzureLogParser;
 public partial class MainWindow : Window
 {
   readonly string key;
-  readonly LogParser lp = new();
+  readonly LogParser logParser = new();
+  readonly SpeechSynthesizer synth = new();
 
   public MainWindow()
   {
@@ -19,11 +21,11 @@ public partial class MainWindow : Window
 
   async Task ReadInLog(string? firstVisitId = null)
   {
-    System.Media.SystemSounds.Hand.Play();
+    Console.Beep(360, 222);
     tbxAllLog.Text = "Loading...";
     dbg1.ItemsSource = null;
 
-    var (logRaw, elogs, users) = await lp.DoCRUD('r', key);
+    var (logRaw, elogs, users) = await logParser.DoCRUD('r', key);
 
     tbxAllLog.Text = logRaw;
     tbxAllLog.ScrollToEnd(); // scroll to the end of text
@@ -40,7 +42,10 @@ public partial class MainWindow : Window
     tbkReport.Text = isNew ? "++ New usage detected ++" : "-- Nothing new --";
     tbkReport.Foreground = isNew ? Brushes.GreenYellow : Brushes.Gray;
 
-    System.Media.SystemSounds.Beep.Play();
+    if (isNew)
+      synth.SpeakAsync(tbkReport.Text);
+    else
+      Console.Beep(333, 333);
   }
 
   bool NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime(DateTime potentiallyNewUsageTime, string filePath)
@@ -64,7 +69,7 @@ public partial class MainWindow : Window
     }
     catch (Exception ex)
     {
-      // Handle or log the exception
+      MessageBox.Show(ex.Message);
     }
     return false;
   }
@@ -86,6 +91,6 @@ public partial class MainWindow : Window
   {
     var user = (Db.OneBase.Model.WebsiteUser?)e.Row.Item;
     if (user is not null)
-      lp.UpdateIfDifferent(user.MemberSinceKey, ((TextBox)e.EditingElement).Text, e.Column.DisplayIndex);
+      logParser.UpdateIfDifferent(user.MemberSinceKey, ((TextBox)e.EditingElement).Text, e.Column.DisplayIndex);
   }
 }
