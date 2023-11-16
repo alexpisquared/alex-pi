@@ -48,7 +48,7 @@ public class LogParser
               Nickname = NickMapper(line.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1]),
             };
 
-            webEventLog.Sub = webEventLog.BrowserSignature.Split(new string[] { "│", ", Nickname = " }, StringSplitOptions.RemoveEmptyEntries);
+            webEventLog.Sub = $"{webEventLog.BrowserSignature}|°|°|°|°|°|°|°|°|°|°|°|.".Split(new string[] { "║", "│", "|", ", Nickname = " }, StringSplitOptions.RemoveEmptyEntries);
 
             //if (webEventLog.DoneAt > new DateTime(2023, 10, 15))
             webEventLogs.Add(webEventLog);
@@ -97,7 +97,7 @@ public class LogParser
   }
   string NickMapper(string firstVisitStr) => _userMap.GetOrCreateUsernameFromId(firstVisitStr.Replace(", Nickname = ", ""));
 
-  internal void UpdateIfDifferent(string v1, string v2) => _userMap.UpdateIfDifferent(v1, v2);
+  internal void UpdateIfDifferent(string v1, string v2, int displayIndex) => _userMap.UpdateIfDifferent(v1, v2, displayIndex);
 
   const string _log = """
 10-08 13:46    0  WebEventLogsController.Post(WebEventLog { BrowserSignature = Linux; Android 10; K 117.0.**Safari/537.36**en-GB**CPU:8**ANGLE (Qualcomm, Adreno (TM) 630, OpenGL ES 3.2)**Google Inc. (Qualcomm)., Id = 0, WebsiteUserId = 0, EventName = home undefined, DoneAt = 10/8/2023 1:46:40 PM, WebsiteUser =  }) ■▄▀■

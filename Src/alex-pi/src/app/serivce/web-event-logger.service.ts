@@ -51,12 +51,17 @@ export class WebEventLoggerService {
     try {
       const { gpr, gpv } = this.getWebGLDetails();
       const usa = navigator.userAgent.replace('Mozilla/5.0 (', '').replace(') AppleWebKit/537.36 (KHTML, like Gecko) Chrome/', ' ');
-      const usl = usa.length - 13; // ... Safari/537.36
+      //const usl = usa.length - 13; // ... Safari/537.36
 
+      const userAgentArray = navigator.userAgent.split(/Mozilla\/5\.0 \(|\) AppleWebKit\/|\(KHTML, like Gecko\)/g).filter(Boolean);
+
+      // port this var csv = $"{userAgentArray.FirstOrDefault()?.Trim()}|{userAgentArray[1]?.Trim()}|{userAgentArray.LastOrDefault()?.Trim()}|" from C# to TS
+      // const csv = `${userAgentArray[0]?.trim()}|${userAgentArray[1]?.trim()}|${userAgentArray[2]?.trim()}|`;
+      
       const clientId =
-        `${usa.substring(0, 27)}│${usa.substring(usl)}│cpu:${navigator.hardwareConcurrency.toString().padStart(2, '00')}│` +
-        `${window.screen.width}x${window.screen.height}xd:${window.screen.colorDepth}│${Intl.DateTimeFormat().resolvedOptions().timeZone}│s:${window.sessionStorage.length}│${gpr}│${gpv}│` +
-        `b:${navigator.platform}│p:${navigator.plugins.length}│c:${navigator.cookieEnabled}│${navigator.language}│${navigator.languages}`;
+        `${userAgentArray[0]?.trim()}│${userAgentArray[1]?.trim()}│${userAgentArray[2]?.trim()}│${navigator.hardwareConcurrency.toString().padStart(2, '00')}│` +
+        `${navigator.platform}│${navigator.languages}│` +
+        `${window.screen.width}x${window.screen.height}x${window.screen.colorDepth}│${Intl.DateTimeFormat().resolvedOptions().timeZone}│${gpr}│${gpv}│`;
 
       return clientId;
     } catch (err) {

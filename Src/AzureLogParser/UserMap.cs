@@ -27,8 +27,9 @@ namespace AzureLogParser
         File.WriteAllText(_filename, JsonSerializer.Serialize(_dictionary, new JsonSerializerOptions { WriteIndented = true }));
       }
     }
-    internal void UpdateIfDifferent(string key, string val)
+    internal void UpdateIfDifferent(string key, string val, int displayIndex)
     {
+      // displayIndex: 2 for key, 6 for notes ... but where is the full time stored?
       if (_dictionary.ContainsKey(key) && _dictionary[key]!=val)
       {
         _dictionary[key] = val;
