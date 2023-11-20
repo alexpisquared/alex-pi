@@ -14,12 +14,15 @@
         <RowDefinition Height="*"/>
         <RowDefinition Height="8"/>
         <RowDefinition Height="*"/>
+        <RowDefinition Height="8"/>
+        <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
 
       <Image VerticalAlignment="Center" HorizontalAlignment="Left" Source="/TTennis.ico" Width="30" Height="30" Margin="5 5 5 10"/>
       <TextBlock Grid.Row="0" x:Name="tbkReport" FontSize="22" HorizontalAlignment="Center" Foreground="#aaf" />
+      <TextBox   Grid.Row="1" x:Name="tbxAllLog" FontSize="12" Background="#222" VerticalScrollBarVisibility="Auto" Foreground="#aaf" />
 
-      <DataGrid x:Name="dbEvent" Grid.Row="3"  >
+      <DataGrid Grid.Row="3" x:Name="dbEvent" >
         <DataGrid.Columns>
           <DataGridTextColumn Header="Time"                  Binding="{Binding DoneAt, StringFormat='{}{0:MM-dd HH:mm ddd}'}" Foreground="#0c0" />
           <DataGridTextColumn Header="Event / Build"         Binding="{Binding EventName}" Width="112" Foreground="#0af" />
@@ -34,15 +37,28 @@
           <DataGridTextColumn Header="Zone"                  Binding="{Binding Sub[07]}"   Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
           <DataGridTextColumn Header="GPU"                   Binding="{Binding Sub[08]}"   Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
           <DataGridTextColumn Header="GPV"                   Binding="{Binding Sub[09]}"   Width="080" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
-          <!--
-        <DataGridTextColumn Header="Signature"    Binding="{Binding BrowserSignature}" FontFamily="Arial Narrow" FontSize="18" Width="*" Foreground="#aaa" />
-        <DataGridTextColumn Header="FirstVisitId" Binding="{Binding FirstVisitId}" />-->
         </DataGrid.Columns>
       </DataGrid>
 
-      <TextBox   Grid.Row="1" x:Name="tbxAllLog" FontSize="12" Background="#222" VerticalScrollBarVisibility="Auto" Foreground="#aaf" />
+      <DataGrid Grid.Row="5" x:Name="dbGroup" SelectionChanged="OnGroupChanged">
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="Time"                  Width="112" Foreground="#0c0" />
+          <DataGridTextColumn Header="Event / Build"         Width="112" Foreground="#0af" />
+          <DataGridTextColumn Header="Nick"                  Binding="{Binding Count}"   Width="1*"  Foreground="#cc0" />
+          <DataGridTextColumn Header="Hardware&#10;     TTT" Binding="{Binding Hardware}"   Width="220" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+          <DataGridTextColumn Header="Mozilla&#10;   ver"    Binding="{Binding MozillaVer}" Width="090" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+          <DataGridTextColumn Header="Versions"              Binding="{Binding Versions}"   Width="180" FontFamily="Arial Narrow" FontSize="18" Foreground="#0af" />
+          <DataGridTextColumn Header="CPU"                   Binding="{Binding CPU}"        Width="036" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" ElementStyle="{StaticResource RightAlignStyle}" />
+          <DataGridTextColumn Header="Platform"              Binding="{Binding Platform}"   Width="080" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+          <DataGridTextColumn Header="Languages"             Binding="{Binding Languages}"  Width="190" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+          <DataGridTextColumn Header="Resolution"            Binding="{Binding Resolution}" Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+          <DataGridTextColumn Header="Zone"                  Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+          <DataGridTextColumn Header="GPU"                   Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+          <DataGridTextColumn Header="GPV"                   Width="080" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+        </DataGrid.Columns>
+      </DataGrid>
 
-      <DataGrid Grid.Row="5" x:Name="dbUsers" SelectionChanged="OnUserChanged" CellEditEnding="OnEdit" >
+      <DataGrid Grid.Row="7" x:Name="dbUsers" SelectionChanged="OnUserChanged" CellEditEnding="OnEdit" >
         <DataGrid.Columns>
           <DataGridTextColumn Header="Last Visit  &#10;  (Local)"       IsReadOnly="True"  Binding="{Binding LastVisitAt, StringFormat='{}{0:MM-dd HH:mm ddd}'}" Foreground="#0c0" />
           <DataGridTextColumn Header="Added at  &#10;  (Local)"         IsReadOnly="True"  Binding="{Binding CreatedAt, StringFormat='{}{0:y-MM-dd HH:mm}'}"     Foreground="#ea0" />

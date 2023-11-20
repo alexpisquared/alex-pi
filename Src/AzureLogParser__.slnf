@@ -1,0 +1,9 @@
+{
+  "solution": {
+    "path": "alex-pi.sln",
+    "projects": [
+      "AzureLogParser\\AzureLogParser.csproj",
+      "Db.OneBase\\Db.OneBase.csproj"
+    ]
+  }
+}
