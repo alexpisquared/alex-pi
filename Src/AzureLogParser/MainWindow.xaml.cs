@@ -95,13 +95,12 @@ public partial class MainWindow : Window
         (string.IsNullOrEmpty(Res) || w.Sub[6]?.Contains(Res, StringComparison.OrdinalIgnoreCase) == true));
     dbEvent.ItemsSource = _events;
 
-    if (MemId == null)
-    {
-      //var vs = CollectionViewSource.GetDefaultView(users.OrderByDescending(r => r.LastVisitAt));
-      //vs.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
-      dbUsers.ItemsSource = null;
+    //if (MemId == null) // only update the user list if the user is not selected
+    //{
+    //  //nogo: prevents from editing: var vs = CollectionViewSource.GetDefaultView(users.OrderByDescending(r => r.LastVisitAt));      //vs.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
+    //  dbUsers.ItemsSource = null; // 
       dbUsers.ItemsSource = users.OrderByDescending(r => r.LastVisitAt).ToList();
-    }
+    //}
 
     var gr = eLogs.GroupBy(log => new
     {
