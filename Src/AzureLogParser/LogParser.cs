@@ -1,13 +1,12 @@
-﻿using AlexPiApi.Services;
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-using Db.OneBase.Model;
-using static System.Diagnostics.Trace;
-namespace AzureLogParser;
+﻿namespace AzureLogParser;
+// what to improve here:
 public class LogParser
 {
+  readonly string _key;
+
+  public LogParser(string key) => _key = key;
   readonly UserMap _userMap = new();
-  public async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> DoCRUD(char crud, string connectionString)
+  public async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> DoCRUD(char crud)
   {
     var webEventLogs = new List<WebEventLog>();
     var websiteUsers = new List<WebsiteUser>();
@@ -17,11 +16,11 @@ public class LogParser
       if (DateTime.Now == DateTime.Today) //nogo: @wo //tu: @ho!!!
       {
         var client = new SecretClient(new Uri("https://demopockv.vault.azure.net/"), new DefaultAzureCredential());
-        KeyVaultSecret secret = client.GetSecret("ChtBlobStorageConnectionString");
-        connectionString = secret.Value;
+        KeyVaultSecret secret = client.GetSecret("ChtBlobStorage_key");
+        var connectionString = secret.Value;
       }
 
-      var poorMansLogger = new PoorMansLogger(connectionString);
+      var poorMansLogger = new PoorMansLogger(_key);
 
       if (DateTime.Now == DateTime.Today)
         await poorMansLogger.AppendToFileAsync($"{DateTime.Now:MM-dd HH:mm}  -----  a call from the NEW(!) inspector's start  -----\r\n");
@@ -29,8 +28,7 @@ public class LogParser
       if (crud == 'c')
       {
         await poorMansLogger.CreateFileAsync("Creating...");
-      }
-      else if (crud == 'r')
+      } else if (crud == 'r')
       {
         var logRaw = await poorMansLogger.ReadFileAsync(); // _log; //
         WriteLine($"{logRaw}");
@@ -52,8 +50,7 @@ public class LogParser
 
             //if (webEventLog.DoneAt > new DateTime(2023, 10, 15))
             webEventLogs.Add(webEventLog);
-          }
-          catch (Exception ex)
+          } catch (Exception ex)
           {
             WriteLine($"{ex.Message}  {line}");
           }
@@ -74,23 +71,19 @@ public class LogParser
           ForEach(websiteUsers.Add);
 
         return (logRaw, webEventLogs, websiteUsers);
-      }
-      else if (crud == 'u')
+      } else if (crud == 'u')
       {
         await poorMansLogger.UpdateFileAsync($"-- Updated with this at {DateTime.Now} --\n");
-      }
-      else if (crud == 'd')
+      } else if (crud == 'd')
       {
         await poorMansLogger.DeleteFileAsync();
-      }
-      else if (crud == 'a')
+      } else if (crud == 'a')
       {
         await poorMansLogger.AppendToFileAsync($"++ Appending with this at {DateTime.Now}\n");
       }
 
       return ("Really???????", webEventLogs, websiteUsers);
-    }
-    catch (Exception ex)
+    } catch (Exception ex)
     {
       return (ex.Message, webEventLogs, websiteUsers);
     }
@@ -100,8 +93,16 @@ public class LogParser
   internal void UpdateIfDifferent(string v1, string v2, int displayIndex) => _userMap.UpdateIfDifferent(v1, v2, displayIndex);
 
   const string _log = """
-10-08 13:46    0  WebEventLogsController.Post(WebEventLog { BrowserSignature = Linux; Android 10; K 117.0.**Safari/537.36**en-GB**CPU:8**ANGLE (Qualcomm, Adreno (TM) 630, OpenGL ES 3.2)**Google Inc. (Qualcomm)., Id = 0, WebsiteUserId = 0, EventName = home undefined, DoneAt = 10/8/2023 1:46:40 PM, WebsiteUser =  }) ■▄▀■
-10-08 13:46    1  WebEventLogsController.Post(WebEventLog { BrowserSignature = Linux; Android 10; K 117.0.**Safari/537.36**en-GB**CPU:8**ANGLE (Qualcomm, Adreno (TM) 630, OpenGL ES 3.2)**Google Inc. (Qualcomm)., Id = 0, WebsiteUserId = 0, EventName = ttmr, DoneAt = 10/8/2023 1:46:43 PM, WebsiteUser =  }) ■▄▀■
-10-08 13:50    2  WebEventLogsController.Post(WebEventLog { BrowserSignature = Windows NT 10.0; Win64; x64**117.0.2045.47**en-US,en,uk,ru**CPU:12**ANGLE (Intel, Intel(R) UHD Graphics 630 Direct3D11 vs_5_0 ps_5_0, D3D11)**Google Inc. (Intel)., Id = 0, WebsiteUserId = 0, EventName = home undefined, DoneAt = 10/8/2023 1:50:28 PM, WebsiteUser =  }) ■▄▀■
+10-08 13:46    0  WebEventLogsController.Post(WebEventLog { BrowserSignature = Linux; Android 10; K 117.0.**Safari/537.36**en-GB**CpuCores:8**ANGLE (Qualcomm, Adreno (TM) 630, OpenGL ES 3.2)**Google Inc. (Qualcomm)., Id = 0, WebsiteUserId = 0, EventName = home undefined, DoneAt = 10/8/2023 1:46:40 PM, WebsiteUser =  }) ■▄▀■
+10-08 13:46    1  WebEventLogsController.Post(WebEventLog { BrowserSignature = Linux; Android 10; K 117.0.**Safari/537.36**en-GB**CpuCores:8**ANGLE (Qualcomm, Adreno (TM) 630, OpenGL ES 3.2)**Google Inc. (Qualcomm)., Id = 0, WebsiteUserId = 0, EventName = ttmr, DoneAt = 10/8/2023 1:46:43 PM, WebsiteUser =  }) ■▄▀■
+10-08 13:50    2  WebEventLogsController.Post(WebEventLog { BrowserSignature = Windows NT 10.0; Win64; x64**117.0.2045.47**en-US,en,uk,ru**CpuCores:12**ANGLE (Intel, Intel(R) UHD Graphics 630 Direct3D11 vs_5_0 ps_5_0, D3D11)**Google Inc. (Intel)., Id = 0, WebsiteUserId = 0, EventName = home undefined, DoneAt = 10/8/2023 1:50:28 PM, WebsiteUser =  }) ■▄▀■
 """;
+
+  public async Task<bool> UpdateIfNew(ICollectionView? websiteUsers)
+  {
+    if (websiteUsers == null) return false;
+
+    await Task.Yield();
+    return _userMap.UpdateIfNew(websiteUsers);
+  }
 }

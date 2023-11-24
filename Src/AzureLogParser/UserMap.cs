@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Text.Json;
-
-namespace AzureLogParser;
+﻿namespace AzureLogParser;
 
 internal class UserMap
 {
@@ -35,5 +32,16 @@ internal class UserMap
   {
     AddIfNew(key, key);
     return _dictionary[key];
+  }
+
+  public bool UpdateIfNew(ICollectionView websiteUsers)
+  {
+    foreach (var websiteUserMayBe in websiteUsers)
+    {
+      if (websiteUserMayBe is WebsiteUser websiteUser)
+        UpdateIfDifferent(websiteUser.MemberSinceKey, websiteUser.Nickname, 0);
+    }
+
+    return true;
   }
 }
