@@ -36,16 +36,15 @@
           <DataGridTextColumn Header="Time"                  Binding="{Binding DoneAt, StringFormat='{}{0:MM-dd HH:mm ddd}'}" Foreground="#0c0" />
           <DataGridTextColumn Header="Event / Build"         Binding="{Binding EventName}" Width="112" Foreground="#0af" />
           <DataGridTextColumn Header="Nick"                  Binding="{Binding Nickname}"  Width="1*"  Foreground="#cc0" />
+          <DataGridTextColumn Header="Platform"              Binding="{Binding Sub[04]}"   Width="080" FontFamily="Arial Narrow" FontSize="18" Foreground="#a7f" />
           <DataGridTextColumn Header="Hardware&#10;     TTT" Binding="{Binding Sub[00]}"   Width="220" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
-          <DataGridTextColumn Header="Mozilla&#10;   ver"    Binding="{Binding Sub[01]}"   Width="090" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
           <DataGridTextColumn Header="Versions"              Binding="{Binding Sub[02]}"   Width="180" FontFamily="Arial Narrow" FontSize="18" Foreground="#0af" />
-          <DataGridTextColumn Header="Cpu&#10;Cores"         Binding="{Binding Sub[03]}"   Width="036" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" ElementStyle="{StaticResource RightAlignStyle}" />
-          <DataGridTextColumn Header="Platform"              Binding="{Binding Sub[04]}"   Width="080" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+          <DataGridTextColumn Header="Mozilla&#10;   ver"    Binding="{Binding Sub[01]}"   Width="090" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+          <DataGridTextColumn Header="Cpu&#10;Cores"         Binding="{Binding Sub[03]}"   Width="036" FontFamily="Arial Narrow" FontSize="18" Foreground="#dbc" ElementStyle="{StaticResource RightAlignStyle}" />
+          <DataGridTextColumn Header="Resolution"            Binding="{Binding Sub[06]}"   Width="103" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="Languages"             Binding="{Binding Sub[05]}"   Width="100" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
-          <DataGridTextColumn Header="Resolution"            Binding="{Binding Sub[06]}"   Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
           <DataGridTextColumn Header="Zone"                  Binding="{Binding Sub[07]}"   Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
-  
-  <DataGridTextColumn Header="GPU"                   Binding="{Binding Sub[08]}"   Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+          <DataGridTextColumn Header="GPU"                   Binding="{Binding Sub[08]}"   Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
           <DataGridTextColumn Header="GPV"                   Binding="{Binding Sub[09]}"   Width="080" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
         </DataGrid.Columns>
       </DataGrid>
@@ -55,13 +54,13 @@
           <DataGridTextColumn Header="Time"                  Width="116" Foreground="#0c0" />
           <DataGridTextColumn Header="Event / Build"         Width="112" Foreground="#0af" />
           <DataGridTextColumn Header="Match Count"           Binding="{Binding Count}"    Width="1*"  Foreground="#cc0"  ElementStyle="{StaticResource RightAlignStyle}" />
+          <DataGridTextColumn Header="Platform"              Binding="{Binding Platform}" Width="080" FontFamily="Arial Narrow" FontSize="18" Foreground="#a7f" />
           <DataGridTextColumn Header="Hardware&#10;     TTT" Binding="{Binding Hardware}" Width="220" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
-          <DataGridTextColumn Header="Mozilla&#10;   ver"    Binding="{Binding MozillaV}" Width="090" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
           <DataGridTextColumn Header="Versions"              Binding="{Binding Versions}" Width="180" FontFamily="Arial Narrow" FontSize="18" Foreground="#0af" />
-          <DataGridTextColumn Header="CpuCores"              Binding="{Binding CpuCores}" Width="036" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" ElementStyle="{StaticResource RightAlignStyle}" />
-          <DataGridTextColumn Header="Platform"              Binding="{Binding Platform}" Width="080" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
+          <DataGridTextColumn Header="Mozilla&#10;   ver"    Binding="{Binding MozillaV}" Width="090" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+          <DataGridTextColumn Header="CpuCores"              Binding="{Binding CpuCores}" Width="036" FontFamily="Arial Narrow" FontSize="18" Foreground="#dbc" ElementStyle="{StaticResource RightAlignStyle}" />
+          <DataGridTextColumn Header="Resolution"            Binding="{Binding Resolute}" Width="103" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="Languages"             Binding="{Binding Language}" Width="100" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
-          <DataGridTextColumn Header="Resolution"            Binding="{Binding Resolute}" Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
           <DataGridTextColumn Header="Zone"                  Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
           <DataGridTextColumn Header="GPU"                   Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
           <DataGridTextColumn Header="GPV"                   Width="080" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
@@ -84,7 +83,7 @@
       <GridSplitter Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
       <GridSplitter Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
       <GridSplitter Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
-      
+
       <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" Margin="1">
         <Button Content=" _Create " Click="OnCreate" />
         <Button Content=" _Readit " Command="{Binding RunStep1Command}" IsDefault="True" Foreground="#0c0" />
