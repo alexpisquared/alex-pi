@@ -41,7 +41,7 @@
           <DataGridTextColumn Header="Versions"              Binding="{Binding Sub[02]}"   Width="180" FontFamily="Arial Narrow" FontSize="18" Foreground="#0af" />
           <DataGridTextColumn Header="Cpu&#10;Cores"         Binding="{Binding Sub[03]}"   Width="036" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="Platform"              Binding="{Binding Sub[04]}"   Width="080" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
-          <DataGridTextColumn Header="Languages"             Binding="{Binding Sub[05]}"   Width="190" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+          <DataGridTextColumn Header="Languages"             Binding="{Binding Sub[05]}"   Width="100" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
           <DataGridTextColumn Header="Resolution"            Binding="{Binding Sub[06]}"   Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
           <DataGridTextColumn Header="Zone"                  Binding="{Binding Sub[07]}"   Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
   
@@ -60,7 +60,7 @@
           <DataGridTextColumn Header="Versions"              Binding="{Binding Versions}" Width="180" FontFamily="Arial Narrow" FontSize="18" Foreground="#0af" />
           <DataGridTextColumn Header="CpuCores"              Binding="{Binding CpuCores}" Width="036" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="Platform"              Binding="{Binding Platform}" Width="080" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
-          <DataGridTextColumn Header="Languages"             Binding="{Binding Language}" Width="190" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
+          <DataGridTextColumn Header="Languages"             Binding="{Binding Language}" Width="100" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
           <DataGridTextColumn Header="Resolution"            Binding="{Binding Resolute}" Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
           <DataGridTextColumn Header="Zone"                  Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
           <DataGridTextColumn Header="GPU"                   Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
@@ -76,7 +76,7 @@
           <DataGridTextColumn Header="Nickname  "                       IsReadOnly="False" Binding="{Binding Nickname}"  Width="1*"                              Foreground="#cc0" />
           <DataGridTextColumn Header="Visits   "                        IsReadOnly="True"  Binding="{Binding TotalVisits}"                               ElementStyle="{StaticResource RightAlignStyle}" Foreground="#88f" />
           <DataGridTextColumn Header="Spread&#10; (days)"               IsReadOnly="True"  Binding="{Binding Spread.TotalDays, StringFormat='{}{0:N1}'}" ElementStyle="{StaticResource RightAlignStyle}" />
-          <DataGridTextColumn Header="MemberSinceKey&#10;        (UTC)" IsReadOnly="True"  Binding="{Binding MemberSinceKey}" Width="712"                        Foreground="#eb0"  />
+          <DataGridTextColumn Header="MemberSinceKey&#10;        (UTC)" IsReadOnly="True"  Binding="{Binding MemberSinceKey}" Width="662"                        Foreground="#eb0"  />
           <DataGridTextColumn Header="Note  "                           IsReadOnly="True"  Binding="{Binding Note}"           Width="444"                        Foreground="#888" />
         </DataGrid.Columns>
       </DataGrid>
