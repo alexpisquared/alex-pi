@@ -17,14 +17,14 @@ public partial class LogParserVM : ObservableValidator
       WebEventLogs = CollectionViewSource.GetDefaultView(eLogs.OrderByDescending(r => r.DoneAt));
       WebEventLogs.SortDescriptions.Add(new SortDescription(nameof(WebEventLog.DoneAt), ListSortDirection.Descending));
       WebEventLogs.Filter = obj => obj is not WebEventLog w || w is null ||
-                                   ((string.IsNullOrEmpty(MemberSinceKey) || w.FirstVisitId?.Contains(MemberSinceKey, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.Hardware) || w.Sub[0]?.Contains(SelEG.Hardware, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.MozillaV) || w.Sub[1]?.Contains(SelEG.MozillaV, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.Versions) || w.Sub[2]?.Contains(SelEG.Versions, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.CpuCores) || w.Sub[3]?.Contains(SelEG.CpuCores, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.Platform) || w.Sub[4]?.Contains(SelEG.Platform, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.Language) || w.Sub[5]?.Contains(SelEG.Language, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.Resolute) || w.Sub[6]?.Contains(SelEG.Resolute, sc) == true));
+                                   ((string.IsNullOrEmpty(MemberSinceKey) || w.FirstVisitId?.Equals(MemberSinceKey, sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.Hardware) || w.Sub[0]?.Equals(SelEG.Hardware, sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.MozillaV) || w.Sub[1]?.Equals(SelEG.MozillaV, sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.Versions) || w.Sub[2]?.Equals(SelEG.Versions, sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.CpuCores) || w.Sub[3]?.Equals(SelEG.CpuCores, sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.Platform) || w.Sub[4]?.Equals(SelEG.Platform, sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.Language) || w.Sub[5]?.Equals(SelEG.Language, sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.Resolute) || w.Sub[6]?.Equals(SelEG.Resolute, sc) == true));
 
       WebsiteUsers = CollectionViewSource.GetDefaultView(users.OrderByDescending(r => r.LastVisitAt).ToList());
       WebsiteUsers.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
@@ -40,6 +40,7 @@ public partial class LogParserVM : ObservableValidator
         Resolution = log.Sub[06],
       }).Select(r => new EventtGroup
       {
+        LastVisitAt = r.Max(r => r.DoneAt),
         Count = r.Count(),
         Hardware = r.Key.Hardware,
         MozillaV = r.Key.MozillaVer,
@@ -49,7 +50,8 @@ public partial class LogParserVM : ObservableValidator
         Language = r.Key.Languages,
         Resolute = r.Key.Resolution
       })
-        .OrderByDescending(r => r.Versions)
+        .OrderByDescending(r => r.LastVisitAt)
+        .ThenByDescending(r => r.Versions)
         .ThenByDescending(r => r.MozillaV)
         .ThenByDescending(r => r.Hardware)
         .ThenByDescending(r => r.Resolute)

@@ -47,19 +47,30 @@ export class MyStatusOpenComponent implements OnInit, OnDestroy {
       this.isLightOn = true;
     }, 750);
 
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    // const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    const contractEnd = new Date('2023-12-01T23:59:59');
-    if (new Date() > contractEnd)
-      this.startMonth = monthNames[this.addDays(new Date(), 7).getMonth()];
-    else
-      this.startMonth = monthNames[contractEnd.getMonth()];
+    // const contractEnd = new Date('2023-12-05T16:59:59'); // todo: keep this in sync with the contract end date in the real world.
+    // if (new Date() > contractEnd)
+    //   this.startMonth = monthNames[this.addDays(new Date(), 7).getMonth()];
+    // else
+    //   this.startMonth = monthNames[contractEnd.getMonth()];
+
+    this.startMonth = this.calculateStartDate();
 
     this.messageForm = this.formBuilder.group({
       textareaMsg: ['', Validators.required],
     });
 
     this.msgCount = this.randomIntFromInterval(25, 64);
+  }
+
+  calculateStartDate(): string {
+    const eoContract = new Date(2023, 11, 5);
+    const today = new Date();
+    const avlbldate = today < eoContract ? eoContract : new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14);
+    const monthPart = avlbldate.getDate() < 10 ? 'early' : avlbldate.getDate() > 20 ? 'late' : 'mid';
+    const startDate = `${monthPart} ${avlbldate.toLocaleString('default', { month: 'long' })} ${avlbldate.getFullYear()}`;
+    return startDate;
   }
 
   addDays(date, days) {

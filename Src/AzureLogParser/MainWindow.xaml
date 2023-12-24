@@ -40,7 +40,7 @@
           <DataGridTextColumn Header="Hardware&#10;     TTT" Binding="{Binding Sub[00]}"   Width="220" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
           <DataGridTextColumn Header="Versions"              Binding="{Binding Sub[02]}"   Width="180" FontFamily="Arial Narrow" FontSize="18" Foreground="#0af" />
           <DataGridTextColumn Header="Mozilla&#10;   ver"    Binding="{Binding Sub[01]}"   Width="090" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
-          <DataGridTextColumn Header="Cpu&#10;Cores"         Binding="{Binding Sub[03]}"   Width="036" FontFamily="Arial Narrow" FontSize="18" Foreground="#dbc" ElementStyle="{StaticResource RightAlignStyle}" />
+          <DataGridTextColumn Header="Cpu&#10;Cores"         Binding="{Binding Sub[03]}"   Width="039" FontFamily="Arial Narrow" FontSize="18" Foreground="#dbc" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="Resolution"            Binding="{Binding Sub[06]}"   Width="103" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="Languages"             Binding="{Binding Sub[05]}"   Width="100" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
           <DataGridTextColumn Header="Zone"                  Binding="{Binding Sub[07]}"   Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
@@ -51,14 +51,14 @@
 
       <DataGrid Grid.Row="5" ItemsSource="{Binding EventtGroups}" CurrentItem="{Binding SelEG,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
         <DataGrid.Columns>
-          <DataGridTextColumn Header="Time"                  Width="116" Foreground="#0c0" />
+          <DataGridTextColumn Header="Last Visit  &#10;  (Local)" IsReadOnly="True"  Binding="{Binding LastVisitAt, StringFormat='{}{0:MM-dd HH:mm ddd}'}" Foreground="#0c0" />
           <DataGridTextColumn Header="Event / Build"         Width="112" Foreground="#0af" />
           <DataGridTextColumn Header="Match Count"           Binding="{Binding Count}"    Width="1*"  Foreground="#cc0"  ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="Platform"              Binding="{Binding Platform}" Width="080" FontFamily="Arial Narrow" FontSize="18" Foreground="#a7f" />
           <DataGridTextColumn Header="Hardware&#10;     TTT" Binding="{Binding Hardware}" Width="220" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" />
           <DataGridTextColumn Header="Versions"              Binding="{Binding Versions}" Width="180" FontFamily="Arial Narrow" FontSize="18" Foreground="#0af" />
           <DataGridTextColumn Header="Mozilla&#10;   ver"    Binding="{Binding MozillaV}" Width="090" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
-          <DataGridTextColumn Header="CpuCores"              Binding="{Binding CpuCores}" Width="036" FontFamily="Arial Narrow" FontSize="18" Foreground="#dbc" ElementStyle="{StaticResource RightAlignStyle}" />
+          <DataGridTextColumn Header="CpuCores"              Binding="{Binding CpuCores}" Width="039" FontFamily="Arial Narrow" FontSize="18" Foreground="#dbc" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="Resolution"            Binding="{Binding Resolute}" Width="103" FontFamily="Arial Narrow" FontSize="18" Foreground="#aaf" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="Languages"             Binding="{Binding Language}" Width="100" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />
           <DataGridTextColumn Header="Zone"                  Width="120" FontFamily="Arial Narrow" FontSize="18" Foreground="#bbc" />

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyResumesComponent implements OnInit {
   cv03page = 'Resume - Alex Pigida - short summary';
-  cv11page = 'Resume - Alex Pigida - long detailed version';
+  cv11page = 'Resume - Alex Pigida - long version';
 
   constructor() {}
 

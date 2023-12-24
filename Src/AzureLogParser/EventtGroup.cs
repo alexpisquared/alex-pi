@@ -2,6 +2,7 @@
 
 public class EventtGroup
 {
+  public DateTime LastVisitAt { get; set; }
   public int Count { get; set; }
   public string? Hardware { get; set; }
   public string? MozillaV { get; set; }

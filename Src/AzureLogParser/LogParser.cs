@@ -28,7 +28,8 @@ public class LogParser
       if (crud == 'c')
       {
         await poorMansLogger.CreateFileAsync("Creating...");
-      } else if (crud == 'r')
+      }
+      else if (crud == 'r')
       {
         var logRaw = await poorMansLogger.ReadFileAsync(); // _log; //
         WriteLine($"{logRaw}");
@@ -50,7 +51,8 @@ public class LogParser
 
             //if (webEventLog.DoneAt > new DateTime(2023, 10, 15))
             webEventLogs.Add(webEventLog);
-          } catch (Exception ex)
+          }
+          catch (Exception ex)
           {
             WriteLine($"{ex.Message}  {line}");
           }
@@ -71,19 +73,23 @@ public class LogParser
           ForEach(websiteUsers.Add);
 
         return (logRaw, webEventLogs, websiteUsers);
-      } else if (crud == 'u')
+      }
+      else if (crud == 'u')
       {
         await poorMansLogger.UpdateFileAsync($"-- Updated with this at {DateTime.Now} --\n");
-      } else if (crud == 'd')
+      }
+      else if (crud == 'd')
       {
         await poorMansLogger.DeleteFileAsync();
-      } else if (crud == 'a')
+      }
+      else if (crud == 'a')
       {
         await poorMansLogger.AppendToFileAsync($"++ Appending with this at {DateTime.Now}\n");
       }
 
       return ("Really???????", webEventLogs, websiteUsers);
-    } catch (Exception ex)
+    }
+    catch (Exception ex)
     {
       return (ex.Message, webEventLogs, websiteUsers);
     }

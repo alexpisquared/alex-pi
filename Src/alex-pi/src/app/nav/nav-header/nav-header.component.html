@@ -5,7 +5,7 @@
         <img loading="lazy" height="55" alt="AlexPi Logo" src="{{ AlexPiLogoThemed }}" class="cirled" style="margin-top: 15px;" />
         <!-- <span class="font-effect-3d-float">&nbsp; {{ appTitle }} </span> too ~cheesy? // a change to trigger pipeline rebuild -->
         <span>&nbsp;{{ appTitle }}&nbsp;</span>
-        <img loading="lazy" height="45" alt="Flag of Ukraine" src="{{ UkraineFlagThemd }}" />
+        <!-- <img loading="lazy" height="45" alt="Flag of Ukraine" src="{{ UkraineFlagThemd }}" /> //todo: restore after redeployment. -->
       </button>
     </div>
 
@@ -28,9 +28,9 @@
     <div *ngIf="!getIsMobileResolution()" style="margin: 8px">
       <!-- <button mat-button routerLink="/" matTooltip="Go to Home page">Home</button> -->
       <!-- <button mat-button disabled="{{ router.url == '/tttimer' }}" routerLink="/tttimer" matTooltip="Table Tennis Timer">Timer</button> -->
-      <button mat-button disabled="{{ router.url == '/ocrdemo' }}" routerLink="/ocrdemo" matTooltip="OCR (Optical Character Recognition) Demo">OCR</button>
       <button mat-button disabled="{{ router.url == '/designs' }}" routerLink="/designs" matTooltip="Some of my original UI/UX solutions">Designs</button>
       <button mat-button disabled="{{ router.url == '/my-apps' }}" routerLink="/my-apps" matTooltip="Apps I have placed to Microsoft Store...and other places">Apps</button>
+      <button mat-button disabled="{{ router.url == '/ocrdemo' }}" routerLink="/ocrdemo" matTooltip="OCR (Optical Character Recognition) Demo">OCR</button>
       <button mat-button disabled="{{ router.url == '/about__' }}" routerLink="/about__" matTooltip="More about me">About</button>
       <button mat-button disabled="{{ router.url == '/contact' }}" routerLink="/contact" matTooltip="Ways to contact me">Contact</button>
     </div>
@@ -49,10 +49,10 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item disabled="{{ router.url == '/' }}" routerLink="/" matTooltip="Home"><mat-icon>home</mat-icon><span>Home</span></button>
-        <button mat-menu-item disabled="{{ router.url == '/tttimer' }}" routerLink="/tttimer" matTooltip="Tennis Timer"><mat-icon>timer</mat-icon><span>Timer</span></button>
-        <button mat-menu-item disabled="{{ router.url == '/ocrdemo' }}" routerLink="/ocrdemo" matTooltip="OCR (Optical Character Recognition) Demo"><mat-icon>text_fields</mat-icon><span>OCR Demo</span></button>
         <button mat-menu-item disabled="{{ router.url == '/designs' }}" routerLink="/designs" matTooltip="Some of my original UI/UX solutions"><mat-icon>play_for_work</mat-icon>My UI/UX Designs</button>
         <button mat-menu-item disabled="{{ router.url == '/my-apps' }}" routerLink="/my-apps" matTooltip="Apps I have placed to Microsoft Store...and other places"><mat-icon>apps</mat-icon>My Apps in Stores</button>
+        <button mat-menu-item disabled="{{ router.url == '/ocrdemo' }}" routerLink="/ocrdemo" matTooltip="OCR (Optical Character Recognition) Demo"><mat-icon>text_fields</mat-icon><span>Random Demo - OCR</span></button>
+        <button mat-menu-item disabled="{{ router.url == '/tttimer' }}" routerLink="/tttimer" matTooltip="Tennis Timer"><mat-icon>timer</mat-icon><span>Table Tennis Timer</span></button>
         <button mat-menu-item disabled="{{ router.url == '/about__' }}" routerLink="/about__" matTooltip="More about me"><mat-icon>info</mat-icon>About</button>
         <button mat-menu-item disabled="{{ router.url == '/contact' }}" routerLink="/contact" matTooltip="Ways to contact me"><mat-icon>contact_support</mat-icon>Contact</button>
         <hr />

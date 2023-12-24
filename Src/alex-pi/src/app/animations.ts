@@ -159,11 +159,11 @@ export const slideInAnimation = trigger('routeAnimations', [
   // transition('* => HomePage', slideToFunc('left'))                 // todo: ERROR during template compile of 'AppComponent' Reference to a non-exported function in contains the error at
 
   transition(
-    '* => HomePage, ContactPage => *, MyAppsPage => MyDesignsPage, AboutPage => MyDesignsPage, AboutPage => MyAppsPage, MyDesignsPage => OcrDemoPage, MyAppsPage => OcrDemoPage, AboutPage => OcrDemoPage, ContactPage => OcrDemoPage',
+    'ContactPage => *, MyDesignsPage => HomePage, MyAppsPage => MyDesignsPage, AboutPage => MyDesignsPage, AboutPage => MyAppsPage, OcrDemoPage => MyDesignsPage, OcrDemoPage => MyAppsPage, AboutPage => OcrDemoPage, ContactPage => OcrDemoPage',
     pivotToFunc_LEFT()
   ),
   transition(
-    '* => ContactPage, HomePage => *, MyAppsPage => AboutPage, MyDesignsPage => MyAppsPage, MyDesignsPage => AboutPage, OcrDemoPage => MyDesignsPage, OcrDemoPage => MyAppsPage, OcrDemoPage => AboutPage, OcrDemoPage => ContactPage',
+    '* => ContactPage, HomePage => MyDesignsPage, MyAppsPage => AboutPage, MyDesignsPage => MyAppsPage, MyDesignsPage => AboutPage, MyDesignsPage => OcrDemoPage, MyAppsPage => OcrDemoPage, OcrDemoPage => AboutPage, OcrDemoPage => ContactPage',
     pivotToFuncRIGHT()
   ) // todo: nogo.
 ]);
