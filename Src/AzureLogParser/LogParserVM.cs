@@ -60,10 +60,7 @@ public partial class LogParserVM : ObservableValidator
 
       var isNew = MiscServices.NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime(eLogs.Max(r => r.DoneAt), @"C:\temp\potentiallyNewUsageTime.txt");
       Report = isNew ? "New usage detected!" : "-- Nothing new --"; //tbkReport.Foreground = isNew ? Brushes.GreenYellow : Brushes.Gray;
-      if (isNew)
-        _ = synth.SpeakAsync(Report);
-      else
-        Console.Beep(333, 200);
+      _ = synth.SpeakAsync(Report);
     }
     catch (Exception ex) { _ = MessageBox.Show(ex.Message); Report = ex.Message; }
     finally { IsBusy = false; }
