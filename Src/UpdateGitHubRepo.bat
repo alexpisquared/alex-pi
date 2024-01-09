@@ -9,11 +9,13 @@ set para=/FFT /R:1 /W:1 /XD .git .gitignore .vs .vscode node_modules dist bin ob
 @echo.
 @echo.
     
-robocopy C:\Users\alexp\source\repos\alex-pi C:\g\alex-pi\Src %para%       /MIR  /XF UserMap.json
+@REM robocopy C:\Users\alexp\source\repos\alex-pi C:\g\alex-pi\Src %para%  /MIR   /XF UserMap.json    :DELETES!!! if new file is in the wrong place: source
+robocopy C:\Users\alexp\source\repos\alex-pi C:\g\alex-pi\Src %para%       /S /XO /XF UserMap.json
+
 @echo.
 @echo.
 @echo.
 @REM @echo      ******************* The End ***********************
 set para=
 
-timeout 26
+timeout 260
