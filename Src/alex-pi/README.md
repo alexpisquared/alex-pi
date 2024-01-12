@@ -98,7 +98,7 @@ Deploy to Azure:      https://docs.microsoft.com/en-us/visualstudio/get-started/
     - NG 11 (echo 2020-12-14  Upgrading NG from 8 to 11 - globally and locally - succeeded!!)
     - Safe storage of app secrets in development in ASP.NET Core  https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows#register-the-user-secrets-configuration-source
       + done on SecretManagerIntro branch
-      + apparently it is almost the same with my solutiuon for AlexPi.scr and TypeCatch
+      + apparently it is almost the same with my solution for AlexPi.scr and TypeCatch
     - Azure Key Vault Configuration Provider in ASP.NET Core      https://docs.microsoft.com/en-us/aspnet/core/security/key-vault-configuration?view=aspnetcore-5.0
       + pending Azure pricing clarification
         * secret creation   https://www.youtube.com/watch?v=PgujSug1ZbI
@@ -156,10 +156,62 @@ Deploy to Azure:      https://docs.microsoft.com/en-us/visualstudio/get-started/
 
   Quickstarts original: https://docs.microsoft.com/en-us/azure/app-service/
 
-#2022-09-12
+# 2022-09-12
   Looks like the org  https://docs.microsoft.com/en-us/azure/devops/pipelines/release/?view=azure-devops
   ..followed up, created new Rls Pipeline "~Org rls pipeline" with approvals..
   ..only to notice that the old one "Alex-Pi--CD" works but for the root folder only!!!!!!??????
 
   !!!Apparently, all has been well: building, publishing, all!!! It must've been cached version got stuck. Used title in the index.html to figure it out: looks like it does not get cached.
 
+# 2024-01-11  Started getting this error:
+
+2024-01-11T00:44:12.3149903Z ##[error]Could not fetch access token for Azure. Verify if the Service Principal used is valid and not expired. For more information refer https://aka.ms/azureappservicedeploytsg
+2024-01-11T00:44:12.3159748Z (node:4684) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'getApplicationURL' of undefined
+2024-01-11T00:44:12.3162271Z     at WindowsWebAppRunFromZipProvider.<anonymous> (D:\a\_tasks\AzureRmWebAppDeployment_497d490f-eea7-4f2b-ab94-48d9c1acdcb1\4.232.2\deploymentProvider\WindowsWebAppRunFromZipProvider.js:68:77)
+
+2024-01-11T00:44:12.3165110Z ##[error]Error: Failed to get resource ID for resource type 'Microsoft.Web/Sites' and resource name 'Alex-Pi'. 
+  Error: Could not fetch access token for Azure. 
+  Status code: invalid_client, status message: 7000222 - [2024-01-11 00:44:12Z]: 
+  AADSTS7000222: The provided client secret keys for app '***' are expired. 
+      Visit the Azure portal to create new keys for your app: https://aka.ms/NewClientSecret, or 
+      consider using certificate credentials for added security: https://aka.ms/certCreds. 
+  Trace ID: d6a190bc-5d8c-4f60-9f76-7e09f307c403 Correlation ID: da4a2171-dd77-4f5c-a188-c14ef0a5e529 Timestamp: 2024-01-11 00:44:12Z - Correlation ID: da4a2171-dd77-4f5c-a188-c14ef0a5e529 - 
+  Trace ID: d6a190bc-5d8c-4f60-9f76-7e09f307c403
+
+2024-01-11T00:44:12.3166724Z     at Generator.next (<anonymous>)
+2024-01-11T00:44:12.3170616Z     at fulfilled (D:\a\_tasks\AzureRmWebAppDeployment_497d490f-eea7-4f2b-ab94-48d9c1acdcb1\4.232.2\deploymentProvider\WindowsWebAppRunFromZipProvider.js:5:58)
+2024-01-11T00:44:12.3171418Z Failed to add release annotation. TypeError: Cannot read property 'getApplicationSettings' of undefined
+2024-01-11T00:44:12.3172029Z     at process._tickCallback (internal/process/next_tick.js:68:7)
+2024-01-11T00:44:12.3172772Z (node:4684) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
+2024-01-11T00:44:12.3173942Z (node:4684) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+2024-01-11T00:44:12.3245118Z ##[section]Finishing: Deploy Azure App Service
+
+1. I added two new secrets:
+  AlexPi-CICD2021-55444df9-fdd4-43d1-a454-16a90de75646 | Certificates & secrets
+    Alex-Pi--CD fix attempt  1/9/2026  ol.8Q~Jxl06-V5eZaxJKrxQK~zyCowOItP6_NbY2  76fee11c-b163-47cc-af54-21c71fd4c89b
+      ^^^^^^^^^^!!!!!!!!!!REMOVED!!!!!!!!!!^^^^^^^^^^^
+
+  https://aka.ms/NewClientSecret: In the Ms Entra admin center, in App registrations, select your application \ LocalDevelopmentEnv \ BuildErrFix2024 => .wb8Q~TgvijRAfrg5RgGgmjaXHEjoSwwVDjrCb..
+    Description  Expires  Value  Secret ID
+    BuildErrFix2024  1/10/2026  .wb8Q~TgvijRAfrg5RgGgmjaXHEjoSwwVDjrCb..  53b91c1f-20f3-426d-8d60-c817202649ae
+      ^^^^^^^^^^!!!!!!!!!!REMOVED!!!!!!!!!!^^^^^^^^^^^
+    DevSecret  12/31/2299  ~8H******************  612ef2b3-fd91-4e7b-a8eb-fb620137e0a0
+
+2. Then tried to follow this: 
+  Copilot from Edge:
+    To update the client secret in your Azure DevOps pipeline for the “Azure App Service Deploy” stage, you’ll need to update the service connection used by that stage. Here’s a general process:
+  
+    Go to your Azure DevOps project.
+    Navigate to Project settings at the bottom of the left-hand menu.
+    Click on Service connections under the Pipelines section.
+    Find the service connection used by your release stage. This is typically an Azure Resource Manager connection.
+    Click on the Edit button for that service connection.
+    ??  Update the Client secret field with the new client secret you generated in Azure AD.
+      No such field; BUT I UPDATED AN EMPTY Resource Group combobox with 'uvw' ... THAT SEEMS TO HAVE SOLVED THE PROBLEM!?!?!?!?!?!?!?!?!?!?!? *********************************  
+        Also, there is a Verify button. Clicking gives green check now ...not sure what was there before.
+
+    ??  Click Verify and save.
+    ??  This should update the client secret used by your pipeline. The next time you run the pipeline, it should use the new client secret for the “Azure App Service Deploy” stage.
+  Not sure what happened, but it worked. I did not have luck with the last 3 ?? steps... It just worked. I guess it was a glitch in the matrix.
+
+?? maybe try GitHub actions:  https://docs.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=applevel
