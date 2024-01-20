@@ -7,8 +7,9 @@ namespace Db.OneBase.Model
   {
     [NotMapped] public string[] Sub { get; set; }
     [NotMapped] public string BrowserSignature { get; set; }
-    [NotMapped] public string Nickname { get; set; }       // don't change order!!! :parsing depends on it.
+    [NotMapped] public string NickUser { get; set; }       // don't change order!!! :parsing depends on it.
     [NotMapped] public string FirstVisitId { get; set; }   // don't change order!!! :parsing depends on it.
+    [NotMapped] public string NickWare { get; set; }       // don't change order!!! :parsing depends on it.
   }
   public partial class WebsiteUser
   {

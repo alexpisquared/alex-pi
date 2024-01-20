@@ -11,4 +11,6 @@ public class EventtGroup
   public string? Platform { get; set; }
   public string? Language { get; set; }
   public string? Resolute { get; set; }
+  public string PseudoKey => $"{Hardware}|{MozillaV}|{Versions}|{CpuCores}|{Platform}|{Language}|{Resolute}";
+  public string NickWare { get; set; } = "";
 }

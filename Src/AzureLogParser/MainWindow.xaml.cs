@@ -1,14 +1,4 @@
-﻿using System.ComponentModel;
-using System.IO;
-using System.Speech.Synthesis;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
-using System.Windows.Media;
-using Db.OneBase.Model;
-using Microsoft.Extensions.Configuration;
-namespace AzureLogParser;
+﻿namespace AzureLogParser;
 public partial class MainWindow : Window
 {
   readonly LogParserVM vm = new();
@@ -24,7 +14,7 @@ public partial class MainWindow : Window
     DataContext = vm;
   }
 
-  async void OnLoaded(object sender, RoutedEventArgs e) { await vm.ReLoad(); }
+  async void OnLoaded(object sender, RoutedEventArgs e) => await vm.ReLoad();
   async void OnCreate(object sender, RoutedEventArgs e) { tbkReport.Text = "Creating  the log file..."; var (_, _, _) = await logParser.DoCRUD('c'); await vm.ReLoad(); }
   async void OnUpdate(object sender, RoutedEventArgs e) { tbkReport.Text = "Updating  the log file..."; var (_, _, _) = await logParser.DoCRUD('u'); await vm.ReLoad(); }
   async void OnDelete(object sender, RoutedEventArgs e) { tbkReport.Text = "Deleting  the log file..."; var (_, _, _) = await logParser.DoCRUD('d'); await vm.ReLoad(); }

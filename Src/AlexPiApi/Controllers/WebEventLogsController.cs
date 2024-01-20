@@ -33,9 +33,9 @@ public class WebEventLogsController : ControllerBase
 
     var events = _context.WebEventLog.OrderByDescending(r => r.Id).Take(21).ToList();
 
-    //todo: does not await all events.ForEach(async ev => ev.Nickname = (await _context.WebsiteUser.FirstOrDefaultAsync(r => r.Id == ev.WebsiteUserId)).Nickname);
+    //todo: does not await all events.ForEach(async ev => ev.NickUser = (await _context.WebsiteUser.FirstOrDefaultAsync(r => r.Id == ev.WebsiteUserId)).NickUser);
 
-    //use view: foreach (var ev in events) ev.Nickname = (await _context.WebsiteUser.FirstOrDefaultAsync(r => r.Id == ev.WebsiteUserId)).Nickname;
+    //use view: foreach (var ev in events) ev.NickUser = (await _context.WebsiteUser.FirstOrDefaultAsync(r => r.Id == ev.WebsiteUserId)).NickUser;
 
     return events;
   }
@@ -91,7 +91,7 @@ public class WebEventLogsController : ControllerBase
             var wsu = _context.WebsiteUser.FirstOrDefault(r => r.MemberSinceKey.Equals(webEventLog.BrowserSignature));
             if (wsu == null)
             {
-              wsu = _context.WebsiteUser.Add(new WebsiteUser { Nickname = $"{webEventLog.DoneAt:yyMMdd}", CreatedAt = webEventLog.DoneAt, LastVisitAt = webEventLog.DoneAt, MemberSinceKey = webEventLog.BrowserSignature }).Entity; // *!?`
+              wsu = _context.WebsiteUser.Add(new WebsiteUser { NickUser = $"{webEventLog.DoneAt:yyMMdd}", CreatedAt = webEventLog.DoneAt, LastVisitAt = webEventLog.DoneAt, MemberSinceKey = webEventLog.BrowserSignature }).Entity; // *!?`
               await saveToDb(); // :Core3 does not provide mechanism for the new ID !!!
             }
 

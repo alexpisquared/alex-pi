@@ -58,6 +58,11 @@ public partial class LogParserVM : ObservableValidator
         .ThenBy(r => r.Language)
         .ToList());
 
+      foreach (EventtGroup item in EventtGroups)
+      {
+        item.NickWare = logParser.NickMapperWare(item.PseudoKey);
+      }
+
       var isNew = MiscServices.NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime(eLogs.Max(r => r.DoneAt), @"C:\temp\potentiallyNewUsageTime.txt");
       Report = isNew ? "New usage detected!" : "-- Nothing new --"; //tbkReport.Foreground = isNew ? Brushes.GreenYellow : Brushes.Gray;
       _ = synth.SpeakAsync(Report);
@@ -113,5 +118,9 @@ public partial class LogParserVM : ObservableValidator
   }
   [RelayCommand(CanExecute = nameof(CanRunStep2))] public async Task RunStep2() => await RunStep2_(SelWU); bool CanRunStep2() => SelWU is not null; Task RunStep2_(WebsiteUser? selWU) => throw new NotImplementedException();
 
-  public async Task TrySave() => await logParser.UpdateIfNew(WebsiteUsers);
+  public async Task TrySave()
+  {
+    await logParser.UpdateIfNewUser(WebsiteUsers);
+    await logParser.UpdateIfNewWare(EventtGroups);
+  }
 }

@@ -1,11 +1,11 @@
 ﻿namespace AzureLogParser;
-// what to improve here:
 public class LogParser
 {
   readonly string _key;
 
   public LogParser(string key) => _key = key;
-  readonly UserMap _userMap = new();
+  readonly UserMap _userMap = new(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\UserMap.json");
+  readonly UserMap _wareMap = new(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\WareMap.json");
   public async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> DoCRUD(char crud)
   {
     var webEventLogs = new List<WebEventLog>();
@@ -38,19 +38,42 @@ public class LogParser
         {
           try
           {
-            var webEventLog = new WebEventLog
+            var log = new WebEventLog
             {
               DoneAt = DateTime.Parse(line.Split(new string[] { "DoneAt = ", ", WebsiteUser =" }, StringSplitOptions.RemoveEmptyEntries)[1]).ToLocalTime(),
               EventName = line.Split(new string[] { "EventName = ", ", DoneAt =" }, StringSplitOptions.RemoveEmptyEntries)[1],
               BrowserSignature = line.Split(new string[] { "BrowserSignature = ", ", FirstVisitId = " }, StringSplitOptions.RemoveEmptyEntries)[1],
               FirstVisitId = line.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1],
-              Nickname = NickMapper(line.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1]),
+              NickUser = NickMapperUser(line.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1]),
             };
 
-            webEventLog.Sub = $"{webEventLog.BrowserSignature}|°|°|°|°|°|°|°|°|°|°|°|.".Split(new string[] { "║", "│", "|", ", Nickname = " }, StringSplitOptions.RemoveEmptyEntries);
+            log.Sub = $"{log.BrowserSignature}|°|°|°|°|°|°|°|°|°|°|°|.".Split(new string[] { "║", "│", "|", ", NickUser = " }, StringSplitOptions.RemoveEmptyEntries);
 
-            //if (webEventLog.DoneAt > new DateTime(2023, 10, 15))
-            webEventLogs.Add(webEventLog);
+            var r = new
+            {
+              Hardware = log.Sub[0],
+              MozillaVer = log.Sub[01],
+              Versions = log.Sub[02],
+              CPUCORES = log.Sub[03].TrimStart('0'),
+              Platform = log.Sub[04],
+              Languages = log.Sub[05],
+              Resolution = log.Sub[06],
+            };
+            var eg = new EventtGroup
+            {
+              Hardware = r.Hardware,
+              MozillaV = r.MozillaVer,
+              Versions = r.Versions,
+              CpuCores = r.CPUCORES,
+              Platform = r.Platform,
+              Language = r.Languages,
+              Resolute = r.Resolution
+            };
+
+            log.NickWare = NickMapperWare(eg.PseudoKey);
+
+            //if (log.DoneAt > new DateTime(2023, 10, 15))
+            webEventLogs.Add(log);
           }
           catch (Exception ex)
           {
@@ -63,14 +86,15 @@ public class LogParser
         {
           Id = 0,
           MemberSinceKey = g.Key,
-          Nickname = NickMapper(g.Key),
+          Nickname = NickMapperUser(g.Key),
           Note = $"{g.Max(r => r.DoneAt) - g.Min(r => r.DoneAt),15}{g.Count(),4}",
           CreatedAt = g.Min(r => r.DoneAt),
           LastVisitAt = g.Max(r => r.DoneAt),
           Spread = g.Max(r => r.DoneAt) - g.Min(r => r.DoneAt),
           TotalVisits = g.Count()
-        }).OrderBy(r => r.LastVisitAt).ToList().
-          ForEach(websiteUsers.Add);
+        }).OrderBy(r => r.LastVisitAt)
+        .ToList()
+        .ForEach(websiteUsers.Add);
 
         return (logRaw, webEventLogs, websiteUsers);
       }
@@ -94,21 +118,17 @@ public class LogParser
       return (ex.Message, webEventLogs, websiteUsers);
     }
   }
-  string NickMapper(string firstVisitStr) => _userMap.GetOrCreateUsernameFromId(firstVisitStr.Replace(", Nickname = ", ""));
 
-  internal void UpdateIfDifferent(string v1, string v2, int displayIndex) => _userMap.UpdateIfDifferent(v1, v2, displayIndex);
+  public async Task<bool> UpdateIfNewUser(ICollectionView? users) => users != null && await _userMap.UpdateIfNewAsync(users);
+  public async Task<bool> UpdateIfNewWare(ICollectionView? wares) => wares != null && await _wareMap.UpdateIfNewAsync(wares);
 
+  string NickMapperUser(string key) => _userMap.GetOrCreateFromId(key.Replace(", NickUser = ", ""));
+  public string NickMapperWare(string key) => _wareMap.GetOrCreateFromId(key);
+
+  //internal void UpdateIfDifferent(string v1, string v2, int displayIndex) => _userMap.UpdateIfDifferent(v1, v2, displayIndex);
   const string _log = """
 10-08 13:46    0  WebEventLogsController.Post(WebEventLog { BrowserSignature = Linux; Android 10; K 117.0.**Safari/537.36**en-GB**CpuCores:8**ANGLE (Qualcomm, Adreno (TM) 630, OpenGL ES 3.2)**Google Inc. (Qualcomm)., Id = 0, WebsiteUserId = 0, EventName = home undefined, DoneAt = 10/8/2023 1:46:40 PM, WebsiteUser =  }) ■▄▀■
 10-08 13:46    1  WebEventLogsController.Post(WebEventLog { BrowserSignature = Linux; Android 10; K 117.0.**Safari/537.36**en-GB**CpuCores:8**ANGLE (Qualcomm, Adreno (TM) 630, OpenGL ES 3.2)**Google Inc. (Qualcomm)., Id = 0, WebsiteUserId = 0, EventName = ttmr, DoneAt = 10/8/2023 1:46:43 PM, WebsiteUser =  }) ■▄▀■
 10-08 13:50    2  WebEventLogsController.Post(WebEventLog { BrowserSignature = Windows NT 10.0; Win64; x64**117.0.2045.47**en-US,en,uk,ru**CpuCores:12**ANGLE (Intel, Intel(R) UHD Graphics 630 Direct3D11 vs_5_0 ps_5_0, D3D11)**Google Inc. (Intel)., Id = 0, WebsiteUserId = 0, EventName = home undefined, DoneAt = 10/8/2023 1:50:28 PM, WebsiteUser =  }) ■▄▀■
 """;
-
-  public async Task<bool> UpdateIfNew(ICollectionView? websiteUsers)
-  {
-    if (websiteUsers == null) return false;
-
-    await Task.Yield();
-    return _userMap.UpdateIfNew(websiteUsers);
-  }
 }
