@@ -87,8 +87,9 @@
       <GridSplitter Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
 
       <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" Margin="1">
-        <Button Content=" _Create " Click="OnCreate" />
-        <Button Content=" _Readit " Command="{Binding RunStep1Command}" IsDefault="True" Foreground="#0c0" />
+        <Button Content=" _Fresh! " Click="OnRefresh" IsDefault="True"   Foreground="#0c0" />
+        <Button Content=" _Create " Click="OnCreate" />                  
+        <Button Content=" _Readit " Command="{Binding RunStep1Command}"  Foreground="#070" />
         <Button Content=" _Update " Click="OnUpdate" />
         <Button Content=" _Delete " Command="{Binding DeleteLogCommand}" Foreground="#f00" />
         <Button Content=" _Append " Click="OnAppend" />

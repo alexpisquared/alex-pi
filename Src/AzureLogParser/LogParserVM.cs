@@ -10,7 +10,7 @@ public partial class LogParserVM : ObservableValidator
 
     try
     {
-      var (logRaw0, eLogs, users) = await logParser.DoCRUD('r'); //tu: adhoc usersecrets});
+      var (logRaw0, eLogs, users) = await logParser.DoCRUD('r');
 
       LogRaw = logRaw0; //tbxAllLog.ScrollToEnd(); // scroll to the end of text
 
@@ -98,6 +98,7 @@ public partial class LogParserVM : ObservableValidator
   [ObservableProperty] WebsiteUser? selWU; partial void OnSelWUChanged(WebsiteUser? value)
   {
     if (value is null) return;
+
     SelEG = null;
     MemberSinceKey = value.MemberSinceKey;
     WebEventLogs?.Refresh();

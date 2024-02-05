@@ -6,6 +6,8 @@ public class LogParser
   public LogParser(string key) => _key = key;
   readonly UserMap _userMap = new(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\UserMap.json");
   readonly UserMap _wareMap = new(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\WareMap.json");
+  string? _logRaw;
+
   public async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> DoCRUD(char crud)
   {
     var webEventLogs = new List<WebEventLog>();
@@ -29,12 +31,27 @@ public class LogParser
       {
         await poorMansLogger.CreateFileAsync("Creating...");
       }
+      else if (crud == 'u')
+      {
+        await poorMansLogger.UpdateFileAsync($"-- Updated with this at {DateTime.Now} --\n");
+      }
+      else if (crud == 'd')
+      {
+        await poorMansLogger.DeleteFileAsync();
+      }
+      else if (crud == 'a')
+      {
+        await poorMansLogger.AppendToFileAsync($"++ Appending with this at {DateTime.Now} ++\n");
+      }
       else if (crud == 'r')
       {
-        var logRaw = await poorMansLogger.ReadFileAsync(); // _log; //
-        WriteLine($"{logRaw}");
+        if (_logRaw is null)
+        {
+          _logRaw = await poorMansLogger.ReadFileAsync();
+          WriteLine($"{_logRaw}");
+        }
 
-        foreach (var line in logRaw.Split("\r\n").ToList().Where(r => r.Contains(", FirstVisitId = ")).ToList())
+        foreach (var line in _logRaw.Split("\r\n").ToList().Where(r => r.Contains(", FirstVisitId = ")).ToList())
         {
           try
           {
@@ -96,19 +113,7 @@ public class LogParser
         .ToList()
         .ForEach(websiteUsers.Add);
 
-        return (logRaw, webEventLogs, websiteUsers);
-      }
-      else if (crud == 'u')
-      {
-        await poorMansLogger.UpdateFileAsync($"-- Updated with this at {DateTime.Now} --\n");
-      }
-      else if (crud == 'd')
-      {
-        await poorMansLogger.DeleteFileAsync();
-      }
-      else if (crud == 'a')
-      {
-        await poorMansLogger.AppendToFileAsync($"++ Appending with this at {DateTime.Now}\n");
+        return (_logRaw, webEventLogs, websiteUsers);
       }
 
       return ("Really???????", webEventLogs, websiteUsers);
