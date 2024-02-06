@@ -28,6 +28,7 @@
       </Grid.RowDefinitions>
 
       <Image VerticalAlignment="Center" HorizontalAlignment="Left" Source="/TTennis.ico" Width="30" Height="30" Margin="5 5 5 10"/>
+      <local:ClockUserControl Height="32" Width="200" HorizontalAlignment="Left"/>
       <TextBlock Grid.Row="0" x:Name="tbkReport" Text="{Binding Report}" FontSize="22" HorizontalAlignment="Center" Foreground="#aaf" />
       <TextBox   Grid.Row="1" x:Name="tbxAllLog" Text="{Binding LogRaw}" FontSize="12" Background="#222" VerticalScrollBarVisibility="Auto" Foreground="#aaf" />
 
@@ -95,6 +96,8 @@
         <Button Content=" _Append " Click="OnAppend" />
         <Button     IsCancel="True" Click="OnExit"   />
       </StackPanel>
+
+      <local:ClockUserControl Grid.Row="7" Height="32" Width="200" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
     </Grid>
   </Border>
 </Window>
