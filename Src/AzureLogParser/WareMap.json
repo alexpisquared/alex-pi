@@ -130,8 +130,10 @@
   "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0|12|Win32|en-US,en,uk|4096x1152x24": "rzr top monitor",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0|12|Win32|en-US,en|1536x864x24": "\u0060",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/109.0.0.0 Safari/537.36|8|Win32|pt-BR,pt,en-US,en|1366x768x24": "12:02",
-  "Windows NT 10.0; Win64; x64|537.36|Chrome/120.0.0.0 Safari/537.36|8|Win32|en-US,en|1366x768x24": "12:02",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/120.0.0.0 Safari/537.36|8|Win32|en-US,en|1366x768x24": "12:02 * 2",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/120.0.0.0 Safari/537.36|8|Win32|ru-RU,ru,en-US,en|1366x768x24": "12:02",
-  "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36|8|Win32|en-US,en|2560x1440x24": "human",
-  "iOS/17.1.2 (21B101) dataaccessd/1.0|undefined|undefined|48|Linux x86_64|en-US|800x600x24": "cpu48"
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36|8|Win32|en-US,en|2560x1440x24": "email link",
+  "iOS/17.1.2 (21B101) dataaccessd/1.0|undefined|undefined|48|Linux x86_64|en-US|800x600x24": "cpu48",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/120.0.0.0 Safari/537.36|48|Win32|en-US|1536x864x24": "cpu48",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36|8|Win32|en,fr-CA,en-US|1920x1080x24": "2"
 }
