@@ -41,6 +41,7 @@ const routes: Routes = [
   { path: 'tttimer', component: TennisTimerComponent, data: { animation: 'TennisTimerPage' } },
   { path: 'contact', component: ContactComponent, data: { animation: 'ContactPage' } },
   { path: 'designs', component: MyDesignsComponent, data: { animation: 'MyDesignsPage' } },
+  { path: 'Designs', component: MyDesignsComponent, data: { animation: 'MyDesignsPage' } },
   { path: 'analtcs', component: AnalytMainComponent }
 ];
 
