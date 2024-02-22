@@ -4,8 +4,8 @@ public class LogParser
   readonly string _key;
 
   public LogParser(string key) => _key = key;
-  readonly UserMap _userMap = new(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\UserMap.json");
-  readonly UserMap _wareMap = new(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\WareMap.json");
+  readonly UniMapper _userMap = new(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\UserMap.json");
+  readonly UniMapper _wareMap = new(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\WareMap.json");
   string? _logRaw;
 
   public async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> DoCRUD(char crud)

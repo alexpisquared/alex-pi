@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace AzureLogParser;
+﻿namespace AzureLogParser;
 public partial class MainWindow : Window
 {
   readonly LogParserVM _vm = new();
@@ -15,7 +13,7 @@ public partial class MainWindow : Window
 
     _logParser = new(new ConfigurationBuilder().AddUserSecrets<App>().Build()["SecretKey"] ?? "no key");
     KeyUp += new System.Windows.Input.KeyEventHandler((s, e) => { if (e.Key == Key.Escape) { Close(); } }); //tu:
-    MouseLeftButtonDown += new MouseButtonEventHandler((s, e) => { DragMove(); }); //tu:
+    MouseLeftButtonDown += new MouseButtonEventHandler((s, e) => { if (e.ButtonState == MouseButtonState.Pressed) { DragMove(); } }); //tu:
 
     DataContext = _vm;
   }
@@ -36,7 +34,7 @@ public partial class MainWindow : Window
     }
   }
 
-  async void OnLoaded(object sender, RoutedEventArgs e) => await _vm.ReLoad();
+  async void OnLoaded(object sender, RoutedEventArgs e) => await _vm.ReLoad(true);
   async void OnCreate(object sender, RoutedEventArgs e) { tbkReport.Content = "Creating  the log file..."; var (_, _, _) = await _logParser.DoCRUD('c'); await _vm.ReLoad(); }
   async void OnUpdate(object sender, RoutedEventArgs e) { tbkReport.Content = "Updating  the log file..."; var (_, _, _) = await _logParser.DoCRUD('u'); await _vm.ReLoad(); }
   async void OnDelete(object sender, RoutedEventArgs e) { tbkReport.Content = "Deleting  the log file..."; var (_, _, _) = await _logParser.DoCRUD('d'); await _vm.ReLoad(); }
@@ -55,22 +53,25 @@ public partial class MainWindow : Window
     }
     else
     {
-      var timestamp = slt[1];
-      var matchingLines = File.ReadAllLines("""C:\Users\alexp\OneDrive\Public\Logs\MinNavTpl.RAZ.ale.Infi..log""").Where(x => x.Contains(timestamp)).ToList();
-      if (matchingLines.Count <= 0)
+      try
       {
-        tbkReport.Foreground = System.Windows.Media.Brushes.Orange;
-        tbkReport.Content =
-        EmailAddress1.Header = "No matches in the log";
+        var timestamp = slt[1];
+        var matchingLines = File.ReadAllLines("""C:\Users\alexp\OneDrive\Public\Logs\MinNavTpl.RAZ.ale.Infi..log""").Where(x => x.Contains(timestamp)).ToList();
+        if (matchingLines.Count <= 0)
+        {
+          tbkReport.Foreground = System.Windows.Media.Brushes.Orange;
+          tbkReport.Content = EmailAddress1.Header = "No matches in the log";
+        }
+        else
+        {
+          var eml = matchingLines[0].Split(' ', StringSplitOptions.RemoveEmptyEntries).Last();
+          tbkReport.Foreground = System.Windows.Media.Brushes.LimeGreen;
+          tbkReport.Content = EmailAddress1.Header = eml;
+          //new Window { Title = "Details", Height = 260, Width = 1400, Content = new TextBox { Text = $"{eml}\n\n{string.Join(Environment.NewLine, matchingLines)}\n\n", FontSize = 20, Foreground = System.Windows.Media.Brushes.Blue, TextWrapping = TextWrapping.Wrap, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto }}.ShowDialog();
+        }
+
       }
-      else
-      {
-        var eml = matchingLines[0].Split(' ', StringSplitOptions.RemoveEmptyEntries).Last();
-        tbkReport.Foreground = System.Windows.Media.Brushes.LimeGreen;
-        tbkReport.Content =
-        EmailAddress1.Header = eml;
-        //new Window { Title = "Details", Height = 260, Width = 1400, Content = new TextBox { Text = $"{eml}\n\n{string.Join(Environment.NewLine, matchingLines)}\n\n", FontSize = 20, Foreground = System.Windows.Media.Brushes.Blue, TextWrapping = TextWrapping.Wrap, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto }}.ShowDialog();
-      }
+      catch (Exception ex) { _ = MessageBox.Show(ex.Message); EmailAddress1.Header = ex.Message; }
     }
   }
 
