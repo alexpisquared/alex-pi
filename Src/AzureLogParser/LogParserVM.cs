@@ -28,6 +28,14 @@ public partial class LogParserVM : ObservableValidator
 
       WebsiteUsers = CollectionViewSource.GetDefaultView(users.OrderByDescending(r => r.LastVisitAt).ToList());
       WebsiteUsers.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
+      WebsiteUsers.Filter = obj =>
+      {
+        WriteLine($"■ {SelEL?.DoneAt}  {(obj as WebsiteUser)?.LastVisitAt}");
+        return obj is not WebsiteUser w || w is null || (
+                   ((SelEL?.DoneAt is null || w.LastVisitAt == SelEL.DoneAt))
+                && ((string.IsNullOrEmpty(SelEL?.NickUser) || w.Nickname?.Equals(SelEL?.NickUser, sc) == true)) // :requires unique nicks
+                );
+      }; //todo: filter by the selected SelEL
 
       EventtGroups = CollectionViewSource.GetDefaultView(eLogs.GroupBy(log => new
       {
@@ -86,6 +94,16 @@ public partial class LogParserVM : ObservableValidator
   [ObservableProperty] ICollectionView? webEventLogs;
   [ObservableProperty] ICollectionView? eventtGroups;
   [ObservableProperty] ICollectionView? websiteUsers;
+  [ObservableProperty] WebEventLog? selEL; partial void OnSelELChanged(WebEventLog? value)
+  {
+    if (value is null) return;
+
+    MemberSinceKey = null;
+    WebsiteUsers?.Refresh();
+
+    //RunStep01Command?.NotifyCanExecuteChanged();
+    WriteLine($"· {value.DoneAt}");
+  }
   [ObservableProperty] EventtGroup? selEG; partial void OnSelEGChanged(EventtGroup? value)
   {
     if (value is null) return;
@@ -93,7 +111,7 @@ public partial class LogParserVM : ObservableValidator
     MemberSinceKey = null;
     WebEventLogs?.Refresh();
 
-    RunStep1Command?.NotifyCanExecuteChanged();
+    RunStep01Command?.NotifyCanExecuteChanged();
   }
   [ObservableProperty] WebsiteUser? selWU; partial void OnSelWUChanged(WebsiteUser? value)
   {
@@ -103,11 +121,11 @@ public partial class LogParserVM : ObservableValidator
     MemberSinceKey = value.MemberSinceKey;
     WebEventLogs?.Refresh();
 
-    RunStep1Command?.NotifyCanExecuteChanged();
+    RunStep01Command?.NotifyCanExecuteChanged();
   }
 
-  [RelayCommand(CanExecute = nameof(CanRunStep1))] public async Task RunStep1() => await RunStep1_(); bool CanRunStep1() => !IsBusy; async Task RunStep1_() => await ReLoad();
-  [RelayCommand(CanExecute = nameof(CanDeleteLog))] public async Task DeleteLog() => await DeleteLog_(); bool CanDeleteLog() => !IsBusy; async Task DeleteLog_()
+  [RelayCommand(CanExecute = nameof(CanRunStep01))] public async Task RunStep01() => await RunStep01_(); /**/ bool CanRunStep01() => !IsBusy; async Task RunStep01_() => await ReLoad();
+  [RelayCommand(CanExecute = nameof(CanDeleteLog))] public async Task DeleteLog() => await DeleteLog_(); /**/ bool CanDeleteLog() => !IsBusy; async Task DeleteLog_()
   {
     IsBusy = true;
     Report = "Deleting the log file on remote Azure location...";
@@ -117,7 +135,7 @@ public partial class LogParserVM : ObservableValidator
     var (_, _, _) = await logParser.DoCRUD('d');
     await ReLoad();
   }
-  [RelayCommand(CanExecute = nameof(CanRunStep2))] public async Task RunStep2() => await RunStep2_(SelWU); bool CanRunStep2() => SelWU is not null; Task RunStep2_(WebsiteUser? selWU) => throw new NotImplementedException();
+  [RelayCommand(CanExecute = nameof(CanRunStep02))] public async Task RunStep02() => await RunStep02_(SelWU); bool CanRunStep02() => SelWU is not null; Task RunStep02_(WebsiteUser? selWU) => throw new NotImplementedException();
 
   public async Task TrySave()
   {

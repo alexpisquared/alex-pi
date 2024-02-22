@@ -4,7 +4,7 @@
         d:DataContext="{d:DesignInstance Type=local:LogParserVM}"
         Title="Azure Log Parser" Height="540" Width="1920" Loaded="OnLoaded" Icon="/TTennis.ico" 
         WindowStartupLocation="Manual" Left="0" Top="0" WindowState="Maximized" 
-        AllowsTransparency="True" WindowStyle="None" Background="Transparent" >
+        AllowsTransparency="True" WindowStyle="None" Background="Transparent">
   <WindowChrome.WindowChrome>
     <WindowChrome CaptionHeight="0" ResizeBorderThickness="16" />
   </WindowChrome.WindowChrome>
@@ -29,10 +29,10 @@
 
       <Image VerticalAlignment="Center" HorizontalAlignment="Left" Source="/TTennis.ico" Width="30" Height="30" Margin="5 5 5 10"/>
       <local:ClockUserControl Height="32" Width="200" HorizontalAlignment="Left"/>
-      <TextBlock Grid.Row="0" x:Name="tbkReport" Text="{Binding Report}" FontSize="22" HorizontalAlignment="Center" Foreground="#aaf" />
-      <TextBox   Grid.Row="1" x:Name="tbxAllLog" Text="{Binding LogRaw}" FontSize="12" Background="#222" VerticalScrollBarVisibility="Auto" Foreground="#aaf" />
+      <Button  Grid.Row="0" x:Name="tbkReport" Content="{Binding Report}" FontSize="22" Click="OnCopyClip" ToolTip="Click to Copy" HorizontalAlignment="Center" d:Content="Info Header" Padding="18 0" Foreground="#aaf" />
+      <TextBox Grid.Row="1" x:Name="tbxAllLog"    Text="{Binding LogRaw}" FontSize="12" VerticalScrollBarVisibility="Auto" d:Text="111111111123" Background="#222" Foreground="#aaf" />
 
-      <DataGrid Grid.Row="3" ItemsSource="{Binding WebEventLogs}" FontFamily="Arial Narrow" FontSize="17">
+      <DataGrid Grid.Row="3" ItemsSource="{Binding WebEventLogs}" CurrentItem="{Binding SelEL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontFamily="Arial Narrow" FontSize="17" MouseDoubleClick="OnDblClck" IsReadOnly="True" x:Name="dg1">
         <DataGrid.Columns>
           <DataGridTextColumn Header="Time"                  Binding="{Binding DoneAt, StringFormat='{}{0:MM-dd HH:mm ddd}'}" Foreground="#0c0" />
           <DataGridTextColumn Header="Event / Build"         Binding="{Binding EventName}" Width="129" Foreground="#fba" />
@@ -87,15 +87,21 @@
       <GridSplitter Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
       <GridSplitter Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
 
-      <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" Margin="1">
-        <Button Content=" _Fresh! " Click="OnRefresh" IsDefault="True"   Foreground="#0c0" />
-        <Button Content=" _Create " Click="OnCreate" />                  
-        <Button Content=" _Readit " Command="{Binding RunStep1Command}"  Foreground="#070" />
-        <Button Content=" _Update " Click="OnUpdate" />
-        <Button Content=" _Delete " Command="{Binding DeleteLogCommand}" Foreground="#f00" />
-        <Button Content=" _Append " Click="OnAppend" />
-        <Button     IsCancel="True" Click="OnExit"   />
-      </StackPanel>
+      <Menu Grid.Row="0" Margin="0 9 8 0" HorizontalAlignment="Right" Background="Transparent" Foreground="#44f">
+        <MenuItem Header=" _Fresh! " Click="OnRefresh"  Foreground="#0c0" ToolTip="+ blend in the new Nicks" />
+        <MenuItem Header=" _Email! " Click="OnGetEmail" Foreground="#0af" ToolTip="Find email in the broadcast log" />
+        <MenuItem Header="         " Click="OnCopyClip" Foreground="#0af" ToolTip="Click to Copy" x:Name="EmailAddress1" />
+        <MenuItem Header="  · · ·  " FontWeight="Bold">
+          <MenuItem Header=" _Create " Click="OnCreate" />
+          <MenuItem Header=" _Readit " Command="{Binding RunStep01Command}"  Foreground="#070" />
+          <MenuItem Header=" _Update " Click="OnUpdate" />
+          <MenuItem Header=" _Delete " Command="{Binding DeleteLogCommand}" Foreground="#f00" />
+          <MenuItem Header=" _Append " Click="OnAppend" />
+          <MenuItem Header="  E_xit  " Click="OnExit" />
+          <Button IsCancel="True" Click="OnExit" />
+        </MenuItem>
+        <MenuItem Header=" X " Click="OnExit" Foreground="#e00" />
+      </Menu>
 
       <local:ClockUserControl Grid.Row="7" Height="32" Width="200" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
     </Grid>
