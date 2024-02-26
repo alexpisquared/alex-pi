@@ -5,6 +5,8 @@ set say=%OneDrive%\Public\bin\say.exe
     
 @REM robocopy C:\Users\alexp\source\repos\alex-pi C:\g\alex-pi\Src %para%  /MIR       :DELETES!!! if new file is in the wrong place: source
 
+call :1
+
 :menu
 start /min %say% "hm?"
 echo.
@@ -49,7 +51,11 @@ goto :EOF
 goto :EOF
 
 :end
+  echo   Bye
+  echo   Bye
+  echo   Bye
+  start /min %say% "Bye"
   set para=
   set say=
-  timeout %ERRORLEVEL%
+  rem timeout %ERRORLEVEL%
 exit

@@ -43,7 +43,7 @@ public partial class LogParserVM : ObservableValidator
     RunReLoadCommand?.NotifyCanExecuteChanged();
   }
 
-  [RelayCommand(CanExecute = nameof(CanRunReLoad))] public async Task RunReLoad() => await RunReLoad_(); /**/ bool CanRunReLoad() => !IsBusy; async Task RunReLoad_() => await ReLoad();
+  [RelayCommand(CanExecute = nameof(CanRunReLoad))] public async Task RunReLoad() => await RunReLoad_(); /**/ bool CanRunReLoad() => !IsBusy; async Task RunReLoad_() => await ReLoadLists_CheckIfNews();
   [RelayCommand(CanExecute = nameof(CanCreateLog))] public async Task CreateLog() => await DoCrud_('c'); /**/ bool CanCreateLog() => !IsBusy;
   [RelayCommand(CanExecute = nameof(CanUpdateLog))] public async Task UpdateLog() => await DoCrud_('u'); /**/ bool CanUpdateLog() => !IsBusy;
   [RelayCommand(CanExecute = nameof(CanDeleteLog))] public async Task DeleteLog() => await DoCrud_('d'); /**/ bool CanDeleteLog() => !IsBusy;
@@ -53,13 +53,12 @@ public partial class LogParserVM : ObservableValidator
   {
     IsBusy = true;
     Report = "...ing the log file on remote Azure location...";
-    if (crud == 'd')
-      _ = MiscServices.SaveBlob(LogRaw ?? "Nothing here", $@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\AzureTttLog.{DateTime.Now:yyMMdd-HHmmss}.txt");
+    //if (crud == 'd')      _ = MiscServices.SaveBlob(LogRaw ?? "Nothing here", $@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\AzureTttLog.{DateTime.Now:yyMMdd-HHmmss}.txt");
 
     var (_, _, _) = await _logParser.DoCRUD(crud);
-    await ReLoad();
+    await ReLoadLists_CheckIfNews();
   }
-  public async Task ReLoad(bool sayIt = false)
+  public async Task<bool> ReLoadLists_CheckIfNews(bool sayIt = false)
   {
     IsBusy = true;
     LogRaw = Report = "Loading...";
@@ -115,11 +114,15 @@ public partial class LogParserVM : ObservableValidator
 
       var isNew = MiscServices.NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime(eLogs.Max(r => r.DoneAt), @"C:\temp\potentiallyNewUsageTime.txt");
       Report = isNew ? "New usage detected!" : "-- Nothing new --"; //tbkReport.Foreground = isNew ? Brushes.GreenYellow : Brushes.Gray;
-      if (sayIt)
+      if (/*isNew &&*/ sayIt)
         _ = synth.SpeakAsync(Report);
+
+      return isNew;
     }
     catch (Exception ex) { _ = MessageBox.Show(ex.Message); Report = ex.Message; }
     finally { IsBusy = false; }
+
+    return true;
   }
   public async Task TrySave()
   {

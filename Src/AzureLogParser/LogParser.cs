@@ -37,6 +37,7 @@ public class LogParser
       }
       else if (crud == 'd')
       {
+        _ = MiscServices.SaveBlob(_logRaw ?? "Nothing here", $@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\AzureTttLog.{DateTime.Now:yyMMdd-HHmmss}.txt");
         await poorMansLogger.DeleteFileAsync();
       }
       else if (crud == 'a')
@@ -45,74 +46,7 @@ public class LogParser
       }
       else if (crud == 'r')
       {
-        if (_logRaw is null)
-        {
-          _logRaw = await poorMansLogger.ReadFileAsync();
-          WriteLine($"{_logRaw}");
-        }
-
-        foreach (var line in _logRaw.Split("\r\n").ToList().Where(r => r.Contains(", FirstVisitId = ")).ToList())
-        {
-          try
-          {
-            var log = new WebEventLog
-            {
-              DoneAt = DateTime.Parse(line.Split(new string[] { "DoneAt = ", ", WebsiteUser =" }, StringSplitOptions.RemoveEmptyEntries)[1]).ToLocalTime(),
-              EventName = line.Split(new string[] { "EventName = ", ", DoneAt =" }, StringSplitOptions.RemoveEmptyEntries)[1],
-              BrowserSignature = line.Split(new string[] { "BrowserSignature = ", ", FirstVisitId = " }, StringSplitOptions.RemoveEmptyEntries)[1],
-              FirstVisitId = line.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1],
-              NickUser = NickMapperUser(line.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1]),
-            };
-
-            log.Sub = $"{log.BrowserSignature}|°|°|°|°|°|°|°|°|°|°|°|.".Split(new string[] { "║", "│", "|", ", NickUser = " }, StringSplitOptions.RemoveEmptyEntries);
-
-            var r = new
-            {
-              Hardware = log.Sub[0],
-              MozillaVer = log.Sub[01],
-              Versions = log.Sub[02],
-              CPUCORES = log.Sub[03].TrimStart('0'),
-              Platform = log.Sub[04],
-              Languages = log.Sub[05],
-              Resolution = log.Sub[06],
-            };
-            var eg = new EventtGroup
-            {
-              Hardware = r.Hardware,
-              MozillaV = r.MozillaVer,
-              Versions = r.Versions,
-              CpuCores = r.CPUCORES,
-              Platform = r.Platform,
-              Language = r.Languages,
-              Resolute = r.Resolution
-            };
-
-            log.NickWare = NickMapperWare(eg.PseudoKey);
-
-            //if (log.DoneAt > new DateTime(2023, 10, 15))
-            webEventLogs.Add(log);
-          }
-          catch (Exception ex)
-          {
-            WriteLine($"{ex.Message}  {line}");
-          }
-        }
-
-        // select unique FirstVisitId With Max and Min Of DoneAt and the count records per FirstVisitId of from webEventLogs
-        webEventLogs.GroupBy(r => r.FirstVisitId).Select(g => new WebsiteUser
-        {
-          Id = 0,
-          MemberSinceKey = g.Key,
-          Nickname = NickMapperUser(g.Key),
-          Note = $"{g.Max(r => r.DoneAt) - g.Min(r => r.DoneAt),15}{g.Count(),4}",
-          CreatedAt = g.Min(r => r.DoneAt),
-          LastVisitAt = g.Max(r => r.DoneAt),
-          TotalVisits = g.Count()
-        }).OrderBy(r => r.LastVisitAt)
-        .ToList()
-        .ForEach(websiteUsers.Add);
-
-        return (_logRaw, webEventLogs, websiteUsers);
+        return await ReadAzureFile_Populate2Lists(webEventLogs, websiteUsers, poorMansLogger);
       }
 
       return ("Really???????", webEventLogs, websiteUsers);
@@ -121,6 +55,78 @@ public class LogParser
     {
       return (ex.Message, webEventLogs, websiteUsers);
     }
+  }
+
+  async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> ReadAzureFile_Populate2Lists(List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers, PoorMansLogger poorMansLogger)
+  {
+    if (_logRaw is null)
+    {
+      _logRaw = await poorMansLogger.ReadFileAsync();
+      WriteLine($"{_logRaw}");
+    }
+
+    foreach (var line in _logRaw.Split("\r\n").ToList().Where(r => r.Contains(", FirstVisitId = ")).ToList())
+    {
+      try
+      {
+        var log = new WebEventLog
+        {
+          DoneAt = DateTime.Parse(line.Split(new string[] { "DoneAt = ", ", WebsiteUser =" }, StringSplitOptions.RemoveEmptyEntries)[1]).ToLocalTime(),
+          EventName = line.Split(new string[] { "EventName = ", ", DoneAt =" }, StringSplitOptions.RemoveEmptyEntries)[1],
+          BrowserSignature = line.Split(new string[] { "BrowserSignature = ", ", FirstVisitId = " }, StringSplitOptions.RemoveEmptyEntries)[1],
+          FirstVisitId = line.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1],
+          NickUser = NickMapperUser(line.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1]),
+        };
+
+        log.Sub = $"{log.BrowserSignature}|°|°|°|°|°|°|°|°|°|°|°|.".Split(new string[] { "║", "│", "|", ", NickUser = " }, StringSplitOptions.RemoveEmptyEntries);
+
+        var r = new
+        {
+          Hardware = log.Sub[0],
+          MozillaVer = log.Sub[01],
+          Versions = log.Sub[02],
+          CPUCORES = log.Sub[03].TrimStart('0'),
+          Platform = log.Sub[04],
+          Languages = log.Sub[05],
+          Resolution = log.Sub[06],
+        };
+        var eg = new EventtGroup
+        {
+          Hardware = r.Hardware,
+          MozillaV = r.MozillaVer,
+          Versions = r.Versions,
+          CpuCores = r.CPUCORES,
+          Platform = r.Platform,
+          Language = r.Languages,
+          Resolute = r.Resolution
+        };
+
+        log.NickWare = NickMapperWare(eg.PseudoKey);
+
+        //if (log.DoneAt > new DateTime(2023, 10, 15))
+        webEventLogs.Add(log);
+      }
+      catch (Exception ex)
+      {
+        WriteLine($"{ex.Message}  {line}");
+      }
+    }
+
+    // select unique FirstVisitId With Max and Min Of DoneAt and the count records per FirstVisitId of from webEventLogs
+    webEventLogs.GroupBy(r => r.FirstVisitId).Select(g => new WebsiteUser
+    {
+      Id = 0,
+      MemberSinceKey = g.Key,
+      Nickname = NickMapperUser(g.Key),
+      Note = $"{g.Max(r => r.DoneAt) - g.Min(r => r.DoneAt),15}{g.Count(),4}",
+      CreatedAt = g.Min(r => r.DoneAt),
+      LastVisitAt = g.Max(r => r.DoneAt),
+      TotalVisits = g.Count()
+    }).OrderBy(r => r.LastVisitAt)
+    .ToList()
+    .ForEach(websiteUsers.Add);
+
+    return (_logRaw, webEventLogs, websiteUsers);
   }
 
   public async Task<bool> UpdateIfNewUser(ICollectionView? users) => users != null && await _userMap.UpdateIfNewAsync(users);

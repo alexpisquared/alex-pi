@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AzureLogParser": {
+      "commandName": "Project",
+      "commandLineArgs": "DonotShowIfNothingNew"
+    }
+  }
+}

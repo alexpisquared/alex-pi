@@ -1,20 +1,19 @@
 ﻿namespace AzureLogParser;
 public partial class MainWindow : Window
 {
-  readonly LogParserVM _vm = new();
-  readonly LogParser _logParser;
+  readonly LogParserVM _vm;
 
-  public MainWindow()
+  public MainWindow(LogParserVM vm)
   {
     InitializeComponent();
 
-    UpdateMaxSize(); // Call UpdateMaxSize initially to set the correct initial size
-    LocationChanged += (sender, e) => UpdateMaxSize();    // Handle the LocationChanged event to update the size when the window is moved
+    UpdateMaxSize();                                    // Call UpdateMaxSize initially to set the correct initial size
+    LocationChanged += (sender, e) => UpdateMaxSize();  // Handle the LocationChanged event to update the size when the window is moved
 
-    _logParser = new(new ConfigurationBuilder().AddUserSecrets<App>().Build()["SecretKey"] ?? "no key");
     KeyUp += new KeyEventHandler(async (s, e) => { if (e.Key == Key.Escape) await SaveAndClose(); }); //tu:
     MouseLeftButtonDown += new MouseButtonEventHandler((s, e) => { if (e.ButtonState == MouseButtonState.Pressed) { DragMove(); } }); //tu:
 
+    _vm = vm;
     DataContext = _vm;
   }
 
@@ -35,12 +34,8 @@ public partial class MainWindow : Window
     }
   }
 
-  async void OnLoaded(object sender, RoutedEventArgs e) => await _vm.ReLoad(true);
-  async void OnCreate(object sender, RoutedEventArgs e) { tbkReport.Content = "Creating  the log file..."; var (_, _, _) = await _logParser.DoCRUD('c'); await _vm.ReLoad(); }
-  async void OnUpdate(object sender, RoutedEventArgs e) { tbkReport.Content = "Updating  the log file..."; var (_, _, _) = await _logParser.DoCRUD('u'); await _vm.ReLoad(); }
-  async void OnDelete(object sender, RoutedEventArgs e) { tbkReport.Content = "Deleting  the log file..."; var (_, _, _) = await _logParser.DoCRUD('d'); await _vm.ReLoad(); }
-  async void OnAppend(object sender, RoutedEventArgs e) { tbkReport.Content = "Appending the log file..."; var (_, _, _) = await _logParser.DoCRUD('a'); await _vm.ReLoad(); }
-  async void OnRefresh(object sender, RoutedEventArgs e) { await _vm.TrySave(); await _vm.ReLoad(); }
+  async void OnLoaded(object sender, RoutedEventArgs e) => await Task.Yield();// _vm.ReLoadLists_CheckIfNews(true);
+  async void OnRefresh(object sender, RoutedEventArgs e) { await _vm.TrySave(); _ = await _vm.ReLoadLists_CheckIfNews(); }
   async void OnExit(object sender, RoutedEventArgs e) => await SaveAndClose();
   void OnCopyClip(object sender, RoutedEventArgs e) => Clipboard.SetText(tbkReport.Content?.ToString());
   void OnDblClck(object sender, MouseButtonEventArgs e) => GetEmailAddressFromLog();

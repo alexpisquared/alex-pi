@@ -98,12 +98,6 @@
           <MenuItem Header=" _Delete " Command="{Binding DeleteLogCommand}" Foreground="#f00" />
           <MenuItem Header=" _Append " Command="{Binding AppendLogCommand}" Foreground="#00f" />
         </MenuItem>
-        <MenuItem Header=" Log CRUD ">
-          <MenuItem Header=" _Create " Click="OnCreate" />
-          <MenuItem Header=" _Update " Click="OnUpdate" />
-          <MenuItem Header=" _Delete " Click="OnDelete" />
-          <MenuItem Header=" _Append " Click="OnAppend" />
-        </MenuItem>
         <MenuItem  Header=" X " Click="OnExit" Foreground="#e00" />
         <Button IsCancel="True" Click="OnExit" />
       </Menu>
