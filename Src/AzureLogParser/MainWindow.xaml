@@ -34,8 +34,8 @@
 
       <DataGrid Grid.Row="3" ItemsSource="{Binding WebEventLogs}" CurrentItem="{Binding SelEL,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontFamily="Arial Narrow" FontSize="17" MouseDoubleClick="OnDblClck" IsReadOnly="True" x:Name="dg1">
         <DataGrid.Columns>
-          <DataGridTextColumn Header="Time"                  Binding="{Binding DoneAt, StringFormat='{}{0:MM-dd HH:mm ddd}'}" Foreground="#0c0" />
-          <DataGridTextColumn Header="Event / Build"         Binding="{Binding EventName}" Width="129" Foreground="#fba" />
+          <DataGridTextColumn Header="Visit Time"            Binding="{Binding DoneAt, StringFormat='{}{0:MM-dd HH:mm ddd}'}" Foreground="#0c0" />
+          <DataGridTextColumn Header="Event Name"            Binding="{Binding EventName}" Width="129" Foreground="#fba" />
           <DataGridTextColumn Header="Nick User"             Binding="{Binding NickUser}"  Width="180" Foreground="#e6f" />
           <DataGridTextColumn Header="Nick Ware"             Binding="{Binding NickWare}"  Width="1*"  Foreground="#0af" />
           <!--<DataGridTextColumn Header="Platform"          Binding="{Binding Sub[04]}"   Width="080" Foreground="#a7f" />
@@ -79,6 +79,7 @@
           <DataGridTextColumn Header="Visits   "                        IsReadOnly="True"  Binding="{Binding TotalVisits}"                                       Foreground="#cc0" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="Spread&#10; (days)"               IsReadOnly="True"  Binding="{Binding Spread.TotalDays, StringFormat='{}{0:N1}'}"         Foreground="#0a0" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="MemberSinceKey&#10;        (UTC)" IsReadOnly="True"  Binding="{Binding MemberSinceKey}"  Width="662"                       Foreground="#ea0" />
+          <DataGridTextColumn Header="FirstVisitDt"                     IsReadOnly="True"  Binding="{Binding FirstVisitDt, StringFormat='{}{0:yyyy-MM-dd}'}"     Foreground="#f0c" />
           <DataGridTextColumn Header="Note  "                           IsReadOnly="True"  Binding="{Binding Note}"            Width="*"                         Foreground="#888" />
         </DataGrid.Columns>
       </DataGrid>
@@ -90,17 +91,21 @@
       <Menu Grid.Row="0" Margin="0 9 8 0" HorizontalAlignment="Right" Background="Transparent" Foreground="#44f">
         <MenuItem Header=" _Fresh! " Click="OnRefresh"  Foreground="#0c0" ToolTip="+ blend in the new Nicks" />
         <MenuItem Header=" _Email! " Click="OnGetEmail" Foreground="#0af" ToolTip="Find email in the broadcast log" />
-        <MenuItem Header="         " Click="OnCopyClip" Foreground="#0af" ToolTip="Click to Copy" x:Name="EmailAddress1" />
-        <MenuItem Header="  · · ·  " FontWeight="Bold">
-          <MenuItem Header=" _Create " Click="OnCreate" />
-          <MenuItem Header=" _Readit " Command="{Binding RunStep01Command}"  Foreground="#070" />
-          <MenuItem Header=" _Update " Click="OnUpdate" />
+        <MenuItem Header="  VM  " FontWeight="Bold">
+          <MenuItem Header=" _ReLoad " Command="{Binding RunReLoadCommand}" Foreground="#070" />
+          <MenuItem Header=" _Create " Command="{Binding CreateLogCommand}" Foreground="#00f" />
+          <MenuItem Header=" _Update " Command="{Binding UpdateLogCommand}" Foreground="#00f" />
           <MenuItem Header=" _Delete " Command="{Binding DeleteLogCommand}" Foreground="#f00" />
-          <MenuItem Header=" _Append " Click="OnAppend" />
-          <MenuItem Header="  E_xit  " Click="OnExit" />
-          <Button IsCancel="True" Click="OnExit" />
+          <MenuItem Header=" _Append " Command="{Binding AppendLogCommand}" Foreground="#00f" />
         </MenuItem>
-        <MenuItem Header=" X " Click="OnExit" Foreground="#e00" />
+        <MenuItem Header=" Log CRUD ">
+          <MenuItem Header=" _Create " Click="OnCreate" />
+          <MenuItem Header=" _Update " Click="OnUpdate" />
+          <MenuItem Header=" _Delete " Click="OnDelete" />
+          <MenuItem Header=" _Append " Click="OnAppend" />
+        </MenuItem>
+        <MenuItem  Header=" X " Click="OnExit" Foreground="#e00" />
+        <Button IsCancel="True" Click="OnExit" />
       </Menu>
 
       <local:ClockUserControl Grid.Row="7" Height="32" Width="200" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>

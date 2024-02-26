@@ -107,7 +107,6 @@ public class LogParser
           Note = $"{g.Max(r => r.DoneAt) - g.Min(r => r.DoneAt),15}{g.Count(),4}",
           CreatedAt = g.Min(r => r.DoneAt),
           LastVisitAt = g.Max(r => r.DoneAt),
-          Spread = g.Max(r => r.DoneAt) - g.Min(r => r.DoneAt),
           TotalVisits = g.Count()
         }).OrderBy(r => r.LastVisitAt)
         .ToList()

@@ -1,10 +1,10 @@
 ﻿namespace AzureLogParser;
 public partial class LogParserVM : ObservableValidator
 {
-  public LogParserVM() => logParser = new LogParser(new ConfigurationBuilder().AddUserSecrets<App>().Build()["SecretKey"] ?? "no key");
+  public LogParserVM() => _logParser = new LogParser(new ConfigurationBuilder().AddUserSecrets<App>().Build()["SecretKey"] ?? "no key");
 
   const StringComparison sc = StringComparison.OrdinalIgnoreCase;
-  readonly LogParser logParser;
+  readonly LogParser _logParser;
   readonly SpeechSynthesizer synth = new();
 
   [ObservableProperty] bool isBusy;
@@ -30,7 +30,7 @@ public partial class LogParserVM : ObservableValidator
     MemberSinceKey = null;
     WebEventLogs?.Refresh();
 
-    RunStep01Command?.NotifyCanExecuteChanged();
+    RunReLoadCommand?.NotifyCanExecuteChanged();
   }
   [ObservableProperty] WebsiteUser? selWU; partial void OnSelWUChanged(WebsiteUser? value)
   {
@@ -40,22 +40,25 @@ public partial class LogParserVM : ObservableValidator
     MemberSinceKey = value.MemberSinceKey;
     WebEventLogs?.Refresh();
 
-    RunStep01Command?.NotifyCanExecuteChanged();
+    RunReLoadCommand?.NotifyCanExecuteChanged();
   }
 
-  [RelayCommand(CanExecute = nameof(CanRunStep01))] public async Task RunStep01() => await RunStep01_(); /**/ bool CanRunStep01() => !IsBusy; async Task RunStep01_() => await ReLoad();
-  [RelayCommand(CanExecute = nameof(CanDeleteLog))] public async Task DeleteLog() => await DeleteLog_(); /**/ bool CanDeleteLog() => !IsBusy; async Task DeleteLog_()
+  [RelayCommand(CanExecute = nameof(CanRunReLoad))] public async Task RunReLoad() => await RunReLoad_(); /**/ bool CanRunReLoad() => !IsBusy; async Task RunReLoad_() => await ReLoad();
+  [RelayCommand(CanExecute = nameof(CanCreateLog))] public async Task CreateLog() => await DoCrud_('c'); /**/ bool CanCreateLog() => !IsBusy;
+  [RelayCommand(CanExecute = nameof(CanUpdateLog))] public async Task UpdateLog() => await DoCrud_('u'); /**/ bool CanUpdateLog() => !IsBusy;
+  [RelayCommand(CanExecute = nameof(CanDeleteLog))] public async Task DeleteLog() => await DoCrud_('d'); /**/ bool CanDeleteLog() => !IsBusy;
+  [RelayCommand(CanExecute = nameof(CanAppendLog))] public async Task AppendLog() => await DoCrud_('a'); /**/ bool CanAppendLog() => !IsBusy;
+
+  async Task DoCrud_(char crud)
   {
     IsBusy = true;
-    Report = "Deleting the log file on remote Azure location...";
-    _ = MiscServices.SaveBlob(LogRaw ?? "Nothing here", $@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\AzureTttLog.{DateTime.Now:yyMMdd-HHmmss}.txt");
+    Report = "...ing the log file on remote Azure location...";
+    if (crud == 'd')
+      _ = MiscServices.SaveBlob(LogRaw ?? "Nothing here", $@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\AzureTttLog.{DateTime.Now:yyMMdd-HHmmss}.txt");
 
-    _ = synth.SpeakAsync("To do");
-    var (_, _, _) = await logParser.DoCRUD('d');
+    var (_, _, _) = await _logParser.DoCRUD(crud);
     await ReLoad();
   }
-  [RelayCommand(CanExecute = nameof(CanRunStep02))] public async Task RunStep02() => await RunStep02_(SelWU); bool CanRunStep02() => SelWU is not null; Task RunStep02_(WebsiteUser? selWU) => throw new NotImplementedException();
-
   public async Task ReLoad(bool sayIt = false)
   {
     IsBusy = true;
@@ -64,7 +67,7 @@ public partial class LogParserVM : ObservableValidator
 
     try
     {
-      var (logRaw0, eLogs, users) = await logParser.DoCRUD('r');
+      var (logRaw0, eLogs, users) = await _logParser.DoCRUD('r');
 
       LogRaw = logRaw0; //tbxAllLog.ScrollToEnd(); // scroll to the end of text
 
@@ -82,7 +85,7 @@ public partial class LogParserVM : ObservableValidator
 
       WebsiteUsers = CollectionViewSource.GetDefaultView(users.OrderByDescending(r => r.LastVisitAt).ToList());
       WebsiteUsers.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
-      WebsiteUsers.Filter = obj => obj is not WebsiteUser w || w is null || (((string.IsNullOrEmpty(SelEL?.NickUser) || w.Nickname?.Equals(SelEL?.NickUser, sc) == true)));
+      WebsiteUsers.Filter = obj => obj is not WebsiteUser w || w is null || string.IsNullOrEmpty(SelEL?.NickUser) || w.Nickname?.Equals(SelEL?.NickUser, sc) == true;
 
       EventtGroups = CollectionViewSource.GetDefaultView(eLogs.GroupBy(log => new
       {
@@ -106,9 +109,9 @@ public partial class LogParserVM : ObservableValidator
         Resolute = r.Key.Resolution
       }).ToList());
       EventtGroups.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
-      EventtGroups.Filter = obj => obj is not EventtGroup w || w is null || (((string.IsNullOrEmpty(SelEL?.NickWare) || w.NickWare?.Equals(SelEL?.NickWare, sc) == true)));
+      EventtGroups.Filter = obj => obj is not EventtGroup w || w is null || string.IsNullOrEmpty(SelEL?.NickWare) || w.NickWare?.Equals(SelEL?.NickWare, sc) == true;
 
-      foreach (EventtGroup item in EventtGroups) item.NickWare = logParser.NickMapperWare(item.PseudoKey);
+      foreach (EventtGroup item in EventtGroups) item.NickWare = _logParser.NickMapperWare(item.PseudoKey);
 
       var isNew = MiscServices.NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime(eLogs.Max(r => r.DoneAt), @"C:\temp\potentiallyNewUsageTime.txt");
       Report = isNew ? "New usage detected!" : "-- Nothing new --"; //tbkReport.Foreground = isNew ? Brushes.GreenYellow : Brushes.Gray;
@@ -120,7 +123,9 @@ public partial class LogParserVM : ObservableValidator
   }
   public async Task TrySave()
   {
-    await logParser.UpdateIfNewUser(WebsiteUsers);
-    await logParser.UpdateIfNewWare(EventtGroups);
+    _ = await _logParser.UpdateIfNewUser(WebsiteUsers);
+    _ = await _logParser.UpdateIfNewWare(EventtGroups);
+    _ = synth.SpeakAsync("Saved");
+    await Task.Delay(260);
   }
 }
