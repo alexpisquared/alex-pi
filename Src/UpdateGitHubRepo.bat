@@ -18,8 +18,10 @@ echo [99;94m   Reverse direction:: [0m
 robocopy C:\g\alex-pi\Src C:\Users\alexp\source\repos\alex-pi %para%       /S /XO   /L
 echo.
 echo.
-echo     Select:  [99;92m   Norm    Revr   Palette   Quit [0m      [99;93m   ... or auto quitting in 99 sec ... [0m 
-choice /T 99 /C nrpq /N /D q
+echo    [100;97m Select: [45;92m    Norm  [93m  Mir!  [94m  Revr  [96m  Palette  [91m  Quit    [100;93m ... or auto quitting in 99 sec ... [0m 
+echo    [100;97m Select: [45;92m    Norm  [93m  Mir!  [94m  Revr  [96m  Palette  [91m  Quit    [100;93m ... or auto quitting in 99 sec ... [0m 
+echo    [100;97m Select: [45;92m    Norm  [93m  Mir!  [94m  Revr  [96m  Palette  [91m  Quit    [100;93m ... or auto quitting in 99 sec ... [0m 
+choice /T 99 /C nmrpq /N /D q
 echo [99;94m   selected  %ERRORLEVEL%: [0m 
 call :%ERRORLEVEL%
 timeout /T 1 >Nul
@@ -28,15 +30,17 @@ goto menu
 :1 Normal
   robocopy C:\Users\alexp\source\repos\alex-pi C:\g\alex-pi\Src %para%  /S /XO 
 goto :EOF
-:2 Reverse
+:2 MOR
+  robocopy C:\Users\alexp\source\repos\alex-pi C:\g\alex-pi\Src %para%  /MIR 
+goto :EOF
+:3 Reverse
   robocopy C:\g\alex-pi\Src C:\Users\alexp\source\repos\alex-pi %para%  /S /XO 
 goto :EOF
-:3 Palette
+:4 Palette
   call :Plt
 goto :EOF
-:4
-goto end
 :5
+goto end
 :6
 :7
 :8
