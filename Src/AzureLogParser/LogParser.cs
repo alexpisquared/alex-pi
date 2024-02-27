@@ -1,13 +1,25 @@
-﻿namespace AzureLogParser;
+﻿using Db.OneBase.Model;
+
+namespace AzureLogParser;
 public class LogParser
 {
   readonly string _key;
+  string? _logRaw;
 
   public LogParser(string key) => _key = key;
   readonly UniMapper _userMap = new(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\UserMap.json");
   readonly UniMapper _wareMap = new(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\WareMap.json");
-  string? _logRaw;
 
+  public async Task<string> LogRaw()
+  {
+    if (_logRaw is null)
+    {
+      _logRaw = await new PoorMansLogger(_key).ReadFileAsync();
+      //tmi: WriteLine($"{_logRaw}");
+    }
+
+    return _logRaw;
+  }
   public async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> DoCRUD(char crud)
   {
     var webEventLogs = new List<WebEventLog>();
@@ -37,7 +49,8 @@ public class LogParser
       }
       else if (crud == 'd')
       {
-        _ = MiscServices.SaveBlob(_logRaw ?? "Nothing here", $@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\AzureTttLog.{DateTime.Now:yyMMdd-HHmmss}.txt");
+        var lr = await LogRaw();
+        _ = MiscServices.SaveBlob(lr ?? "Nothing here", $@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\AzureTttLog.{DateTime.Now:yyMMdd-HHmmss}.txt");
         await poorMansLogger.DeleteFileAsync();
       }
       else if (crud == 'a')
@@ -46,7 +59,7 @@ public class LogParser
       }
       else if (crud == 'r')
       {
-        return await ReadAzureFile_Populate2Lists(webEventLogs, websiteUsers, poorMansLogger);
+        return await AddLogLinesToLists(await LogRaw(), webEventLogs, websiteUsers);
       }
 
       return ("Really???????", webEventLogs, websiteUsers);
@@ -56,16 +69,17 @@ public class LogParser
       return (ex.Message, webEventLogs, websiteUsers);
     }
   }
-
-  async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> ReadAzureFile_Populate2Lists(List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers, PoorMansLogger poorMansLogger)
+  public async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> AddLogLinesToLists(string logRaw)
   {
-    if (_logRaw is null)
-    {
-      _logRaw = await poorMansLogger.ReadFileAsync();
-      WriteLine($"{_logRaw}");
-    }
+    var webEventLogs = new List<WebEventLog>();
+    var websiteUsers = new List<WebsiteUser>();
 
-    foreach (var line in _logRaw.Split("\r\n").ToList().Where(r => r.Contains(", FirstVisitId = ")).ToList())
+    return await AddLogLinesToLists(logRaw, webEventLogs, websiteUsers);
+  }
+
+  async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> AddLogLinesToLists(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)
+  {
+    foreach (var line in logRaw.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).ToList().Where(r => r.Contains(", FirstVisitId = ")).ToList())
     {
       try
       {
@@ -126,7 +140,7 @@ public class LogParser
     .ToList()
     .ForEach(websiteUsers.Add);
 
-    return (_logRaw, webEventLogs, websiteUsers);
+    return (await LogRaw(), webEventLogs, websiteUsers);
   }
 
   public async Task<bool> UpdateIfNewUser(ICollectionView? users) => users != null && await _userMap.UpdateIfNewAsync(users);

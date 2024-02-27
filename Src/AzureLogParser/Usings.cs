@@ -15,3 +15,4 @@ global using Db.OneBase.Model;
 global using Microsoft.Extensions.Configuration;
 global using static System.Diagnostics.Trace;
 global using Application = System.Windows.Application;
+global using System.Diagnostics;

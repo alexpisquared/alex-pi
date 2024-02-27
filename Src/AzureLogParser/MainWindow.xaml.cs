@@ -35,7 +35,7 @@ public partial class MainWindow : Window
   }
 
   async void OnLoaded(object sender, RoutedEventArgs e) => await Task.Yield();// _vm.ReLoadLists_CheckIfNews(true);
-  async void OnRefresh(object sender, RoutedEventArgs e) { await _vm.TrySave(); _ = await _vm.ReLoadLists_CheckIfNews(); }
+  async void OnRefresh(object sender, RoutedEventArgs e) { await _vm.TrySave(); _ = await _vm.ReLoadLists_CheckIfNews(false); }
   async void OnExit(object sender, RoutedEventArgs e) => await SaveAndClose();
   void OnCopyClip(object sender, RoutedEventArgs e) => Clipboard.SetText(tbkReport.Content?.ToString());
   void OnDblClck(object sender, MouseButtonEventArgs e) => GetEmailAddressFromLog();

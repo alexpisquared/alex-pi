@@ -6,7 +6,11 @@ public partial class App : Application
   {
     base.OnStartup(e);
 
+    Listeners.Add(new TextWriterTraceListener(@$"C:\Users\alexp\OneDrive\Public\Logs\{AppDomain.CurrentDomain.FriendlyName}.log"));
+
     var hasNewVisits = await _vm.ReLoadLists_CheckIfNews(true);
+    WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm} [***] hasNewVisits: {hasNewVisits}.");
+
     if (hasNewVisits || e.Args.FirstOrDefault() != "DonotShowIfNothingNew")
       new MainWindow(_vm).Show();
     else
@@ -14,6 +18,9 @@ public partial class App : Application
       await Task.Delay(1000);
       Shutdown();
     }
+
+    Flush();
+    Close();
   }
 }
 

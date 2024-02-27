@@ -89,7 +89,8 @@
       <GridSplitter Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
 
       <Menu Grid.Row="0" Margin="0 9 8 0" HorizontalAlignment="Right" Background="Transparent" Foreground="#44f">
-        <MenuItem Header=" _Fresh! " Click="OnRefresh"  Foreground="#0c0" ToolTip="+ blend in the new Nicks" />
+        <MenuItem Header="_Load Old" Command="{Binding LoadOldTxCommand}" Foreground="#0f0" />
+        <MenuItem Header=" _Fresh! " Click="OnRefresh"  Foreground="#0a0" ToolTip="+ blend in the new Nicks" />
         <MenuItem Header=" _Email! " Click="OnGetEmail" Foreground="#0af" ToolTip="Find email in the broadcast log" />
         <MenuItem Header="  VM  " FontWeight="Bold">
           <MenuItem Header=" _ReLoad " Command="{Binding RunReLoadCommand}" Foreground="#070" />

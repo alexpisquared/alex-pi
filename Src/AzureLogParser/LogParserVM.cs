@@ -43,7 +43,26 @@ public partial class LogParserVM : ObservableValidator
     RunReLoadCommand?.NotifyCanExecuteChanged();
   }
 
-  [RelayCommand(CanExecute = nameof(CanRunReLoad))] public async Task RunReLoad() => await RunReLoad_(); /**/ bool CanRunReLoad() => !IsBusy; async Task RunReLoad_() => await ReLoadLists_CheckIfNews();
+  [RelayCommand(CanExecute = nameof(CanLoadOldTx))] public async Task LoadOldTx() => await LoadOldTx_(); /**/ bool CanLoadOldTx() => !IsBusy; async Task LoadOldTx_()
+  {
+    var before = LogRaw.Length;
+    var files = Directory.GetFiles(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\", "*.txt"); // read all *.txt files from $@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\*.txt" and append contents of them into a single string:
+    LogRaw += string.Join("\r\n\r\n", files.Select(File.ReadAllText));
+    var after = LogRaw.Length;
+
+    var (logRaw0, eLogs, users) = await _logParser.AddLogLinesToLists(LogRaw);
+    await ReLoadCVSs_CheckIfNews(logRaw0, eLogs, users);
+
+    Report = ($"Characters: {before:N0} => {after:N0}.");
+    Console.Beep(360, 100);
+  }
+  [RelayCommand(CanExecute = nameof(CanRunReLoad))] public async Task RunReLoad() => await RunReLoad_(); /**/ bool CanRunReLoad() => !IsBusy; async Task RunReLoad_()
+  {
+    var (logRaw0, eLogs, users) = await _logParser.DoCRUD('r');
+
+    await ReLoadCVSs_CheckIfNews(logRaw0, eLogs, users);
+  }
+
   [RelayCommand(CanExecute = nameof(CanCreateLog))] public async Task CreateLog() => await DoCrud_('c'); /**/ bool CanCreateLog() => !IsBusy;
   [RelayCommand(CanExecute = nameof(CanUpdateLog))] public async Task UpdateLog() => await DoCrud_('u'); /**/ bool CanUpdateLog() => !IsBusy;
   [RelayCommand(CanExecute = nameof(CanDeleteLog))] public async Task DeleteLog() => await DoCrud_('d'); /**/ bool CanDeleteLog() => !IsBusy;
@@ -53,21 +72,24 @@ public partial class LogParserVM : ObservableValidator
   {
     IsBusy = true;
     Report = "...ing the log file on remote Azure location...";
-    //if (crud == 'd')      _ = MiscServices.SaveBlob(LogRaw ?? "Nothing here", $@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\AzureTttLog.{DateTime.Now:yyMMdd-HHmmss}.txt");
-
-    var (_, _, _) = await _logParser.DoCRUD(crud);
-    await ReLoadLists_CheckIfNews();
+    var (logRaw0, eLogs, users) = await _logParser.DoCRUD(crud);
+    await ReLoadCVSs_CheckIfNews(logRaw0, eLogs, users);
   }
-  public async Task<bool> ReLoadLists_CheckIfNews(bool sayIt = false)
+  public async Task<bool> ReLoadLists_CheckIfNews(bool sayIt)
+  {
+    var (logRaw0, eLogs, users) = await _logParser.DoCRUD('r');
+
+    return await ReLoadCVSs_CheckIfNews(logRaw0, eLogs, users, sayIt);
+  }
+  public async Task<bool> ReLoadCVSs_CheckIfNews(string logRaw0, List<WebEventLog> eLogs, List<WebsiteUser> users, bool sayIt = false)
   {
     IsBusy = true;
-    LogRaw = Report = "Loading...";
+    Report = "Loading...";
     Console.Beep(360, 100);
+    await Task.Delay(26);
 
     try
     {
-      var (logRaw0, eLogs, users) = await _logParser.DoCRUD('r');
-
       LogRaw = logRaw0; //tbxAllLog.ScrollToEnd(); // scroll to the end of text
 
       WebEventLogs = CollectionViewSource.GetDefaultView(eLogs.OrderByDescending(r => r.DoneAt));
