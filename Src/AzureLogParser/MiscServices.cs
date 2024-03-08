@@ -1,16 +1,14 @@
 ﻿namespace AzureLogParser;
-
 public class MiscServices
 {
   public static bool SaveBlob(string blob, string filePath)
   {
     try
     {
-      {
-        File.WriteAllText(filePath, blob);
-        return true;
-      }
-    } catch (Exception ex) { _ = MessageBox.Show(ex.Message); }
+      File.WriteAllText(filePath, blob);
+      return true;
+    }
+    catch (Exception ex) { _ = MessageBox.Show(nameof(SaveBlob), ex.Message); }
 
     return false;
   }
@@ -26,12 +24,14 @@ public class MiscServices
           File.WriteAllText(filePath, potentiallyNewUsageTime.ToString("o"));
           return true;
         }
-      } else
+      }
+      else
       {
         File.WriteAllText(filePath, potentiallyNewUsageTime.ToString("o"));
         return true;
       }
-    } catch (Exception ex) { _ = MessageBox.Show(ex.Message); }
+    }
+    catch (Exception ex) { _ = MessageBox.Show(nameof(NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime), ex.Message); }
 
     return false;
   }

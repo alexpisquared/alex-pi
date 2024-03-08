@@ -10,89 +10,108 @@ public partial class LogParserVM : ObservableValidator
   [ObservableProperty] bool isBusy;
   [ObservableProperty] string? logRaw;
   [ObservableProperty] string? report;
-  [ObservableProperty] string? memberSinceKey; //partial void OnMemIdChanged(string? value) => WebEventLogs?.Refresh();
+  /*[ObservableProperty]*/
+  string? MemberSinceKey; //partial void OnMemIdChanged(string? value) => WebEventLogs?.Refresh();
 
   [ObservableProperty] ICollectionView? webEventLogs;
   [ObservableProperty] ICollectionView? eventtGroups;
   [ObservableProperty] ICollectionView? websiteUsers;
-  [ObservableProperty] WebEventLog? selEL; partial void OnSelELChanged(WebEventLog? value)
+  [ObservableProperty] WebEventLog? selWE; partial void OnSelWEChanged(WebEventLog? value)
   {
+    UnselectAllCommand?.NotifyCanExecuteChanged();
+
     if (value is null) return;
 
     MemberSinceKey = null;
-    WebsiteUsers?.Refresh();
+    //WebEventLogs?.Refresh();
     EventtGroups?.Refresh();
+    WebsiteUsers?.Refresh();
   }
   [ObservableProperty] EventtGroup? selEG; partial void OnSelEGChanged(EventtGroup? value)
   {
+    UnselectAllCommand?.NotifyCanExecuteChanged();
+
     if (value is null) return;
 
+    SelWU = null;
     MemberSinceKey = null;
     WebEventLogs?.Refresh();
+    //EventtGroups?.Refresh();
+    WebsiteUsers?.Refresh();
 
-    RunReLoadCommand?.NotifyCanExecuteChanged();
+    //RunReLoadCommand?.NotifyCanExecuteChanged();
   }
   [ObservableProperty] WebsiteUser? selWU; partial void OnSelWUChanged(WebsiteUser? value)
   {
+    UnselectAllCommand?.NotifyCanExecuteChanged();
+
     if (value is null) return;
 
     SelEG = null;
     MemberSinceKey = value.MemberSinceKey;
     WebEventLogs?.Refresh();
+    EventtGroups?.Refresh();
+    //WebsiteUsers?.Refresh();
 
-    RunReLoadCommand?.NotifyCanExecuteChanged();
+    //RunReLoadCommand?.NotifyCanExecuteChanged();
   }
 
-  [RelayCommand(CanExecute = nameof(CanLoadOldTx))] public async Task LoadOldTx() => await LoadOldTx_(); /**/ bool CanLoadOldTx() => !IsBusy; async Task LoadOldTx_()
+  [RelayCommand(CanExecute = nameof(CanLoadOldTx))] public async Task LoadOldTx() => await LoadOldTx_(); bool CanLoadOldTx() => !IsBusy; async Task LoadOldTx_()
   {
-    var before = LogRaw.Length;
+    var before = LogRaw?.Length;
     var files = Directory.GetFiles(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\", "*.txt"); // read all *.txt files from $@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\*.txt" and append contents of them into a single string:
     LogRaw += string.Join("\r\n\r\n", files.Select(File.ReadAllText));
     var after = LogRaw.Length;
 
     var (logRaw0, eLogs, users) = await _logParser.AddLogLinesToLists(LogRaw);
-    await ReLoadCVSs_CheckIfNews(logRaw0, eLogs, users);
+    //todo: restore _ = await ReLoadCVSs_CheckIfNews(logRaw0, eLogs, users);
 
-    Report = ($"Characters: {before:N0} => {after:N0}.");
+    Report = $"Characters: {before:N0} => {after:N0}.";
     Console.Beep(360, 100);
   }
-  [RelayCommand(CanExecute = nameof(CanRunReLoad))] public async Task RunReLoad() => await RunReLoad_(); /**/ bool CanRunReLoad() => !IsBusy; async Task RunReLoad_()
+  [RelayCommand(CanExecute = nameof(CanRunReLoad))] public async Task RunReLoad() => _ = await ReLoadLists_CheckIfNews(false); bool CanRunReLoad() => !IsBusy;
+  [RelayCommand(CanExecute = nameof(CanCreateLog))] public async Task CreateLog() => await DoCrud_('c'); bool CanCreateLog() => !IsBusy;
+  [RelayCommand(CanExecute = nameof(CanUpdateLog))] public async Task UpdateLog() => await DoCrud_('u'); bool CanUpdateLog() => !IsBusy;
+  [RelayCommand(CanExecute = nameof(CanDeleteLog))] public async Task DeleteLog() => await DoCrud_('d'); bool CanDeleteLog() => !IsBusy;
+  [RelayCommand(CanExecute = nameof(CanAppendLog))] public async Task AppendLog() => await DoCrud_('a'); bool CanAppendLog() => !IsBusy;
+
+  [RelayCommand(CanExecute = nameof(CanUnselectAll))]
+  public async Task UnselectAll()
   {
-    var (logRaw0, eLogs, users) = await _logParser.DoCRUD('r');
+    SelWE = null;
+    SelEG = null;
+    SelWU = null;
 
-    await ReLoadCVSs_CheckIfNews(logRaw0, eLogs, users);
+    WebEventLogs?.Refresh();
+    EventtGroups?.Refresh();
+    WebsiteUsers?.Refresh();
+
+    //RunReLoadCommand?.NotifyCanExecuteChanged();
+
+    Console.Beep(360, 100);
+    await Task.Delay(26);
   }
+  bool CanUnselectAll() => SelWE is not null || SelEG is not null || SelWU is not null;
 
-  [RelayCommand(CanExecute = nameof(CanCreateLog))] public async Task CreateLog() => await DoCrud_('c'); /**/ bool CanCreateLog() => !IsBusy;
-  [RelayCommand(CanExecute = nameof(CanUpdateLog))] public async Task UpdateLog() => await DoCrud_('u'); /**/ bool CanUpdateLog() => !IsBusy;
-  [RelayCommand(CanExecute = nameof(CanDeleteLog))] public async Task DeleteLog() => await DoCrud_('d'); /**/ bool CanDeleteLog() => !IsBusy;
-  [RelayCommand(CanExecute = nameof(CanAppendLog))] public async Task AppendLog() => await DoCrud_('a'); /**/ bool CanAppendLog() => !IsBusy;
+  [RelayCommand] public async Task MakeUnique() { Console.Beep(360, 100); await Task.Delay(26); }
+  [RelayCommand] public async Task UpdateNicks() { await TrySave(); _ = await ReLoadLists_CheckIfNews(false); Console.Beep(360, 100); await Task.Delay(26); }
 
-  async Task DoCrud_(char crud)
-  {
-    IsBusy = true;
-    Report = "...ing the log file on remote Azure location...";
-    var (logRaw0, eLogs, users) = await _logParser.DoCRUD(crud);
-    await ReLoadCVSs_CheckIfNews(logRaw0, eLogs, users);
-  }
-  public async Task<bool> ReLoadLists_CheckIfNews(bool sayIt)
-  {
-    var (logRaw0, eLogs, users) = await _logParser.DoCRUD('r');
-
-    return await ReLoadCVSs_CheckIfNews(logRaw0, eLogs, users, sayIt);
-  }
-  public async Task<bool> ReLoadCVSs_CheckIfNews(string logRaw0, List<WebEventLog> eLogs, List<WebsiteUser> users, bool sayIt = false)
+  async Task DoCrud_(char crud) { IsBusy = true; Report = $"{crud}-ing the log file on remote Azure location..."; _ = await ReLoadCVSs_CheckIfNews(crud); }
+  public async Task<bool> ReLoadLists_CheckIfNews(bool sayIt) => await ReLoadCVSs_CheckIfNews('r', sayIt);
+  public async Task<bool> ReLoadCVSs_CheckIfNews(char crud, bool sayIt = false)
   {
     IsBusy = true;
     Report = "Loading...";
-    Console.Beep(360, 100);
+    Console.Beep(260, 500);
     await Task.Delay(26);
 
     try
     {
+      var (logRaw0, eLogs, users) = await _logParser.DoCRUD(crud);
+
       LogRaw = logRaw0; //tbxAllLog.ScrollToEnd(); // scroll to the end of text
 
-      WebEventLogs = CollectionViewSource.GetDefaultView(eLogs.OrderByDescending(r => r.DoneAt));
+      WebEventLogs = CollectionViewSource.GetDefaultView(eLogs.OrderByDescending(r => r.DoneAt).ToList());
       WebEventLogs.SortDescriptions.Add(new SortDescription(nameof(WebEventLog.DoneAt), ListSortDirection.Descending));
       WebEventLogs.Filter = obj => obj is not WebEventLog w || w is null ||
                                    ((string.IsNullOrEmpty(MemberSinceKey) || w.FirstVisitId?.Equals(MemberSinceKey, sc) == true) &&
@@ -106,7 +125,7 @@ public partial class LogParserVM : ObservableValidator
 
       WebsiteUsers = CollectionViewSource.GetDefaultView(users.OrderByDescending(r => r.LastVisitAt).ToList());
       WebsiteUsers.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
-      WebsiteUsers.Filter = obj => obj is not WebsiteUser w || w is null || string.IsNullOrEmpty(SelEL?.NickUser) || w.Nickname?.Equals(SelEL?.NickUser, sc) == true;
+      WebsiteUsers.Filter = obj => obj is not WebsiteUser w || w is null || string.IsNullOrEmpty(SelWE?.NickUser) || w.Nickname?.Equals(SelWE?.NickUser, sc) == true;
 
       EventtGroups = CollectionViewSource.GetDefaultView(eLogs.GroupBy(log => new
       {
@@ -127,21 +146,21 @@ public partial class LogParserVM : ObservableValidator
         CpuCores = r.Key.CPUCORES,
         Platform = r.Key.Platform,
         Language = r.Key.Languages,
-        Resolute = r.Key.Resolution
+        Resolute = r.Key.Resolution,
+        NickWare = _logParser.NickMapperWare($"{r.Key.Hardware}|{r.Key.MozillaVer}|{r.Key.Versions}|{r.Key.CPUCORES}|{r.Key.Platform}|{r.Key.Languages}|{r.Key.Resolution}")
       }).ToList());
+      //foreach (EventtGroup eg in EventtGroups) eg.NickWare = _logParser.NickMapperWare(eg.PseudoKey);
       EventtGroups.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
-      EventtGroups.Filter = obj => obj is not EventtGroup w || w is null || string.IsNullOrEmpty(SelEL?.NickWare) || w.NickWare?.Equals(SelEL?.NickWare, sc) == true;
-
-      foreach (EventtGroup item in EventtGroups) item.NickWare = _logParser.NickMapperWare(item.PseudoKey);
+      EventtGroups.Filter = obj => obj is not EventtGroup w || w is null || string.IsNullOrEmpty(SelWE?.NickWare) || w.NickWare?.Equals(SelWE?.NickWare, sc) == true;
 
       var isNew = MiscServices.NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime(eLogs.Max(r => r.DoneAt), @"C:\temp\potentiallyNewUsageTime.txt");
-      Report = isNew ? "New usage detected!" : "-- Nothing new --"; //tbkReport.Foreground = isNew ? Brushes.GreenYellow : Brushes.Gray;
+      Report = isNew ? "New visits detected!" : "-- Nothing new --"; //tbkReport.Foreground = isNew ? Brushes.GreenYellow : Brushes.Gray;
       if (/*isNew &&*/ sayIt)
         _ = synth.SpeakAsync(Report);
 
       return isNew;
     }
-    catch (Exception ex) { _ = MessageBox.Show(ex.Message); Report = ex.Message; }
+    catch (Exception ex) { /*_ = MessageBox.Show(ex.Message);*/ Report = ex.Message; }
     finally { IsBusy = false; }
 
     return true;
@@ -153,4 +172,6 @@ public partial class LogParserVM : ObservableValidator
     _ = synth.SpeakAsync("Saved");
     await Task.Delay(260);
   }
+
+  internal void OnNickUserChanged(string v) => throw new NotImplementedException();
 }

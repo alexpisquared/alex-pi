@@ -224,5 +224,18 @@
   "Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0|undefined|undefined|12|Win32|en-CA,en-US,en|2176x1224x24": "f27 * 8\u002B2",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36|16|Win32|en-US,en|3440x1440x24": "f27 * 7",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36|8|Win32|en-GB,en|1366x768x24": "@cynetsystems",
-  "Windows NT 6.1; Win64; x64|537.36|Chrome/109.0.0.0 Safari/537.36|8|Win32|en-US,en|1366x768x24": "@nascentdigital"
+  "Windows NT 6.1; Win64; x64|537.36|Chrome/109.0.0.0 Safari/537.36|8|Win32|en-US,en|1366x768x24": "@nascentdigital",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36|8|Win32|es-ES,es|1366x768x24": "@geotab",
+  "AHC/2.1|undefined|undefined|48|Linux x86_64|en-US|800x600x24": "f28 * 1\u0060",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36|48|Win32|en-US|1536x864x24": "@cybercoders @dapasoft",
+  "iPhone; CPU iPhone OS 17_3 like Mac OS X|605.1.15|EdgiOS/121.0.2277.133 Version/17.0 Mobile/15E148 Safari/604.1|48|Linux x86_64|en-US|800x600x24": "cpu48\u0060",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|12|Win32|en-US,en|1920x1200x24": "mccassen",
+  "Macintosh; Intel Mac OS X 10_15_7|605.1.15|Version/17.3.1 Safari/605.1.15|48|Linux x86_64|en-US|800x600x24": "mac\u00B7",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36|56|Win32|en-US|1536x864x24": "@cybercoders",
+  "Linux; Android 10; K|537.36|Chrome/122.0.0.0 Mobile Safari/537.36|48|Linux x86_64|en-US|800x600x24": "Linux; Android 10; K|537.36|Chrome/122.0.0.0 Mobile Safari/537.36|48|Linux x86_64|en-US|800x600x24",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|48|Linux x86_64|en-US|800x600x24": "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|48|Linux x86_64|en-US|800x600x24",
+  "Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0|undefined|undefined|48|Linux x86_64|en-US|800x600x24": "Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0|undefined|undefined|48|Linux x86_64|en-US|800x600x24",
+  "Macintosh; Intel Mac OS X 10_15_7|537.36|Chrome/111.0.5563.146 Safari/537.36|16|Linux aarch64|en-US|800x600x24": "mac",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/109.0.0.0 Safari/537.36|48|Linux x86_64|en-US|800x600x24": "m6",
+  "User-Agent: SEOlyt/1.0 (SEO analysis tool; https://seolyt.com)|undefined|undefined|4|Win32|en-US,en|1x1x24": "1x1"
 }

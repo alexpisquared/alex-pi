@@ -77,19 +77,19 @@ public class LogParser
     return await AddLogLinesToLists(logRaw, webEventLogs, websiteUsers);
   }
 
-  async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> AddLogLinesToLists(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)
+  async Task<(string logRaw, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)> AddLogLinesToLists(string logLines, List<WebEventLog> webEventLogs, List<WebsiteUser> websiteUsers)
   {
-    foreach (var line in logRaw.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).ToList().Where(r => r.Contains(", FirstVisitId = ")).ToList())
+    foreach (var logLine in logLines.Split("\r\n", StringSplitOptions.RemoveEmptyEntries).ToList().Where(r => r.Contains(", FirstVisitId = ")).ToList())
     {
       try
       {
         var log = new WebEventLog
         {
-          DoneAt = DateTime.Parse(line.Split(new string[] { "DoneAt = ", ", WebsiteUser =" }, StringSplitOptions.RemoveEmptyEntries)[1]).ToLocalTime(),
-          EventName = line.Split(new string[] { "EventName = ", ", DoneAt =" }, StringSplitOptions.RemoveEmptyEntries)[1],
-          BrowserSignature = line.Split(new string[] { "BrowserSignature = ", ", FirstVisitId = " }, StringSplitOptions.RemoveEmptyEntries)[1],
-          FirstVisitId = line.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1],
-          NickUser = NickMapperUser(line.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1]),
+          DoneAt = DateTime.Parse(logLine.Split(new string[] { "DoneAt = ", ", WebsiteUser =" }, StringSplitOptions.RemoveEmptyEntries)[1]).ToLocalTime(),
+          EventName = logLine.Split(new string[] { "EventName = ", ", DoneAt =" }, StringSplitOptions.RemoveEmptyEntries)[1],
+          BrowserSignature = logLine.Split(new string[] { "BrowserSignature = ", ", FirstVisitId = " }, StringSplitOptions.RemoveEmptyEntries)[1],
+          FirstVisitId = logLine.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1],
+          NickUser = NickMapperUser(logLine.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1]),
         };
 
         log.Sub = $"{log.BrowserSignature}|°|°|°|°|°|°|°|°|°|°|°|.".Split(new string[] { "║", "│", "|", ", NickUser = " }, StringSplitOptions.RemoveEmptyEntries);
@@ -122,7 +122,7 @@ public class LogParser
       }
       catch (Exception ex)
       {
-        WriteLine($"{ex.Message}  {line}");
+        WriteLine($"{ex.Message}  {logLine}");
       }
     }
 

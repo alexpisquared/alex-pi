@@ -20,9 +20,8 @@ internal class UniMapper
       File.WriteAllText(_filename, JsonSerializer.Serialize(_dictionary, new JsonSerializerOptions { WriteIndented = true }));
     }
   }
-  internal async Task UpdateIfDifferentAsync(string key, string val, int displayIndex)
+  internal async Task UpdateIfDifferentAsync(string key, string val)
   {
-    // displayIndex: 2 for key, 6 for notes ... but where is the full time stored?
     if (_dictionary.TryGetValue(key, out var value) && value != val)
     {
       _dictionary[key] = val;
@@ -39,9 +38,22 @@ internal class UniMapper
   {
     foreach (var item in items)
     {
-      if (item is WebsiteUser user) await UpdateIfDifferentAsync(user.MemberSinceKey, user.Nickname, 0);
-      else
-      if (item is EventtGroup ware) await UpdateIfDifferentAsync(ware.PseudoKey, ware.NickWare, 0);
+      if (item is WebsiteUser user)
+      {
+        var duplicates = items.Cast<WebsiteUser>().Where(r => r.Nickname == user.Nickname);
+        if (duplicates.Count() > 1)
+          user.Nickname += "·";
+
+        await UpdateIfDifferentAsync(user.MemberSinceKey, user.Nickname);
+      }
+      else if (item is EventtGroup ware)
+      {
+        var duplicates = items.Cast<EventtGroup>().Where(r => r.NickWare == ware.NickWare);
+        if (duplicates.Count() > 1)
+          ware.NickWare += "·";
+
+        await UpdateIfDifferentAsync(ware.PseudoKey, ware.NickWare);
+      }
     }
 
     return true;

@@ -1,7 +1,10 @@
-﻿namespace AzureLogParser;
+﻿using System.Windows.Controls;
+
+namespace AzureLogParser;
 public partial class MainWindow : Window
 {
   readonly LogParserVM _vm;
+  readonly SpeechSynthesizer synth = new();
 
   public MainWindow(LogParserVM vm)
   {
@@ -15,6 +18,19 @@ public partial class MainWindow : Window
 
     _vm = vm;
     DataContext = _vm;
+  }
+
+  async void OnExit(object sender, RoutedEventArgs e) => await SaveAndClose();
+  void OnCopyClip(object sender, RoutedEventArgs e) => Clipboard.SetText(((Button)sender).Content?.ToString());
+  void OnDblClck(object sender, MouseButtonEventArgs e) => GetEmailAddressFromLog();
+  void OnGetEmail(object sender, RoutedEventArgs e) => GetEmailAddressFromLog();
+  void OnNicknameChanged(object sender, DataTransferEventArgs e)
+  {
+    var dataGridCell = (DataGridCell)sender;
+    //var viewModel = (LogParserVM)dataGridCell.DataContext;
+    //var newNickname = viewModel.Nickname;
+    // Do something with the newNickname value
+    _vm.OnNickUserChanged("54");
   }
 
   async Task SaveAndClose() { Hide(); await _vm.TrySave(); Close(); }
@@ -33,13 +49,6 @@ public partial class MainWindow : Window
       MaxWidth = currentScreen.Bounds.Width;
     }
   }
-
-  async void OnLoaded(object sender, RoutedEventArgs e) => await Task.Yield();// _vm.ReLoadLists_CheckIfNews(true);
-  async void OnRefresh(object sender, RoutedEventArgs e) { await _vm.TrySave(); _ = await _vm.ReLoadLists_CheckIfNews(false); }
-  async void OnExit(object sender, RoutedEventArgs e) => await SaveAndClose();
-  void OnCopyClip(object sender, RoutedEventArgs e) => Clipboard.SetText(tbkReport.Content?.ToString());
-  void OnDblClck(object sender, MouseButtonEventArgs e) => GetEmailAddressFromLog();
-  void OnGetEmail(object sender, RoutedEventArgs e) => GetEmailAddressFromLog();
   void GetEmailAddressFromLog()
   {
     var slt = (dg1.SelectedItem as WebEventLog)?.EventName?.Split(':');
@@ -52,7 +61,7 @@ public partial class MainWindow : Window
       try
       {
         var timestamp = slt[1];
-        var matchingLines = File.ReadAllLines("""C:\Users\alexp\OneDrive\Public\Logs\MinNavTpl.RAZ.ale.Infi..log""").Where(x => x.Contains(timestamp)).ToList();
+        var matchingLines = ReadInPotentiallyLockedLogFile(timestamp);
         if (matchingLines.Count <= 0)
         {
           tbkReport.Foreground = System.Windows.Media.Brushes.Orange;
@@ -63,10 +72,30 @@ public partial class MainWindow : Window
           var eml = matchingLines[0].Split(' ', StringSplitOptions.RemoveEmptyEntries).Last();
           tbkReport.Foreground = System.Windows.Media.Brushes.LimeGreen;
           tbkReport.Content = eml;
+          Clipboard.SetText(eml);
+          _ = synth.SpeakAsync("Copied to Clipboard.");
           //new Window { Title = "Details", Height = 260, Width = 1400, Content = new TextBox { Text = $"{eml}\n\n{string.Join(Environment.NewLine, matchingLines)}\n\n", FontSize = 20, Foreground = System.Windows.Media.Brushes.Blue, TextWrapping = TextWrapping.Wrap, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto }}.ShowDialog();
         }
       }
-      catch (Exception ex) { _ = MessageBox.Show(ex.Message); tbkReport.Content = ex.Message; }
+      catch (Exception ex) { /*_ = MessageBox.Show(ex.Message);*/ tbkReport.Content = ex.Message; }
     }
   }
+  static List<string> ReadLogFile(string timestamp) => File.ReadAllLines(path).Where(x => x.Contains(timestamp)).ToList();
+  static List<string> ReadInPotentiallyLockedLogFile(string timestamp)
+  {
+    using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+    using var streamReader = new StreamReader(fileStream);
+    var lines = new List<string>();
+    string? line;
+    while ((line = streamReader.ReadLine()) != null)
+    {
+      if (line.Contains(timestamp))
+      {
+        lines.Add(line);
+      }
+    }
+
+    return lines;
+  }
+  const string path = @"C:\Users\alexp\OneDrive\Public\Logs\MinNavTpl.RAZ.ale.Infi..log";
 }
