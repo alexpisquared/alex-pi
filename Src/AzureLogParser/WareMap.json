@@ -238,5 +238,7 @@
   "Macintosh; Intel Mac OS X 10_15_7|537.36|Chrome/111.0.5563.146 Safari/537.36|16|Linux aarch64|en-US|800x600x24": "mac",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/109.0.0.0 Safari/537.36|48|Linux x86_64|en-US|800x600x24": "m6",
   "User-Agent: SEOlyt/1.0 (SEO analysis tool; https://seolyt.com)|undefined|undefined|4|Win32|en-US,en|1x1x24": "1x1",
-  "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36|2|Win32|en,en-CA|1920x1200x24": "aturlov@"
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36|2|Win32|en,en-CA|1920x1200x24": "aturlov@",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|8|Win32|en-US,en|2294x960x24": "2",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|12|Win32|en-US,en|2560x1440x24": "@moeen"
 }

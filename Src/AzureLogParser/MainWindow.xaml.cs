@@ -77,7 +77,7 @@ public partial class MainWindow : Window
           //new Window { Title = "Details", Height = 260, Width = 1400, Content = new TextBox { Text = $"{eml}\n\n{string.Join(Environment.NewLine, matchingLines)}\n\n", FontSize = 20, Foreground = System.Windows.Media.Brushes.Blue, TextWrapping = TextWrapping.Wrap, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto }}.ShowDialog();
         }
       }
-      catch (Exception ex) { /*_ = MessageBox.Show(ex.Message);*/ tbkReport.Content = ex.Message; }
+      catch (Exception ex) { /*_ = MessageBox.Show(ex.Message);*/ tbkReport.Content = ex.Message; WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  \n  {ex}\n"); }
     }
   }
   static List<string> ReadLogFile(string timestamp) => File.ReadAllLines(path).Where(x => x.Contains(timestamp)).ToList();

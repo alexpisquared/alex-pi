@@ -66,6 +66,7 @@ public class LogParser
     }
     catch (Exception ex)
     {
+      WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  \n  {ex}\n");
       return (ex.Message, webEventLogs, websiteUsers);
     }
   }
@@ -122,7 +123,7 @@ public class LogParser
       }
       catch (Exception ex)
       {
-        WriteLine($"{ex.Message}  {logLine}");
+        WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  \n  {ex}\n  {logLine}\n");
       }
     }
 
