@@ -104,7 +104,6 @@
         <MenuItem Header=" _Fresh! " Command="{Binding UpdateNicksCommand}" Foreground="#0a0" ToolTip="+ blend in the new Nicks" />
         <MenuItem Header=" _Email! " Click="OnGetEmail" Foreground="#0af" ToolTip="Find email in the broadcast log" />
         <MenuItem Header="_Unselect" Command="{Binding UnselectAllCommand}" Foreground="#aa0" ToolTip="Unselect" />
-        <MenuItem Header=" Uni_que " Command="{Binding MakeUniqueCommand}" Foreground="#0aa" ToolTip="MakeUnique" />
         <MenuItem Header="  VM  " FontWeight="Bold">
           <MenuItem Header="_Load Old" Command="{Binding LoadOldTxCommand}" Foreground="#0f0" />
           <MenuItem Header=" _ReLoad " Command="{Binding RunReLoadCommand}" Foreground="#070" />
@@ -112,6 +111,8 @@
           <MenuItem Header=" _Update " Command="{Binding UpdateLogCommand}" Foreground="#00f" />
           <MenuItem Header=" _Delete " Command="{Binding DeleteLogCommand}" Foreground="#f00" />
           <MenuItem Header=" _Append " Command="{Binding AppendLogCommand}" Foreground="#00f" />
+          <Separator />
+          <MenuItem Header=" Beep360 " Command="{Binding MakeUniqueCommand}"  Foreground="#0aa" ToolTip="MakeUnique - EMPTY TODO" />
         </MenuItem>
         <MenuItem  Header=" X " Click="OnExit" Foreground="#e00" />
         <Button IsCancel="True" Click="OnExit" />

@@ -93,8 +93,8 @@ public partial class LogParserVM : ObservableValidator
   }
   bool CanUnselectAll() => SelWE is not null || SelEG is not null || SelWU is not null;
 
+  [RelayCommand] public async Task UpdateNicks() { await TrySave(); _ = await ReLoadLists_CheckIfNews(false); await UnselectAll(); }
   [RelayCommand] public async Task MakeUnique() { Console.Beep(360, 100); await Task.Delay(26); }
-  [RelayCommand] public async Task UpdateNicks() { await TrySave(); _ = await ReLoadLists_CheckIfNews(false); Console.Beep(360, 100); await Task.Delay(26); }
 
   async Task DoCrud_(char crud) { IsBusy = true; Report = $"{crud}-ing the log file on remote Azure location..."; _ = await ReLoadCVSs_CheckIfNews(crud); }
   public async Task<bool> ReLoadLists_CheckIfNews(bool sayIt) => await ReLoadCVSs_CheckIfNews('r', sayIt);
