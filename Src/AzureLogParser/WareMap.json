@@ -240,5 +240,9 @@
   "User-Agent: SEOlyt/1.0 (SEO analysis tool; https://seolyt.com)|undefined|undefined|4|Win32|en-US,en|1x1x24": "1x1",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36|2|Win32|en,en-CA|1920x1200x24": "aturlov@",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|8|Win32|en-US,en|2294x960x24": "2",
-  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|12|Win32|en-US,en|2560x1440x24": "@moeen"
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|12|Win32|en-US,en|2560x1440x24": "@moeen",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0|8|Win32|en-US,en|2195x1236x24": "1\u00B7",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|8|Win32|en-US,en|1280x720x24": "5",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0|8|Win32|en-US,en|1920x1080x24": "8",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|16|Win32|en-US,en-GB,en|2048x1152x24": "martin.gula@pwc.com"
 }

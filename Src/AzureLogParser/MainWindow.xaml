@@ -89,7 +89,7 @@
           </DataGridTextColumn>-->
 
           <DataGridTextColumn Header="Visits   "                        IsReadOnly="True"  Binding="{Binding TotalVisits}"                                       Foreground="#cc0" ElementStyle="{StaticResource RightAlignStyle}" />
-          <DataGridTextColumn Header="Spread&#10; (days)"               IsReadOnly="True"  Binding="{Binding Spread.TotalDays, StringFormat='{}{0:N4}'}"         Foreground="#0a0" ElementStyle="{StaticResource RightAlignStyle}" />
+          <DataGridTextColumn Header="Spread&#10; (days)"               IsReadOnly="True"  Binding="{Binding Spread, StringFormat='{}{0:d\\ hh\\:mm\\:ss}'}"     Foreground="#0a0" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="MemberSinceKey&#10;        (UTC)" IsReadOnly="True"  Binding="{Binding MemberSinceKey}"  Width="662"                       Foreground="#ea0" />
           <DataGridTextColumn Header="FirstVisitDt"                     IsReadOnly="True"  Binding="{Binding FirstVisitDt, StringFormat='{}{0:yyyy-MM-dd}'}"     Foreground="#f0c" />
           <DataGridTextColumn Header="Note  "                           IsReadOnly="True"  Binding="{Binding Note}"            Width="*"                         Foreground="#888" />

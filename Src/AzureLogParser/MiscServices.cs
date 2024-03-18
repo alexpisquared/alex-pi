@@ -8,7 +8,7 @@ public class MiscServices
       File.WriteAllText(filePath, blob);
       return true;
     }
-    catch (Exception ex) { WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  \n  {ex}\n"); _ = MessageBox.Show(nameof(SaveBlob), ex.Message); }
+    catch (Exception ex) { WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  \n  {ex}"); _ = MessageBox.Show(nameof(SaveBlob), ex.Message); }
 
     return false;
   }
@@ -31,7 +31,7 @@ public class MiscServices
         return true;
       }
     }
-    catch (Exception ex) { WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  \n  {ex}\n"); _ = MessageBox.Show(nameof(NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime), ex.Message); }
+    catch (Exception ex) { WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  \n  {ex}"); _ = MessageBox.Show(nameof(NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime), ex.Message); }
 
     return false;
   }

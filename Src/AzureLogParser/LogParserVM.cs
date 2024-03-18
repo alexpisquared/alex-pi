@@ -160,7 +160,7 @@ public partial class LogParserVM : ObservableValidator
 
       return isNew;
     }
-    catch (Exception ex) { /*_ = MessageBox.Show(ex.Message);*/ Report = ex.Message; WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  \n  {ex}\n"); }
+    catch (Exception ex) { /*_ = MessageBox.Show(ex.Message);*/ Report = ex.Message; WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  {ex}"); }
     finally { IsBusy = false; }
 
     return true;
