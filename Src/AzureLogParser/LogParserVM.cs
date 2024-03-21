@@ -55,6 +55,7 @@ public partial class LogParserVM : ObservableValidator
 
     //RunReLoadCommand?.NotifyCanExecuteChanged();
   }
+  [ObservableProperty] bool importantOnly; partial void OnImportantOnlyChanged(bool oldValue, bool newValue) { WebEventLogs?.Refresh(); ; }
 
   [RelayCommand(CanExecute = nameof(CanLoadOldTx))] public async Task LoadOldTx() => await LoadOldTx_(); bool CanLoadOldTx() => !IsBusy; async Task LoadOldTx_()
   {
@@ -100,21 +101,21 @@ public partial class LogParserVM : ObservableValidator
   public async Task<bool> ReLoadLists_CheckIfNews(bool sayIt) => await ReLoadCVSs_CheckIfNews('r', sayIt);
   public async Task<bool> ReLoadCVSs_CheckIfNews(char crud, bool sayIt = false)
   {
+    //Console.Beep(260, 500);
     IsBusy = true;
     Report = "Loading...";
-    Console.Beep(260, 500);
-    await Task.Delay(26);
 
     try
     {
-      var (logRaw0, eLogs, users) = await _logParser.DoCRUD(crud);
+      var (logRaw_, eLogs_, users_) = await _logParser.DoCRUD(crud);
 
-      LogRaw = logRaw0; //tbxAllLog.ScrollToEnd(); // scroll to the end of text
+      LogRaw = logRaw_;
 
-      WebEventLogs = CollectionViewSource.GetDefaultView(eLogs.OrderByDescending(r => r.DoneAt).ToList());
+      WebEventLogs = CollectionViewSource.GetDefaultView(eLogs_.OrderByDescending(r => r.DoneAt).ToList());
       WebEventLogs.SortDescriptions.Add(new SortDescription(nameof(WebEventLog.DoneAt), ListSortDirection.Descending));
-      WebEventLogs.Filter = obj => obj is not WebEventLog w || w is null ||
-                                   ((string.IsNullOrEmpty(MemberSinceKey) || w.FirstVisitId?.Equals(MemberSinceKey, sc) == true) &&
+      WebEventLogs.Filter = obj => obj is not WebEventLog w || w is null || (
+                                    (ImportantOnly == false || w.EventName.Contains("home") == false) &&
+                                    (string.IsNullOrEmpty(MemberSinceKey) || w.FirstVisitId?.Equals(MemberSinceKey, sc) == true) &&
                                     (string.IsNullOrEmpty(SelEG?.Hardware) || w.Sub[0]?.Equals(SelEG.Hardware, sc) == true) &&
                                     (string.IsNullOrEmpty(SelEG?.MozillaV) || w.Sub[1]?.Equals(SelEG.MozillaV, sc) == true) &&
                                     (string.IsNullOrEmpty(SelEG?.Versions) || w.Sub[2]?.Equals(SelEG.Versions, sc) == true) &&
@@ -123,11 +124,11 @@ public partial class LogParserVM : ObservableValidator
                                     (string.IsNullOrEmpty(SelEG?.Language) || w.Sub[5]?.Equals(SelEG.Language, sc) == true) &&
                                     (string.IsNullOrEmpty(SelEG?.Resolute) || w.Sub[6]?.Equals(SelEG.Resolute, sc) == true));
 
-      WebsiteUsers = CollectionViewSource.GetDefaultView(users.OrderByDescending(r => r.LastVisitAt).ToList());
+      WebsiteUsers = CollectionViewSource.GetDefaultView(users_.OrderByDescending(r => r.LastVisitAt).ToList());
       WebsiteUsers.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
       WebsiteUsers.Filter = obj => obj is not WebsiteUser w || w is null || string.IsNullOrEmpty(SelWE?.NickUser) || w.Nickname?.Equals(SelWE?.NickUser, sc) == true;
 
-      EventtGroups = CollectionViewSource.GetDefaultView(eLogs.GroupBy(log => new
+      EventtGroups = CollectionViewSource.GetDefaultView(eLogs_.GroupBy(log => new
       {
         Hardware = log.Sub[0],
         MozillaVer = log.Sub[01],
@@ -153,7 +154,7 @@ public partial class LogParserVM : ObservableValidator
       EventtGroups.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
       EventtGroups.Filter = obj => obj is not EventtGroup w || w is null || string.IsNullOrEmpty(SelWE?.NickWare) || w.NickWare?.Equals(SelWE?.NickWare, sc) == true;
 
-      var isNew = MiscServices.NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime(eLogs.Max(r => r.DoneAt), @"C:\temp\potentiallyNewUsageTime.txt");
+      var isNew = MiscServices.NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime(eLogs_.Max(r => r.DoneAt), @"C:\temp\potentiallyNewUsageTime.txt");
       Report = isNew ? "New visits detected!" : "-- Nothing new --"; //tbkReport.Foreground = isNew ? Brushes.GreenYellow : Brushes.Gray;
       if (/*isNew &&*/ sayIt)
         _ = synth.SpeakAsync(Report);

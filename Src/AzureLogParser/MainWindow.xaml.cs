@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace AzureLogParser;
+﻿namespace AzureLogParser;
 public partial class MainWindow : Window
 {
   readonly LogParserVM _vm;

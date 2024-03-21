@@ -40,7 +40,7 @@
           <DataGridTextColumn Header="Visit Time"            Binding="{Binding DoneAt, StringFormat='{}{0:dd HH:mm:ss}'}" Foreground="#0c0" />
           <DataGridTextColumn Header="Event Name"            Binding="{Binding EventName}" Width="160" Foreground="#fba" />
           <DataGridTextColumn Header="Nick User"             Binding="{Binding NickUser}"  Width="190" Foreground="#e6f" />
-          <DataGridTextColumn Header="Nick Ware"             Binding="{Binding NickWare}"  Width="210"  Foreground="#0af" />
+          <DataGridTextColumn Header="Nick Ware"             Binding="{Binding NickWare}"  Width="210" Foreground="#0af" />
           <!--<DataGridTextColumn Header="Platform"          Binding="{Binding Sub[04]}"   Width="080" Foreground="#a7f" />
           <DataGridTextColumn Header="Hardware&#10;     TTT" Binding="{Binding Sub[00]}"   Width="220" Foreground="#aaf" />
           <DataGridTextColumn Header="Versions"              Binding="{Binding Sub[02]}"   Width="180" Foreground="#0af" />
@@ -101,6 +101,7 @@
       <GridSplitter Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
 
       <Menu Grid.Row="0" Margin="0 9 8 0" HorizontalAlignment="Right" Background="Transparent" Foreground="#44f">
+        <MenuItem Header=" _Important Only! " IsCheckable="True" IsChecked="{Binding ImportantOnly}" Foreground="#05f" ToolTip="" />
         <MenuItem Header=" _Fresh! " Command="{Binding UpdateNicksCommand}" Foreground="#0a0" ToolTip="+ blend in the new Nicks" />
         <MenuItem Header=" _Email! " Click="OnGetEmail" Foreground="#0af" ToolTip="Find email in the broadcast log" />
         <MenuItem Header="_Unselect" Command="{Binding UnselectAllCommand}" Foreground="#aa0" ToolTip="Unselect" />

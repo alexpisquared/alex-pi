@@ -241,8 +241,14 @@
   "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36|2|Win32|en,en-CA|1920x1200x24": "aturlov@",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|8|Win32|en-US,en|2294x960x24": "2",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|12|Win32|en-US,en|2560x1440x24": "@moeen",
-  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0|8|Win32|en-US,en|2195x1236x24": "1\u00B7",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0|8|Win32|en-US,en|2195x1236x24": "1\u00B7\u00B7\u00B7",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|8|Win32|en-US,en|1280x720x24": "5",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0|8|Win32|en-US,en|1920x1080x24": "8",
-  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|16|Win32|en-US,en-GB,en|2048x1152x24": "martin.gula@pwc.com"
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|16|Win32|en-US,en-GB,en|2048x1152x24": "martin.gula@pwc.com",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0|48|Win32|en-US,en|3215x1346x24": "3",
+  "iPhone; CPU iPhone OS 17_3_1 like Mac OS X|605.1.15|Version/17.3.1 Mobile/15E148 Safari/604.1|4|iPhone|en-CA|375x812x24": "mei",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0|12|Win32|en-US,en,en-CA|1536x864x24": "16",
+  "Linux; Android 10; K|537.36|Chrome/122.0.0.0 Mobile Safari/537.36|9|Linux armv81|en-CA,pl-PL,pl,en-GB,en-US,en|412x915x24": "1\u00B7",
+  "iPhone; CPU iPhone OS 17_3_1 like Mac OS X|605.1.15|Version/17.3.1 Mobile/15E148 Safari/604.1|4|iPhone|en-CA|393x852x24": "1\u00B7\u00B7",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|12|Win32|en-US,en|1920x1080x24": "3\u00B7"
 }
