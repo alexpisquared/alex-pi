@@ -252,5 +252,6 @@
   "iPhone; CPU iPhone OS 17_3_1 like Mac OS X|605.1.15|Version/17.3.1 Mobile/15E148 Safari/604.1|4|iPhone|en-CA|393x852x24": "1\u00B7\u00B7\u00B7",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36|12|Win32|en-US,en|1920x1080x24": "3\u00B7\u00B7",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0|12|Win32|en-US,en,uk,ru|4096x1152x24": "1\u00B7",
-  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0|12|Win32|en-US,en,uk,ru|1536x864x24": "21"
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/122.0.0.0 Safari/537.36 Edg/122.0.0.0|12|Win32|en-US,en,uk,ru|1536x864x24": "21",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36|12|Win32|en-US,en|1280x800x24": "3\u00B7"
 }
