@@ -9,7 +9,7 @@ public partial class MainWindow : Window
     InitializeComponent();
 
     UpdateMaxSize();                                    // Call UpdateMaxSize initially to set the correct initial size
-    LocationChanged += (sender, e) => UpdateMaxSize();  // Handle the LocationChanged event to update the size when the window is moved
+    LocationChanged += (s, e) => UpdateMaxSize();  // Handle the LocationChanged event to update the size when the window is moved
 
     KeyUp += new KeyEventHandler(async (s, e) => { if (e.Key == Key.Escape) await SaveAndClose(); }); //tu:
     MouseLeftButtonDown += new MouseButtonEventHandler((s, e) => { if (e.ButtonState == MouseButtonState.Pressed) { DragMove(); } }); //tu:
@@ -18,13 +18,13 @@ public partial class MainWindow : Window
     DataContext = _vm;
   }
 
-  async void OnExit(object sender, RoutedEventArgs e) => await SaveAndClose();
-  void OnCopyClip(object sender, RoutedEventArgs e) => Clipboard.SetText(((Button)sender).Content?.ToString());
-  void OnDblClck(object sender, MouseButtonEventArgs e) => GetEmailAddressFromLog();
-  void OnGetEmail(object sender, RoutedEventArgs e) => GetEmailAddressFromLog();
-  void OnNicknameChanged(object sender, DataTransferEventArgs e)
+  async void OnExit(object s, RoutedEventArgs e) => await SaveAndClose();
+  void OnCopyClip(object s, RoutedEventArgs e) => Clipboard.SetText(((Button)s).Content?.ToString());
+  async void OnDblClck(object s, MouseButtonEventArgs e) => await GetEmailAddressFromLog();
+  async void OnGetEmail(object s, RoutedEventArgs e) => await GetEmailAddressFromLog();
+  void OnNicknameChanged(object s, DataTransferEventArgs e)
   {
-    var dataGridCell = (DataGridCell)sender;
+    var dataGridCell = (DataGridCell)s;
     //var viewModel = (LogParserVM)dataGridCell.DataContext;
     //var newNickname = viewModel.Nickname;
     // Do something with the newNickname value
@@ -47,7 +47,7 @@ public partial class MainWindow : Window
       MaxWidth = currentScreen.Bounds.Width;
     }
   }
-  void GetEmailAddressFromLog()
+async Task  GetEmailAddressFromLog()
   {
     var slt = (dg1.SelectedItem as WebEventLog)?.EventName?.Split(':');
     if (slt is null || slt.Length <= 1)
@@ -63,7 +63,7 @@ public partial class MainWindow : Window
         if (matchingLines.Count <= 0)
         {
           tbkReport.Foreground = System.Windows.Media.Brushes.Orange;
-          tbkReport.Content = "No matches in the log";
+          tbkReport.Content = $"No matches in the log for {timestamp}";
         }
         else
         {
@@ -72,6 +72,9 @@ public partial class MainWindow : Window
           tbkReport.Content = eml;
           Clipboard.SetText(eml);
           _ = synth.SpeakAsync("Copied to Clipboard.");
+          
+         await _vm.Bingo(dg1.SelectedItem as WebEventLog, eml);
+
           //new Window { Title = "Details", Height = 260, Width = 1400, Content = new TextBox { Text = $"{eml}\n\n{string.Join(Environment.NewLine, matchingLines)}\n\n", FontSize = 20, Foreground = System.Windows.Media.Brushes.Blue, TextWrapping = TextWrapping.Wrap, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto }}.ShowDialog();
         }
       }

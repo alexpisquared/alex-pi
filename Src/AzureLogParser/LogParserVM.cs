@@ -175,4 +175,18 @@ public partial class LogParserVM : ObservableValidator
   }
 
   internal void OnNickUserChanged(string v) => throw new NotImplementedException();
+  internal async Task Bingo(WebEventLog? webEventLog, string eml)
+  {
+    if (WebsiteUsers?.SourceCollection is IEnumerable<WebsiteUser> websiteUsers)
+    {
+      var matchingUser = websiteUsers.FirstOrDefault(user => user.MemberSinceKey == webEventLog?.FirstVisitId);
+      if (matchingUser != null)
+      {
+        //wipes out the list:
+        matchingUser.Nickname = eml;
+        //WebsiteUsers?.Refresh();
+        await UnselectAll();
+      }
+    }
+  }
 }

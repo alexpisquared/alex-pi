@@ -25,7 +25,7 @@
   "iPhone; CPU iPhone OS 17_1_2 like Mac OS X|605.1.15|Version/17.1.2 Mobile/15E148 Safari/604.1|4|iPhone|en-CA|390x844x24": "3",
   "Macintosh; Intel Mac OS X 10_15_7|605.1.15|Version/17.1.2 Safari/605.1.15|48|Linux x86_64|en-US|800x600x24": "wc",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/117.0.5938.132 Safari/537.36|64|Linux x86_64|en-US|800x600x24": "cpu64",
-  "Windows NT 10.0; Win64; x64|537.36|Chrome/104.0.0.0 Safari/537.36|8|Win32|en-US,en|1280x960x24": "1\u00B7",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/104.0.0.0 Safari/537.36|8|Win32|en-US,en|1280x960x24": "1\u00B7\u00B7\u00B7\u00B7",
   "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Googlebot/2.1; \u002Bhttp://www.google.com/bot.html) Chrome/120.0.6099.71 Safari/537.36|undefined|undefined|124|Linux x86_64|en-US|1024x1024x24": "wc",
   "Linux; Android 6.0.1; Nexus 5X Build/MMB29P|537.36|Chrome/120.0.6099.71 Mobile Safari/537.36 (compatible; Googlebot/2.1; \u002Bhttp://www.google.com/bot.html)|109|Linux armv8l|en-US|412x732x24": "wc",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/117.0.5938.132 Safari/537.36|56|Linux x86_64|en-US|800x600x24": "wc",
@@ -142,7 +142,7 @@
   "Linux; Android 10; K|537.36|Chrome/121.0.0.0 Mobile Safari/537.36|48|Linux x86_64|en-US|800x600x24": "1",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/120.0.0.0 Safari/537.36|8|Win32|nl-NL,nl,en-US,en|1366x768x24": "1",
   "iPhone; CPU iPhone OS 16_6_1 like Mac OS X|605.1.15|Version/16.6 Mobile/15E148 Safari/604.1|48|Linux x86_64|en-US|800x600x24": "cpu48 * 1",
-  "Windows NT 10.0; Win64; x64|537.36|Chrome/103.0.5060.134 Safari/537.36|8|Win32|en-US,en|1280x960x24": "1\u00B7",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/103.0.5060.134 Safari/537.36|8|Win32|en-US,en|1280x960x24": "1\u00B7\u00B7",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0|8|Win32|en-US,en|1280x720x24": "morgan.starke@capco.com",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/79.0.3945.79 Safari/537.36|56|Linux x86_64|en-US|1024x1024x24": "cpu56",
   "Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0|undefined|undefined|4|Win32|en-US,en|1280x720x24": "abijith@yochana.com",
@@ -278,7 +278,7 @@
   "Windows NT 10.0; Win64; x64|537.36|Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0|12|Win32|en-US,en,uk,ru,en-CA|4097x1152x24": "rzr edge alexpi.ca",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0|8|Win32|en-US,en,sv|1366x768x24": "Windows NT 10.0; Win64; x64|537.36|Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0|8|Win32|en-US,en,sv|1366x768x24",
   "Macintosh; Intel Mac OS X 10_15_7|537.36|Chrome/122.0.0.0 Safari/537.36|48|Linux x86_64|en-US|800x600x24": "Macintosh; Intel Mac OS X 10_15_7|537.36|Chrome/122.0.0.0 Safari/537.36|48|Linux x86_64|en-US|800x600x24",
-  "Windows NT 10.0; Win64; x64|537.36|Chrome/125.0.0.0 Safari/537.36|56|Win32|en-US|1536x864x24": "1\u00B7\u00B7",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/125.0.0.0 Safari/537.36|56|Win32|en-US|1536x864x24": "1\u00B7\u00B7\u00B7\u00B7\u00B7",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/125.0.0.0 Safari/537.36|12|Win32|en-CA,zh-CN,zh,uk-UA,uk,en-GB,en-US,en|1536x864x24": "Windows NT 10.0; Win64; x64|537.36|Chrome/125.0.0.0 Safari/537.36|12|Win32|en-CA,zh-CN,zh,uk-UA,uk,en-GB,en-US,en|1536x864x24",
   "Windows NT 10.0; Win64; x64|537.36|Chrome/125.0.0.0 Safari/537.36|8|Win32|en-US,en|1366x768x24": "Windows NT 10.0; Win64; x64|537.36|Chrome/125.0.0.0 Safari/537.36|8|Win32|en-US,en|1366x768x24",
   "Microsoft Office/16.0 (Windows NT 10.0; Microsoft Outlook 16.0.16731; Pro)|undefined|undefined|48|Linux x86_64|en-US|800x600x24": "Microsoft Office/16.0 (Windows NT 10.0; Microsoft Outlook 16.0.16731; Pro)|undefined|undefined|48|Linux x86_64|en-US|800x600x24",
@@ -286,5 +286,8 @@
   "iPhone; CPU iPhone OS 17_5 like Mac OS X|605.1.15|GSA/319.0.638705450 Mobile/15E148 Safari/604.1|48|Linux x86_64|en-US|800x600x24": "iPhone; CPU iPhone OS 17_5 like Mac OS X|605.1.15|GSA/319.0.638705450 Mobile/15E148 Safari/604.1|48|Linux x86_64|en-US|800x600x24",
   "Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0|undefined|undefined|48|Linux x86_64|en-US|800x600x24": "Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0|undefined|undefined|48|Linux x86_64|en-US|800x600x24",
   "iPhone; CPU iPhone OS 17_3 like Mac OS X|605.1.15|EdgiOS/125.0.2535.87 Version/17.0 Mobile/15E148 Safari/604.1|48|Linux x86_64|en-US|800x600x24": "1",
-  "Windows NT 5.2; RW; rv:7.0a1) Gecko/20091211 SeaMonkey/9.23a1pre|undefined|undefined|48|Linux x86_64|en-US|800x600x24": "1\u00B7\u00B7"
+  "Windows NT 5.2; RW; rv:7.0a1) Gecko/20091211 SeaMonkey/9.23a1pre|undefined|undefined|48|Linux x86_64|en-US|800x600x24": "1\u00B7\u00B7\u00B7",
+  "Macintosh; Intel Mac OS X 10_13_6|605.1.15|Version/13.1.2 Safari/605.1.15|48|Linux x86_64|en-US|800x600x24": "Macintosh; Intel Mac OS X 10_13_6|605.1.15|Version/13.1.2 Safari/605.1.15|48|Linux x86_64|en-US|800x600x24",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/85.0.4183.121 Safari/537.36|48|Linux x86_64|en-US|800x600x24": "Windows NT 10.0; Win64; x64|537.36|Chrome/85.0.4183.121 Safari/537.36|48|Linux x86_64|en-US|800x600x24",
+  "Windows NT 10.0; Win64; x64|537.36|Chrome/125.0.0.0 Safari/537.36|4|Win32|en-US,en|1920x1080x24": "Windows NT 10.0; Win64; x64|537.36|Chrome/125.0.0.0 Safari/537.36|4|Win32|en-US,en|1920x1080x24"
 }
