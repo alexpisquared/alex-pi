@@ -79,15 +79,6 @@
           <DataGridTextColumn Header="Last Visit  &#10;  (Local)"       IsReadOnly="True"  Binding="{Binding LastVisitAt, StringFormat='{}{0:MM-dd HH:mm}'}" Foreground="#0c0" />
           <DataGridTextColumn Header="Added at  &#10;  (Local)"         IsReadOnly="True"  Binding="{Binding CreatedAt, StringFormat='{}{0:MM-dd HH:mm}'}"     Foreground="#ea0" />
           <DataGridTextColumn Header="Nick User "                       IsReadOnly="False" Binding="{Binding Nickname}"        Width="190"                       Foreground="#e6f" />
-
-          <!--//nogo: <DataGridTextColumn Header="Nick User" IsReadOnly="False" Binding="{Binding Nickname}" Width="160" Foreground="#e6f">
-            <DataGridTextColumn.CellStyle>
-              <Style TargetType="{x:Type DataGridCell}">
-                <EventSetter Event="Binding.TargetUpdated" Handler="OnNicknameChanged"/>
-              </Style>
-            </DataGridTextColumn.CellStyle>
-          </DataGridTextColumn>-->
-
           <DataGridTextColumn Header="Visits   "                        IsReadOnly="True"  Binding="{Binding TotalVisits}"                                       Foreground="#cc0" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="Spread&#10; (days)"               IsReadOnly="True"  Binding="{Binding Spread, StringFormat='{}{0:d\\ hh\\:mm\\:ss}'}"     Foreground="#0a0" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="MemberSinceKey&#10;        (UTC)" IsReadOnly="True"  Binding="{Binding MemberSinceKey}"  Width="662"                       Foreground="#ea0" />

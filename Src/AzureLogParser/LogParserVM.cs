@@ -111,6 +111,8 @@ public partial class LogParserVM : ObservableValidator
 
       LogRaw = logRaw_;
 
+      CheckFindVisitorsWhoClickedBroadcastEmailLink(eLogs_, users_);
+
       WebEventLogs = CollectionViewSource.GetDefaultView(eLogs_.OrderByDescending(r => r.DoneAt).ToList());
       WebEventLogs.SortDescriptions.Add(new SortDescription(nameof(WebEventLog.DoneAt), ListSortDirection.Descending));
       WebEventLogs.Filter = obj => obj is not WebEventLog w || w is null || (
@@ -166,6 +168,34 @@ public partial class LogParserVM : ObservableValidator
 
     return true;
   }
+
+  private static void CheckFindVisitorsWhoClickedBroadcastEmailLink(List<WebEventLog> eLogs_, List<WebsiteUser> users_)
+  {
+    var allLogLines = ReadAllLinesFromPotentiallyLockedLogFile();
+
+    foreach (WebEventLog webEventLog in eLogs_.Where(r => r.EventName.Contains(':')))
+    {
+      // 1. Find the matching line in the broadcast log file.
+      var line = allLogLines.FirstOrDefault(line => line.Contains(webEventLog.EventName.Split(':')[1]));
+      if (line is null) continue;
+
+      // 2. Extract the email address from the line.
+      var email = line.Split(' ', StringSplitOptions.RemoveEmptyEntries).Last();
+      if (string.IsNullOrEmpty(email)) continue;
+
+      // 3. Find the WebsiteUser with the FirstVisitId.
+      var matchingUser = users_.FirstOrDefault(user => user.MemberSinceKey == webEventLog.FirstVisitId);
+      if (matchingUser is null) continue;
+
+      // 4. Check if the email address is different from the one in the WebsiteUser.
+      if (!matchingUser.Nickname.Contains(email))
+      {
+        // 5. If different, update the WebsiteUser with the email address.
+        matchingUser.Nickname = email;
+      }
+    }
+  }
+
   public async Task TrySave()
   {
     _ = await _logParser.UpdateIfNewUser(WebsiteUsers);
@@ -174,7 +204,6 @@ public partial class LogParserVM : ObservableValidator
     await Task.Delay(260);
   }
 
-  internal void OnNickUserChanged(string v) => throw new NotImplementedException();
   internal async Task Bingo(WebEventLog? webEventLog, string eml)
   {
     if (WebsiteUsers?.SourceCollection is IEnumerable<WebsiteUser> websiteUsers)
@@ -189,4 +218,20 @@ public partial class LogParserVM : ObservableValidator
       }
     }
   }
+
+
+  static List<string> ReadAllLinesFromPotentiallyLockedLogFile()
+  {
+    using var fileStream = new FileStream(broadcastLogFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); // Open the potentially locked file.
+    using var streamReader = new StreamReader(fileStream);
+    var lines = new List<string>();
+    string? line;
+    while ((line = streamReader.ReadLine()) != null)
+    {
+      lines.Add(line);
+    }
+
+    return lines;
+  }
+  const string broadcastLogFile = @"C:\Users\alexp\OneDrive\Public\Logs\MinNavTpl.RAZ.ale.Infi..log";
 }
