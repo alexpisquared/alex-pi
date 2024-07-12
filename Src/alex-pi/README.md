@@ -215,3 +215,8 @@ Deploy to Azure:      https://docs.microsoft.com/en-us/visualstudio/get-started/
   Not sure what happened, but it worked. I did not have luck with the last 3 ?? steps... It just worked. I guess it was a glitch in the matrix.
 
 ?? maybe try GitHub actions:  https://docs.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=applevel
+
+## 2024-07-12
+  - upgraded to Angular 18
+  - reduced to 4 vulnerabilities:  npm audit >audit.txt
+  
