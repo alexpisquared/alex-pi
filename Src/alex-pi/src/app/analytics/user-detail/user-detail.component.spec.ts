@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { UserDetailComponent } from './user-detail.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { VwEventUserUtcComponent } from '../vw-event-user-utc/vw-event-user-utc.component';
@@ -14,9 +14,10 @@ describe('UserDetailComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [MaterialModule, RouterTestingModule, HttpClientModule, BrowserAnimationsModule, FormsModule], // karma fix
-      declarations: [UserDetailComponent, VwEventUserUtcComponent]
-    }).compileComponents();
+    declarations: [UserDetailComponent, VwEventUserUtcComponent],
+    imports: [MaterialModule, RouterTestingModule, BrowserAnimationsModule, FormsModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
   }));
 
   beforeEach(() => {

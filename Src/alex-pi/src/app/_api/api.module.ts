@@ -1,6 +1,6 @@
 /* tslint:disable */
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationInterface } from './api-configuration';
 
 import { OcrService } from './services/ocr.service';
@@ -10,26 +10,24 @@ import { VwUserHopsUtcsService } from './services/vw-user-hops-utcs.service';
 import { WebEventLogsService } from './services/web-event-logs.service';
 import { WebsiteUsersService } from './services/website-users.service';
 
+import { HttpClientModule } from '@angular/common/http';
+
 /**
  * Provider for all Api services, plus ApiConfiguration
  */
 @NgModule({
-  imports: [
-    HttpClientModule
-  ],
-  exports: [
-    HttpClientModule
-  ],
-  declarations: [],
-  providers: [
+  imports: [HttpClientModule],
+  exports: [HttpClientModule],
+  declarations: [], providers: [
     ApiConfiguration,
     OcrService,
     ValuesService,
     VwEventUserUtcsService,
     VwUserHopsUtcsService,
     WebEventLogsService,
-    WebsiteUsersService
-  ],
+    WebsiteUsersService,
+    provideHttpClient(withInterceptorsFromDi())
+  ]
 })
 export class ApiModule {
   static forRoot(customParams: ApiConfigurationInterface): ModuleWithProviders<ApiModule> {
@@ -38,7 +36,7 @@ export class ApiModule {
       providers: [
         {
           provide: ApiConfiguration,
-          useValue: {rootUrl: customParams.rootUrl}
+          useValue: { rootUrl: customParams.rootUrl }
         }
       ]
     }
