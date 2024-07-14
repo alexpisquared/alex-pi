@@ -2,6 +2,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationInterface } from './api-configuration';
+import { HttpClientModule } from '@angular/common/http'; // Add this line
+import 'tslib'; // Add this line
 
 import { OcrService } from './services/ocr.service';
 import { ValuesService } from './services/values.service';
@@ -10,15 +12,14 @@ import { VwUserHopsUtcsService } from './services/vw-user-hops-utcs.service';
 import { WebEventLogsService } from './services/web-event-logs.service';
 import { WebsiteUsersService } from './services/website-users.service';
 
-import { HttpClientModule } from '@angular/common/http';
-
 /**
- * Provider for all Api services, plus ApiConfiguration
+ * Provider for all Api services, plus ApiConfiguration -------------------------------------------------------
  */
 @NgModule({
-  imports: [HttpClientModule],
+  declarations: [],
   exports: [HttpClientModule],
-  declarations: [], providers: [
+  imports: [HttpClientModule], // Add HttpClientModule to imports
+  providers: [
     ApiConfiguration,
     OcrService,
     ValuesService,
