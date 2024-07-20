@@ -2,7 +2,7 @@
 public partial class MainWindow : Window
 {
   readonly LogParserVM _vm;
-  readonly SpeechSynthesizer synth = new();
+  readonly SpeechSynthesizer _synth = new();
 
   public MainWindow(LogParserVM vm)
   {
@@ -62,7 +62,7 @@ public partial class MainWindow : Window
           tbkReport.Foreground = System.Windows.Media.Brushes.LimeGreen;
           tbkReport.Content = eml;
           System.Windows.Clipboard.SetText(eml);
-          _ = synth.SpeakAsync("Copied to Clipboard.");
+          _ = _synth.SpeakAsync("Copied to Clipboard.");
 
           await _vm.Bingo(dg1.SelectedItem as WebEventLog, eml);
 
@@ -72,22 +72,25 @@ public partial class MainWindow : Window
       catch (Exception ex) { /*_ = MessageBox.Show(ex.Message);*/ tbkReport.Content = ex.Message; WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  \n  {ex}"); }
     }
   }
-  static List<string> ReadLogFile(string timestamp) => File.ReadAllLines(broadcastLogFile).Where(x => x.Contains(timestamp)).ToList();
+  static List<string> ReadLogFile(string timestamp) => File.ReadAllLines(_broadcastLogFile).Where(x => x.Contains(timestamp)).ToList();
   static List<string> ReadInPotentiallyLockedLogFile(string timestamp)
   {
-    using var fileStream = new FileStream(broadcastLogFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); // Open the potentially locked file.
-    using var streamReader = new StreamReader(fileStream);
     var lines = new List<string>();
-    string? line;
-    while ((line = streamReader.ReadLine()) != null)
+    if (File.Exists(_broadcastLogFile))
     {
-      if (line.Contains(timestamp))
+      using var fileStream = new FileStream(_broadcastLogFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); // Open the potentially locked file.
+      using var streamReader = new StreamReader(fileStream);
+      string? line;
+      while ((line = streamReader.ReadLine()) != null)
       {
-        lines.Add(line);
+        if (line.Contains(timestamp))
+        {
+          lines.Add(line);
+        }
       }
     }
 
     return lines;
   }
-  const string broadcastLogFile = @"C:\Users\alexp\OneDrive\Public\Logs\MinNavTpl.RAZ.ale.Infi..log";
+  const string _broadcastLogFile = @"C:\Users\alexp\OneDrive\Public\Logs\MinNavTpl.RAZ.ale.Infi..log";
 }
