@@ -39,10 +39,6 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
   <!-- Odd: compiles without this:
   <ItemGroup>
     <Reference Include="System.Windows.Forms" />

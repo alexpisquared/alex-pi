@@ -117,7 +117,7 @@ public partial class LogParserVM : ObservableValidator
       WebEventLogs = CollectionViewSource.GetDefaultView(eLogs_.OrderByDescending(r => r.DoneAt).ToList());
       WebEventLogs.SortDescriptions.Add(new SortDescription(nameof(WebEventLog.DoneAt), ListSortDirection.Descending));
       WebEventLogs.Filter = obj => obj is not WebEventLog w || w is null || (
-                                    (ExcludeApiCaHome == false || (w.EventName.Contains("home") == false && w.EventName.Contains("ttt") == false)) &&
+                                    (ExcludeApiCaHome == false || (w.EventName.Contains("home:undefined:undefined") == false && w.EventName.Contains("ttt") == false)) &&
                                     (TttRotationOnly == false || w.EventName.Contains("ttt") == true) &&
                                     (string.IsNullOrEmpty(_memberSinceKey) || w.FirstVisitId?.Equals(_memberSinceKey, _sc) == true) &&
                                     (string.IsNullOrEmpty(SelEG?.Hardware) || w.Sub[0]?.Equals(SelEG.Hardware, _sc) == true) &&
@@ -154,11 +154,14 @@ public partial class LogParserVM : ObservableValidator
         Resolute = r.Key.Resolution,
         NickWare = _logParser.NickMapperWare($"{r.Key.Hardware}|{r.Key.MozillaVer}|{r.Key.Versions}|{r.Key.CPUCORES}|{r.Key.Platform}|{r.Key.Languages}|{r.Key.Resolution}")
       }).ToList());
+
       //foreach (EventtGroup eg in EventtGroups) eg.NickWare = _logParser.NickMapperWare(eg.PseudoKey);
       EventtGroups.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
       EventtGroups.Filter = obj => obj is not EventtGroup w || w is null || string.IsNullOrEmpty(SelWE?.NickWare) || w.NickWare?.Equals(SelWE?.NickWare, _sc) == true;
 
-      var isNew = MiscServices.NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime(eLogs_.Max(r => r.DoneAt), @"C:\temp\potentiallyNewUsageTime.txt");
+      if (!eLogs_.Any()) return false;
+
+      var isNew = MiscServices.IsThereAreNewLogEntriesAndStoreLastNewLogTime(eLogs_.Max(r => r.DoneAt));
       Report = isNew ? "New visits detected!" : "-- Nothing new --"; //tbkReport.Foreground = isNew ? Brushes.GreenYellow : Brushes.Gray;
       if (/*isNew &&*/ sayIt)
         _ = _synth.SpeakAsync(Report);

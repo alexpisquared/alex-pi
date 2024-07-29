@@ -10,7 +10,7 @@ public partial class App : Application
 
     var hasNewVisits = await _vm.ReLoadLists_CheckIfNews(false);
     AutoFlush = true;
-    WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.f}  {(hasNewVisits ? "New visit[s] detected!" : "°")}");
+    WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss.f}  args[0] {e.Args[0],-26}  {(hasNewVisits ? "New visit[s] detected!" : "°")}");
 
     if (hasNewVisits || e.Args.FirstOrDefault() != "DonotShowIfNothingNew")
       new MainWindow(_vm).Show();

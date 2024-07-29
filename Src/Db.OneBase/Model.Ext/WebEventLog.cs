@@ -2,12 +2,13 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace Db.OneBase.Model;
 
 public partial record WebEventLog
 {
-  [NotMapped] public string[] Sub { get; set; }
+  [NotMapped][JsonIgnore] public string[] Sub { get; set; } // used for parsing and grouping data from BrowserSignature field.
   [NotMapped] public string BrowserSignature { get; set; }
   [NotMapped] public string NickUser { get; set; }       // don't change order!!! :parsing depends on it.
   [NotMapped] public string FirstVisitId { get; set; }   // don't change order!!! :parsing depends on it.
