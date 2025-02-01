@@ -422,5 +422,22 @@
   "Macintosh; I|537.36|Chrome|8|MacIntel|en-GB,en-US,en|2048x1280x24": "Macintosh; I|537.36|Chrome|8|MacIntel|en-GB,en-US,en|2048x1280x24",
   "Windows NT 1|537.36|Chrome|16|Win32|en-US,en|2247x1264x24": "Windows NT 1|537.36|Chrome|16|Win32|en-US,en|2247x1264x24",
   "Linux; Andro|537.36|Chrome|15|Linux x86_64|en-US|400x400x24": "Linux; Andro|537.36|Chrome|15|Linux x86_64|en-US|400x400x24",
-  "Linux; Andro|537.36|Chrome|8|Linux armv81|en-US|412x883x24": "Linux; Andro|537.36|Chrome|8|Linux armv81|en-US|412x883x24"
+  "Linux; Andro|537.36|Chrome|8|Linux armv81|en-US|412x883x24": "Linux; Andro|537.36|Chrome|8|Linux armv81|en-US|412x883x24",
+  "Windows NT 1|537.36|Chrome|16|Win32|en-US,en|4493x1264x24": "Windows NT 1|537.36|Chrome|16|Win32|en-US,en|4493x1264x24",
+  "Windows NT 1|537.36|Chrome|8|Win32|en-US,en,uk,en-CA|1920x1080x24": "Windows NT 1|537.36|Chrome|8|Win32|en-US,en,uk,en-CA|1920x1080x24",
+  "Windows NT 1|537.36|Chrome|16|Win32|en-US,en|2246x1264x24": "ThinkPad",
+  "Linux; Andro|537.36|Chrome|8|Linux armv8l|en-CA,en|412x883x32": "Linux; Andro|537.36|Chrome|8|Linux armv8l|en-CA,en|412x883x32",
+  "Linux; Andro|537.36|Chrome|8|Linux armv81|en-CA,en-GB,en-US,en|360x780x24": "Linux; Andro|537.36|Chrome|8|Linux armv81|en-CA,en-GB,en-US,en|360x780x24",
+  "Macintosh; I|537.36|Chrome|2|Linux x86_64|en-US|1366x768x24": "Macintosh; I|537.36|Chrome|2|Linux x86_64|en-US|1366x768x24",
+  "Mozilla/5.0 |undefined|undefined|110|Linux x86_64|en-US|1024x1024x24": "Mozilla/5.0 |undefined|undefined|110|Linux x86_64|en-US|1024x1024x24",
+  "Mozilla/5.0 |undefined|undefined|247|Linux x86_64|en-US|1024x1024x24": "Mozilla/5.0 |undefined|undefined|247|Linux x86_64|en-US|1024x1024x24",
+  "Linux; Andro|537.36|Chrome|247|Linux armv8l|en-US|412x732x24": "Linux; Andro|537.36|Chrome|247|Linux armv8l|en-US|412x732x24",
+  "Mozilla/5.0 |undefined|undefined|238|Linux x86_64|en-US|1024x1024x24": "Mozilla/5.0 |undefined|undefined|238|Linux x86_64|en-US|1024x1024x24",
+  "Windows NT 1|537.36|Chrome|40|Linux x86_64|en-US|800x600x24": "Windows NT 1|537.36|Chrome|40|Linux x86_64|en-US|800x600x24",
+  "Windows NT 1|537.36|Chrome|8|Win32|en-GB,en-US,en|1739x979x24": "Windows NT 1|537.36|Chrome|8|Win32|en-GB,en-US,en|1739x979x24",
+  "Mozilla/5.0 |undefined|undefined|128|Linux x86_64|en-US|1024x1024x24": "Mozilla/5.0 |undefined|undefined|128|Linux x86_64|en-US|1024x1024x24",
+  "Windows NT 1|537.36|Chrome|48|Win32|en-US,en;q=0.9|1536x864x24": "Windows NT 1|537.36|Chrome|48|Win32|en-US,en;q=0.9|1536x864x24",
+  "Windows NT 1|537.36|Chrome|56|Win32|en-US,en;q=0.9|1536x864x24": "Windows NT 1|537.36|Chrome|56|Win32|en-US,en;q=0.9|1536x864x24",
+  "Windows NT 1|537.36|Chrome|8|Win32|en-US,en|1280x720x24": "Windows NT 1|537.36|Chrome|8|Win32|en-US,en|1280x720x24",
+  "X11; Linux x|537.36|Chrome|48|Linux x86_64|en-US|800x600x24": "X11; Linux x|537.36|Chrome|48|Linux x86_64|en-US|800x600x24"
 }
