@@ -7,12 +7,13 @@
     <br />
     <br />
     <div align="center" class="welcome-row">
-      <h1>&nbsp;Welcome &nbsp; to&nbsp;&nbsp;<span class="biggerish"> alex</span></h1>
+      <h1>&nbsp;Welcome &nbsp; to&nbsp;&nbsp;<span class="biggerish"> alex</span>&nbsp;&nbsp;</h1>
+      <!-- '4' overlaps with 'alex' on iPhone - 2025-03-01 -->
       <div class="g765 biggerish" [@flipinplace]="isNumeric ? 'isNmb' : 'isDgt'" (@flipinplace.done)="onDone($event)">
-        <h1>3.14&nbsp;</h1>
+        <h1>&nbsp;&nbsp;3.14&nbsp;</h1>
       </div>
       <div class="g765 biggerish" [@flipinplace]="isNumeric ? 'isDgt' : 'isNmb'">
-        <h1>Pi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+        <h1>&nbsp;&nbsp;Pi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
       </div>
     </div>
     <br />
@@ -43,19 +44,24 @@
         Praesent suscipit mauris non risus.
         <br /><br />
         In pharetra erat vel vestibulum.
-
-          <h2>No new announcements at this time</h2>
-          <h6><i>stay tuned</i></h6>
         -->
-        Starting <b>{{ startMonth }}</b>
+
+          <h2>No new announcements</h2>
+          <h2>this time</h2>
+          <h6><i>stay tuned</i></h6>
+
+          <!-- Starting <b>{{ startMonth }}</b>
         <br /><br />
         I'm available for full-stack
         <br /><br />
+
+        <br />
+        <br />
         development projects in <b>Toronto </b>
-        <br />
-        <br />
+        -->
       </span>
-      <!-- <canvas #canvas height="10" width="620"></canvas>
+      <!--
+      <canvas #canvas height="10" width="620"></canvas>
       <button (click)="play()">Play</button> -->
       <br />
     </div>

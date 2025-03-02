@@ -439,5 +439,15 @@
   "Windows NT 1|537.36|Chrome|48|Win32|en-US,en;q=0.9|1536x864x24": "Windows NT 1|537.36|Chrome|48|Win32|en-US,en;q=0.9|1536x864x24",
   "Windows NT 1|537.36|Chrome|56|Win32|en-US,en;q=0.9|1536x864x24": "Windows NT 1|537.36|Chrome|56|Win32|en-US,en;q=0.9|1536x864x24",
   "Windows NT 1|537.36|Chrome|8|Win32|en-US,en|1280x720x24": "Windows NT 1|537.36|Chrome|8|Win32|en-US,en|1280x720x24",
-  "X11; Linux x|537.36|Chrome|48|Linux x86_64|en-US|800x600x24": "X11; Linux x|537.36|Chrome|48|Linux x86_64|en-US|800x600x24"
+  "X11; Linux x|537.36|Chrome|48|Linux x86_64|en-US|800x600x24": "X11; Linux x|537.36|Chrome|48|Linux x86_64|en-US|800x600x24",
+  "Mozilla/5.0 |undefined|undefined|12|Win32|en-US|800x600x24": "Mozilla/5.0 |undefined|undefined|12|Win32|en-US|800x600x24",
+  "Windows NT 1|537.36|Chrome|20|Win32|en-US,en,en-CA|1536x864x24": "Windows NT 1|537.36|Chrome|20|Win32|en-US,en,en-CA|1536x864x24",
+  "Windows NT 1|537.36|Chrome|8|Win32|en-US,en,en-CA|2560x1440x24": "Windows NT 1|537.36|Chrome|8|Win32|en-US,en,en-CA|2560x1440x24",
+  "Windows NT 1|537.36|Chrome|12|Win32|en-US,en,en-CA|1536x864x24": "Windows NT 1|537.36|Chrome|12|Win32|en-US,en,en-CA|1536x864x24",
+  "Windows NT 1|537.36|Chrome|12|Win32|en-US,en,en-CA|1106x622x24": "Windows NT 1|537.36|Chrome|12|Win32|en-US,en,en-CA|1106x622x24",
+  "X11; Linux x|537.36|Headle|4|Linux x86_64|en-US@posix|1280x720x24": "X11; Linux x|537.36|Headle|4|Linux x86_64|en-US@posix|1280x720x24",
+  "Windows NT 1|537.36|Chrome|8|Win32|en-US,en|1920x1080x24": "Windows NT 1|537.36|Chrome|8|Win32|en-US,en|1920x1080x24",
+  "\u2584\u2580\u2584\u2580\u2584\u2580, Nickname = |\u00B0|\u00B0|\u00B0|\u00B0|\u00B0|\u00B0": "\u2584\u2580\u2584\u2580\u2584\u2580, Nickname = |\u00B0|\u00B0|\u00B0|\u00B0|\u00B0|\u00B0",
+  "iPhone; CPU |605.1.15|Versio|96|iPhone|zh-CN,en,en-GB,en-US,fr|375x667x24": "iPhone; CPU |605.1.15|Versio|96|iPhone|zh-CN,en,en-GB,en-US,fr|375x667x24",
+  "Windows NT 1|537.36|Chrome|12|Win32|en-CA,zh-CN,zh,uk-UA,uk,en-GB,en-US,en|4097x1152x24": "Windows NT 1|537.36|Chrome|12|Win32|en-CA,zh-CN,zh,uk-UA,uk,en-GB,en-US,en|4097x1152x24"
 }
