@@ -113,6 +113,7 @@ export class TennisTimerComponent implements OnInit {
         await this.delay(5000);
         this.playResourse(this.getTimeToChange());
         await this.delay(1000);
+        this.welSvc.logEvName('ttmr.Rotated');
         break;
     }
   }

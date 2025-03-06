@@ -2,7 +2,7 @@
   "profiles": {
     "AzureLogParser": {
       "commandName": "Project",
-      "commandLineArgs": "D onotShowIfNothingNew"
+      "commandLineArgs": "VS2024 Do_notShowIfNothingNew"
     }
   }
 }

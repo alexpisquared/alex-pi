@@ -7,12 +7,13 @@
     <br />
     <br />
     <div align="center" class="welcome-row">
-      <h1>Welcome &nbsp; to&nbsp;&nbsp;<span class="biggerish"> alex </span>&nbsp;</h1>
+      <h1>&nbsp;Welcome &nbsp; to&nbsp;&nbsp;<span class="biggerish"> alex</span>&nbsp;&nbsp;</h1>
+      <!-- '4' overlaps with 'alex' on iPhone - 2025-03-01 -->
       <div class="g765 biggerish" [@flipinplace]="isNumeric ? 'isNmb' : 'isDgt'" (@flipinplace.done)="onDone($event)">
-        <h1>3.14</h1>
+        <h1>&nbsp;&nbsp;3.14&nbsp;</h1>
       </div>
       <div class="g765 biggerish" [@flipinplace]="isNumeric ? 'isDgt' : 'isNmb'">
-        <h1>Pi&nbsp;&nbsp;&nbsp;</h1>
+        <h1>&nbsp;&nbsp;Pi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
       </div>
     </div>
     <br />
@@ -31,41 +32,44 @@
     <div [@slideBumpRightToLeft]="isLightOn ? 'isOn' : 'isOf'" class="styleLightOn">
       <span>
         <div align="center">
-          <!-- (2019-11-24:park  2020-11-10:unpark)
-            <h2>My Status</h2>
+          <!-- (2019-11-24:park  2020-11-10:unpark 2024-12-06:park)
+          <h2>Praesent commodo</h2>
+          <h2>My Status</h2>
           -->
-        <h2>Praesent commodo</h2>
         </div>
+        <br /><br />
         <!-- (2019-11-24:park  2020-11-10:unpark)
-          Proin egestas dolor id finibus ultrices.
-          <br /><br />
-          Praesent suscipit mauris non risus.
-          <br /><br />
-          In pharetra erat vel vestibulum.
+        Proin egestas dolor id finibus ultrices.
+        <br /><br />
+        Praesent suscipit mauris non risus.
+        <br /><br />
+        In pharetra erat vel vestibulum.
         -->
-          <h1>No new announcements at this time</h1>
-          <h6><i>stay tuned</i></h6>
-          <!-- <h2>No new announcements at this time</h2>
-          <h3>No new announcements at this time</h3>
-          <h4>No new announcements at this time</h4>
-          <h5>No new announcements at this time</h5>
-          <h6>No new announcements at this time</h6> -->
 
-        <!-- Starting <b>{{ startMonth }}</b>
+          <h2>No new announcements</h2>
+          <h2>this time</h2>
+          <h6><i>stay tuned</i></h6>
+
+          <!-- Starting <b>{{ startMonth }}</b>
         <br /><br />
-        I'm available for full-stack development
+        I'm available for full-stack
         <br /><br />
-        projects in <b>Toronto </b> <i> or remotely worldwide</i>
-              <br />
-        <br /> -->
+
+        <br />
+        <br />
+        development projects in <b>Toronto </b>
+        -->
       </span>
-      <!-- <canvas #canvas height="10" width="620"></canvas>
+      <!--
+      <canvas #canvas height="10" width="620"></canvas>
       <button (click)="play()">Play</button> -->
       <br />
     </div>
   </div>
   <div align="center">
+    <br />
     <div style="text-align: left; min-width: 400px; max-width: 640px">
+      <br />
       <p class="m12-15-f12">
         <!-- (2019-11-24:park  2020-11-10:unpark)
           Cras at augue ac metus viverra volutpat et ullamcorper mi. Donec
@@ -80,11 +84,11 @@
         Need IT projects delivered lightning-fast with cutting-edge .NET, WPF, MS SQL, and Web tech? ...
       </p>
       <p class="m12-15-f12" style="text-align: right;">
-          ... Tap into my expert service.
+        ... tap into my expert service.
       </p>
     </div>
   </div>
-   <!-- hide this div: -->
+  <!-- hide this div: -->
 
   <div align="center" style="display: none;">
     <div style="text-align: left; min-width: 400px; max-width: 640px">

@@ -30,8 +30,8 @@ export class NavHeaderComponent implements OnInit, OnDestroy, AfterViewInit {
   private themeKey = 'themeKey';
   private mainTheme = 'main-theme';
   private darkTheme = 'dark-theme';
-  // AlexPiLogoThemed = './assets/images/AlexTiny_LinkedIn.png';
-  AlexPiLogoThemed = './assets/images/AlexPi pro 315x315 - Ukraine Flag - Ofc.png';
+  AlexPiLogoThemed = './assets/images/AlexPi pro 200x200.jpg';
+  // AlexPiLogoThemed = './assets/images/AlexPi pro 315x315 - Ukraine Flag - Ofc.png';
   UkraineFlagThemd = './assets/images/UkraineFlag.svg'; // a change to trigger pipeline rebuild
   isSignedIn = false;
   private isMobileResolution: boolean;

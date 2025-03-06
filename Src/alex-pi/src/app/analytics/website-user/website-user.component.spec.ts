@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { WebsiteUserComponent } from './website-user.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('WebsiteUserComponent', () => {
   let component: WebsiteUserComponent;
@@ -11,9 +11,10 @@ describe('WebsiteUserComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [MaterialModule, RouterTestingModule, HttpClientModule],
-      declarations: [WebsiteUserComponent]
-    }).compileComponents();
+    declarations: [WebsiteUserComponent],
+    imports: [MaterialModule, RouterTestingModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
   }));
 
   beforeEach(() => {

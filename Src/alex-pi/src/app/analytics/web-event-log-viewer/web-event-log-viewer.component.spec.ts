@@ -4,7 +4,7 @@ import { WebEventLogViewerComponent } from './web-event-log-viewer.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialModule } from '../../material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('WebEventLogViewerComponent', () => {
   let component: WebEventLogViewerComponent;
@@ -12,9 +12,10 @@ describe('WebEventLogViewerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
-      declarations: [WebEventLogViewerComponent]
-    }).compileComponents();
+    declarations: [WebEventLogViewerComponent],
+    imports: [RouterTestingModule, MaterialModule, BrowserAnimationsModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
   }));
 
   beforeEach(() => {

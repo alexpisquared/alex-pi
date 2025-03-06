@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,53 +42,43 @@ import { UserDetailComponent } from './analytics/user-detail/user-detail.compone
 import { CompInteractService } from './serivce/comp-interact.service';
 import { TennisTimerComponent } from './x/tennis-timer/tennis-timer.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    AboutComponent,
-    ContactComponent,
-    HomeComponent,
-    MyAppsComponent,
-    MyClientsComponent,
-    MyDesignsComponent,
-    MyFamilyComponent,
-    MyGeoTargetComponent,
-    MyProjectsComponent,
-    MyResumesComponent,
-    MyStatusOpenComponent,
-    MyStatusBusyComponent,
-    NavFooterComponent,
-    NavHeaderComponent,
-    NavSideLComponent,
-    OpenCloseComponent,
-    RadarComponent,
-    WebEventLogViewerComponent,
-    AnalytMainComponent,
-    MyDesignRespComponent,
-    MyDesignFpttComponent,
-    MyDesignTrorComponent,
-    MyDesignTytuComponent,
-    MyDesignStr2Component,
-    OcrDemoComponent,
-    WebsiteUserComponent,
-    VwEventUserUtcComponent,
-    VwUserHopsUtcComponent,
-    UserDetailComponent,
-    TennisTimerComponent
-  ],
-  imports: [
-    FormsModule, // for ngModel .. which is obsolete....
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MaterialModule,
-    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }) // review the origins!!! as it does not work.
-    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }) // try to fix SW - no go; need to find latest and do from scratch.
-  ],
-  providers: [CompInteractService, { provide: LocationStrategy, useClass: HashLocationStrategy }], // deep link fix #3 (https://stackoverflow.com/questions/38054707/angular-2-azure-deploy-refresh-error-the-resource-you-are-looking-for-has-been)
-
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        AboutComponent,
+        ContactComponent,
+        HomeComponent,
+        MyAppsComponent,
+        MyClientsComponent,
+        MyDesignsComponent,
+        MyFamilyComponent,
+        MyGeoTargetComponent,
+        MyProjectsComponent,
+        MyResumesComponent,
+        MyStatusOpenComponent,
+        MyStatusBusyComponent,
+        NavFooterComponent,
+        NavHeaderComponent,
+        NavSideLComponent,
+        OpenCloseComponent,
+        RadarComponent,
+        WebEventLogViewerComponent,
+        AnalytMainComponent,
+        MyDesignRespComponent,
+        MyDesignFpttComponent,
+        MyDesignTrorComponent,
+        MyDesignTytuComponent,
+        MyDesignStr2Component,
+        OcrDemoComponent,
+        WebsiteUserComponent,
+        VwEventUserUtcComponent,
+        VwUserHopsUtcComponent,
+        UserDetailComponent,
+        TennisTimerComponent
+    ], // deep link fix #3 (https://stackoverflow.com/questions/38054707/angular-2-azure-deploy-refresh-error-the-resource-you-are-looking-for-has-been)
+    bootstrap: [AppComponent], imports: [FormsModule, // for ngModel .. which is obsolete....
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        MaterialModule], providers: [CompInteractService, { provide: LocationStrategy, useClass: HashLocationStrategy }, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

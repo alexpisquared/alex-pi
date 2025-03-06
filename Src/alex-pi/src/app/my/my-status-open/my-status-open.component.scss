@@ -7,6 +7,17 @@
   //   border: 1px solid gray;} .flexVertJust div {  background-color: #03030341;
 }
 
+.container11 {
+  display: flex;
+  justify-content: center;  // Center horizontally
+  align-items: center;      // Center vertically
+  height: 24vh;             // 20% of the viewport height  100vh = Full viewport height
+}
+
+.welcome-row11 {
+  text-align: center;
+}
+
 // .SiteHeader {   background-image: url('/assets/images/HeaderBackground.png');}
 
 .m12-15-f12 {
