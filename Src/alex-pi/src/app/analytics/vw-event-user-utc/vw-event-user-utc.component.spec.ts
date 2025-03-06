@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { VwEventUserUtcComponent } from './vw-event-user-utc.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CompInteractService } from 'src/app/serivce/comp-interact.service';
 
 describe('VwEventUserUtcComponent', () => {
@@ -12,10 +12,10 @@ describe('VwEventUserUtcComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [MaterialModule, RouterTestingModule, HttpClientModule],
-      declarations: [VwEventUserUtcComponent],
-      providers: [CompInteractService]
-    }).compileComponents();
+    declarations: [VwEventUserUtcComponent],
+    imports: [MaterialModule, RouterTestingModule],
+    providers: [CompInteractService, provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
   }));
 
   beforeEach(() => {

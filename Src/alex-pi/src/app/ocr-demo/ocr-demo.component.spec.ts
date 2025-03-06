@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { OcrDemoComponent } from './ocr-demo.component';
 import { MaterialModule } from '../material/material.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('OcrDemoComponent', () => {
@@ -12,9 +12,10 @@ describe('OcrDemoComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [MaterialModule, RouterTestingModule, HttpClientModule, BrowserAnimationsModule],
-      declarations: [OcrDemoComponent]
-    }).compileComponents();
+    declarations: [OcrDemoComponent],
+    imports: [MaterialModule, RouterTestingModule, BrowserAnimationsModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
   }));
 
   beforeEach(() => {

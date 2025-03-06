@@ -9,7 +9,7 @@ import { MyStatusOpenComponent } from '../my/my-status-open/my-status-open.compo
 import { MyResumesComponent } from '../my/my-resumes/my-resumes.component';
 import { MyClientsComponent } from '../my/my-clients/my-clients.component';
 import { NavFooterComponent } from '../nav/nav-footer/nav-footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -17,9 +17,10 @@ describe('HomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
-      declarations: [HomeComponent, MyStatusOpenComponent, MyResumesComponent, MyClientsComponent, NavFooterComponent]
-    }).compileComponents();
+    declarations: [HomeComponent, MyStatusOpenComponent, MyResumesComponent, MyClientsComponent, NavFooterComponent],
+    imports: [RouterTestingModule, MaterialModule, BrowserAnimationsModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
   }));
 
   beforeEach(() => {

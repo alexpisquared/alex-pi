@@ -1,22 +1,19 @@
-﻿using Db.OneBase.Model;
-
-namespace AzureLogParser;
+﻿namespace AzureLogParser;
 public class LogParser
 {
+  const string _root = @"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\";
   readonly string _key;
   string? _logRaw;
 
   public LogParser(string key) => _key = key;
-  readonly UniMapper _userMap = new(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\UserMap.json");
-  readonly UniMapper _wareMap = new(@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\WareMap.json");
+  readonly UniMapper _userMap = new($@"{_root}UserMap.json");
+  readonly UniMapper _wareMap = new($@"{_root}WareMap.json");
 
   public async Task<string> LogRaw()
   {
-    if (_logRaw is null)
-    {
-      _logRaw = await new PoorMansLogger(_key).ReadFileAsync();
-      //tmi: WriteLine($"{_logRaw}");
-    }
+    _logRaw ??= await new PoorMansLogger(_key).ReadFileAsync();
+
+    _ = MiscServices.SaveBlob(_logRaw, $@"{_root}AzureTttLog.Latest.txt");
 
     return _logRaw;
   }
@@ -50,7 +47,7 @@ public class LogParser
       else if (crud == 'd')
       {
         var lr = await LogRaw();
-        _ = MiscServices.SaveBlob(lr ?? "Nothing here", $@"C:\Users\alexp\source\repos\alex-pi\AzureLogParser\Data\AzureTttLog.{DateTime.Now:yyMMdd-HHmmss}.txt");
+        _ = MiscServices.SaveBlob(lr ?? "Nothing here", $@"{_root}AzureTttLog.{DateTime.Now:yyMMdd-HHmmss}.txt");
         await poorMansLogger.DeleteFileAsync();
       }
       else if (crud == 'a')
@@ -86,14 +83,14 @@ public class LogParser
       {
         var log = new WebEventLog
         {
-          DoneAt = DateTime.Parse(logLine.Split(new string[] { "DoneAt = ", ", WebsiteUser =" }, StringSplitOptions.RemoveEmptyEntries)[1]).ToLocalTime(),
-          EventName = logLine.Split(new string[] { "EventName = ", ", DoneAt =" }, StringSplitOptions.RemoveEmptyEntries)[1],
-          BrowserSignature = logLine.Split(new string[] { "BrowserSignature = ", ", FirstVisitId = " }, StringSplitOptions.RemoveEmptyEntries)[1],
-          FirstVisitId = logLine.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1],
-          NickUser = NickMapperUser(logLine.Split(new string[] { ", FirstVisitId = ", ", Id = " }, StringSplitOptions.RemoveEmptyEntries)[1]),
+          DoneAt = DateTime.Parse(logLine.Split(["DoneAt = ", ", WebsiteUser ="], StringSplitOptions.RemoveEmptyEntries)[1]).ToLocalTime(),
+          EventName = logLine.Split(["EventName = ", ", DoneAt ="], StringSplitOptions.RemoveEmptyEntries)[1],
+          BrowserSignature = logLine.Split(["BrowserSignature = ", ", FirstVisitId = "], StringSplitOptions.RemoveEmptyEntries)[1],
+          FirstVisitId = logLine.Split([", FirstVisitId = ", ", Id = "], StringSplitOptions.RemoveEmptyEntries)[1],
+          NickUser = NickMapperUser(logLine.Split([", FirstVisitId = ", ", Id = "], StringSplitOptions.RemoveEmptyEntries)[1]),
         };
 
-        log.Sub = $"{log.BrowserSignature}|°|°|°|°|°|°|°|°|°|°|°|.".Split(new string[] { "║", "│", "|", ", NickUser = " }, StringSplitOptions.RemoveEmptyEntries);
+        log.Sub = $"{log.BrowserSignature}|°|°|°|°|°|°|°|°|°|°|°|.".Split([ "║", "│", "|", ", NickUser = " ], StringSplitOptions.RemoveEmptyEntries);
 
         var r = new
         {

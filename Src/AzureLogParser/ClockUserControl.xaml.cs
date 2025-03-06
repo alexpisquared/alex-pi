@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 
 namespace AzureLogParser;
-public partial class ClockUserControl : UserControl
+public partial class ClockUserControl : System.Windows.Controls.UserControl
 {
   public ClockUserControl() => InitializeComponent();
 

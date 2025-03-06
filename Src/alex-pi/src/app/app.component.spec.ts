@@ -7,14 +7,15 @@ import { MaterialModule } from './material/material.module';
 import { NavHeaderComponent } from './nav/nav-header/nav-header.component';
 import { NavSideLComponent } from './nav/nav-side-l/nav-side-l.component';
 import { NavFooterComponent } from './nav/nav-footer/nav-footer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [MaterialModule, RouterTestingModule, HttpClientModule, BrowserAnimationsModule], // karma fix
-      declarations: [AppComponent, NavHeaderComponent, NavSideLComponent, NavFooterComponent]
-    }).compileComponents();
+    declarations: [AppComponent, NavHeaderComponent, NavSideLComponent, NavFooterComponent],
+    imports: [MaterialModule, RouterTestingModule, BrowserAnimationsModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
   }));
 
   it('should create the app', () => {

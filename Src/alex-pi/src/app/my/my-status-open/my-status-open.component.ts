@@ -65,9 +65,9 @@ export class MyStatusOpenComponent implements OnInit, OnDestroy {
   }
 
   calculateStartDate(): string {
-    const eoContract = new Date(2023, 11, 5);
+    const eoContract = new Date(2025, 2, 9);
     const today = new Date();
-    const avlbldate = today < eoContract ? eoContract : new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14);
+    const avlbldate = today < eoContract ? eoContract : new Date(today.getFullYear(), today.getMonth(), today.getDate() + 15);
     const monthPart = avlbldate.getDate() < 10 ? 'early' : avlbldate.getDate() > 20 ? 'late' : 'mid';
     const startDate = `${monthPart} ${avlbldate.toLocaleString('default', { month: 'long' })} ${avlbldate.getFullYear()}`;
     return startDate;

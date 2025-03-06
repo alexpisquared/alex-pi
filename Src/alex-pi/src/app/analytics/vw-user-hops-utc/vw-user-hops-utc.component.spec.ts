@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { VwUserHopsUtcComponent } from './vw-user-hops-utc.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('VwUserHopsUtcComponent', () => {
   let component: VwUserHopsUtcComponent;
@@ -11,9 +11,10 @@ describe('VwUserHopsUtcComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [MaterialModule, RouterTestingModule, HttpClientModule],
-      declarations: [VwUserHopsUtcComponent]
-    }).compileComponents();
+    declarations: [VwUserHopsUtcComponent],
+    imports: [MaterialModule, RouterTestingModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
   }));
 
   beforeEach(() => {

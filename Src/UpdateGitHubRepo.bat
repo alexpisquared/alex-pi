@@ -30,7 +30,7 @@ goto menu
 :1 Normal
   robocopy C:\Users\alexp\source\repos\alex-pi C:\g\alex-pi\Src %para%  /S /XO 
 goto :EOF
-:2 MOR
+:2 MIR
   robocopy C:\Users\alexp\source\repos\alex-pi C:\g\alex-pi\Src %para%  /MIR 
 goto :EOF
 :3 Reverse

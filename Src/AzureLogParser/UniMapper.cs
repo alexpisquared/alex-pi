@@ -42,7 +42,7 @@ internal class UniMapper
       {
         var duplicates = items.Cast<WebsiteUser>().Where(r => r.Nickname == user.Nickname);
         if (duplicates.Count() > 1)
-          user.Nickname += "·";
+          user.Nickname += ".";
 
         await UpdateIfDifferentAsync(user.MemberSinceKey, user.Nickname);
       }
@@ -50,7 +50,7 @@ internal class UniMapper
       {
         var duplicates = items.Cast<EventtGroup>().Where(r => r.NickWare == ware.NickWare);
         if (duplicates.Count() > 1)
-          ware.NickWare += "·";
+          ware.NickWare += ".";
 
         await UpdateIfDifferentAsync(ware.PseudoKey, ware.NickWare);
       }

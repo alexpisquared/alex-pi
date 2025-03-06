@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MyDesignsComponent } from './my-designs.component';
 import { MaterialModule } from '../../material/material.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyDesignRespComponent } from './my-design-resp/my-design-resp.component';
 import { MyDesignFpttComponent } from './my-design-fptt/my-design-fptt.component';
@@ -17,9 +17,10 @@ describe('MyDesignsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [MaterialModule, RouterTestingModule, HttpClientModule, BrowserAnimationsModule],
-      declarations: [MyDesignsComponent, MyDesignRespComponent, MyDesignFpttComponent, MyDesignTrorComponent, MyDesignStr2Component, MyDesignTytuComponent]
-    }).compileComponents();
+    declarations: [MyDesignsComponent, MyDesignRespComponent, MyDesignFpttComponent, MyDesignTrorComponent, MyDesignStr2Component, MyDesignTytuComponent],
+    imports: [MaterialModule, RouterTestingModule, BrowserAnimationsModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
   }));
 
   beforeEach(() => {

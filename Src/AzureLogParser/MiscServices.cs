@@ -8,30 +8,29 @@ public class MiscServices
       File.WriteAllText(filePath, blob);
       return true;
     }
-    catch (Exception ex) { WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  \n  {ex}"); _ = MessageBox.Show(nameof(SaveBlob), ex.Message); }
+    catch (Exception ex) { WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  \n  {ex}"); _ = System.Windows.MessageBox.Show(nameof(SaveBlob), ex.Message); }
 
     return false;
   }
-  public static bool NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime(DateTime potentiallyNewUsageTime, string filePath)
+  public static bool IsThereAreNewLogEntriesAndStoreLastNewLogTime(DateTime lastTimeFromAzure, string filePath = @"C:\temp\potentiallyNewUsageTime.txt")
   {
     try
     {
-      var lastKnownTimeOfUsage = File.Exists(filePath) ? File.ReadAllText(filePath) : null;
-      if (lastKnownTimeOfUsage != null && DateTime.TryParse(lastKnownTimeOfUsage, out var lastKnownTime))
+      if (File.Exists(filePath) && DateTime.TryParse(File.ReadAllText(filePath), out var lastTimeFromCache))
       {
-        if (potentiallyNewUsageTime > lastKnownTime)
+        if (lastTimeFromAzure > lastTimeFromCache)
         {
-          File.WriteAllText(filePath, potentiallyNewUsageTime.ToString("o"));
+          File.WriteAllText(filePath, lastTimeFromAzure.ToString("o"));
           return true;
         }
       }
       else
       {
-        File.WriteAllText(filePath, potentiallyNewUsageTime.ToString("o"));
+        File.WriteAllText(filePath, lastTimeFromAzure.ToString("o"));
         return true;
       }
     }
-    catch (Exception ex) { WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  \n  {ex}"); _ = MessageBox.Show(nameof(NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime), ex.Message); }
+    catch (Exception ex) { WriteLine($"\n{DateTime.Now:yyyy-MM-dd HH:mm}  ERR  \n  {ex}"); _ = System.Windows.MessageBox.Show(nameof(IsThereAreNewLogEntriesAndStoreLastNewLogTime), ex.Message); }
 
     return false;
   }
