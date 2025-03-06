@@ -57,16 +57,16 @@
       <DataGrid Grid.Row="5" ItemsSource="{Binding EventtGroups}" CurrentItem="{Binding SelEG,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontFamily="Arial Narrow" FontSize="17">
         <DataGrid.Columns>
           <DataGridTextColumn Header="Last Visit  &#10;  (Local)" IsReadOnly="True"  Binding="{Binding LastVisitAt, StringFormat='{}{0:MM-dd HH:mm ddd}'}" Foreground="#0c0" />
-          <DataGridTextColumn Header=" * * * "                                            Width="245" Foreground="#0af" />
+          <DataGridTextColumn Header=" * * * "                                            Width="245" />
           <DataGridTextColumn Header="Match Count"           Binding="{Binding Count}"    Width="070" Foreground="#cc0" ElementStyle="{StaticResource RightAlignStyle}" />
-          <DataGridTextColumn Header="Nick Ware "            Binding="{Binding NickWare}" Width="240"  IsReadOnly="False" Foreground="#0af" />
+          <DataGridTextColumn Header="Nick Ware "            Binding="{Binding NickWare}" Width="240" Foreground="#0af" IsReadOnly="False" />
           <DataGridTextColumn Header="Platform"              Binding="{Binding Platform}" Width="080" Foreground="#a7f" />
-          <DataGridTextColumn Header="CpuCores"              Binding="{Binding CpuCores}" Width="039" Foreground="#0af" ElementStyle="{StaticResource RightAlignStyle}" />
-          <DataGridTextColumn Header="Resolution"            Binding="{Binding Resolute}" Width="107" Foreground="#afa" ElementStyle="{StaticResource RightAlignStyle}" />
-          <DataGridTextColumn Header="Languages"             Binding="{Binding Language}" Width="120" Foreground="#f8f" />
+          <DataGridTextColumn Header="CpuCores"              Binding="{Binding CpuCores}" Width="039" Foreground="#07f" ElementStyle="{StaticResource RightAlignStyle}" />
+          <DataGridTextColumn Header="Resolution"            Binding="{Binding Resolute}" Width="107" Foreground="#4c4" ElementStyle="{StaticResource RightAlignStyle}" />
+          <DataGridTextColumn Header="Languages"             Binding="{Binding Language}" Width="200" Foreground="#f8f" />
           <DataGridTextColumn Header="Hardware&#10;     TTT" Binding="{Binding Hardware}" Width="26*" Foreground="#aaf" />
           <DataGridTextColumn Header="Versions"              Binding="{Binding Versions}" Width="28*" Foreground="#0af" />
-          <DataGridTextColumn Header="Mozilla&#10;   ver"    Binding="{Binding MozillaV}" Width="070" Foreground="#bbc" />
+          <DataGridTextColumn Header="Mozilla&#10;   ver"    Binding="{Binding MozillaV}" Width="080" Foreground="#bbc" />
           <!--<DataGridTextColumn Header="Zone"                  Width="120" FontSize="18" Foreground="#bbc" />
           <DataGridTextColumn Header="GPU"                   Width="120" FontSize="18" Foreground="#aaf" />
           <DataGridTextColumn Header="GPV"                   Width="080" FontSize="18" Foreground="#bbc" />-->
@@ -79,15 +79,6 @@
           <DataGridTextColumn Header="Last Visit  &#10;  (Local)"       IsReadOnly="True"  Binding="{Binding LastVisitAt, StringFormat='{}{0:MM-dd HH:mm}'}" Foreground="#0c0" />
           <DataGridTextColumn Header="Added at  &#10;  (Local)"         IsReadOnly="True"  Binding="{Binding CreatedAt, StringFormat='{}{0:MM-dd HH:mm}'}"     Foreground="#ea0" />
           <DataGridTextColumn Header="Nick User "                       IsReadOnly="False" Binding="{Binding Nickname}"        Width="190"                       Foreground="#e6f" />
-
-          <!--//nogo: <DataGridTextColumn Header="Nick User" IsReadOnly="False" Binding="{Binding Nickname}" Width="160" Foreground="#e6f">
-            <DataGridTextColumn.CellStyle>
-              <Style TargetType="{x:Type DataGridCell}">
-                <EventSetter Event="Binding.TargetUpdated" Handler="OnNicknameChanged"/>
-              </Style>
-            </DataGridTextColumn.CellStyle>
-          </DataGridTextColumn>-->
-
           <DataGridTextColumn Header="Visits   "                        IsReadOnly="True"  Binding="{Binding TotalVisits}"                                       Foreground="#cc0" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="Spread&#10; (days)"               IsReadOnly="True"  Binding="{Binding Spread, StringFormat='{}{0:d\\ hh\\:mm\\:ss}'}"     Foreground="#0a0" ElementStyle="{StaticResource RightAlignStyle}" />
           <DataGridTextColumn Header="MemberSinceKey&#10;        (UTC)" IsReadOnly="True"  Binding="{Binding MemberSinceKey}"  Width="662"                       Foreground="#ea0" />
@@ -101,19 +92,20 @@
       <GridSplitter Grid.Row="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
 
       <Menu Grid.Row="0" Margin="0 9 8 0" HorizontalAlignment="Right" Background="Transparent" Foreground="#44f">
-        <MenuItem Header=" _Important Only! " IsCheckable="True" IsChecked="{Binding ImportantOnly}" Foreground="#05f" ToolTip="" />
-        <MenuItem Header=" _Fresh! " Command="{Binding UpdateNicksCommand}" Foreground="#0a0" ToolTip="+ blend in the new Nicks" />
-        <MenuItem Header=" _Email! " Click="OnGetEmail" Foreground="#0af" ToolTip="Find email in the broadcast log" />
-        <MenuItem Header="_Unselect" Command="{Binding UnselectAllCommand}" Foreground="#aa0" ToolTip="Unselect" />
+        <MenuItem Header="_APi -crwl" IsChecked="{Binding ExcludeApiCaHome}" Foreground="#08f" ToolTip="alexPi -webcrawlers" IsCheckable="True" />
+        <MenuItem Header="_Rotn Only" IsChecked="{Binding TttRotationOnly}"  Foreground="#08f" ToolTip="TTT Rotations only"  IsCheckable="True" />
+        <MenuItem Header=" _Fresh! " Command="{Binding UpdateNicksCommand}"  Foreground="#ca0" ToolTip="+ blend in the new Nicks" />
+        <MenuItem Header="_Unselect" Command="{Binding UnselectAllCommand}"  Foreground="#0a0" ToolTip="Unselect" />
+        <MenuItem Header=" E_mail! " Click="OnGetEmail"                      Foreground="#0ac" ToolTip="Find email in the broadcast log" />
         <MenuItem Header="  VM  " FontWeight="Bold">
-          <MenuItem Header="_Load Old" Command="{Binding LoadOldTxCommand}" Foreground="#0f0" />
+          <MenuItem Header="_Load Old" Command="{Binding LoadOldTxCommand}" Foreground="#0b0" />
           <MenuItem Header=" _ReLoad " Command="{Binding RunReLoadCommand}" Foreground="#070" />
           <MenuItem Header=" _Create " Command="{Binding CreateLogCommand}" Foreground="#00f" />
-          <MenuItem Header=" _Update " Command="{Binding UpdateLogCommand}" Foreground="#00f" />
-          <MenuItem Header=" _Delete " Command="{Binding DeleteLogCommand}" Foreground="#f00" />
-          <MenuItem Header=" _Append " Command="{Binding AppendLogCommand}" Foreground="#00f" />
+          <MenuItem Header=" _Update " Command="{Binding UpdateLogCommand}" Foreground="#08f" />
+          <MenuItem Header=" _Delete " Command="{Binding DeleteLogCommand}" Foreground="#a00" />
+          <MenuItem Header=" _Append " Command="{Binding AppendLogCommand}" Foreground="#80f" />
           <Separator />
-          <MenuItem Header=" Beep360 " Command="{Binding MakeUniqueCommand}"  Foreground="#0aa" ToolTip="MakeUnique - EMPTY TODO" />
+          <MenuItem Header="Beep360"  Command="{Binding MakeUniqueCommand}" Foreground="#0aa" ToolTip="MakeUnique - EMPTY TODO" />
         </MenuItem>
         <MenuItem  Header=" X " Click="OnExit" Foreground="#e00" />
         <Button IsCancel="True" Click="OnExit" />

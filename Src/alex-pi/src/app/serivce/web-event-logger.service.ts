@@ -59,7 +59,7 @@ export class WebEventLoggerService {
       // const csv = `${userAgentArray[0]?.trim()}|${userAgentArray[1]?.trim()}|${userAgentArray[2]?.trim()}|`;
 
       const clientId =
-        `${userAgentArray[0]?.trim()}│${userAgentArray[1]?.trim()}│${userAgentArray[2]?.trim()}│${navigator.hardwareConcurrency.toString()}│` +
+        `${userAgentArray[0]?.trim().substring(0, 12)}│${userAgentArray[1]?.trim()}│${userAgentArray[2]?.trim().substring(0, 6)}│${navigator.hardwareConcurrency.toString()}│` +
         `${navigator.platform}│${navigator.languages}│` +
         `${window.screen.width}x${window.screen.height}x${window.screen.colorDepth}│${Intl.DateTimeFormat().resolvedOptions().timeZone}│${gpr}│${gpv}│`;
 

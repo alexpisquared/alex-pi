@@ -215,3 +215,12 @@ Deploy to Azure:      https://docs.microsoft.com/en-us/visualstudio/get-started/
   Not sure what happened, but it worked. I did not have luck with the last 3 ?? steps... It just worked. I guess it was a glitch in the matrix.
 
 ?? maybe try GitHub actions:  https://docs.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=applevel
+
+## 2024-07-13
+//tu: Replacing the angular.json with the one from the working Ng17 version fixed the target path issue. The build is now successful.
+//tu: Replacing the angular.json with the one from the working Ng17 version fixed the target path issue. The build is now successful.
+//tu: Replacing the angular.json with the one from the working Ng17 version fixed the target path issue. The build is now successful.
+//tu: Replacing the angular.json with the one from the working Ng17 version fixed the target path issue. The build is now successful.
+
+branch-from-90290028-LastGoodNg18-PreMerge
+branch-from-90290028-LastGoodNg18-PreMerge

@@ -34,7 +34,7 @@ public partial class OneBaseContext__ : DbContext
     }
   }
 
-  [Obsolete]
+  // [Obsolete] :why Copilot decides to mark it such?
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     _ = modelBuilder.HasAnnotation("Relational:DefaultSchema", "APi");

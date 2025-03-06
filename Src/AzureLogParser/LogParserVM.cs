@@ -3,59 +3,60 @@ public partial class LogParserVM : ObservableValidator
 {
   public LogParserVM() => _logParser = new LogParser(new ConfigurationBuilder().AddUserSecrets<App>().Build()["SecretKey"] ?? "no key");
 
-  const StringComparison sc = StringComparison.OrdinalIgnoreCase;
+  const StringComparison _sc = StringComparison.OrdinalIgnoreCase;
   readonly LogParser _logParser;
-  readonly SpeechSynthesizer synth = new();
+  readonly SpeechSynthesizer _synth = new();
 
-  [ObservableProperty] bool isBusy;
-  [ObservableProperty] string? logRaw;
-  [ObservableProperty] string? report;
+  [ObservableProperty] bool _isBusy;
+  [ObservableProperty] string? _logRaw;
+  [ObservableProperty] string? _report;
   /*[ObservableProperty]*/
-  string? MemberSinceKey; //partial void OnMemIdChanged(string? value) => WebEventLogs?.Refresh();
+  string? _memberSinceKey; //partial void OnMemIdChanged(string? value) => WebEventLogs?.Refresh();
 
-  [ObservableProperty] ICollectionView? webEventLogs;
-  [ObservableProperty] ICollectionView? eventtGroups;
-  [ObservableProperty] ICollectionView? websiteUsers;
-  [ObservableProperty] WebEventLog? selWE; partial void OnSelWEChanged(WebEventLog? value)
+  [ObservableProperty] ICollectionView? _webEventLogs;
+  [ObservableProperty] ICollectionView? _eventtGroups;
+  [ObservableProperty] ICollectionView? _websiteUsers;
+  [ObservableProperty] WebEventLog? _selWE; partial void OnSelWEChanged(WebEventLog? value)
   {
     UnselectAllCommand?.NotifyCanExecuteChanged();
 
     if (value is null) return;
 
-    MemberSinceKey = null;
+    _memberSinceKey = null;
     //WebEventLogs?.Refresh();
     EventtGroups?.Refresh();
     WebsiteUsers?.Refresh();
   }
-  [ObservableProperty] EventtGroup? selEG; partial void OnSelEGChanged(EventtGroup? value)
+  [ObservableProperty] EventtGroup? _selEG; partial void OnSelEGChanged(EventtGroup? value)
   {
     UnselectAllCommand?.NotifyCanExecuteChanged();
 
     if (value is null) return;
 
     SelWU = null;
-    MemberSinceKey = null;
+    _memberSinceKey = null;
     WebEventLogs?.Refresh();
     //EventtGroups?.Refresh();
     WebsiteUsers?.Refresh();
 
     //RunReLoadCommand?.NotifyCanExecuteChanged();
   }
-  [ObservableProperty] WebsiteUser? selWU; partial void OnSelWUChanged(WebsiteUser? value)
+  [ObservableProperty] WebsiteUser? _selWU; partial void OnSelWUChanged(WebsiteUser? value)
   {
     UnselectAllCommand?.NotifyCanExecuteChanged();
 
     if (value is null) return;
 
     SelEG = null;
-    MemberSinceKey = value.MemberSinceKey;
+    _memberSinceKey = value.MemberSinceKey;
     WebEventLogs?.Refresh();
     EventtGroups?.Refresh();
     //WebsiteUsers?.Refresh();
 
     //RunReLoadCommand?.NotifyCanExecuteChanged();
   }
-  [ObservableProperty] bool importantOnly; partial void OnImportantOnlyChanged(bool oldValue, bool newValue) { WebEventLogs?.Refresh(); ; }
+  [ObservableProperty] bool _excludeApiCaHome; partial void OnExcludeApiCaHomeChanged(bool oldValue, bool newValue) { WebEventLogs?.Refresh(); ; }
+  [ObservableProperty] bool _tttRotationOnly; partial void OnTttRotationOnlyChanged(bool oldValue, bool newValue) { WebEventLogs?.Refresh(); ; }
 
   [RelayCommand(CanExecute = nameof(CanLoadOldTx))] public async Task LoadOldTx() => await LoadOldTx_(); bool CanLoadOldTx() => !IsBusy; async Task LoadOldTx_()
   {
@@ -111,22 +112,25 @@ public partial class LogParserVM : ObservableValidator
 
       LogRaw = logRaw_;
 
+      CheckFindVisitorsWhoClickedBroadcastEmailLink(eLogs_, users_);
+
       WebEventLogs = CollectionViewSource.GetDefaultView(eLogs_.OrderByDescending(r => r.DoneAt).ToList());
       WebEventLogs.SortDescriptions.Add(new SortDescription(nameof(WebEventLog.DoneAt), ListSortDirection.Descending));
       WebEventLogs.Filter = obj => obj is not WebEventLog w || w is null || (
-                                    (ImportantOnly == false || w.EventName.Contains("home") == false) &&
-                                    (string.IsNullOrEmpty(MemberSinceKey) || w.FirstVisitId?.Equals(MemberSinceKey, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.Hardware) || w.Sub[0]?.Equals(SelEG.Hardware, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.MozillaV) || w.Sub[1]?.Equals(SelEG.MozillaV, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.Versions) || w.Sub[2]?.Equals(SelEG.Versions, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.CpuCores) || w.Sub[3]?.Equals(SelEG.CpuCores, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.Platform) || w.Sub[4]?.Equals(SelEG.Platform, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.Language) || w.Sub[5]?.Equals(SelEG.Language, sc) == true) &&
-                                    (string.IsNullOrEmpty(SelEG?.Resolute) || w.Sub[6]?.Equals(SelEG.Resolute, sc) == true));
+                                    (ExcludeApiCaHome == false || (w.EventName.Contains("home:undefined:undefined") == false && w.EventName.Contains("ttt") == false)) &&
+                                    (TttRotationOnly == false || w.EventName.Contains("ttt") == true) &&
+                                    (string.IsNullOrEmpty(_memberSinceKey) || w.FirstVisitId?.Equals(_memberSinceKey, _sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.Hardware) || w.Sub[0]?.Equals(SelEG.Hardware, _sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.MozillaV) || w.Sub[1]?.Equals(SelEG.MozillaV, _sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.Versions) || w.Sub[2]?.Equals(SelEG.Versions, _sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.CpuCores) || w.Sub[3]?.Equals(SelEG.CpuCores, _sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.Platform) || w.Sub[4]?.Equals(SelEG.Platform, _sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.Language) || w.Sub[5]?.Equals(SelEG.Language, _sc) == true) &&
+                                    (string.IsNullOrEmpty(SelEG?.Resolute) || w.Sub[6]?.Equals(SelEG.Resolute, _sc) == true));
 
       WebsiteUsers = CollectionViewSource.GetDefaultView(users_.OrderByDescending(r => r.LastVisitAt).ToList());
       WebsiteUsers.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
-      WebsiteUsers.Filter = obj => obj is not WebsiteUser w || w is null || string.IsNullOrEmpty(SelWE?.NickUser) || w.Nickname?.Equals(SelWE?.NickUser, sc) == true;
+      WebsiteUsers.Filter = obj => obj is not WebsiteUser w || w is null || string.IsNullOrEmpty(SelWE?.NickUser) || w.Nickname?.Equals(SelWE?.NickUser, _sc) == true;
 
       EventtGroups = CollectionViewSource.GetDefaultView(eLogs_.GroupBy(log => new
       {
@@ -150,14 +154,17 @@ public partial class LogParserVM : ObservableValidator
         Resolute = r.Key.Resolution,
         NickWare = _logParser.NickMapperWare($"{r.Key.Hardware}|{r.Key.MozillaVer}|{r.Key.Versions}|{r.Key.CPUCORES}|{r.Key.Platform}|{r.Key.Languages}|{r.Key.Resolution}")
       }).ToList());
+
       //foreach (EventtGroup eg in EventtGroups) eg.NickWare = _logParser.NickMapperWare(eg.PseudoKey);
       EventtGroups.SortDescriptions.Add(new SortDescription("LastVisitAt", ListSortDirection.Descending));
-      EventtGroups.Filter = obj => obj is not EventtGroup w || w is null || string.IsNullOrEmpty(SelWE?.NickWare) || w.NickWare?.Equals(SelWE?.NickWare, sc) == true;
+      EventtGroups.Filter = obj => obj is not EventtGroup w || w is null || string.IsNullOrEmpty(SelWE?.NickWare) || w.NickWare?.Equals(SelWE?.NickWare, _sc) == true;
 
-      var isNew = MiscServices.NotifyIfThereAreNewLogEntriesAndStoreLastNewLogTime(eLogs_.Max(r => r.DoneAt), @"C:\temp\potentiallyNewUsageTime.txt");
+      if (!eLogs_.Any()) return false;
+
+      var isNew = MiscServices.IsThereAreNewLogEntriesAndStoreLastNewLogTime(eLogs_.Max(r => r.DoneAt));
       Report = isNew ? "New visits detected!" : "-- Nothing new --"; //tbkReport.Foreground = isNew ? Brushes.GreenYellow : Brushes.Gray;
       if (/*isNew &&*/ sayIt)
-        _ = synth.SpeakAsync(Report);
+        _ = _synth.SpeakAsync(Report);
 
       return isNew;
     }
@@ -166,13 +173,72 @@ public partial class LogParserVM : ObservableValidator
 
     return true;
   }
+
+  private static void CheckFindVisitorsWhoClickedBroadcastEmailLink(List<WebEventLog> eLogs_, List<WebsiteUser> users_)
+  {
+    var allLogLines = ReadAllLinesFromPotentiallyLockedLogFile();
+
+    foreach (var webEventLog in eLogs_.Where(r => r.EventName.Contains(':')))
+    {
+      // 1. Find the matching line in the broadcast log file.
+      var line = allLogLines.FirstOrDefault(line => line.Contains(webEventLog.EventName.Split(':')[1]));
+      if (line is null) continue;
+
+      // 2. Extract the email address from the line.
+      var email = line.Split(' ', StringSplitOptions.RemoveEmptyEntries).Last();
+      if (string.IsNullOrEmpty(email)) continue;
+
+      // 3. Find the WebsiteUser with the FirstVisitId.
+      var matchingUser = users_.FirstOrDefault(user => user.MemberSinceKey == webEventLog.FirstVisitId);
+      if (matchingUser is null) continue;
+
+      // 4. Check if the email address is different from the one in the WebsiteUser.
+      if (!matchingUser.Nickname.Contains(email))
+      {
+        // 5. If different, update the WebsiteUser with the email address.
+        matchingUser.Nickname = email;
+      }
+    }
+  }
+
   public async Task TrySave()
   {
     _ = await _logParser.UpdateIfNewUser(WebsiteUsers);
     _ = await _logParser.UpdateIfNewWare(EventtGroups);
-    _ = synth.SpeakAsync("Saved");
+    _ = _synth.SpeakAsync("Saved");
     await Task.Delay(260);
   }
 
-  internal void OnNickUserChanged(string v) => throw new NotImplementedException();
+  internal async Task Bingo(WebEventLog? webEventLog, string eml)
+  {
+    if (WebsiteUsers?.SourceCollection is IEnumerable<WebsiteUser> websiteUsers)
+    {
+      var matchingUser = websiteUsers.FirstOrDefault(user => user.MemberSinceKey == webEventLog?.FirstVisitId);
+      if (matchingUser != null)
+      {
+        //wipes out the list:
+        matchingUser.Nickname = eml;
+        //WebsiteUsers?.Refresh();
+        await UnselectAll();
+      }
+    }
+  }
+
+  static List<string> ReadAllLinesFromPotentiallyLockedLogFile()
+  {
+    var lines = new List<string>();
+    if (File.Exists(_broadcastLogFile))
+    {
+      using var fileStream = new FileStream(_broadcastLogFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite); // Open the potentially locked file.
+      using var streamReader = new StreamReader(fileStream);
+      string? line;
+      while ((line = streamReader.ReadLine()) != null)
+      {
+        lines.Add(line);
+      }
+    }
+
+    return lines;
+  }
+  const string _broadcastLogFile = @"C:\Users\alexp\OneDrive\Public\Logs\MinNavTpl.RAZ.ale.Infi..log";
 }

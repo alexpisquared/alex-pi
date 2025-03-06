@@ -55,7 +55,8 @@
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import 'zone.js/dist/zone';  // Included with Angular CLI.
+// import 'zone.js/dist/zone';  // Included with Angular CLI.
+import 'zone.js';  //tu: fixes this  Error: Module not found: Error: Package path ./dist/zone is not exported from package C:\Users\alexp\source\repos\alex-pi\alex-pi\node_modules\zone.js (see exports field in C:\Users\alexp\source\repos\alex-pi\alex-pi\node_modules\zone.js\package.json)
 
 
 /***************************************************************************************************
