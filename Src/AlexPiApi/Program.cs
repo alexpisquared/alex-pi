@@ -1,3 +1,33 @@
+using Azure.Identity;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using System;
+
+namespace AlexPiApi;
+
+public class Program
+{
+  public static void Main(string[] args) => CreateHostBuilder(args).Build().Run();
+
+  public static IHostBuilder CreateHostBuilder(string[] args) =>
+      Host.CreateDefaultBuilder(args)
+          .ConfigureAppConfiguration((context, config) =>
+          {
+            var keyVaultEndpoint = new Uri("https://demopockv.vault.azure.net/");
+            _ = config.AddAzureKeyVault(
+                    keyVaultEndpoint,
+                    new DefaultAzureCredential()
+                    //,                    new AzureKeyVaultConfigurationOptions()
+                    );
+          })
+          .ConfigureWebHostDefaults(webBuilder =>
+          {
+            _ = webBuilder.UseStartup<Startup>();
+          });
+}
+
+/*
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.Services.AppAuthentication;
@@ -19,3 +49,4 @@ public class Program
             _ = webBuilder.UseStartup<Startup>();
           });
 }
+*/
