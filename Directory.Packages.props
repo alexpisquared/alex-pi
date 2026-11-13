@@ -13,13 +13,13 @@
     <PackageVersion Include="Microsoft.AspNetCore.JsonPatch" Version="11.0.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="11.0.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="5.9.0" />
-    <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.1.1" />
+    <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.1.2" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="11.0.0" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="11.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="11.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="11.0.0" />
     <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.3" />
-    <PackageVersion Include="Swashbuckle.AspNetCore" Version="11.0.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="11.0.1" />
     <PackageVersion Include="System.Speech" Version="11.0.0" />
   </ItemGroup>
 </Project>
